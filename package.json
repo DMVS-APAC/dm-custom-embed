@@ -2,14 +2,14 @@
   "name": "dm-custom-embed",
   "version": "1.0.0",
   "description": "A library to embed video from Dailymotion",
-  "main": "index.js",
+  "main": "dm-ce.bundle.js",
   "scripts": {
     "dev": "webpack --mode development --debug",
     "watch": "webpack --mode development --debug --watch",
     "prod": "webpack --mode production"
   },
-  "author": "isatrio <y.satrio@dailymotion.com>",
-  "license": "GPL-2.0-only",
+  "author": "Yudhi Satrio <y.satrio@dailymotion.com>",
+  "license": "MIT",
   "devDependencies": {
     "@types/dotenv": "^8.2.0",
     "@types/node": "^13.1.2",
@@ -31,5 +31,9 @@
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "keywords": [
+    "video-embed",
+    "dailymotion"
+  ]
 }

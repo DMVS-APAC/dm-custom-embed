@@ -17,6 +17,7 @@ module.exports = (env, options) => {
             filename: '[name].bundle.js',
             chunkFilename: '[id].bundle.chunk.js',
         },
+        devtool: 'eval-source-map',
         module: {
             rules: [
                 {
@@ -43,7 +44,7 @@ module.exports = (env, options) => {
         },
         plugins: [
             new HtmlWebpackPlugin({
-                title: 'Dailymotion Video Section',
+                title: 'Dailymotion Video Embed',
                 template: 'src/entries/index.html',
                 filename: 'index.html',
                 chunks: ['dm-ce'],
