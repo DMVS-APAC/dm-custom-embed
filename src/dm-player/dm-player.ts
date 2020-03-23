@@ -120,24 +120,29 @@ export default class DmPlayer {
 
     }
 
+    private htmlEntities(str) {
+        return String(str).replace(/&/g, '%26').replace(/=/g, '%3d');
+    }
+
     private loadDmPlayer() {
         const rootEl = this.rootEls[0];
         let cpeEmbed = document.createElement("div");
 
         let queryString = "";
 
-        if (this.playerParams.adsParams == "")
+        if (this.playerParams.adsParams === "") {
             queryString += "ads_params=contextual";
-        else
-            queryString += "ads_params=" + this.playerParams.adsParams;
+        } else {
+            queryString += "ads_params=" + this.htmlEntities(this.playerParams.adsParams);
+        }
 
         if (this.playerParams.syndication !== "") queryString += "&syndication=" + this.playerParams.syndication;
+
+        if (this.playerParams.controls !== true) queryString += "&controls=" + this.playerParams.controls;
 
         cpeEmbed.setAttribute("class", "dailymotion-cpe");
         cpeEmbed.setAttribute("video-id", this.videoParams.id);
         cpeEmbed.setAttribute("query-string", queryString);
-
-        console.log(this.videoParams);
 
         if(rootEl.getAttribute("width") !== null){
             this.playerParams.width = Number(rootEl.getAttribute("width"));
@@ -235,7 +240,6 @@ export default class DmPlayer {
         let keywords = [''];
 
         if ( selector !== null ) {
-            console.log(selector);
             const keywordContainer = document.querySelector(selector);
             keywords = this.sanitizeKeywords(keywordContainer.getAttribute("content"));
         } else if ( (typeof selector === "undefined") && typeof document.getElementsByTagName("h1")[0] !== "undefined") {

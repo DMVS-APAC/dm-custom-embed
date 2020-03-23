@@ -1,7 +1,7 @@
 {
-  "name": "dailymotion-contextual-embed",
+  "name": "dm-custom-embed",
   "version": "1.0.0",
-  "description": "A library to get video based on article",
+  "description": "A library to embed video from Dailymotion",
   "main": "index.js",
   "scripts": {
     "dev": "webpack --mode development --debug",
