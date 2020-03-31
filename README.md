@@ -4,7 +4,7 @@ This library is to embed Dailymotion video programmatically. Build using Typescr
 
 ## Quick start
 
-There are 2 options using this library. You can download latest version or using it as library on your project by using `npm`. You can download it below
+There are 2 options using this library. Download it directly to use on your production environment or use it on your development environment. 
 
 [Download latest release](https://github.com/DMVS-APAC/dm-custom-embed/archive/v1.0.0.zip)
 
@@ -22,5 +22,7 @@ npm install
 npm run dev // Build development source
 npm run prod // Build production source
 ```
+
+
 
 
