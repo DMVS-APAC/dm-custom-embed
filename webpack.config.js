@@ -14,10 +14,10 @@ module.exports = (env, options) => {
         },
         output: {
             path: path.resolve(__dirname, 'dist'),
-            filename: '[name].bundle.js',
-            chunkFilename: '[id].bundle.chunk.js',
+            filename: isProd ? '[name].min.js' : '[name].js',
+            chunkFilename: isProd ? '[id].min.chunk.js' : '[id].chunk.js',
         },
-        devtool: 'eval-source-map',
+        devtool: 'source-map',
         module: {
             rules: [
                 {
@@ -66,13 +66,13 @@ module.exports = (env, options) => {
                 } : false,
                 hash: false
             }),
-            new DelWebpackPlugin({
-                include: ['**'],
-                exclude: [],
-                info: true,
-                keepGeneratedAssets: true,
-                allowExternal: false
-            }),
+            // new DelWebpackPlugin({
+            //     include: ['**'],
+            //     exclude: [],
+            //     info: true,
+            //     keepGeneratedAssets: true,
+            //     allowExternal: false
+            // }),
             dotenv
         ]
     }
