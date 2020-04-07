@@ -1,5 +1,5 @@
 {
-  "name": "dm-custom-embed",
+  "name": "@dmvs_apac/dm-custom-embed",
   "version": "1.0.0",
   "description": "A library to embed video from Dailymotion",
   "main": "dm-ce.bundle.js",
@@ -35,5 +35,13 @@
   "keywords": [
     "video-embed",
     "dailymotion"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DMVS-APAC/dm-custom-embed.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DMVS-APAC/dm-custom-embed/issues"
+  },
+  "homepage": "https://github.com/DMVS-APAC/dm-custom-embed#readme"
 }
