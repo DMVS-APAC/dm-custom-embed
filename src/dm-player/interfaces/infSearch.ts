@@ -2,7 +2,7 @@ export default interface infSearchParams {
     fields: string;
     sort: string;
     limit: number;
-    search: string;
+    search?: string;
     private?: number;
     flags?: string;
     longer_than?: number;

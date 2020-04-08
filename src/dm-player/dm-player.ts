@@ -190,14 +190,8 @@ export default class DmPlayer {
             if (data.total > 0) {
                 this.setVideo(data.list[0]);
             } else {
-                // this.searchParams.search = this.searchParams.search.substring(0, this.searchParams.search.lastIndexOf(' '));
-
-                // if(this.searchParams.search.split(' ').length >= this.playerParams.minWordSearch && this.searchParams.search.length > 0)
-                //     this.searchVideo();
-                // else{
-                    console.log("%c DM related ", "background: #56C7FF; color: #232323", "Can not find related video. Fallback video used.");
-                    this.getFallbackVideo();
-                // }
+                console.log("%c DM related ", "background: #56C7FF; color: #232323", "Can not find related video. Fallback video used.");
+                this.getFallbackVideo();
             }
         });
 
@@ -242,7 +236,7 @@ export default class DmPlayer {
         if ( selector !== null ) {
             const keywordContainer = document.querySelector(selector);
             keywords = this.sanitizeKeywords(keywordContainer.getAttribute("content"));
-        } else if ( (typeof selector === "undefined") && typeof document.getElementsByTagName("h1")[0] !== "undefined") {
+        } else if ( selector === null && typeof document.getElementsByTagName("h1")[0] !== "undefined") {
             keywords = this.sanitizeKeywords(document.getElementsByTagName("h1")[0].textContent);
         }
 
@@ -258,12 +252,9 @@ export default class DmPlayer {
      * Devanagri (India): \u0900-\u097F
      */
     protected sanitizeKeywords(keywords: string): string[] {
-
-        const splitWords = keywords.replace(/[^- \u3131-\uD79D a-zA-Z0-9 \u00C0-\u00FF \u0153]/g, ' ')
+        return keywords.replace(/[^- \u3131-\uD79D a-zA-Z0-9 \u00C0-\u00FF \u0900-\u097F \u0153]/g, ' ')
             .split(' ')
             .filter(word => word.length >= this.playerParams.minWordLength);
-
-        return splitWords;
     }
 
 }
