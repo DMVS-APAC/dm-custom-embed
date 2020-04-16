@@ -8,7 +8,11 @@ There are 2 options using this library. Download it directly to use on your prod
 
 [Download latest release](https://github.com/DMVS-APAC/dm-custom-embed/archive/v1.0.0.zip)
 
-## Pre-requisite
+or if you just want to test just use cdn below
+
+
+
+## Pre-requisite for Development
 
 Make sure you have installed packages below:
 
