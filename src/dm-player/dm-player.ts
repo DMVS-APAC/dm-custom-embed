@@ -101,6 +101,7 @@ export default class DmPlayer {
             keywordsSelector: rootEl.getAttribute('keywordsSelector') ? rootEl.getAttribute('keywordsSelector') : null,
             preVideoTitle: rootEl.getAttribute('preVideoTitle') ? rootEl.getAttribute('preVideoTitle') : null,
             showVideoTitle: ( rootEl.getAttribute('showVideoTitle') != 'false' &&  rootEl.getAttribute('showVideoTitle') != null ),
+            showInfoCard: ( rootEl.getAttribute('showInfoCard') != 'false' &&  rootEl.getAttribute('showInfoCard') != null ),
             autoPlayMute: ( rootEl.getAttribute("autoPlayMute") != 'false'),
             queueEnable: ( rootEl.getAttribute('queueEnable') != 'false'),
             queueEnableNext: ( rootEl.getAttribute('queueEnableNext') != 'false'),
@@ -129,11 +130,10 @@ export default class DmPlayer {
     private prepareSearchParams() {
         const keywords = this.findKeywords(this.playerParams.keywordsSelector);
         this.searchParams = {
-            fields: 'id,title',
+            fields: 'id,title,description',
             limit: 1,
             sort: this.playerParams.sort,
             search: keywords ? keywords.sort((a, b) => b.length - a.length).slice(0, this.playerParams.maxWordSearch).join(' ') : "",
-            language: this.playerParams.language ? this.playerParams.language : ''
         };
 
         if (!this.playerParams.searchInPlaylist) {
@@ -252,6 +252,14 @@ export default class DmPlayer {
             const videoTitle = this.setVideoTitle(this.videoParams.title);
             rootEl.appendChild(videoTitle);
         }
+
+        /**
+         * Set an info card
+         */
+        if (this.playerParams.showInfoCard === true) {
+            const infoCard = this.setInfoCard(this.videoParams);
+            rootEl.appendChild(infoCard);
+        }
     }
 
     private setVideo(video: infVideo): void {
@@ -273,6 +281,24 @@ export default class DmPlayer {
         videoTitle.className = 'dm__video-title';
 
         return videoTitle;
+    }
+
+    private setInfoCard(data: infVideo): HTMLDivElement {
+        const infoCard = document.createElement('div');
+        infoCard.className = 'dm__info-card';
+
+        const videoTitle = document.createElement('p');
+        videoTitle.innerHTML = data.title;
+        videoTitle.className = 'dm__video-title';
+
+        const videoDesc = document.createElement('p');
+        videoDesc.innerHTML = data.description;
+        videoDesc.className = 'dm__video-desc';
+
+        infoCard.append(videoTitle);
+        infoCard.append(videoDesc);
+
+        return infoCard;
     }
 
     private searchVideo(): void {

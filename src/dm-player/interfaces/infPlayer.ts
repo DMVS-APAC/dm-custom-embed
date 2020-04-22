@@ -41,10 +41,13 @@ export default interface InfPlayer {
     keywordsSelector: string;
 
     // Title before video player. I.E. "see also:"
-    preVideoTitle: string;
+    preVideoTitle?: string;
 
     // Show video title or not, set true if need to show video title
-    showVideoTitle: boolean;
+    showVideoTitle?: boolean;
+
+    // Info of the video in a card below the video player
+    showInfoCard?: boolean;
 
     ////// Config to player
 

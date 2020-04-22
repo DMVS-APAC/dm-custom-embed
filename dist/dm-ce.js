@@ -97,7 +97,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".dm-player {\n  --dm-video-align: center;\n  --dm-video-margin: 8px 0;\n  --dm-video-style: normal;\n  --dm-video-color: inherit;\n  --dm-video-size: inherit;\n  --dm-video-weight: inherit;\n  --dm-title-align: center;\n  --dm-title-margin: 8px 0;\n  --dm-title-style: italic;\n  --dm-title-color: inherit;\n  --dm-title-size: inherit;\n  --dm-title-weight: inherit; }\n\n.dm__pre-video-title {\n  text-align: var(--dm-video-align) !important;\n  margin: var(--dm-video-margin) !important;\n  font-style: var(--dm-video-style) !important;\n  color: var(--dm-video-color) !important;\n  font-size: var(--dm-video-size) !important;\n  font-weight: var(--dm-video-weight) !important; }\n\n.dm__video-title {\n  text-align: var(--dm-title-align) !important;\n  margin: var(--dm-title-margin) !important;\n  font-style: var(--dm-title-style) !important;\n  color: var(--dm-title-color) !important;\n  font-size: var(--dm-title-size) !important;\n  font-weight: var(--dm-title-weight) !important; }\n", ""]);
+exports.push([module.i, "/*.dm-player {*/\n/*  --dm-video-align: center;*/\n/*  --dm-video-margin: 8px 0;*/\n/*  --dm-video-style: normal;*/\n/*  --dm-video-color: inherit;*/\n/*  --dm-video-size: inherit;*/\n/*  --dm-video-weight: inherit;*/\n/**/\n/*  --dm-title-align: center;*/\n/*  --dm-title-margin: 8px 0;*/\n/*  --dm-title-style: italic;*/\n/*  --dm-title-color: inherit;*/\n/*  --dm-title-size: inherit;*/\n/*  --dm-title-weight: inherit;*/\n/*}*/\n.dailymotion-cpe:before {\n  content: \"\";\n  padding-top: 56.25%;\n  background: #000;\n  display: block;\n  -webkit-animation: slideInDown;\n  animation: slideInDown;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1; }\n\n@-webkit-keyframes slideInDown {\n  from {\n    padding-top: 0; }\n  to {\n    padding-top: 56.25%; } }\n\n@keyframes slideInDown {\n  from {\n    padding-top: 0; }\n  to {\n    padding-top: 56.25%; } }\n\n.dm__pre-video-title {\n  text-align: var(--dm-video-align, center) !important;\n  margin: var(--dm-video-margin, 8px 0) !important;\n  font-style: var(--dm-video-style, normal) !important;\n  color: var(--dm-video-color, inherit) !important;\n  font-size: var(--dm-video-size, inherit) !important;\n  font-weight: var(--dm-video-weight, inherit) !important; }\n\n.dm__info-card {\n  background: var(--dm-info-card-bg, #ddd) !important;\n  padding: var(--dm-info-card-padding, 8px 13px) !important;\n  display: block;\n  text-align: var(--dm-info-card-align, left) !important;\n  /* Title*/\n  --dm-title-align: left;\n  --dm-title-weight: 700;\n  --dm-title-size: 1.1em;\n  /* Description*/\n  --dm-desc-align: left;\n  --dm-desc-size: .9em; }\n\n.dm__video-title {\n  text-align: var(--dm-title-align, center) !important;\n  margin: var(--dm-title-margin, 8px 0) !important;\n  font-style: var(--dm-title-style, normal) !important;\n  color: var(--dm-title-color, inherit) !important;\n  font-size: var(--dm-title-size, inherit) !important;\n  font-weight: var(--dm-title-weight, inherit) !important;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%; }\n\n.dm__video-desc {\n  text-align: var(--dm-desc-align, center) !important;\n  margin: var(--dm-desc-margin, 16px 0 8px) !important;\n  font-style: var(--dm-desc-style, normal) !important;\n  color: var(--dm-desc-color, inherit) !important;\n  font-size: var(--dm-desc-size, inherit) !important;\n  font-weight: var(--dm-desc-weight, inherit) !important;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 1; }\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -574,6 +574,7 @@ var DmPlayer = /** @class */ (function () {
             keywordsSelector: rootEl.getAttribute('keywordsSelector') ? rootEl.getAttribute('keywordsSelector') : null,
             preVideoTitle: rootEl.getAttribute('preVideoTitle') ? rootEl.getAttribute('preVideoTitle') : null,
             showVideoTitle: (rootEl.getAttribute('showVideoTitle') != 'false' && rootEl.getAttribute('showVideoTitle') != null),
+            showInfoCard: (rootEl.getAttribute('showInfoCard') != 'false' && rootEl.getAttribute('showInfoCard') != null),
             autoPlayMute: (rootEl.getAttribute("autoPlayMute") != 'false'),
             queueEnable: (rootEl.getAttribute('queueEnable') != 'false'),
             queueEnableNext: (rootEl.getAttribute('queueEnableNext') != 'false'),
@@ -599,11 +600,10 @@ var DmPlayer = /** @class */ (function () {
     DmPlayer.prototype.prepareSearchParams = function () {
         var keywords = this.findKeywords(this.playerParams.keywordsSelector);
         this.searchParams = {
-            fields: 'id,title',
+            fields: 'id,title,description',
             limit: 1,
             sort: this.playerParams.sort,
             search: keywords ? keywords.sort(function (a, b) { return b.length - a.length; }).slice(0, this.playerParams.maxWordSearch).join(' ') : "",
-            language: this.playerParams.language ? this.playerParams.language : ''
         };
         if (!this.playerParams.searchInPlaylist) {
             this.searchParams.private = 0;
@@ -702,6 +702,13 @@ var DmPlayer = /** @class */ (function () {
             var videoTitle = this.setVideoTitle(this.videoParams.title);
             rootEl.appendChild(videoTitle);
         }
+        /**
+         * Set an info card
+         */
+        if (this.playerParams.showInfoCard === true) {
+            var infoCard = this.setInfoCard(this.videoParams);
+            rootEl.appendChild(infoCard);
+        }
     };
     DmPlayer.prototype.setVideo = function (video) {
         this.videoParams = video;
@@ -718,6 +725,19 @@ var DmPlayer = /** @class */ (function () {
         videoTitle.innerHTML = text;
         videoTitle.className = 'dm__video-title';
         return videoTitle;
+    };
+    DmPlayer.prototype.setInfoCard = function (data) {
+        var infoCard = document.createElement('div');
+        infoCard.className = 'dm__info-card';
+        var videoTitle = document.createElement('p');
+        videoTitle.innerHTML = data.title;
+        videoTitle.className = 'dm__video-title';
+        var videoDesc = document.createElement('p');
+        videoDesc.innerHTML = data.description;
+        videoDesc.className = 'dm__video-desc';
+        infoCard.append(videoTitle);
+        infoCard.append(videoDesc);
+        return infoCard;
     };
     DmPlayer.prototype.searchVideo = function () {
         var _this = this;
