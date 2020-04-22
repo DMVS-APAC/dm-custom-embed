@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.2] (2020-04-22)
+
+**Fixed Bugs:**
+- Fixed get recent video
+
+**Implemented enhancements:**
+- Add owner avatar to info card
+
 ## [1.1.1] (2020-04-22)
 
 **Fixed Bugs:**

@@ -130,11 +130,14 @@ export default class DmPlayer {
     private prepareSearchParams() {
         const keywords = this.findKeywords(this.playerParams.keywordsSelector);
         this.searchParams = {
-            fields: 'id,title,description',
+            fields: this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url' : 'id,title',
             limit: 1,
             sort: this.playerParams.sort,
-            search: keywords ? keywords.sort((a, b) => b.length - a.length).slice(0, this.playerParams.maxWordSearch).join(' ') : "",
         };
+
+        if (this.playerParams.sort === "relevance") {
+            this.searchParams.search= keywords ? keywords.sort((a, b) => b.length - a.length).slice(0, this.playerParams.maxWordSearch).join(' ') : "";
+        }
 
         if (!this.playerParams.searchInPlaylist) {
 
@@ -287,6 +290,9 @@ export default class DmPlayer {
         const infoCard = document.createElement('div');
         infoCard.className = 'dm__info-card';
 
+        const textWrapper = document.createElement('div');
+        textWrapper.className = 'dm__text-wrapper';
+
         const videoTitle = document.createElement('p');
         videoTitle.innerHTML = data.title;
         videoTitle.className = 'dm__video-title';
@@ -295,8 +301,15 @@ export default class DmPlayer {
         videoDesc.innerHTML = data.description;
         videoDesc.className = 'dm__video-desc';
 
-        infoCard.append(videoTitle);
-        infoCard.append(videoDesc);
+        textWrapper.append(videoTitle);
+        textWrapper.append(videoDesc);
+
+        const ownerAva = document.createElement('img');
+        ownerAva.src = data["owner.avatar_190_url"];
+        ownerAva.className = 'dm__owner-ava';
+
+        infoCard.append(textWrapper);
+        infoCard.append(ownerAva);
 
         return infoCard;
     }

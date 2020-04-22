@@ -97,7 +97,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "/*.dm-player {*/\n/*  --dm-video-align: center;*/\n/*  --dm-video-margin: 8px 0;*/\n/*  --dm-video-style: normal;*/\n/*  --dm-video-color: inherit;*/\n/*  --dm-video-size: inherit;*/\n/*  --dm-video-weight: inherit;*/\n/**/\n/*  --dm-title-align: center;*/\n/*  --dm-title-margin: 8px 0;*/\n/*  --dm-title-style: italic;*/\n/*  --dm-title-color: inherit;*/\n/*  --dm-title-size: inherit;*/\n/*  --dm-title-weight: inherit;*/\n/*}*/\n.dailymotion-cpe:before {\n  content: \"\";\n  padding-top: 56.25%;\n  background: #000;\n  display: block;\n  -webkit-animation: slideInDown;\n  animation: slideInDown;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1; }\n\n@-webkit-keyframes slideInDown {\n  from {\n    padding-top: 0; }\n  to {\n    padding-top: 56.25%; } }\n\n@keyframes slideInDown {\n  from {\n    padding-top: 0; }\n  to {\n    padding-top: 56.25%; } }\n\n.dm__pre-video-title {\n  text-align: var(--dm-video-align, center) !important;\n  margin: var(--dm-video-margin, 8px 0) !important;\n  font-style: var(--dm-video-style, normal) !important;\n  color: var(--dm-video-color, inherit) !important;\n  font-size: var(--dm-video-size, inherit) !important;\n  font-weight: var(--dm-video-weight, inherit) !important; }\n\n.dm__info-card {\n  background: var(--dm-info-card-bg, #ddd) !important;\n  padding: var(--dm-info-card-padding, 8px 13px) !important;\n  display: block;\n  text-align: var(--dm-info-card-align, left) !important;\n  /* Title*/\n  --dm-title-align: left;\n  --dm-title-weight: 700;\n  --dm-title-size: 1.1em;\n  /* Description*/\n  --dm-desc-align: left;\n  --dm-desc-size: .9em; }\n\n.dm__video-title {\n  text-align: var(--dm-title-align, center) !important;\n  margin: var(--dm-title-margin, 8px 0) !important;\n  font-style: var(--dm-title-style, normal) !important;\n  color: var(--dm-title-color, inherit) !important;\n  font-size: var(--dm-title-size, inherit) !important;\n  font-weight: var(--dm-title-weight, inherit) !important;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%; }\n\n.dm__video-desc {\n  text-align: var(--dm-desc-align, center) !important;\n  margin: var(--dm-desc-margin, 16px 0 8px) !important;\n  font-style: var(--dm-desc-style, normal) !important;\n  color: var(--dm-desc-color, inherit) !important;\n  font-size: var(--dm-desc-size, inherit) !important;\n  font-weight: var(--dm-desc-weight, inherit) !important;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 1; }\n", ""]);
+exports.push([module.i, ".dailymotion-cpe:before {\n  content: \"\";\n  padding-top: 56.25%;\n  background: #000;\n  display: block;\n  -webkit-animation: slideInDown;\n  animation: slideInDown;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1; }\n\n@-webkit-keyframes slideInDown {\n  from {\n    padding-top: 0; }\n  to {\n    padding-top: 56.25%; } }\n\n@keyframes slideInDown {\n  from {\n    padding-top: 0; }\n  to {\n    padding-top: 56.25%; } }\n\n.dm__pre-video-title {\n  text-align: var(--dm-video-align, center) !important;\n  margin: var(--dm-video-margin, 8px 0) !important;\n  font-style: var(--dm-video-style, normal) !important;\n  color: var(--dm-video-color, #000) !important;\n  font-size: var(--dm-video-size, 1.2em) !important;\n  font-weight: var(--dm-video-weight, 700) !important; }\n\n.dm__info-card {\n  background: var(--dm-info-card-bg, #ddd) !important;\n  padding: var(--dm-info-card-padding, 8px 13px) !important;\n  display: flex;\n  text-align: var(--dm-info-card-align, left) !important;\n  /* Title*/\n  --dm-title-align: left;\n  --dm-title-weight: 700;\n  --dm-title-size: 1.1em; }\n\n.dm__text-wrapper {\n  width: calc(100% - 78px);\n  padding-right: 13px; }\n\n.dm__video-title {\n  text-align: var(--dm-title-align, center) !important;\n  margin: var(--dm-title-margin, 8px 0) !important;\n  font-style: var(--dm-title-style, normal) !important;\n  color: var(--dm-title-color, inherit) !important;\n  font-size: var(--dm-title-size, 1em) !important;\n  font-weight: var(--dm-title-weight, 400) !important;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%; }\n\n.dm__video-desc {\n  text-align: var(--dm-desc-align, left) !important;\n  margin: var(--dm-desc-margin, 0 0 8px) !important;\n  font-style: var(--dm-desc-style, normal) !important;\n  color: var(--dm-desc-color, inherit) !important;\n  font-size: var(--dm-desc-size, 0.9em) !important;\n  font-weight: var(--dm-desc-weight, inherit) !important;\n  padding-top: 13px;\n  border-top: solid #666 1px;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%;\n  display: -webkit-box;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 1; }\n\n.dm__owner-ava {\n  width: 65px;\n  height: auto; }\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -600,11 +600,13 @@ var DmPlayer = /** @class */ (function () {
     DmPlayer.prototype.prepareSearchParams = function () {
         var keywords = this.findKeywords(this.playerParams.keywordsSelector);
         this.searchParams = {
-            fields: 'id,title,description',
+            fields: this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url' : 'id,title',
             limit: 1,
             sort: this.playerParams.sort,
-            search: keywords ? keywords.sort(function (a, b) { return b.length - a.length; }).slice(0, this.playerParams.maxWordSearch).join(' ') : "",
         };
+        if (this.playerParams.sort === "relevance") {
+            this.searchParams.search = keywords ? keywords.sort(function (a, b) { return b.length - a.length; }).slice(0, this.playerParams.maxWordSearch).join(' ') : "";
+        }
         if (!this.playerParams.searchInPlaylist) {
             this.searchParams.private = 0;
             this.searchParams.flags = "no_live,exportable" + (this.playerParams.owners.length > 0 ? "" : ",verified");
@@ -729,14 +731,21 @@ var DmPlayer = /** @class */ (function () {
     DmPlayer.prototype.setInfoCard = function (data) {
         var infoCard = document.createElement('div');
         infoCard.className = 'dm__info-card';
+        var textWrapper = document.createElement('div');
+        textWrapper.className = 'dm__text-wrapper';
         var videoTitle = document.createElement('p');
         videoTitle.innerHTML = data.title;
         videoTitle.className = 'dm__video-title';
         var videoDesc = document.createElement('p');
         videoDesc.innerHTML = data.description;
         videoDesc.className = 'dm__video-desc';
-        infoCard.append(videoTitle);
-        infoCard.append(videoDesc);
+        textWrapper.append(videoTitle);
+        textWrapper.append(videoDesc);
+        var ownerAva = document.createElement('img');
+        ownerAva.src = data["owner.avatar_190_url"];
+        ownerAva.className = 'dm__owner-ava';
+        infoCard.append(textWrapper);
+        infoCard.append(ownerAva);
         return infoCard;
     };
     DmPlayer.prototype.searchVideo = function () {
