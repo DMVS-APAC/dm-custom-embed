@@ -765,10 +765,15 @@ var DmPlayer = /** @class */ (function () {
                 _this.setVideo(data.list[0]);
             }
             else {
-                if (_this.debugMode === true) {
-                    console.log("%c DM related ", "background: #56C7FF; color: #232323", "Can not find related video. Fallback video used.");
+                _this.searchParams.search = _this.searchParams.search.substring(0, _this.searchParams.search.lastIndexOf(' '));
+                if (_this.searchParams.search.split(' ').length >= _this.playerParams.minWordSearch && _this.searchParams.search.length > 0)
+                    _this.searchVideo();
+                else {
+                    if (_this.debugMode === true) {
+                        console.log("%c DM related ", "background: #56C7FF; color: #232323", "Can not find related video. Fallback video used.");
+                    }
+                    _this.getFallbackVideo();
                 }
-                _this.getFallbackVideo();
             }
         });
     };
