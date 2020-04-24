@@ -1,6 +1,12 @@
 import DmPlayer from '../dm-player/dm-player';
+import { waitFor } from '../utilities/wait-for';
 
-const el: NodeListOf<HTMLDivElement> = document.querySelectorAll('.dm-player');
+const getEl = async () => {
 
-const dmEmbed = new DmPlayer(el);
+	// console.log(document.querySelectorAll('.dm-player'));
+	const el: NodeListOf<HTMLDivElement> = await waitFor( );
 
+	// const dmEmbed = new DmPlayer(el);
+};
+
+getEl();

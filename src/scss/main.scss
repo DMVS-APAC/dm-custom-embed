@@ -31,7 +31,7 @@
 }
 
 .dm__info-card {
-  background: var(--dm-info-card-bg, #ddd) !important;
+  background: var(--dm-info-card-bg, #eee) !important;
   padding: var(--dm-info-card-padding, 8px 13px) !important;
   display: flex;
   text-align: var(--dm-info-card-align, left) !important;
@@ -44,7 +44,7 @@
 }
 
 .dm__text-wrapper {
-  width: calc(100% - 78px);
+  width: 88%;
   padding-right: 13px;
 }
 
@@ -80,6 +80,6 @@
 }
 
 .dm__owner-ava {
-  width: 65px;
+  width: 10%;
   height: auto;
 }
