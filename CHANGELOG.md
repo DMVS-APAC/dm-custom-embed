@@ -1,9 +1,12 @@
 # Changelog
 
-## [1.1.3] (2020-04-24)
+## [1.1.5] (2020-04-24)
 
 **Fixed Bugs:**
 - Add waiting function to wait for the element is ready or not
+
+**Implemented enhancements:**
+- Search API improvements
 
 ## [1.1.2] (2020-04-22)
 
