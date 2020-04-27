@@ -99,6 +99,7 @@ export default class DmPlayer {
             adsParams: rootEl.getAttribute('adsParams') ? rootEl.getAttribute('adsParams') : "contextual",
             cpeId: rootEl.getAttribute('cpeId') ? rootEl.getAttribute('cpeId').split(',') : [''],
             keywordsSelector: rootEl.getAttribute('keywordsSelector') ? rootEl.getAttribute('keywordsSelector') : null,
+            getUpdatedVideo: ( rootEl.getAttribute('getUpdatedVideo') != 'false' ) ,
             preVideoTitle: rootEl.getAttribute('preVideoTitle') ? rootEl.getAttribute('preVideoTitle') : null,
             showVideoTitle: ( rootEl.getAttribute('showVideoTitle') != 'false' &&  rootEl.getAttribute('showVideoTitle') != null ),
             showInfoCard: ( rootEl.getAttribute('showInfoCard') != 'false' &&  rootEl.getAttribute('showInfoCard') != null ),
@@ -141,6 +142,7 @@ export default class DmPlayer {
 
         if (!this.playerParams.searchInPlaylist) {
 
+            // TODO: test using private video
             this.searchParams.private = 0;
             this.searchParams.flags = "no_live,exportable" + (this.playerParams.owners.length > 0 ? "": ",verified");
             this.searchParams.longer_than = 0.35; //21sec
@@ -304,12 +306,17 @@ export default class DmPlayer {
         textWrapper.append(videoTitle);
         textWrapper.append(videoDesc);
 
+        const avaWrapper = document.createElement('picture');
+        avaWrapper.className = 'dm__ava-wrapper';
+
         const ownerAva = document.createElement('img');
         ownerAva.src = data["owner.avatar_190_url"];
         ownerAva.className = 'dm__owner-ava';
 
+        avaWrapper.append(ownerAva);
+
         infoCard.append(textWrapper);
-        infoCard.append(ownerAva);
+        infoCard.append(avaWrapper);
 
         return infoCard;
     }
@@ -332,6 +339,8 @@ export default class DmPlayer {
             if (data.total > 0) {
                 this.setVideo(data.list[0]);
             } else {
+
+                // Strip a string to try to get video one more time if there is no video found
                 this.searchParams.search = this.searchParams.search.substring(0, this.searchParams.search.lastIndexOf(' '));
 
                 if( this.searchParams.search.split(' ').length >= this.playerParams.minWordSearch && this.searchParams.search.length > 0 )
@@ -352,7 +361,7 @@ export default class DmPlayer {
         // Define current time and 30 days
         const currentTime = Math.floor(Date.now()/1000);
         const thirtyDays = 2592000;
-        const url = "https://api.dailymotion.com/" + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners)  + "&created_after=" + (currentTime - thirtyDays) + "&sort=random&limit=1&fields=" + this.searchParams.fields;
+        const url = "https://api.dailymotion.com/" + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners)  + (this.playerParams.getUpdatedVideo ? "&created_after=" + (currentTime - thirtyDays) : "") + "&sort=random&limit=1&fields=" + this.searchParams.fields;
 
         const self = this;
 
@@ -377,6 +386,7 @@ export default class DmPlayer {
 
     private videoEvents(): void {
 
+        // Ignore 'cpeready' event because this event is from outside the script
         // @ts-ignore
         window.addEventListener('cpeready', ({ detail: { players } }) => {
             const player = players[0];
@@ -413,6 +423,7 @@ export default class DmPlayer {
      * Latin Character: \u00C0-\u00FF
      * Devanagri (India): \u0900-\u097F
      */
+    // TODO: improve sanitize the keywords to strip duplicate string
     protected sanitizeKeywords(keywords: string): string[] {
         return keywords.replace(/[^- \u3131-\uD79D a-zA-Z0-9 \u00C0-\u00FF \u0900-\u097F \u0153]/g, ' ')
             .split(' ')

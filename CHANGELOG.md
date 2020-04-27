@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.1.6] (2020-04-27)
+
+**Fixed Bugs:**
+- Fixed publisher logo on info card
+
+**Implemented enhancements:**
+- Remove @types/dotenv package
+- Add version badge and license badge to readme
+- Add new param to handle updated video
+
 ## [1.1.5] (2020-04-24)
 
 **Fixed Bugs:**

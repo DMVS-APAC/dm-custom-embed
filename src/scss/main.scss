@@ -44,7 +44,7 @@
 }
 
 .dm__text-wrapper {
-  width: 88%;
+  width: calc(100% - 80px);
   padding-right: 13px;
 }
 
@@ -79,7 +79,11 @@
   -webkit-line-clamp: 1;
 }
 
+.dm__ava-wrapper {
+  width: 80px;
+}
+
 .dm__owner-ava {
-  width: 10%;
+  width: 100%;
   height: auto;
 }

@@ -38,7 +38,11 @@ export default interface InfPlayer {
     //You can get CPE ID from partner HQ on template tabs, inside embed menu
     cpeId: string[];
 
+    // Add selector to get keywords meta
     keywordsSelector: string;
+
+    // Assign false the video inventory is not up to date
+    getUpdatedVideo?: boolean;
 
     // Title before video player. I.E. "see also:"
     preVideoTitle?: string;
