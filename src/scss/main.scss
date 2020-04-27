@@ -1,0 +1,89 @@
+.dailymotion-cpe {
+
+  &:before {
+    content: "";
+    padding-top: 56.25%;
+    background: #000;
+    display: block;
+    animation: slideInDown;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    padding-top: 0;
+  }
+
+  to {
+    padding-top: 56.25%;
+  }
+}
+
+.dm__pre-video-title {
+  text-align: var(--dm-video-align, center) !important;
+  margin: var(--dm-video-margin, 8px 0) !important;
+  font-style: var(--dm-video-style, normal) !important;
+  color: var(--dm-video-color, #000) !important;
+  font-size: var(--dm-video-size, 1.2em) !important;
+  font-weight: var(--dm-video-weight, 700) !important;
+}
+
+.dm__info-card {
+  background: var(--dm-info-card-bg, #eee) !important;
+  padding: var(--dm-info-card-padding, 8px 13px) !important;
+  display: flex;
+  text-align: var(--dm-info-card-align, left) !important;
+
+  // Title
+  --dm-title-align: left;
+  --dm-title-weight: 700;
+  --dm-title-size: 1.1em;
+
+}
+
+.dm__text-wrapper {
+  width: calc(100% - 80px);
+  padding-right: 13px;
+}
+
+.dm__video-title {
+  text-align: var(--dm-title-align, center) !important;
+  margin: var(--dm-title-margin, 8px 0) !important;
+  font-style: var(--dm-title-style, normal) !important;
+  color: var(--dm-title-color, inherit) !important;
+  font-size: var(--dm-title-size, 1em) !important;
+  font-weight: var(--dm-title-weight, 400) !important;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.dm__video-desc {
+  text-align: var(--dm-desc-align, left) !important;
+  margin: var(--dm-desc-margin, 0 0 8px) !important;
+  font-style: var(--dm-desc-style, normal) !important;
+  color: var(--dm-desc-color, inherit) !important;
+  font-size: var(--dm-desc-size, .9em) !important;
+  font-weight: var(--dm-desc-weight, inherit) !important;
+  padding-top: 13px;
+  border-top: solid #666 1px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.dm__ava-wrapper {
+  width: 80px;
+}
+
+.dm__owner-ava {
+  width: 100%;
+  height: auto;
+}

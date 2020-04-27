@@ -1,7 +1,7 @@
 {
-  "name": "dm-custom-embed",
-  "version": "1.0.0",
-  "version_short": "1.0",
+  "name": "@dmvs-apac/dm-custom-embed",
+  "version": "1.1.6",
+  "version_short": "1.1",
   "description": "A library to embed video from Dailymotion",
   "main": "dist/dm-ce.min.js",
   "unpkg": "dist/dm-ce.min.js",
@@ -19,7 +19,6 @@
   "author": "Yudhi Satrio <y.satrio@dailymotion.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/dotenv": "^8.2.0",
     "@types/node": "^13.1.2",
     "autoprefixer": "^9.7.3",
     "css-loader": "^3.4.0",
@@ -44,5 +43,9 @@
   "keywords": [
     "video-embed",
     "dailymotion"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/DMVS-APAC/dm-custom-embed/issues"
+  },
+  "homepage": "https://github.com/DMVS-APAC/dm-custom-embed#readme"
 }

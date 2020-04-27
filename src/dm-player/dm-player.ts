@@ -1,13 +1,13 @@
 // Libraries
-// import { waitFor } from '../utilities/wait-for';
+import getParam from "../utilities/get-query-params";
 
 // Interfaces
 import infPlayer from './interfaces/infPlayer';
 import infSearch from "./interfaces/infSearch";
 import infVideo from "./interfaces/infVideo";
 
-// Reserve DM variable for future purposes
-// declare const DM: any;
+// Styles
+import '../scss/main.scss';
 
 declare global {
     interface Window {
@@ -22,6 +22,9 @@ export default class DmPlayer {
     private searchParams: infSearch = null;
     private videoParams: infVideo = null;
 
+    // Showing debug console that need to check
+    private debugMode: boolean = false;
+
     // Events
     private apiReady: Event;
     private playerExtracted: Event;
@@ -29,6 +32,10 @@ export default class DmPlayer {
 
     public constructor(rootEls: NodeListOf<HTMLDivElement>) {
         this.rootEls = rootEls;
+
+        if (getParam('dmdebug') != null) {
+            this.debugMode = getParam('dmdebug') != 'false';
+        }
 
         this.addEventListeners();
         this.registerNewEvents();
@@ -38,34 +45,45 @@ export default class DmPlayer {
     private addEventListeners() {
         const self = this;
 
+        /**
+         * Listen to `dm-api-ready` to run `loadDmPlayer` to construct the player
+         */
         document.addEventListener('dm-api-ready', ( e) => {
             self.loadDmPlayer();
         });
 
+        /**
+         * Listen to `dm-player-extracted` to wait all attributes is extracted from the element
+         * then prepare the search parameters
+         */
         document.addEventListener('dm-player-extracted', (e) => {
             self.prepareSearchParams();
         });
 
+        /**
+         * Listen to `dm-search-params-ready` after parameters is ready then start search
+         * related/recent video
+         */
         document.addEventListener( 'dm-search-params-ready', (e) => {
             self.searchVideo();
         });
     }
 
+    /**
+     * Create new events to dispatch after the event is ready
+     */
     private registerNewEvents() {
-
-        // listen to api to be ready
         this.apiReady = new Event('dm-api-ready');
-
-        // listen to extract player attribute to be extracted
         this.playerExtracted = new Event('dm-player-extracted');
-
-        // listen to search params to be ready
         this.searchParamsReady = new Event('dm-search-params-ready');
     }
 
     private extractAttrs() {
         const rootEl = this.rootEls[0];
 
+        /**
+         * See interfaces/infPlayer.ts to know further
+         */
         this.playerParams = {
             maxWordSearch: rootEl.getAttribute('maxWordSearch') ? Number(rootEl.getAttribute('maxWordSearch')) : 15,
             minWordLength: rootEl.getAttribute('minWordLength') ? Number(rootEl.getAttribute('minWordLength')) : 4,
@@ -77,31 +95,54 @@ export default class DmPlayer {
             excludeIds: rootEl.getAttribute("excludeIds") ? rootEl.getAttribute("excludeIds") : "",
             searchInPlaylist: rootEl.getAttribute("searchInPlaylist") ? rootEl.getAttribute("searchInPlaylist") : false,
             syndication: rootEl.getAttribute("syndication") ? rootEl.getAttribute("syndication") : "",
-            autoPlayMute: (rootEl.getAttribute("autoPlayMute") != 'false'),
-            queueEnable: (rootEl.getAttribute('queueEnable') != 'false'),
-            queueEnableNext: (rootEl.getAttribute('queueEnableNext') != 'false'),
             controls: (rootEl.getAttribute('controls') != 'false'),
             adsParams: rootEl.getAttribute('adsParams') ? rootEl.getAttribute('adsParams') : "contextual",
             cpeId: rootEl.getAttribute('cpeId') ? rootEl.getAttribute('cpeId').split(',') : [''],
-            keywordsSelector: rootEl.getAttribute('keywordsSelector') ? rootEl.getAttribute('keywordsSelector') : null
+            keywordsSelector: rootEl.getAttribute('keywordsSelector') ? rootEl.getAttribute('keywordsSelector') : null,
+            getUpdatedVideo: ( rootEl.getAttribute('getUpdatedVideo') != 'false' ) ,
+            preVideoTitle: rootEl.getAttribute('preVideoTitle') ? rootEl.getAttribute('preVideoTitle') : null,
+            showVideoTitle: ( rootEl.getAttribute('showVideoTitle') != 'false' &&  rootEl.getAttribute('showVideoTitle') != null ),
+            showInfoCard: ( rootEl.getAttribute('showInfoCard') != 'false' &&  rootEl.getAttribute('showInfoCard') != null ),
+            autoPlayMute: ( rootEl.getAttribute("autoPlayMute") != 'false'),
+            queueEnable: ( rootEl.getAttribute('queueEnable') != 'false'),
+            queueEnableNext: ( rootEl.getAttribute('queueEnableNext') != 'false'),
+            pipAtStart: ( rootEl.getAttribute('pipAtStart') != 'false' && rootEl.getAttribute('pipAtStart') != null ),
+            noStp: ( rootEl.getAttribute('noStp') != 'false' && rootEl.getAttribute('noStp') != null ),
+            noPip: ( rootEl.getAttribute('noPip') != 'false' && rootEl.getAttribute('noPip') != null ),
+            scrollToPause: ( rootEl.getAttribute('scrollToPause') != 'false' && rootEl.getAttribute('scrollToPause') != null ),
+            stpSound: ( rootEl.getAttribute('stpSound') != 'false' && rootEl.getAttribute('stpSound') != null ),
+            playerStyleEnable: ( rootEl.getAttribute('playerStyleEnable') != 'false' && rootEl.getAttribute('playerStyleEnable') != null ),
+            playerStyleColor: rootEl.getAttribute('playerStyleColor') ? rootEl.getAttribute('playerStyleColor') : null
         };
+
+        if (this.debugMode === true) {
+            console.log("%c DM Player Params: ", "background: #56C7FF; color: #232323", this.playerParams);
+        }
 
         // Tell the event listener that player parameters is extracted
         document.dispatchEvent(this.playerExtracted);
     }
 
+    /**
+     * Set search parameters
+     *
+     * For all search parameters, please see interfaces/infSearch.ts
+     */
     private prepareSearchParams() {
         const keywords = this.findKeywords(this.playerParams.keywordsSelector);
         this.searchParams = {
-            fields: 'id,title',
+            fields: this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url' : 'id,title',
             limit: 1,
             sort: this.playerParams.sort,
-            search: keywords ? keywords.sort((a, b) => b.length - a.length).slice(0, this.playerParams.maxWordSearch).join(' ') : "",
-            language: this.playerParams.language ? this.playerParams.language : ''
         };
+
+        if (this.playerParams.sort === "relevance") {
+            this.searchParams.search= keywords ? keywords.sort((a, b) => b.length - a.length).slice(0, this.playerParams.maxWordSearch).join(' ') : "";
+        }
 
         if (!this.playerParams.searchInPlaylist) {
 
+            // TODO: test using private video
             this.searchParams.private = 0;
             this.searchParams.flags = "no_live,exportable" + (this.playerParams.owners.length > 0 ? "": ",verified");
             this.searchParams.longer_than = 0.35; //21sec
@@ -120,14 +161,22 @@ export default class DmPlayer {
 
     }
 
-    private htmlEntities(str) {
+    /**
+     * Handling multiple adsParams
+     *
+     * @param str
+     */
+    private htmlEntities(str: string): string {
         return String(str).replace(/&/g, '%26').replace(/=/g, '%3d');
     }
 
-    private loadDmPlayer() {
+    private loadDmPlayer(): void {
         const rootEl = this.rootEls[0];
         let cpeEmbed = document.createElement("div");
 
+        /**
+         * Set attributes part
+         */
         let queryString = "";
 
         if (this.playerParams.adsParams === "") {
@@ -144,6 +193,18 @@ export default class DmPlayer {
         cpeEmbed.setAttribute("video-id", this.videoParams.id);
         cpeEmbed.setAttribute("query-string", queryString);
 
+        if (this.playerParams.pipAtStart === true) cpeEmbed.setAttribute("pip-at-start", "");
+
+        if (this.playerParams.noStp === true) cpeEmbed.setAttribute("no-stp", "");
+
+        if (this.playerParams.noPip === true) cpeEmbed.setAttribute("no-pip", "");
+
+        if (this.playerParams.queueEnable === false) cpeEmbed.setAttribute("no-queue", "");
+
+        if (this.playerParams.queueEnableNext === false) cpeEmbed.setAttribute("no-autonext", "");
+
+        if (this.playerParams.searchInPlaylist !== false) cpeEmbed.setAttribute("Playlist-id", this.playerParams.searchInPlaylist as string);
+
         if(rootEl.getAttribute("width") !== null){
             this.playerParams.width = Number(rootEl.getAttribute("width"));
             cpeEmbed.setAttribute("width", rootEl.getAttribute("width"));
@@ -154,29 +215,117 @@ export default class DmPlayer {
             cpeEmbed.setAttribute("height", rootEl.getAttribute("height"));
         }
 
+        // end of set attributes
+
         let cpeId = this.playerParams.cpeId[0];
 
         if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
             cpeId = this.playerParams.cpeId[1] ? this.playerParams.cpeId[1] : this.playerParams.cpeId[0];
 
+        let cpeParams = {};
+
+        if (this.playerParams.scrollToPause === true) cpeParams['scroll_to_pause'] = true;
+
+        if (this.playerParams.stpSound === true) cpeParams['stp_sound'] = true;
+
+        if (this.playerParams.playerStyleEnable === true) cpeParams['player_style_enable'] = true;
+
+        if (this.playerParams.playerStyleColor !== null) cpeParams['player_style_color'] = this.playerParams.playerStyleColor;
+
+
         // Avoid error while building
         const date: any = new Date();
+
+        /**
+         * Set pre title for video
+         */
+        if (this.playerParams.preVideoTitle !== null) {
+            const preTitle = this.setPreVideoTitle(this.playerParams.preVideoTitle);
+            rootEl.appendChild(preTitle);
+        }
 
         // Append the element to the root player element
         rootEl.appendChild(cpeEmbed);
 
-        // Load the script
-        (function(w,d,s,u,n,i,f,g,e,c){w.WDMObject=n;w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments);};w[n].l=1*date;w[n].i=i;w[n].f=f;w[n].g=g;e=d.createElement(s);e.async=1;e.src=u;c=d.getElementsByTagName(s)[0];c.parentNode.insertBefore(e,c);})(window,document,"script","//api.dmcdn.net/pxl/cpe/client.min.js","cpe", cpeId);
+        // Load the CPE script
+        (function(w,d,s,u,n,i,f,g,e,c){w.WDMObject=n;w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments);};w[n].l=1*date;w[n].i=i;w[n].f=f;w[n].g=g;e=d.createElement(s);e.async=1;e.src=u;c=d.getElementsByTagName(s)[0];c.parentNode.insertBefore(e,c);})(window,document,"script","//api.dmcdn.net/pxl/cpe/client.min.js","cpe", cpeId, cpeParams);
+
+        /**
+         * Set a video title
+         */
+        if ( this.playerParams.showVideoTitle === true ) {
+            const videoTitle = this.setVideoTitle(this.videoParams.title);
+            rootEl.appendChild(videoTitle);
+        }
+
+        /**
+         * Set an info card
+         */
+        if (this.playerParams.showInfoCard === true) {
+            const infoCard = this.setInfoCard(this.videoParams);
+            rootEl.appendChild(infoCard);
+        }
     }
 
-    private setVideo(video: infVideo) {
+    private setVideo(video: infVideo): void {
         this.videoParams = video;
         document.dispatchEvent(this.apiReady);
     }
 
-    private searchVideo() {
+    private setPreVideoTitle(text: string): HTMLParagraphElement {
+        const preTitle = document.createElement('p');
+        preTitle.innerHTML = text;
+        preTitle.className = 'dm__pre-video-title';
 
-        console.log("%c DM related ", "background: #56C7FF; color: #232323", "Search: " + this.searchParams.search);
+        return preTitle;
+    }
+
+    private setVideoTitle(text: string): HTMLParagraphElement {
+        const videoTitle = document.createElement('p');
+        videoTitle.innerHTML = text;
+        videoTitle.className = 'dm__video-title';
+
+        return videoTitle;
+    }
+
+    private setInfoCard(data: infVideo): HTMLDivElement {
+        const infoCard = document.createElement('div');
+        infoCard.className = 'dm__info-card';
+
+        const textWrapper = document.createElement('div');
+        textWrapper.className = 'dm__text-wrapper';
+
+        const videoTitle = document.createElement('p');
+        videoTitle.innerHTML = data.title;
+        videoTitle.className = 'dm__video-title';
+
+        const videoDesc = document.createElement('p');
+        videoDesc.innerHTML = data.description;
+        videoDesc.className = 'dm__video-desc';
+
+        textWrapper.append(videoTitle);
+        textWrapper.append(videoDesc);
+
+        const avaWrapper = document.createElement('picture');
+        avaWrapper.className = 'dm__ava-wrapper';
+
+        const ownerAva = document.createElement('img');
+        ownerAva.src = data["owner.avatar_190_url"];
+        ownerAva.className = 'dm__owner-ava';
+
+        avaWrapper.append(ownerAva);
+
+        infoCard.append(textWrapper);
+        infoCard.append(avaWrapper);
+
+        return infoCard;
+    }
+
+    private searchVideo(): void {
+
+        if (this.debugMode === true) {
+            console.log("%c DM related ", "background: #56C7FF; color: #232323", "Search: " + this.searchParams.search);
+        }
 
         const properties = Object.entries( this.searchParams ).map( ([ key, value] ) => {
             return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
@@ -190,8 +339,18 @@ export default class DmPlayer {
             if (data.total > 0) {
                 this.setVideo(data.list[0]);
             } else {
-                console.log("%c DM related ", "background: #56C7FF; color: #232323", "Can not find related video. Fallback video used.");
-                this.getFallbackVideo();
+
+                // Strip a string to try to get video one more time if there is no video found
+                this.searchParams.search = this.searchParams.search.substring(0, this.searchParams.search.lastIndexOf(' '));
+
+                if( this.searchParams.search.split(' ').length >= this.playerParams.minWordSearch && this.searchParams.search.length > 0 )
+                    this.searchVideo();
+                else {
+                    if (this.debugMode === true) {
+                        console.log("%c DM related ", "background: #56C7FF; color: #232323", "Can not find related video. Fallback video used.");
+                    }
+                    this.getFallbackVideo();
+                }
             }
         });
 
@@ -202,7 +361,7 @@ export default class DmPlayer {
         // Define current time and 30 days
         const currentTime = Math.floor(Date.now()/1000);
         const thirtyDays = 2592000;
-        const url = "https://api.dailymotion.com/" + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners)  + "&created_after=" + (currentTime - thirtyDays) + "&sort=random&limit=1&fields=id,title";
+        const url = "https://api.dailymotion.com/" + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners)  + (this.playerParams.getUpdatedVideo ? "&created_after=" + (currentTime - thirtyDays) : "") + "&sort=random&limit=1&fields=" + this.searchParams.fields;
 
         const self = this;
 
@@ -217,18 +376,31 @@ export default class DmPlayer {
                  */
                 self.setVideo(data.list[0]);
             } else {
-                console.warn("DM related Unable to find a fallback video");
+                if (this.debugMode === true) {
+                    console.warn("DM related Unable to find a fallback video");
+                }
             }
         });
 
     }
 
+    private videoEvents(): void {
+
+        // Ignore 'cpeready' event because this event is from outside the script
+        // @ts-ignore
+        window.addEventListener('cpeready', ({ detail: { players } }) => {
+            const player = players[0];
+
+            // TODO: handle on video change: for now just update the title below the video
+            // player.addEventListener('videochange', (e) => {
+            // });
+        })
+    }
+
     /**
      * Find keywords strings on website
      *
-     * Step find keywords string
-     * 1. Find meta keywords
-     * 2. Find
+     * selector must be a meta tag placed in head
      */
     private findKeywords(selector?: string): string[] {
         let keywords = [''];
@@ -251,6 +423,7 @@ export default class DmPlayer {
      * Latin Character: \u00C0-\u00FF
      * Devanagri (India): \u0900-\u097F
      */
+    // TODO: improve sanitize the keywords to strip duplicate string
     protected sanitizeKeywords(keywords: string): string[] {
         return keywords.replace(/[^- \u3131-\uD79D a-zA-Z0-9 \u00C0-\u00FF \u0900-\u097F \u0153]/g, ' ')
             .split(' ')
