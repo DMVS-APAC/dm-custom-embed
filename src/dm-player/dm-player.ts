@@ -323,7 +323,7 @@ export default class DmPlayer {
 
     private searchVideo(): void {
 
-        if (this.debugMode === true) {
+        if (this.debugMode === true && this.playerParams.sort === 'relevance') {
             console.log("%c DM related ", "background: #56C7FF; color: #232323", "Search: " + this.searchParams.search);
         }
 
@@ -406,8 +406,15 @@ export default class DmPlayer {
         let keywords = [''];
 
         if ( selector !== null ) {
-            const keywordContainer = document.querySelector(selector);
-            keywords = this.sanitizeKeywords(keywordContainer.getAttribute("content"));
+            try {
+                const keywordContainer = document.querySelector(selector);
+                keywords = this.sanitizeKeywords(keywordContainer.textContent ? keywordContainer.textContent : keywordContainer.getAttribute("content"));
+            } catch (e) {
+                if (this.debugMode === true) {
+                    console.error("Can't find selector: ", selector);
+                }
+            }
+
         } else if ( selector === null && typeof document.getElementsByTagName("h1")[0] !== "undefined") {
             keywords = this.sanitizeKeywords(document.getElementsByTagName("h1")[0].textContent);
         }
