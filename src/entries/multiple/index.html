@@ -10,7 +10,7 @@
     <meta name="keywords" content="covid19, kebijakan pemerintah, Jokowi">
 
     <style>
-        .main-content {
+        article[class*="article-"] {
             max-width: 800px;
             width: 100%;
             margin: 30px auto;
@@ -22,10 +22,8 @@
 </head>
 <body>
 
-<article class="main-content">
-    <header>
-        <h1>Pasien Covid19 di Indonesia</h1>
-    </header>
+<article class="main-content article-1">
+    <h1>Pasien Covid19 di Indonesia</h1>
 
     <div class="dm-player" owners="kompastv" cpeid="5df6e56e3e8c0962957f6a76" sort="relevance" showVideoTitle="true"></div>
 
@@ -41,8 +39,6 @@
 
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-    <div class="dm-player" owners="kompastv" cpeid="5df6e56e3e8c0962957f6a76" sort="relevance"></div>
-
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
@@ -50,7 +46,31 @@
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </article>
 
-<!--<div class="infinite-scroll&#45;&#45;holder"></div>-->
+<div class="infinite-scroll--holder" style="min-height: 20px;"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/scroll-out@2.2.8/dist/scroll-out.min.js"></script>
+<script type="text/javascript">
+    ScrollOut({
+        targets: ".infinite-scroll--holder",
+        once: true,
+        onShown: (e) => {
+            const article = document.createElement('article');
+            article.className = "article-2";
+
+            const content = '<h1>Didi Kempot Meninggal Dunia</h1>' +
+                '<div class="dm-player" owners="kompastv" cpeid="5df6e56e3e8c0962957f6a76" sort="relevance" showVideoTitle="true"></div>' +
+                '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>' +
+                '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>';
+
+            article.innerHTML = content;
+
+            const container = document.querySelector('.infinite-scroll--holder');
+
+            container.append(article);
+
+            window.cpe.parse();
+        }
+    });
+</script>
 </body>
 </html>
