@@ -40,6 +40,8 @@ export default class DmPlayer {
         this.addEventListeners();
         this.registerNewEvents();
         this.extractAttrs();
+
+        this.videoEvents();
     }
 
     private addEventListeners() {
@@ -49,7 +51,10 @@ export default class DmPlayer {
          * Listen to `dm-api-ready` to run `loadDmPlayer` to construct the player
          */
         document.addEventListener('dm-api-ready', ( e) => {
-            self.loadDmPlayer();
+
+            for ( let i=0; i<this.rootEls.length; i++) {
+                self.loadDmPlayer(this.rootEls[i]);
+            }
         });
 
         /**
@@ -58,6 +63,7 @@ export default class DmPlayer {
          */
         document.addEventListener('dm-player-extracted', (e) => {
             self.prepareSearchParams();
+            self.loadScript();
         });
 
         /**
@@ -161,6 +167,20 @@ export default class DmPlayer {
 
     }
 
+    private loadScript() {
+
+        let cpeId = this.playerParams.cpeId[0];
+
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+            cpeId = this.playerParams.cpeId[1] ? this.playerParams.cpeId[1] : this.playerParams.cpeId[0];
+
+        // Avoid error while building
+        const date: any = new Date();
+
+        // Load the CPE script
+        (function(w,d,s,u,n,i,f,g,e,c){w.WDMObject=n;w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments);};w[n].l=1*date;w[n].i=i;w[n].f=f;w[n].g=g;e=d.createElement(s);e.async=1;e.src=u;c=d.getElementsByTagName(s)[0];c.parentNode.insertBefore(e,c);})(window,document,"script","//api.dmcdn.net/pxl/cpe/client.min.js","cpe", cpeId);
+    }
+
     /**
      * Handling multiple adsParams
      *
@@ -170,8 +190,8 @@ export default class DmPlayer {
         return String(str).replace(/&/g, '%26').replace(/=/g, '%3d');
     }
 
-    private loadDmPlayer(): void {
-        const rootEl = this.rootEls[0];
+    private loadDmPlayer(rootEl: HTMLDivElement): void {
+        // const rootEl = this.rootEls[0];
         let cpeEmbed = document.createElement("div");
 
         /**
@@ -217,11 +237,6 @@ export default class DmPlayer {
 
         // end of set attributes
 
-        let cpeId = this.playerParams.cpeId[0];
-
-        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
-            cpeId = this.playerParams.cpeId[1] ? this.playerParams.cpeId[1] : this.playerParams.cpeId[0];
-
         let cpeParams = {};
 
         if (this.playerParams.scrollToPause === true) cpeParams['scroll_to_pause'] = true;
@@ -232,9 +247,6 @@ export default class DmPlayer {
 
         if (this.playerParams.playerStyleColor !== null) cpeParams['player_style_color'] = this.playerParams.playerStyleColor;
 
-
-        // Avoid error while building
-        const date: any = new Date();
 
         /**
          * Set pre title for video
@@ -247,8 +259,8 @@ export default class DmPlayer {
         // Append the element to the root player element
         rootEl.appendChild(cpeEmbed);
 
-        // Load the CPE script
-        (function(w,d,s,u,n,i,f,g,e,c){w.WDMObject=n;w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments);};w[n].l=1*date;w[n].i=i;w[n].f=f;w[n].g=g;e=d.createElement(s);e.async=1;e.src=u;c=d.getElementsByTagName(s)[0];c.parentNode.insertBefore(e,c);})(window,document,"script","//api.dmcdn.net/pxl/cpe/client.min.js","cpe", cpeId, cpeParams);
+        // Start parse the CPE
+        // window.cpe.parse();
 
         /**
          * Set a video title
@@ -392,9 +404,14 @@ export default class DmPlayer {
             const player = players[0];
 
             // TODO: handle on video change: for now just update the title below the video
-            // player.addEventListener('videochange', (e) => {
-            // });
-        })
+            player.addEventListener('videochange', (e) => {
+                console.log(player.video.title);
+            });
+
+            player.addEventListener('loadedmetadata', (e) => {
+                console.log("playing", player);
+            });
+        });
     }
 
     /**

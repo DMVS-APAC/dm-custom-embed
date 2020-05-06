@@ -520,14 +520,18 @@ var DmPlayer = /** @class */ (function () {
         this.addEventListeners();
         this.registerNewEvents();
         this.extractAttrs();
+        this.videoEvents();
     }
     DmPlayer.prototype.addEventListeners = function () {
+        var _this = this;
         var self = this;
         /**
          * Listen to `dm-api-ready` to run `loadDmPlayer` to construct the player
          */
         document.addEventListener('dm-api-ready', function (e) {
-            self.loadDmPlayer();
+            for (var i = 0; i < _this.rootEls.length; i++) {
+                self.loadDmPlayer(_this.rootEls[i]);
+            }
         });
         /**
          * Listen to `dm-player-extracted` to wait all attributes is extracted from the element
@@ -535,6 +539,7 @@ var DmPlayer = /** @class */ (function () {
          */
         document.addEventListener('dm-player-extracted', function (e) {
             self.prepareSearchParams();
+            self.loadScript();
         });
         /**
          * Listen to `dm-search-params-ready` after parameters is ready then start search
@@ -625,6 +630,15 @@ var DmPlayer = /** @class */ (function () {
         // Tell the event listener that search params is ready
         document.dispatchEvent(this.searchParamsReady);
     };
+    DmPlayer.prototype.loadScript = function () {
+        var cpeId = this.playerParams.cpeId[0];
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+            cpeId = this.playerParams.cpeId[1] ? this.playerParams.cpeId[1] : this.playerParams.cpeId[0];
+        // Avoid error while building
+        var date = new Date();
+        // Load the CPE script
+        (function (w, d, s, u, n, i, f, g, e, c) { w.WDMObject = n; w[n] = w[n] || function () { (w[n].q = w[n].q || []).push(arguments); }; w[n].l = 1 * date; w[n].i = i; w[n].f = f; w[n].g = g; e = d.createElement(s); e.async = 1; e.src = u; c = d.getElementsByTagName(s)[0]; c.parentNode.insertBefore(e, c); })(window, document, "script", "//api.dmcdn.net/pxl/cpe/client.min.js", "cpe", cpeId);
+    };
     /**
      * Handling multiple adsParams
      *
@@ -633,8 +647,8 @@ var DmPlayer = /** @class */ (function () {
     DmPlayer.prototype.htmlEntities = function (str) {
         return String(str).replace(/&/g, '%26').replace(/=/g, '%3d');
     };
-    DmPlayer.prototype.loadDmPlayer = function () {
-        var rootEl = this.rootEls[0];
+    DmPlayer.prototype.loadDmPlayer = function (rootEl) {
+        // const rootEl = this.rootEls[0];
         var cpeEmbed = document.createElement("div");
         /**
          * Set attributes part
@@ -674,9 +688,6 @@ var DmPlayer = /** @class */ (function () {
             cpeEmbed.setAttribute("height", rootEl.getAttribute("height"));
         }
         // end of set attributes
-        var cpeId = this.playerParams.cpeId[0];
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
-            cpeId = this.playerParams.cpeId[1] ? this.playerParams.cpeId[1] : this.playerParams.cpeId[0];
         var cpeParams = {};
         if (this.playerParams.scrollToPause === true)
             cpeParams['scroll_to_pause'] = true;
@@ -686,8 +697,6 @@ var DmPlayer = /** @class */ (function () {
             cpeParams['player_style_enable'] = true;
         if (this.playerParams.playerStyleColor !== null)
             cpeParams['player_style_color'] = this.playerParams.playerStyleColor;
-        // Avoid error while building
-        var date = new Date();
         /**
          * Set pre title for video
          */
@@ -697,8 +706,8 @@ var DmPlayer = /** @class */ (function () {
         }
         // Append the element to the root player element
         rootEl.appendChild(cpeEmbed);
-        // Load the CPE script
-        (function (w, d, s, u, n, i, f, g, e, c) { w.WDMObject = n; w[n] = w[n] || function () { (w[n].q = w[n].q || []).push(arguments); }; w[n].l = 1 * date; w[n].i = i; w[n].f = f; w[n].g = g; e = d.createElement(s); e.async = 1; e.src = u; c = d.getElementsByTagName(s)[0]; c.parentNode.insertBefore(e, c); })(window, document, "script", "//api.dmcdn.net/pxl/cpe/client.min.js", "cpe", cpeId, cpeParams);
+        // Start parse the CPE
+        // window.cpe.parse();
         /**
          * Set a video title
          */
@@ -813,8 +822,12 @@ var DmPlayer = /** @class */ (function () {
             var players = _a.detail.players;
             var player = players[0];
             // TODO: handle on video change: for now just update the title below the video
-            // player.addEventListener('videochange', (e) => {
-            // });
+            player.addEventListener('videochange', function (e) {
+                console.log(player.video.title);
+            });
+            player.addEventListener('loadedmetadata', function (e) {
+                console.log("playing", player);
+            });
         });
     };
     /**
