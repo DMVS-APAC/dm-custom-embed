@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.8] ()
+
+**Implemented enhancements:**
+- Support pause when PiP is closed
+- Support multiple player or infinite scroll
+- Add function to wait keywords element to be ready (handle client rendered)
+- Support hange the video title when video changes
+
 ## [1.1.7] (2020-04-29)
 
 **Implemented enhancements:**
