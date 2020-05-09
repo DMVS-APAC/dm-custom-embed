@@ -829,6 +829,16 @@ var DmPlayer = /** @class */ (function () {
                 console.log("playing", player);
             });
         });
+        // @ts-ignore
+        window.addEventListener('cpepipclose', function (_a) {
+            // detail is an Object containing the dailymotion player that has been closed
+            var player = _a.detail.player;
+            // you can pause the video
+            player.pause();
+            console.dir(player);
+            // console.log(player.title)
+            // console.log(player.video.title)
+        });
     };
     /**
      * Find keywords strings on website

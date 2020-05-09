@@ -412,6 +412,18 @@ export default class DmPlayer {
                 console.log("playing", player);
             });
         });
+
+        // @ts-ignore
+        window.addEventListener('cpepipclose', ({ detail: { player } }) => {
+            // detail is an Object containing the dailymotion player that has been closed
+
+            // you can pause the video
+            player.pause()
+
+            console.dir(player)
+            // console.log(player.title)
+            // console.log(player.video.title)
+        });
     }
 
     /**
