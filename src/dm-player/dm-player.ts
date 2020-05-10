@@ -6,6 +6,9 @@ import infPlayer from './interfaces/infPlayer';
 import infSearch from "./interfaces/infSearch";
 import infVideo from "./interfaces/infVideo";
 
+// Global
+import { debugMode } from '../global/vars';
+
 // Styles
 import '../scss/main.scss';
 
@@ -22,9 +25,6 @@ export default class DmPlayer {
     private searchParams: infSearch = null;
     private videoParams: infVideo = null;
 
-    // Showing debug console that need to check
-    private debugMode: boolean = false;
-
     // Events
     private apiReady: Event;
     private playerExtracted: Event;
@@ -32,10 +32,6 @@ export default class DmPlayer {
 
     public constructor(rootEls: NodeListOf<HTMLDivElement>) {
         this.rootEls = rootEls;
-
-        if (getParam('dmdebug') != null) {
-            this.debugMode = getParam('dmdebug') != 'false';
-        }
 
         this.addEventListeners();
         this.registerNewEvents();
@@ -121,7 +117,7 @@ export default class DmPlayer {
             playerStyleColor: rootEl.getAttribute('playerStyleColor') ? rootEl.getAttribute('playerStyleColor') : null
         };
 
-        if (this.debugMode === true) {
+        if (debugMode === true) {
             console.log("%c DM Player Params: ", "background: #56C7FF; color: #232323", this.playerParams);
         }
 
@@ -335,7 +331,7 @@ export default class DmPlayer {
 
     private searchVideo(): void {
 
-        if (this.debugMode === true && this.playerParams.sort === 'relevance') {
+        if (debugMode === true && this.playerParams.sort === 'relevance') {
             console.log("%c DM related ", "background: #56C7FF; color: #232323", "Search: " + this.searchParams.search);
         }
 
@@ -358,7 +354,7 @@ export default class DmPlayer {
                 if( this.searchParams.search.split(' ').length >= this.playerParams.minWordSearch && this.searchParams.search.length > 0 )
                     this.searchVideo();
                 else {
-                    if (this.debugMode === true) {
+                    if (debugMode === true) {
                         console.log("%c DM related ", "background: #56C7FF; color: #232323", "Can not find related video. Fallback video used.");
                     }
                     this.getFallbackVideo();
@@ -388,7 +384,7 @@ export default class DmPlayer {
                  */
                 self.setVideo(data.list[0]);
             } else {
-                if (this.debugMode === true) {
+                if (debugMode === true) {
                     console.warn("DM related Unable to find a fallback video");
                 }
             }
@@ -439,7 +435,7 @@ export default class DmPlayer {
                 const keywordContainer = document.querySelector(selector);
                 keywords = this.sanitizeKeywords(keywordContainer.textContent ? keywordContainer.textContent : keywordContainer.getAttribute("content"));
             } catch (e) {
-                if (this.debugMode === true) {
+                if (debugMode === true) {
                     console.error("Can't find selector: ", selector);
                 }
             }

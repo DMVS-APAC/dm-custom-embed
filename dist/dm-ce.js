@@ -498,10 +498,10 @@ module.exports = function (list, options) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utilities/get-query-params */ "./src/utilities/get-query-params.ts");
+/* harmony import */ var _global_vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../global/vars */ "./src/global/vars.ts");
 /* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../scss/main.scss */ "./src/scss/main.scss");
 /* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_scss_main_scss__WEBPACK_IMPORTED_MODULE_1__);
-// Libraries
+// Global
 
 // Styles
 
@@ -511,12 +511,7 @@ var DmPlayer = /** @class */ (function () {
         this.playerParams = null;
         this.searchParams = null;
         this.videoParams = null;
-        // Showing debug console that need to check
-        this.debugMode = false;
         this.rootEls = rootEls;
-        if (Object(_utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__["default"])('dmdebug') != null) {
-            this.debugMode = Object(_utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__["default"])('dmdebug') != 'false';
-        }
         this.addEventListeners();
         this.registerNewEvents();
         this.extractAttrs();
@@ -592,7 +587,7 @@ var DmPlayer = /** @class */ (function () {
             playerStyleEnable: (rootEl.getAttribute('playerStyleEnable') != 'false' && rootEl.getAttribute('playerStyleEnable') != null),
             playerStyleColor: rootEl.getAttribute('playerStyleColor') ? rootEl.getAttribute('playerStyleColor') : null
         };
-        if (this.debugMode === true) {
+        if (_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
             console.log("%c DM Player Params: ", "background: #56C7FF; color: #232323", this.playerParams);
         }
         // Tell the event listener that player parameters is extracted
@@ -764,7 +759,7 @@ var DmPlayer = /** @class */ (function () {
     };
     DmPlayer.prototype.searchVideo = function () {
         var _this = this;
-        if (this.debugMode === true && this.playerParams.sort === 'relevance') {
+        if (_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true && this.playerParams.sort === 'relevance') {
             console.log("%c DM related ", "background: #56C7FF; color: #232323", "Search: " + this.searchParams.search);
         }
         var properties = Object.entries(this.searchParams).map(function (_a) {
@@ -784,7 +779,7 @@ var DmPlayer = /** @class */ (function () {
                 if (_this.searchParams.search.split(' ').length >= _this.playerParams.minWordSearch && _this.searchParams.search.length > 0)
                     _this.searchVideo();
                 else {
-                    if (_this.debugMode === true) {
+                    if (_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
                         console.log("%c DM related ", "background: #56C7FF; color: #232323", "Can not find related video. Fallback video used.");
                     }
                     _this.getFallbackVideo();
@@ -793,7 +788,6 @@ var DmPlayer = /** @class */ (function () {
         });
     };
     DmPlayer.prototype.getFallbackVideo = function () {
-        var _this = this;
         // Define current time and 30 days
         var currentTime = Math.floor(Date.now() / 1000);
         var thirtyDays = 2592000;
@@ -809,7 +803,7 @@ var DmPlayer = /** @class */ (function () {
                 self.setVideo(data.list[0]);
             }
             else {
-                if (_this.debugMode === true) {
+                if (_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
                     console.warn("DM related Unable to find a fallback video");
                 }
             }
@@ -853,7 +847,7 @@ var DmPlayer = /** @class */ (function () {
                 keywords = this.sanitizeKeywords(keywordContainer.textContent ? keywordContainer.textContent : keywordContainer.getAttribute("content"));
             }
             catch (e) {
-                if (this.debugMode === true) {
+                if (_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
                     console.error("Can't find selector: ", selector);
                 }
             }
@@ -948,6 +942,25 @@ var init = function () { return __awaiter(void 0, void 0, void 0, function () {
     });
 }); };
 init();
+
+
+/***/ }),
+
+/***/ "./src/global/vars.ts":
+/*!****************************!*\
+  !*** ./src/global/vars.ts ***!
+  \****************************/
+/*! exports provided: debugMode */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "debugMode", function() { return debugMode; });
+/* harmony import */ var _utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utilities/get-query-params */ "./src/utilities/get-query-params.ts");
+// Utilities
+
+// Get debug mode params from url
+var debugMode = (Object(_utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__["default"])('dmdebug') != null && Object(_utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__["default"])('dmdebug') != 'false');
 
 
 /***/ }),
