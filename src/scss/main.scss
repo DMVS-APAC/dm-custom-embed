@@ -74,7 +74,7 @@
   text-overflow: ellipsis;
   overflow: hidden;
   max-width: 100%;
-  display: -webkit-box;
+  display: -webkit-box !important;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
 }

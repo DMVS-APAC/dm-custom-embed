@@ -1,26 +1,20 @@
-// Libraries
-import getParam from "../utilities/get-query-params";
-
 // Interfaces
 import infPlayer from './interfaces/infPlayer';
 import infSearch from "./interfaces/infSearch";
 import infVideo from "./interfaces/infVideo";
 
 // Global
-import { debugMode } from '../global/vars';
+import {apiUrl, debugMode} from '../global/vars';
+
+// Utilities
+import htmlEntities from "../utilities/html-entities";
+import {fetchData} from "../api/apiCall";
 
 // Styles
 import '../scss/main.scss';
 
-declare global {
-    interface Window {
-        WDMObject: any;
-        cpe: any;
-    }
-}
-
-export default class DmPlayer {
-    private rootEls: NodeListOf<HTMLDivElement> = null;
+export default class PlayerManager {
+    private rootEl: HTMLDivElement = null;
     private playerParams: infPlayer = null;
     private searchParams: infSearch = null;
     private videoParams: infVideo = null;
@@ -30,8 +24,8 @@ export default class DmPlayer {
     private playerExtracted: Event;
     private searchParamsReady: Event;
 
-    public constructor(rootEls: NodeListOf<HTMLDivElement>) {
-        this.rootEls = rootEls;
+    public constructor(rootEl: HTMLDivElement) {
+        this.rootEl = rootEl;
 
         this.addEventListeners();
         this.registerNewEvents();
@@ -54,10 +48,10 @@ export default class DmPlayer {
         });
 
         /**
-         * Listen to `dm-player-extracted` to wait all attributes is extracted from the element
+         * Listen to `player-extracted` to wait all attributes is extracted from the element
          * then prepare the search parameters
          */
-        document.addEventListener('dm-player-extracted', (e) => {
+        document.addEventListener('player-extracted', (e) => {
             self.prepareSearchParams();
             self.loadScript();
         });
@@ -76,7 +70,7 @@ export default class DmPlayer {
      */
     private registerNewEvents() {
         this.apiReady = new Event('dm-api-ready');
-        this.playerExtracted = new Event('dm-player-extracted');
+        this.playerExtracted = new Event('player-extracted');
         this.searchParamsReady = new Event('dm-search-params-ready');
     }
 
@@ -130,7 +124,7 @@ export default class DmPlayer {
      *
      * For all search parameters, please see interfaces/infSearch.ts
      */
-    private prepareSearchParams() {
+    private prepareSearchParams(): void {
         const keywords = this.findKeywords(this.playerParams.keywordsSelector);
         this.searchParams = {
             fields: this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url' : 'id,title',
@@ -163,7 +157,7 @@ export default class DmPlayer {
 
     }
 
-    private loadScript() {
+    private loadScript(): void {
 
         let cpeId = this.playerParams.cpeId[0];
 
@@ -177,18 +171,8 @@ export default class DmPlayer {
         (function(w,d,s,u,n,i,f,g,e,c){w.WDMObject=n;w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments);};w[n].l=1*date;w[n].i=i;w[n].f=f;w[n].g=g;e=d.createElement(s);e.async=1;e.src=u;c=d.getElementsByTagName(s)[0];c.parentNode.insertBefore(e,c);})(window,document,"script","//api.dmcdn.net/pxl/cpe/client.min.js","cpe", cpeId);
     }
 
-    /**
-     * Handling multiple adsParams
-     *
-     * @param str
-     */
-    private htmlEntities(str: string): string {
-        return String(str).replace(/&/g, '%26').replace(/=/g, '%3d');
-    }
-
     private loadDmPlayer(rootEl: HTMLDivElement): void {
-        // const rootEl = this.rootEls[0];
-        let cpeEmbed = document.createElement("div");
+        const cpeEmbed = document.createElement("div");
 
         /**
          * Set attributes part
@@ -198,7 +182,7 @@ export default class DmPlayer {
         if (this.playerParams.adsParams === "") {
             queryString += "ads_params=contextual";
         } else {
-            queryString += "ads_params=" + this.htmlEntities(this.playerParams.adsParams);
+            queryString += "ads_params=" + htmlEntities(this.playerParams.adsParams);
         }
 
         if (this.playerParams.syndication !== "") queryString += "&syndication=" + this.playerParams.syndication;
@@ -254,9 +238,6 @@ export default class DmPlayer {
 
         // Append the element to the root player element
         rootEl.appendChild(cpeEmbed);
-
-        // Start parse the CPE
-        // window.cpe.parse();
 
         /**
          * Set a video title
@@ -329,7 +310,7 @@ export default class DmPlayer {
         return infoCard;
     }
 
-    private searchVideo(): void {
+    private async searchVideo(): Promise<void> {
 
         if (debugMode === true && this.playerParams.sort === 'relevance') {
             console.log("%c DM related ", "background: #56C7FF; color: #232323", "Search: " + this.searchParams.search);
@@ -339,20 +320,19 @@ export default class DmPlayer {
             return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
         }).join('&');
 
-        const dmSearchUrl = "https://api.dailymotion.com/" + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties;
+        const dmSearchUrl = apiUrl + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties;
 
-        fetch(dmSearchUrl).then( response => {
-            return response.json();
-        }).then( data => {
-            if (data.total > 0) {
-                this.setVideo(data.list[0]);
+        const video = await fetchData(dmSearchUrl);
+
+        if (video) {
+            if (video.total > 0) {
+                this.setVideo(video.list[0]);
             } else {
-
                 // Strip a string to try to get video one more time if there is no video found
                 this.searchParams.search = this.searchParams.search.substring(0, this.searchParams.search.lastIndexOf(' '));
 
                 if( this.searchParams.search.split(' ').length >= this.playerParams.minWordSearch && this.searchParams.search.length > 0 )
-                    this.searchVideo();
+                    await this.searchVideo();
                 else {
                     if (debugMode === true) {
                         console.log("%c DM related ", "background: #56C7FF; color: #232323", "Can not find related video. Fallback video used.");
@@ -360,35 +340,32 @@ export default class DmPlayer {
                     this.getFallbackVideo();
                 }
             }
-        });
+
+        }
 
     }
 
-    private getFallbackVideo() {
+    private async getFallbackVideo(): Promise<void> {
 
         // Define current time and 30 days
         const currentTime = Math.floor(Date.now()/1000);
         const thirtyDays = 2592000;
-        const url = "https://api.dailymotion.com/" + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners)  + (this.playerParams.getUpdatedVideo ? "&created_after=" + (currentTime - thirtyDays) : "") + "&sort=random&limit=1&fields=" + this.searchParams.fields;
+        const url = apiUrl + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners)  + (this.playerParams.getUpdatedVideo ? "&created_after=" + (currentTime - thirtyDays) : "") + "&sort=random&limit=1&fields=" + this.searchParams.fields;
+        const video = await fetchData(url);
 
-        const self = this;
-
-        fetch(url).then( response => {
-            return response.json();
-        }).then( data => {
-
-            if (data.list.length > 0) {
+        if (video) {
+            if (video.list.length > 0) {
 
                 /**
                  * Data return array, get the first array and pass it to setVideo function
                  */
-                self.setVideo(data.list[0]);
+                this.setVideo(video.list[0]);
             } else {
                 if (debugMode === true) {
                     console.warn("DM related Unable to find a fallback video");
                 }
             }
-        });
+        }
 
     }
 
@@ -412,14 +389,12 @@ export default class DmPlayer {
         // @ts-ignore
         window.addEventListener('cpepipclose', ({ detail: { player } }) => {
             // detail is an Object containing the dailymotion player that has been closed
-
-            // you can pause the video
             player.pause()
-
-            console.dir(player)
-            // console.log(player.title)
-            // console.log(player.video.title)
         });
+    }
+
+    public reloadPlayer() {
+
     }
 
     /**

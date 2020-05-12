@@ -1,12 +1,16 @@
 # Changelog
 
-## [1.1.8] ()
+## [1.2.0] ()
+
+**Fixed Bugs:**
+- Fix the infocard description to just show one line
 
 **Implemented enhancements:**
 - Support pause when PiP is closed
 - Support multiple player or infinite scroll
 - Add function to wait keywords element to be ready (handle client rendered)
 - Support change the video title when video changes
+- Handle load video directly
 
 ## [1.1.7] (2020-04-29)
 
