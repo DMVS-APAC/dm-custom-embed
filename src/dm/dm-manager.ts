@@ -20,7 +20,7 @@ export default class DM {
         }
     }
 
-    private loadScript(): void {
+    private loadScript(cpeId: Array<string>): void {
         // let cpeId = this.playerParams.cpeId[0];
         //
         // if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
