@@ -10,6 +10,11 @@ import {apiUrl, debugMode} from '../global/vars';
 import htmlEntities from "../utilities/html-entities";
 import {fetchData} from "../api/apiCall";
 
+// Components
+import setPreVideoTitle from "./components/pre-video-title";
+import setVideoTitle from "./components/video-title";
+import setInfoCard from "./components/info-card";
+
 // Styles
 import '../scss/main.scss';
 
@@ -42,9 +47,7 @@ export default class PlayerManager {
          */
         document.addEventListener('dm-api-ready', ( e) => {
 
-            for ( let i=0; i<this.rootEls.length; i++) {
-                self.loadDmPlayer(this.rootEls[i]);
-            }
+            this.loadDmPlayer(this.rootEl);
         });
 
         /**
@@ -53,7 +56,7 @@ export default class PlayerManager {
          */
         document.addEventListener('player-extracted', (e) => {
             self.prepareSearchParams();
-            self.loadScript();
+            // self.loadScript();
         });
 
         /**
@@ -75,7 +78,7 @@ export default class PlayerManager {
     }
 
     private extractAttrs() {
-        const rootEl = this.rootEls[0];
+        const rootEl = this.rootEl;
 
         /**
          * See interfaces/infPlayer.ts to know further
@@ -217,23 +220,13 @@ export default class PlayerManager {
 
         // end of set attributes
 
-        let cpeParams = {};
-
-        if (this.playerParams.scrollToPause === true) cpeParams['scroll_to_pause'] = true;
-
-        if (this.playerParams.stpSound === true) cpeParams['stp_sound'] = true;
-
-        if (this.playerParams.playerStyleEnable === true) cpeParams['player_style_enable'] = true;
-
-        if (this.playerParams.playerStyleColor !== null) cpeParams['player_style_color'] = this.playerParams.playerStyleColor;
-
 
         /**
          * Set pre title for video
          */
         if (this.playerParams.preVideoTitle !== null) {
-            const preTitle = this.setPreVideoTitle(this.playerParams.preVideoTitle);
-            rootEl.appendChild(preTitle);
+            const preTitle = setPreVideoTitle(this.playerParams.preVideoTitle);
+            rootEl.insertAdjacentElement('afterbegin', preTitle);
         }
 
         // Append the element to the root player element
@@ -243,71 +236,22 @@ export default class PlayerManager {
          * Set a video title
          */
         if ( this.playerParams.showVideoTitle === true ) {
-            const videoTitle = this.setVideoTitle(this.videoParams.title);
-            rootEl.appendChild(videoTitle);
+            const videoTitle = setVideoTitle(this.videoParams.title);
+            rootEl.insertAdjacentElement('afterend', videoTitle);
         }
 
         /**
          * Set an info card
          */
         if (this.playerParams.showInfoCard === true) {
-            const infoCard = this.setInfoCard(this.videoParams);
-            rootEl.appendChild(infoCard);
+            const infoCard = setInfoCard(this.videoParams);
+            rootEl.insertAdjacentElement('afterend', infoCard);
         }
     }
 
     private setVideo(video: infVideo): void {
         this.videoParams = video;
         document.dispatchEvent(this.apiReady);
-    }
-
-    private setPreVideoTitle(text: string): HTMLParagraphElement {
-        const preTitle = document.createElement('p');
-        preTitle.innerHTML = text;
-        preTitle.className = 'dm__pre-video-title';
-
-        return preTitle;
-    }
-
-    private setVideoTitle(text: string): HTMLParagraphElement {
-        const videoTitle = document.createElement('p');
-        videoTitle.innerHTML = text;
-        videoTitle.className = 'dm__video-title';
-
-        return videoTitle;
-    }
-
-    private setInfoCard(data: infVideo): HTMLDivElement {
-        const infoCard = document.createElement('div');
-        infoCard.className = 'dm__info-card';
-
-        const textWrapper = document.createElement('div');
-        textWrapper.className = 'dm__text-wrapper';
-
-        const videoTitle = document.createElement('p');
-        videoTitle.innerHTML = data.title;
-        videoTitle.className = 'dm__video-title';
-
-        const videoDesc = document.createElement('p');
-        videoDesc.innerHTML = data.description;
-        videoDesc.className = 'dm__video-desc';
-
-        textWrapper.append(videoTitle);
-        textWrapper.append(videoDesc);
-
-        const avaWrapper = document.createElement('picture');
-        avaWrapper.className = 'dm__ava-wrapper';
-
-        const ownerAva = document.createElement('img');
-        ownerAva.src = data["owner.avatar_190_url"];
-        ownerAva.className = 'dm__owner-ava';
-
-        avaWrapper.append(ownerAva);
-
-        infoCard.append(textWrapper);
-        infoCard.append(avaWrapper);
-
-        return infoCard;
     }
 
     private async searchVideo(): Promise<void> {

@@ -1,26 +1,38 @@
+// utilities
+import {waitFor} from "../utilities/wait-for";
+
 import PlayerManager from "../player/player-manager";
 
 export default class DM {
     private rootEls: NodeListOf<HTMLDivElement> = null;
+    private player: Array<PlayerManager> = null;
 
     public constructor(rootEls: NodeListOf<HTMLDivElement>){
         this.rootEls = rootEls;
 
-        this.addEventListeners();
+        this.renderElement();
     }
 
     private addEventListeners() {
 
     }
 
-    public renderElement() {
+    public async renderElement() {
 
         for ( let i=0; i<this.rootEls.length; i++) {
-            const player = new PlayerManager(this.rootEls[i]);
+            this.player.push( new PlayerManager(this.rootEls[i]) );
+            // this.players[i] = 1;
+
+            console.log(this.player);
+            // if (i === 0) {
+            //     await waitFor(() => this.players[0] !== null, 500, 2000, "Timeout waiting player ready");
+            //     console.log(this.players[0]);
+            //
+            // }
         }
     }
 
-    private loadScript(cpeId: Array<string>): void {
+    private loadScript(cpeId: string[]): void {
         // let cpeId = this.playerParams.cpeId[0];
         //
         // if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
