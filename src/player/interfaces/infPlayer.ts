@@ -8,6 +8,9 @@ export default interface InfPlayer {
     //Maximum of words used for the search: more words you keep, less are chances to get a result
     maxWordSearch: number;
 
+    // Handle embed directly using video id
+    videoId?: string;
+
     //language of videos. List of available values here: https://developer.dailymotion.com/api/partners#languages
     language: string;
 

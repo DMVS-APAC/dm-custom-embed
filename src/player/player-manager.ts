@@ -8,73 +8,85 @@ import {apiUrl, debugMode} from '../global/vars';
 
 // Utilities
 import htmlEntities from "../utilities/html-entities";
-import {fetchData} from "../api/apiCall";
+import { fetchData } from "../api/apiCall";
+import { waitFor } from "../utilities/wait-for";
 
 // Components
 import setPreVideoTitle from "./components/pre-video-title";
-import setVideoTitle from "./components/video-title";
-import setInfoCard from "./components/info-card";
+import VideoTitle from "./components/video-title";
+import InfoCard from "./components/info-card";
 
 // Styles
 import '../scss/main.scss';
 
 export default class PlayerManager {
+    private id: string = '';
     private rootEl: HTMLDivElement = null;
     private playerParams: infPlayer = null;
     private searchParams: infSearch = null;
     private videoParams: infVideo = null;
 
-    // Events
-    private apiReady: Event;
-    private playerExtracted: Event;
-    private searchParamsReady: Event;
+    private videoTitle: HTMLParagraphElement = null;
+    private infoCard: HTMLDivElement = null;
 
-    public constructor(rootEl: HTMLDivElement) {
+    // From outside, it's a dailymotion player
+    private players: any[] = [];
+
+    cpeId: string[] = [];
+
+    public constructor(id: string, rootEl: HTMLDivElement) {
         this.rootEl = rootEl;
+        this.id = id;
 
         this.addEventListeners();
-        this.registerNewEvents();
         this.extractAttrs();
-
         this.videoEvents();
     }
 
     private addEventListeners() {
-        const self = this;
-
         /**
          * Listen to `dm-api-ready` to run `loadDmPlayer` to construct the player
          */
-        document.addEventListener('dm-api-ready', ( e) => {
-
-            this.loadDmPlayer(this.rootEl);
+        document.addEventListener('dm-api-ready', ( e: Event) => {
+            //@ts-ignore
+            if (e.detail === this.id) {
+                this.loadDmPlayer(this.rootEl);
+            }
         });
 
         /**
          * Listen to `player-extracted` to wait all attributes is extracted from the element
          * then prepare the search parameters
          */
-        document.addEventListener('player-extracted', (e) => {
-            self.prepareSearchParams();
-            // self.loadScript();
+        document.addEventListener('dm-player-extracted', (e: Event) => {
+            //@ts-ignore
+            if (e.detail === this.id) {
+                this.prepareSearchParams();
+            }
         });
 
         /**
          * Listen to `dm-search-params-ready` after parameters is ready then start search
          * related/recent video
          */
-        document.addEventListener( 'dm-search-params-ready', (e) => {
-            self.searchVideo();
+        document.addEventListener( 'dm-search-params-ready', (e: Event) => {
+            //@ts-ignore
+            if (e.detail === this.id) {
+                if (this.playerParams.videoId === null) {
+                    this.searchVideo();
+                } else {
+                    this.getVideoInfo(this.playerParams.videoId);
+                }
+            }
         });
-    }
 
-    /**
-     * Create new events to dispatch after the event is ready
-     */
-    private registerNewEvents() {
-        this.apiReady = new Event('dm-api-ready');
-        this.playerExtracted = new Event('player-extracted');
-        this.searchParamsReady = new Event('dm-search-params-ready');
+        document.addEventListener('dm-video-params-updated', (e: Event) => {
+            //@ts-ignore
+            if (e.detail === this.id) {
+                this.updateVideoInfo(this.id);
+            }
+        });
+
     }
 
     private extractAttrs() {
@@ -87,6 +99,7 @@ export default class PlayerManager {
             maxWordSearch: rootEl.getAttribute('maxWordSearch') ? Number(rootEl.getAttribute('maxWordSearch')) : 15,
             minWordLength: rootEl.getAttribute('minWordLength') ? Number(rootEl.getAttribute('minWordLength')) : 4,
             minWordSearch: rootEl.getAttribute('minWordSearch') ? Number(rootEl.getAttribute('minWordSearch')) : 2,
+            videoId: rootEl.getAttribute('videoId') ? rootEl.getAttribute('videoId') : null,
             language: rootEl.getAttribute("language") ? rootEl.getAttribute("language") : "",
             sort:  rootEl.getAttribute("sort") ? rootEl.getAttribute("sort") : "recent",
             owners: rootEl.getAttribute("owners") ? rootEl.getAttribute("owners") : "",
@@ -119,7 +132,8 @@ export default class PlayerManager {
         }
 
         // Tell the event listener that player parameters is extracted
-        document.dispatchEvent(this.playerExtracted);
+        const playerExtracted = new CustomEvent('dm-player-extracted', { detail: this.id});
+        document.dispatchEvent(playerExtracted);
     }
 
     /**
@@ -128,6 +142,7 @@ export default class PlayerManager {
      * For all search parameters, please see interfaces/infSearch.ts
      */
     private prepareSearchParams(): void {
+        this.cpeId = this.playerParams.cpeId;
         const keywords = this.findKeywords(this.playerParams.keywordsSelector);
         this.searchParams = {
             fields: this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url' : 'id,title',
@@ -156,22 +171,9 @@ export default class PlayerManager {
         if (this.playerParams.language) this.searchParams.language = this.playerParams.language;
 
         // Tell the event listener that search params is ready
-        document.dispatchEvent(this.searchParamsReady);
+        const searchParamsReady = new CustomEvent('dm-search-params-ready', { detail: this.id})
+        document.dispatchEvent(searchParamsReady);
 
-    }
-
-    private loadScript(): void {
-
-        let cpeId = this.playerParams.cpeId[0];
-
-        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
-            cpeId = this.playerParams.cpeId[1] ? this.playerParams.cpeId[1] : this.playerParams.cpeId[0];
-
-        // Avoid error while building
-        const date: any = new Date();
-
-        // Load the CPE script
-        (function(w,d,s,u,n,i,f,g,e,c){w.WDMObject=n;w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments);};w[n].l=1*date;w[n].i=i;w[n].f=f;w[n].g=g;e=d.createElement(s);e.async=1;e.src=u;c=d.getElementsByTagName(s)[0];c.parentNode.insertBefore(e,c);})(window,document,"script","//api.dmcdn.net/pxl/cpe/client.min.js","cpe", cpeId);
     }
 
     private loadDmPlayer(rootEl: HTMLDivElement): void {
@@ -220,6 +222,8 @@ export default class PlayerManager {
 
         // end of set attributes
 
+        // Append the element to the root player element
+        rootEl.appendChild(cpeEmbed);
 
         /**
          * Set pre title for video
@@ -229,30 +233,55 @@ export default class PlayerManager {
             rootEl.insertAdjacentElement('afterbegin', preTitle);
         }
 
-        // Append the element to the root player element
-        rootEl.appendChild(cpeEmbed);
+    }
 
+    private setVideo(video: infVideo): void {
+        this.videoParams = video;
+
+        const apiReady = new CustomEvent("dm-api-ready", { detail: this.id})
+        document.dispatchEvent(apiReady);
+
+        const videoUpdated = new CustomEvent('dm-video-params-updated', { detail: this.id});
+        document.dispatchEvent(videoUpdated);
+    }
+
+    private updateVideoInfo(id: string) {
+        console.log(id, this.id, this.playerParams.showInfoCard, this.playerParams.showVideoTitle);
         /**
          * Set a video title
          */
-        if ( this.playerParams.showVideoTitle === true ) {
-            const videoTitle = setVideoTitle(this.videoParams.title);
-            rootEl.insertAdjacentElement('afterend', videoTitle);
+        if ( this.playerParams.showVideoTitle === true && id === this.id) {
+            const videoTitle = new VideoTitle();
+            if (this.videoTitle !== null) {
+                this.videoTitle.remove();
+            }
+
+            this.videoTitle = videoTitle.setVideoTitle(this.videoParams.title);
+            this.rootEl.insertAdjacentElement('afterend', this.videoTitle);
         }
 
         /**
          * Set an info card
          */
-        if (this.playerParams.showInfoCard === true) {
-            const infoCard = setInfoCard(this.videoParams);
-            rootEl.insertAdjacentElement('afterend', infoCard);
+        if (this.playerParams.showInfoCard === true && id === this.id) {
+            const infoCard = new InfoCard();
+            if (this.infoCard !== null) {
+                this.infoCard.remove();
+            }
+
+            this.infoCard = infoCard.setInfoCard(this.videoParams);
+            this.rootEl.insertAdjacentElement('afterend', this.infoCard);
         }
+
     }
 
-    private setVideo(video: infVideo): void {
-        this.videoParams = video;
-        document.dispatchEvent(this.apiReady);
+    private async getVideoInfo(videoId: string) {
+        const url = apiUrl + "/video/" + videoId + '?fields=' + this.searchParams.fields;
+        const video: infVideo = await fetchData(url);
+
+        this.setVideo(video);
     }
+
 
     private async searchVideo(): Promise<void> {
 
@@ -260,13 +289,17 @@ export default class PlayerManager {
             console.log("%c DM related ", "background: #56C7FF; color: #232323", "Search: " + this.searchParams.search);
         }
 
+        // Waiting for search params to be ready
+        await waitFor( () => this.searchParams !== null, 100, 5000, "Timeout waiting for searchParams not null");
+
+        // Serialize search params before send it
         const properties = Object.entries( this.searchParams ).map( ([ key, value] ) => {
             return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
         }).join('&');
 
-        const dmSearchUrl = apiUrl + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties;
+        const url = apiUrl + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties;
 
-        const video = await fetchData(dmSearchUrl);
+        const video = await fetchData(url);
 
         if (video) {
             if (video.total > 0) {
@@ -294,12 +327,13 @@ export default class PlayerManager {
         // Define current time and 30 days
         const currentTime = Math.floor(Date.now()/1000);
         const thirtyDays = 2592000;
+
+        // Generate url to call
         const url = apiUrl + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners)  + (this.playerParams.getUpdatedVideo ? "&created_after=" + (currentTime - thirtyDays) : "") + "&sort=random&limit=1&fields=" + this.searchParams.fields;
         const video = await fetchData(url);
 
         if (video) {
             if (video.list.length > 0) {
-
                 /**
                  * Data return array, get the first array and pass it to setVideo function
                  */
@@ -318,26 +352,48 @@ export default class PlayerManager {
         // Ignore 'cpeready' event because this event is from outside the script
         // @ts-ignore
         window.addEventListener('cpeready', ({ detail: { players } }) => {
-            const player = players[0];
 
-            // TODO: handle on video change: for now just update the title below the video
-            player.addEventListener('videochange', (e) => {
-                console.log(player.video.title);
-            });
+            this.players = players;
 
-            player.addEventListener('loadedmetadata', (e) => {
-                console.log("playing", player);
-            });
+            for (let i=0; i < players.length; i++) {
+                const player = players[i];
+
+                // TODO: handle on video change: for now just update the title below the video
+                player.addEventListener('videochange', async (e) => {
+                    const parent = player.parentNode.parentNode;
+                    console.log(parent);
+                    const video = player.video;
+                    const url = apiUrl + "/video/" + video.videoId + '?fields=' + this.searchParams.fields;
+                    this.videoParams = await fetchData(url);
+                    this.updateVideoInfo(this.id);
+                });
+
+                /**
+                 * To handle multiple players in a page with scroll to play
+                 */
+                player.addEventListener('playing', (e) => {
+                    this.togglePlay(player.id);
+                });
+            }
         });
 
+        // Listen to PiP close to pause the video player
         // @ts-ignore
         window.addEventListener('cpepipclose', ({ detail: { player } }) => {
-            // detail is an Object containing the dailymotion player that has been closed
+            // Do pause when cpe PiP is closed
             player.pause()
         });
     }
 
-    public reloadPlayer() {
+    private togglePlay(playerId: string): void {
+
+        for (let i=0; i < this.players.length; i++) {
+            if (this.players[i].id !== playerId) {
+                const parent = this.players[i].parentNode;
+                this.players[i].pause();
+                parent.classList.remove('pip');
+            }
+        }
 
     }
 

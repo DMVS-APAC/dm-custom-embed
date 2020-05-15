@@ -1,7 +1,17 @@
-export default function setVideoTitle(text: string): HTMLParagraphElement {
-    const videoTitle = document.createElement('p');
-    videoTitle.innerHTML = text;
-    videoTitle.className = 'dm__video-title';
+export default class VideoTitle {
+    private titleEl: HTMLParagraphElement = null;
 
-    return videoTitle;
+    public setVideoTitle(text: string): HTMLParagraphElement {
+        this.titleEl = document.createElement('p');
+        this.titleEl.innerHTML = text;
+        this.titleEl.className = 'dm__video-title';
+
+        return this.titleEl;
+    }
+
+    private cleanup(): void {
+        delete this.titleEl;
+        this.titleEl.remove();
+    }
+
 }

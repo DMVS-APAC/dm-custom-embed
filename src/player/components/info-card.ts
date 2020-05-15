@@ -1,35 +1,47 @@
 import infVideo from "player/interfaces/infVideo";
 
-export default function setInfoCard(data: infVideo): HTMLDivElement {
-    const infoCard = document.createElement('div');
-    infoCard.className = 'dm__info-card';
+export default class InfoCard {
+    private infoCardEl: HTMLDivElement = null;
 
-    const textWrapper = document.createElement('div');
-    textWrapper.className = 'dm__text-wrapper';
+    public setInfoCard(data: infVideo): HTMLDivElement {
 
-    const videoTitle = document.createElement('p');
-    videoTitle.innerHTML = data.title;
-    videoTitle.className = 'dm__video-title';
+        this.infoCardEl = document.createElement('div');
+        this.infoCardEl.className = 'dm__info-card';
 
-    const videoDesc = document.createElement('p');
-    videoDesc.innerHTML = data.description;
-    videoDesc.className = 'dm__video-desc';
+        const textWrapper = document.createElement('div');
+        textWrapper.className = 'dm__text-wrapper';
 
-    textWrapper.append(videoTitle);
-    textWrapper.append(videoDesc);
+        const videoTitle = document.createElement('p');
+        videoTitle.innerHTML = data.title;
+        videoTitle.className = 'dm__video-title';
 
-    const avaWrapper = document.createElement('picture');
-    avaWrapper.className = 'dm__ava-wrapper';
+        const videoDesc = document.createElement('p');
+        videoDesc.innerHTML = data.description;
+        videoDesc.className = 'dm__video-desc';
 
-    const ownerAva = document.createElement('img');
-    ownerAva.src = data["owner.avatar_190_url"];
-    ownerAva.className = 'dm__owner-ava';
+        textWrapper.append(videoTitle);
+        textWrapper.append(videoDesc);
 
-    avaWrapper.append(ownerAva);
+        const avaWrapper = document.createElement('picture');
+        avaWrapper.className = 'dm__ava-wrapper';
 
-    infoCard.append(textWrapper);
-    infoCard.append(avaWrapper);
+        const ownerAva = document.createElement('img');
+        ownerAva.src = data["owner.avatar_190_url"];
+        ownerAva.className = 'dm__owner-ava';
 
-    return infoCard;
+        avaWrapper.append(ownerAva);
+
+        this.infoCardEl.append(textWrapper);
+        this.infoCardEl.append(avaWrapper);
+
+        return this.infoCardEl;
+    }
+
+    public cleanup() {
+
+        if (this.infoCardEl) {
+            this.infoCardEl.remove();
+            delete this.infoCardEl;
+        }
+    }
 }
-

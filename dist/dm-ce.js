@@ -579,7 +579,8 @@ function fetchData(urlParams) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _player_player_manager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../player/player-manager */ "./src/player/player-manager.ts");
+/* harmony import */ var _utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utilities/wait-for */ "./src/utilities/wait-for.ts");
+/* harmony import */ var _player_player_manager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../player/player-manager */ "./src/player/player-manager.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -616,49 +617,55 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+// utilities
 
-var DM = /** @class */ (function () {
-    function DM(rootEls) {
+
+var DmManager = /** @class */ (function () {
+    function DmManager(rootEls) {
         this.rootEls = null;
-        this.player = null;
+        this.player = [];
+        // Pass rootEls to local variable
         this.rootEls = rootEls;
         this.renderElement();
     }
-    DM.prototype.addEventListeners = function () {
-    };
-    DM.prototype.renderElement = function () {
+    DmManager.prototype.renderElement = function () {
         return __awaiter(this, void 0, void 0, function () {
             var i;
+            var _this = this;
             return __generator(this, function (_a) {
-                for (i = 0; i < this.rootEls.length; i++) {
-                    this.player.push(new _player_player_manager__WEBPACK_IMPORTED_MODULE_0__["default"](this.rootEls[i]));
-                    // this.players[i] = 1;
-                    console.log(this.player);
-                    // if (i === 0) {
-                    //     await waitFor(() => this.players[0] !== null, 500, 2000, "Timeout waiting player ready");
-                    //     console.log(this.players[0]);
-                    //
-                    // }
+                switch (_a.label) {
+                    case 0:
+                        i = 0;
+                        _a.label = 1;
+                    case 1:
+                        if (!(i < this.rootEls.length)) return [3 /*break*/, 4];
+                        this.player[i] = new _player_player_manager__WEBPACK_IMPORTED_MODULE_1__["default"]("dm_" + i, this.rootEls[i]);
+                        if (!(i === 0)) return [3 /*break*/, 3];
+                        return [4 /*yield*/, Object(_utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["waitFor"])(function () { return _this.player[0] !== null; }, 500, 2000, "Timeout waiting player ready")];
+                    case 2:
+                        _a.sent();
+                        this.loadScript(this.player[0].cpeId);
+                        _a.label = 3;
+                    case 3:
+                        i++;
+                        return [3 /*break*/, 1];
+                    case 4: return [2 /*return*/];
                 }
-                return [2 /*return*/];
             });
         });
     };
-    DM.prototype.loadScript = function (cpeId) {
-        // let cpeId = this.playerParams.cpeId[0];
-        //
-        // if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
-        //     cpeId = this.playerParams.cpeId[1] ? this.playerParams.cpeId[1] : this.playerParams.cpeId[0];
-        //
-        // // Avoid error while building
-        // const date: any = new Date();
-        //
-        // // Load the CPE script
-        // (function(w,d,s,u,n,i,f,g,e,c){w.WDMObject=n;w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments);};w[n].l=1*date;w[n].i=i;w[n].f=f;w[n].g=g;e=d.createElement(s);e.async=1;e.src=u;c=d.getElementsByTagName(s)[0];c.parentNode.insertBefore(e,c);})(window,document,"script","//api.dmcdn.net/pxl/cpe/client.min.js","cpe", cpeId);
+    DmManager.prototype.loadScript = function (cpeId) {
+        var cpe = cpeId[0];
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+            cpe = cpeId[1] ? cpeId[1] : cpeId[0];
+        // Avoid error while building
+        var date = new Date();
+        // Load the CPE script
+        (function (w, d, s, u, n, i, f, g, e, c) { w.WDMObject = n; w[n] = w[n] || function () { (w[n].q = w[n].q || []).push(arguments); }; w[n].l = 1 * date; w[n].i = i; w[n].f = f; w[n].g = g; e = d.createElement(s); e.async = 1; e.src = u; c = d.getElementsByTagName(s)[0]; c.parentNode.insertBefore(e, c); })(window, document, "script", "//api.dmcdn.net/pxl/cpe/client.min.js", "cpe", cpe);
     };
-    return DM;
+    return DmManager;
 }());
-/* harmony default export */ __webpack_exports__["default"] = (DM);
+/* harmony default export */ __webpack_exports__["default"] = (DmManager);
 
 
 /***/ }),
@@ -716,8 +723,11 @@ var init = function () { return __awaiter(void 0, void 0, void 0, function () {
     var el;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, Object(_utilities_wait_for__WEBPACK_IMPORTED_MODULE_1__["waitFor"])(function () { return document.querySelectorAll('.dm-player').length > 0; }, 500, 2000, "Timeout to get DM placeholder")];
+            case 0: 
+            // Wait `.dm-player` to be ready first before do everything
+            return [4 /*yield*/, Object(_utilities_wait_for__WEBPACK_IMPORTED_MODULE_1__["waitFor"])(function () { return document.querySelectorAll('.dm-player').length > 0; }, 500, 2000, "Timeout to get DM placeholder")];
             case 1:
+                // Wait `.dm-player` to be ready first before do everything
                 _a.sent();
                 el = document.querySelectorAll('.dm-player');
                 new _dm_dm_manager__WEBPACK_IMPORTED_MODULE_0__["default"](el);
@@ -760,30 +770,42 @@ var apiUrl = "https://api.dailymotion.com/";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return setInfoCard; });
-function setInfoCard(data) {
-    var infoCard = document.createElement('div');
-    infoCard.className = 'dm__info-card';
-    var textWrapper = document.createElement('div');
-    textWrapper.className = 'dm__text-wrapper';
-    var videoTitle = document.createElement('p');
-    videoTitle.innerHTML = data.title;
-    videoTitle.className = 'dm__video-title';
-    var videoDesc = document.createElement('p');
-    videoDesc.innerHTML = data.description;
-    videoDesc.className = 'dm__video-desc';
-    textWrapper.append(videoTitle);
-    textWrapper.append(videoDesc);
-    var avaWrapper = document.createElement('picture');
-    avaWrapper.className = 'dm__ava-wrapper';
-    var ownerAva = document.createElement('img');
-    ownerAva.src = data["owner.avatar_190_url"];
-    ownerAva.className = 'dm__owner-ava';
-    avaWrapper.append(ownerAva);
-    infoCard.append(textWrapper);
-    infoCard.append(avaWrapper);
-    return infoCard;
-}
+var InfoCard = /** @class */ (function () {
+    function InfoCard() {
+        this.infoCardEl = null;
+    }
+    InfoCard.prototype.setInfoCard = function (data) {
+        this.infoCardEl = document.createElement('div');
+        this.infoCardEl.className = 'dm__info-card';
+        var textWrapper = document.createElement('div');
+        textWrapper.className = 'dm__text-wrapper';
+        var videoTitle = document.createElement('p');
+        videoTitle.innerHTML = data.title;
+        videoTitle.className = 'dm__video-title';
+        var videoDesc = document.createElement('p');
+        videoDesc.innerHTML = data.description;
+        videoDesc.className = 'dm__video-desc';
+        textWrapper.append(videoTitle);
+        textWrapper.append(videoDesc);
+        var avaWrapper = document.createElement('picture');
+        avaWrapper.className = 'dm__ava-wrapper';
+        var ownerAva = document.createElement('img');
+        ownerAva.src = data["owner.avatar_190_url"];
+        ownerAva.className = 'dm__owner-ava';
+        avaWrapper.append(ownerAva);
+        this.infoCardEl.append(textWrapper);
+        this.infoCardEl.append(avaWrapper);
+        return this.infoCardEl;
+    };
+    InfoCard.prototype.cleanup = function () {
+        if (this.infoCardEl) {
+            this.infoCardEl.remove();
+            delete this.infoCardEl;
+        }
+    };
+    return InfoCard;
+}());
+/* harmony default export */ __webpack_exports__["default"] = (InfoCard);
 
 
 /***/ }),
@@ -817,13 +839,23 @@ function setPreVideoTitle(text) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return setVideoTitle; });
-function setVideoTitle(text) {
-    var videoTitle = document.createElement('p');
-    videoTitle.innerHTML = text;
-    videoTitle.className = 'dm__video-title';
-    return videoTitle;
-}
+var VideoTitle = /** @class */ (function () {
+    function VideoTitle() {
+        this.titleEl = null;
+    }
+    VideoTitle.prototype.setVideoTitle = function (text) {
+        this.titleEl = document.createElement('p');
+        this.titleEl.innerHTML = text;
+        this.titleEl.className = 'dm__video-title';
+        return this.titleEl;
+    };
+    VideoTitle.prototype.cleanup = function () {
+        delete this.titleEl;
+        this.titleEl.remove();
+    };
+    return VideoTitle;
+}());
+/* harmony default export */ __webpack_exports__["default"] = (VideoTitle);
 
 
 /***/ }),
@@ -840,11 +872,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _global_vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../global/vars */ "./src/global/vars.ts");
 /* harmony import */ var _utilities_html_entities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utilities/html-entities */ "./src/utilities/html-entities.ts");
 /* harmony import */ var _api_apiCall__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../api/apiCall */ "./src/api/apiCall.ts");
-/* harmony import */ var _components_pre_video_title__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/pre-video-title */ "./src/player/components/pre-video-title.ts");
-/* harmony import */ var _components_video_title__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/video-title */ "./src/player/components/video-title.ts");
-/* harmony import */ var _components_info_card__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/info-card */ "./src/player/components/info-card.ts");
-/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../scss/main.scss */ "./src/scss/main.scss");
-/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_scss_main_scss__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _utilities_wait_for__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utilities/wait-for */ "./src/utilities/wait-for.ts");
+/* harmony import */ var _components_pre_video_title__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/pre-video-title */ "./src/player/components/pre-video-title.ts");
+/* harmony import */ var _components_video_title__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/video-title */ "./src/player/components/video-title.ts");
+/* harmony import */ var _components_info_card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/info-card */ "./src/player/components/info-card.ts");
+/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../scss/main.scss */ "./src/scss/main.scss");
+/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_scss_main_scss__WEBPACK_IMPORTED_MODULE_7__);
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -886,6 +919,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 // Utilities
 
 
+
 // Components
 
 
@@ -893,49 +927,65 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 // Styles
 
 var PlayerManager = /** @class */ (function () {
-    function PlayerManager(rootEl) {
+    function PlayerManager(id, rootEl) {
+        this.id = '';
         this.rootEl = null;
         this.playerParams = null;
         this.searchParams = null;
         this.videoParams = null;
+        this.videoTitle = null;
+        this.infoCard = null;
+        // From outside, it's a dailymotion player
+        this.players = [];
+        this.cpeId = [];
         this.rootEl = rootEl;
+        this.id = id;
         this.addEventListeners();
-        this.registerNewEvents();
         this.extractAttrs();
         this.videoEvents();
     }
     PlayerManager.prototype.addEventListeners = function () {
         var _this = this;
-        var self = this;
         /**
          * Listen to `dm-api-ready` to run `loadDmPlayer` to construct the player
          */
         document.addEventListener('dm-api-ready', function (e) {
-            _this.loadDmPlayer(_this.rootEl);
+            //@ts-ignore
+            if (e.detail === _this.id) {
+                _this.loadDmPlayer(_this.rootEl);
+            }
         });
         /**
          * Listen to `player-extracted` to wait all attributes is extracted from the element
          * then prepare the search parameters
          */
-        document.addEventListener('player-extracted', function (e) {
-            self.prepareSearchParams();
-            // self.loadScript();
+        document.addEventListener('dm-player-extracted', function (e) {
+            //@ts-ignore
+            if (e.detail === _this.id) {
+                _this.prepareSearchParams();
+            }
         });
         /**
          * Listen to `dm-search-params-ready` after parameters is ready then start search
          * related/recent video
          */
         document.addEventListener('dm-search-params-ready', function (e) {
-            self.searchVideo();
+            //@ts-ignore
+            if (e.detail === _this.id) {
+                if (_this.playerParams.videoId === null) {
+                    _this.searchVideo();
+                }
+                else {
+                    _this.getVideoInfo(_this.playerParams.videoId);
+                }
+            }
         });
-    };
-    /**
-     * Create new events to dispatch after the event is ready
-     */
-    PlayerManager.prototype.registerNewEvents = function () {
-        this.apiReady = new Event('dm-api-ready');
-        this.playerExtracted = new Event('player-extracted');
-        this.searchParamsReady = new Event('dm-search-params-ready');
+        document.addEventListener('dm-video-params-updated', function (e) {
+            //@ts-ignore
+            if (e.detail === _this.id) {
+                _this.updateVideoInfo(_this.id);
+            }
+        });
     };
     PlayerManager.prototype.extractAttrs = function () {
         var rootEl = this.rootEl;
@@ -946,6 +996,7 @@ var PlayerManager = /** @class */ (function () {
             maxWordSearch: rootEl.getAttribute('maxWordSearch') ? Number(rootEl.getAttribute('maxWordSearch')) : 15,
             minWordLength: rootEl.getAttribute('minWordLength') ? Number(rootEl.getAttribute('minWordLength')) : 4,
             minWordSearch: rootEl.getAttribute('minWordSearch') ? Number(rootEl.getAttribute('minWordSearch')) : 2,
+            videoId: rootEl.getAttribute('videoId') ? rootEl.getAttribute('videoId') : null,
             language: rootEl.getAttribute("language") ? rootEl.getAttribute("language") : "",
             sort: rootEl.getAttribute("sort") ? rootEl.getAttribute("sort") : "recent",
             owners: rootEl.getAttribute("owners") ? rootEl.getAttribute("owners") : "",
@@ -976,7 +1027,8 @@ var PlayerManager = /** @class */ (function () {
             console.log("%c DM Player Params: ", "background: #56C7FF; color: #232323", this.playerParams);
         }
         // Tell the event listener that player parameters is extracted
-        document.dispatchEvent(this.playerExtracted);
+        var playerExtracted = new CustomEvent('dm-player-extracted', { detail: this.id });
+        document.dispatchEvent(playerExtracted);
     };
     /**
      * Set search parameters
@@ -984,6 +1036,7 @@ var PlayerManager = /** @class */ (function () {
      * For all search parameters, please see interfaces/infSearch.ts
      */
     PlayerManager.prototype.prepareSearchParams = function () {
+        this.cpeId = this.playerParams.cpeId;
         var keywords = this.findKeywords(this.playerParams.keywordsSelector);
         this.searchParams = {
             fields: this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url' : 'id,title',
@@ -1008,16 +1061,8 @@ var PlayerManager = /** @class */ (function () {
         if (this.playerParams.language)
             this.searchParams.language = this.playerParams.language;
         // Tell the event listener that search params is ready
-        document.dispatchEvent(this.searchParamsReady);
-    };
-    PlayerManager.prototype.loadScript = function () {
-        var cpeId = this.playerParams.cpeId[0];
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
-            cpeId = this.playerParams.cpeId[1] ? this.playerParams.cpeId[1] : this.playerParams.cpeId[0];
-        // Avoid error while building
-        var date = new Date();
-        // Load the CPE script
-        (function (w, d, s, u, n, i, f, g, e, c) { w.WDMObject = n; w[n] = w[n] || function () { (w[n].q = w[n].q || []).push(arguments); }; w[n].l = 1 * date; w[n].i = i; w[n].f = f; w[n].g = g; e = d.createElement(s); e.async = 1; e.src = u; c = d.getElementsByTagName(s)[0]; c.parentNode.insertBefore(e, c); })(window, document, "script", "//api.dmcdn.net/pxl/cpe/client.min.js", "cpe", cpeId);
+        var searchParamsReady = new CustomEvent('dm-search-params-ready', { detail: this.id });
+        document.dispatchEvent(searchParamsReady);
     };
     PlayerManager.prototype.loadDmPlayer = function (rootEl) {
         var cpeEmbed = document.createElement("div");
@@ -1059,70 +1104,106 @@ var PlayerManager = /** @class */ (function () {
             cpeEmbed.setAttribute("height", rootEl.getAttribute("height"));
         }
         // end of set attributes
+        // Append the element to the root player element
+        rootEl.appendChild(cpeEmbed);
         /**
          * Set pre title for video
          */
         if (this.playerParams.preVideoTitle !== null) {
-            var preTitle = Object(_components_pre_video_title__WEBPACK_IMPORTED_MODULE_3__["default"])(this.playerParams.preVideoTitle);
+            var preTitle = Object(_components_pre_video_title__WEBPACK_IMPORTED_MODULE_4__["default"])(this.playerParams.preVideoTitle);
             rootEl.insertAdjacentElement('afterbegin', preTitle);
-        }
-        // Append the element to the root player element
-        rootEl.appendChild(cpeEmbed);
-        /**
-         * Set a video title
-         */
-        if (this.playerParams.showVideoTitle === true) {
-            var videoTitle = Object(_components_video_title__WEBPACK_IMPORTED_MODULE_4__["default"])(this.videoParams.title);
-            rootEl.insertAdjacentElement('afterend', videoTitle);
-        }
-        /**
-         * Set an info card
-         */
-        if (this.playerParams.showInfoCard === true) {
-            var infoCard = Object(_components_info_card__WEBPACK_IMPORTED_MODULE_5__["default"])(this.videoParams);
-            rootEl.insertAdjacentElement('afterend', infoCard);
         }
     };
     PlayerManager.prototype.setVideo = function (video) {
         this.videoParams = video;
-        document.dispatchEvent(this.apiReady);
+        var apiReady = new CustomEvent("dm-api-ready", { detail: this.id });
+        document.dispatchEvent(apiReady);
+        var videoUpdated = new CustomEvent('dm-video-params-updated', { detail: this.id });
+        document.dispatchEvent(videoUpdated);
+    };
+    PlayerManager.prototype.updateVideoInfo = function (id) {
+        console.log(id, this.id, this.playerParams.showInfoCard, this.playerParams.showVideoTitle);
+        /**
+         * Set a video title
+         */
+        if (this.playerParams.showVideoTitle === true && id === this.id) {
+            var videoTitle = new _components_video_title__WEBPACK_IMPORTED_MODULE_5__["default"]();
+            if (this.videoTitle !== null) {
+                this.videoTitle.remove();
+            }
+            this.videoTitle = videoTitle.setVideoTitle(this.videoParams.title);
+            this.rootEl.insertAdjacentElement('afterend', this.videoTitle);
+        }
+        /**
+         * Set an info card
+         */
+        if (this.playerParams.showInfoCard === true && id === this.id) {
+            var infoCard = new _components_info_card__WEBPACK_IMPORTED_MODULE_6__["default"]();
+            if (this.infoCard !== null) {
+                this.infoCard.remove();
+            }
+            this.infoCard = infoCard.setInfoCard(this.videoParams);
+            this.rootEl.insertAdjacentElement('afterend', this.infoCard);
+        }
+    };
+    PlayerManager.prototype.getVideoInfo = function (videoId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var url, video;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        url = _global_vars__WEBPACK_IMPORTED_MODULE_0__["apiUrl"] + "/video/" + videoId + '?fields=' + this.searchParams.fields;
+                        return [4 /*yield*/, Object(_api_apiCall__WEBPACK_IMPORTED_MODULE_2__["fetchData"])(url)];
+                    case 1:
+                        video = _a.sent();
+                        this.setVideo(video);
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     PlayerManager.prototype.searchVideo = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var properties, dmSearchUrl, video;
+            var properties, url, video;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         if (_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true && this.playerParams.sort === 'relevance') {
                             console.log("%c DM related ", "background: #56C7FF; color: #232323", "Search: " + this.searchParams.search);
                         }
+                        // Waiting for search params to be ready
+                        return [4 /*yield*/, Object(_utilities_wait_for__WEBPACK_IMPORTED_MODULE_3__["waitFor"])(function () { return _this.searchParams !== null; }, 100, 5000, "Timeout waiting for searchParams not null")];
+                    case 1:
+                        // Waiting for search params to be ready
+                        _a.sent();
                         properties = Object.entries(this.searchParams).map(function (_a) {
                             var key = _a[0], value = _a[1];
                             return encodeURIComponent(key) + "=" + encodeURIComponent(value);
                         }).join('&');
-                        dmSearchUrl = _global_vars__WEBPACK_IMPORTED_MODULE_0__["apiUrl"] + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties;
-                        return [4 /*yield*/, Object(_api_apiCall__WEBPACK_IMPORTED_MODULE_2__["fetchData"])(dmSearchUrl)];
-                    case 1:
-                        video = _a.sent();
-                        if (!video) return [3 /*break*/, 5];
-                        if (!(video.total > 0)) return [3 /*break*/, 2];
-                        this.setVideo(video.list[0]);
-                        return [3 /*break*/, 5];
+                        url = _global_vars__WEBPACK_IMPORTED_MODULE_0__["apiUrl"] + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties;
+                        return [4 /*yield*/, Object(_api_apiCall__WEBPACK_IMPORTED_MODULE_2__["fetchData"])(url)];
                     case 2:
+                        video = _a.sent();
+                        if (!video) return [3 /*break*/, 6];
+                        if (!(video.total > 0)) return [3 /*break*/, 3];
+                        this.setVideo(video.list[0]);
+                        return [3 /*break*/, 6];
+                    case 3:
                         // Strip a string to try to get video one more time if there is no video found
                         this.searchParams.search = this.searchParams.search.substring(0, this.searchParams.search.lastIndexOf(' '));
-                        if (!(this.searchParams.search.split(' ').length >= this.playerParams.minWordSearch && this.searchParams.search.length > 0)) return [3 /*break*/, 4];
+                        if (!(this.searchParams.search.split(' ').length >= this.playerParams.minWordSearch && this.searchParams.search.length > 0)) return [3 /*break*/, 5];
                         return [4 /*yield*/, this.searchVideo()];
-                    case 3:
-                        _a.sent();
-                        return [3 /*break*/, 5];
                     case 4:
+                        _a.sent();
+                        return [3 /*break*/, 6];
+                    case 5:
                         if (_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
                             console.log("%c DM related ", "background: #56C7FF; color: #232323", "Can not find related video. Fallback video used.");
                         }
                         this.getFallbackVideo();
-                        _a.label = 5;
-                    case 5: return [2 /*return*/];
+                        _a.label = 6;
+                    case 6: return [2 /*return*/];
                 }
             });
         });
@@ -1158,27 +1239,60 @@ var PlayerManager = /** @class */ (function () {
         });
     };
     PlayerManager.prototype.videoEvents = function () {
+        var _this = this;
         // Ignore 'cpeready' event because this event is from outside the script
         // @ts-ignore
         window.addEventListener('cpeready', function (_a) {
             var players = _a.detail.players;
-            var player = players[0];
-            // TODO: handle on video change: for now just update the title below the video
-            player.addEventListener('videochange', function (e) {
-                console.log(player.video.title);
-            });
-            player.addEventListener('loadedmetadata', function (e) {
-                console.log("playing", player);
-            });
+            _this.players = players;
+            var _loop_1 = function (i) {
+                var player = players[i];
+                // TODO: handle on video change: for now just update the title below the video
+                player.addEventListener('videochange', function (e) { return __awaiter(_this, void 0, void 0, function () {
+                    var parent, video, url, _a;
+                    return __generator(this, function (_b) {
+                        switch (_b.label) {
+                            case 0:
+                                parent = player.parentNode.parentNode;
+                                console.log(parent);
+                                video = player.video;
+                                url = _global_vars__WEBPACK_IMPORTED_MODULE_0__["apiUrl"] + "/video/" + video.videoId + '?fields=' + this.searchParams.fields;
+                                _a = this;
+                                return [4 /*yield*/, Object(_api_apiCall__WEBPACK_IMPORTED_MODULE_2__["fetchData"])(url)];
+                            case 1:
+                                _a.videoParams = _b.sent();
+                                this.updateVideoInfo(this.id);
+                                return [2 /*return*/];
+                        }
+                    });
+                }); });
+                /**
+                 * To handle multiple players in a page with scroll to play
+                 */
+                player.addEventListener('playing', function (e) {
+                    _this.togglePlay(player.id);
+                });
+            };
+            for (var i = 0; i < players.length; i++) {
+                _loop_1(i);
+            }
         });
+        // Listen to PiP close to pause the video player
         // @ts-ignore
         window.addEventListener('cpepipclose', function (_a) {
             var player = _a.detail.player;
-            // detail is an Object containing the dailymotion player that has been closed
+            // Do pause when cpe PiP is closed
             player.pause();
         });
     };
-    PlayerManager.prototype.reloadPlayer = function () {
+    PlayerManager.prototype.togglePlay = function (playerId) {
+        for (var i = 0; i < this.players.length; i++) {
+            if (this.players[i].id !== playerId) {
+                var parent_1 = this.players[i].parentNode;
+                this.players[i].pause();
+                parent_1.classList.remove('pip');
+            }
+        }
     };
     /**
      * Find keywords strings on website
