@@ -32,7 +32,8 @@ export default class PlayerManager {
     // From outside, it's a dailymotion player
     private players: any[] = [];
 
-    cpeId: string[] = [];
+    public cpeId: string[] = [];
+    public cpeParams: object = {};
 
     public constructor(id: string, rootEl: HTMLDivElement) {
         this.rootEl = rootEl;
@@ -74,16 +75,14 @@ export default class PlayerManager {
                 if (this.playerParams.videoId === null) {
                     this.searchVideo();
                 } else {
-                    this.getVideoInfo(this.playerParams.videoId);
+                    this.getVideoInfo(this.playerParams.videoId, true);
                 }
             }
         });
 
-        document.addEventListener('dm-video-params-updated', (e: Event) => {
+        document.addEventListener('dm-video-updated', (e: Event) => {
             //@ts-ignore
-            if (e.detail === this.id) {
-                this.updateVideoInfo();
-            }
+            this.getVideoInfo(e.detail.videoId, false);
         });
 
     }
@@ -220,6 +219,17 @@ export default class PlayerManager {
         }
 
         // end of set attributes
+        let cpeParams = {};
+
+        if (this.playerParams.scrollToPause === true) cpeParams['scroll_to_pause'] = true;
+
+        if (this.playerParams.stpSound === true) cpeParams['stp_sound'] = true;
+
+        if (this.playerParams.playerStyleEnable === true) cpeParams['player_style_enable'] = true;
+
+        if (this.playerParams.playerStyleColor !== null) cpeParams['player_style_color'] = this.playerParams.playerStyleColor;
+
+        this.cpeParams = cpeParams;
 
         // Append the element to the root player element
         rootEl.appendChild(cpeEmbed);
@@ -234,14 +244,15 @@ export default class PlayerManager {
 
     }
 
-    private setVideo(video: infVideo): void {
+    private setVideo(video: infVideo, createNew?: boolean): void {
         this.videoParams = video;
 
-        const apiReady = new CustomEvent("dm-api-ready", { detail: this.id})
-        document.dispatchEvent(apiReady);
+        if (createNew) {
+            const apiReady = new CustomEvent("dm-api-ready", {detail: this.id})
+            document.dispatchEvent(apiReady);
+        }
 
-        const videoUpdated = new CustomEvent('dm-video-params-updated', { detail: this.id});
-        document.dispatchEvent(videoUpdated);
+        this.updateVideoInfo();
     }
 
     private updateVideoInfo() {
@@ -273,11 +284,11 @@ export default class PlayerManager {
 
     }
 
-    private async getVideoInfo(videoId: string) {
+    private async getVideoInfo(videoId: string, createNew: boolean) {
         const url = apiUrl + "/video/" + videoId + '?fields=' + this.searchParams.fields;
         const video: infVideo = await fetchData(url);
 
-        this.setVideo(video);
+        this.setVideo(video, createNew);
     }
 
 
@@ -301,7 +312,7 @@ export default class PlayerManager {
 
         if (video) {
             if (video.total > 0) {
-                this.setVideo(video.list[0]);
+                this.setVideo(video.list[0], true);
             } else {
                 // Strip a string to try to get video one more time if there is no video found
                 this.searchParams.search = this.searchParams.search.substring(0, this.searchParams.search.lastIndexOf(' '));
@@ -335,7 +346,7 @@ export default class PlayerManager {
                 /**
                  * Data return array, get the first array and pass it to setVideo function
                  */
-                this.setVideo(video.list[0]);
+                this.setVideo(video.list[0], true);
             } else {
                 if (debugMode === true) {
                     console.warn("DM related Unable to find a fallback video");

@@ -10,7 +10,8 @@ module.exports = (env, options) => {
 
     return {
         entry: {
-            "dm-ce": "./src/entries/dm-embed.ts"
+            "dm-ce": "./src/entries/dm-embed.ts",
+            "dm-amp": "./src/entries/amp/dm-amp.ts"
         },
         output: {
             path: path.resolve(__dirname, 'dist'),
@@ -89,6 +90,53 @@ module.exports = (env, options) => {
                 } : false,
                 hash: false
             }),
+            new HtmlWebpackPlugin({
+                title: 'Dailymotion AMP Video Embed',
+                template: 'src/entries/amp/index.html',
+                filename: 'amp/index.html',
+                chunks: ['dm-amp'],
+                showErrors : isProd ? false : true,
+                minify: isProd ? {
+                    html5                          : true,
+                    collapseWhitespace             : true,
+                    minifyCSS                      : true,
+                    minifyJS                       : true,
+                    minifyURLs                     : false,
+                    removeAttributeQuotes          : true,
+                    removeComments                 : true,
+                    removeEmptyAttributes          : true,
+                    removeOptionalTags             : true,
+                    removeRedundantAttributes      : true,
+                    removeScriptTypeAttributes     : true,
+                    removeStyleLinkTypeAttributese : true,
+                    useShortDoctype                : true
+                } : false,
+                hash: false
+            }),
+            new HtmlWebpackPlugin({
+                title: 'Dailymotion AMP Video Player',
+                template: 'src/entries/dm-player.html',
+                filename: 'dm-player.html',
+                chunks: ['dm-player'],
+                showErrors : isProd ? false : true,
+                minify: isProd ? {
+                    html5                          : true,
+                    collapseWhitespace             : true,
+                    minifyCSS                      : true,
+                    minifyJS                       : true,
+                    minifyURLs                     : false,
+                    removeAttributeQuotes          : true,
+                    removeComments                 : true,
+                    removeEmptyAttributes          : true,
+                    removeOptionalTags             : true,
+                    removeRedundantAttributes      : true,
+                    removeScriptTypeAttributes     : true,
+                    removeStyleLinkTypeAttributese : true,
+                    useShortDoctype                : true
+                } : false,
+                hash: false
+            }),
+
             // new DelWebpackPlugin({
             //     include: ['**'],
             //     exclude: [],

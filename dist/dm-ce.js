@@ -581,6 +581,7 @@ function fetchData(urlParams) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utilities/wait-for */ "./src/utilities/wait-for.ts");
 /* harmony import */ var _player_player_manager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../player/player-manager */ "./src/player/player-manager.ts");
+/* harmony import */ var _player_player_events_manager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../player/player-events-manager */ "./src/player/player-events-manager.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -620,6 +621,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 // utilities
 
 
+
 var DmManager = /** @class */ (function () {
     function DmManager(rootEls) {
         this.rootEls = null;
@@ -628,6 +630,10 @@ var DmManager = /** @class */ (function () {
         this.rootEls = rootEls;
         this.renderElement();
     }
+    DmManager.prototype.listenVideoEvents = function () {
+        // It's start to listen to the video events
+        new _player_player_events_manager__WEBPACK_IMPORTED_MODULE_2__["default"]();
+    };
     DmManager.prototype.renderElement = function () {
         return __awaiter(this, void 0, void 0, function () {
             var i;
@@ -646,24 +652,26 @@ var DmManager = /** @class */ (function () {
                     case 2:
                         // Waiting for the first instance filled
                         _a.sent();
-                        this.loadScript(this.player[0].cpeId);
+                        this.loadScript(this.player[0].cpeId, this.player[0].cpeParams);
                         _a.label = 3;
                     case 3:
                         i++;
                         return [3 /*break*/, 1];
-                    case 4: return [2 /*return*/];
+                    case 4:
+                        this.listenVideoEvents();
+                        return [2 /*return*/];
                 }
             });
         });
     };
-    DmManager.prototype.loadScript = function (cpeId) {
+    DmManager.prototype.loadScript = function (cpeId, cpeParams) {
         var cpe = cpeId[0];
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
             cpe = cpeId[1] ? cpeId[1] : cpeId[0];
         // Avoid error while building
         var date = new Date();
         // Load the CPE script
-        (function (w, d, s, u, n, i, f, g, e, c) { w.WDMObject = n; w[n] = w[n] || function () { (w[n].q = w[n].q || []).push(arguments); }; w[n].l = 1 * date; w[n].i = i; w[n].f = f; w[n].g = g; e = d.createElement(s); e.async = 1; e.src = u; c = d.getElementsByTagName(s)[0]; c.parentNode.insertBefore(e, c); })(window, document, "script", "//api.dmcdn.net/pxl/cpe/client.min.js", "cpe", cpe);
+        (function (w, d, s, u, n, i, f, g, e, c) { w.WDMObject = n; w[n] = w[n] || function () { (w[n].q = w[n].q || []).push(arguments); }; w[n].l = 1 * date; w[n].i = i; w[n].f = f; w[n].g = g; e = d.createElement(s); e.async = 1; e.src = u; c = d.getElementsByTagName(s)[0]; c.parentNode.insertBefore(e, c); })(window, document, "script", "//api.dmcdn.net/pxl/cpe/client.min.js", "cpe", cpe, cpeParams);
     };
     return DmManager;
 }());
@@ -862,6 +870,109 @@ var VideoTitle = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/player/player-events-manager.ts":
+/*!*********************************************!*\
+  !*** ./src/player/player-events-manager.ts ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var PlayerEventsManager = /** @class */ (function () {
+    function PlayerEventsManager() {
+        this.players = [];
+        this.videoEvents();
+    }
+    PlayerEventsManager.prototype.videoEvents = function () {
+        var _this = this;
+        // Ignore 'cpeready' event because this event is from outside the script
+        // @ts-ignore
+        window.addEventListener('cpeready', function (_a) {
+            var players = _a.detail.players;
+            _this.players = players;
+            var _loop_1 = function (i) {
+                var player = players[i];
+                player.addEventListener('videochange', function (e) { return __awaiter(_this, void 0, void 0, function () {
+                    var video, videoUpdated;
+                    return __generator(this, function (_a) {
+                        video = player.video;
+                        videoUpdated = new CustomEvent('dm-video-updated', { detail: { videoId: video.videoId } });
+                        document.dispatchEvent(videoUpdated);
+                        return [2 /*return*/];
+                    });
+                }); });
+                /**
+                 * To handle multiple players in a page with scroll to play
+                 */
+                player.addEventListener('playing', function (e) {
+                    _this.togglePlay(player.id);
+                });
+            };
+            for (var i = 0; i < players.length; i++) {
+                _loop_1(i);
+            }
+        });
+        // Listen to PiP close to pause the video player
+        // @ts-ignore
+        window.addEventListener('cpepipclose', function (_a) {
+            var player = _a.detail.player;
+            // Do pause when cpe PiP is closed
+            player.pause();
+        });
+    };
+    PlayerEventsManager.prototype.togglePlay = function (playerId) {
+        for (var i = 0; i < this.players.length; i++) {
+            if (this.players[i].id !== playerId) {
+                var parent_1 = this.players[i].parentNode;
+                this.players[i].pause();
+                parent_1.classList.remove('pip');
+            }
+        }
+    };
+    return PlayerEventsManager;
+}());
+/* harmony default export */ __webpack_exports__["default"] = (PlayerEventsManager);
+
+
+/***/ }),
+
 /***/ "./src/player/player-manager.ts":
 /*!**************************************!*\
   !*** ./src/player/player-manager.ts ***!
@@ -940,6 +1051,7 @@ var PlayerManager = /** @class */ (function () {
         // From outside, it's a dailymotion player
         this.players = [];
         this.cpeId = [];
+        this.cpeParams = {};
         this.rootEl = rootEl;
         this.id = id;
         this.addEventListeners();
@@ -977,15 +1089,13 @@ var PlayerManager = /** @class */ (function () {
                     _this.searchVideo();
                 }
                 else {
-                    _this.getVideoInfo(_this.playerParams.videoId);
+                    _this.getVideoInfo(_this.playerParams.videoId, true);
                 }
             }
         });
-        document.addEventListener('dm-video-params-updated', function (e) {
+        document.addEventListener('dm-video-updated', function (e) {
             //@ts-ignore
-            if (e.detail === _this.id) {
-                _this.updateVideoInfo();
-            }
+            _this.getVideoInfo(e.detail.videoId, false);
         });
     };
     PlayerManager.prototype.extractAttrs = function () {
@@ -1105,6 +1215,16 @@ var PlayerManager = /** @class */ (function () {
             cpeEmbed.setAttribute("height", rootEl.getAttribute("height"));
         }
         // end of set attributes
+        var cpeParams = {};
+        if (this.playerParams.scrollToPause === true)
+            cpeParams['scroll_to_pause'] = true;
+        if (this.playerParams.stpSound === true)
+            cpeParams['stp_sound'] = true;
+        if (this.playerParams.playerStyleEnable === true)
+            cpeParams['player_style_enable'] = true;
+        if (this.playerParams.playerStyleColor !== null)
+            cpeParams['player_style_color'] = this.playerParams.playerStyleColor;
+        this.cpeParams = cpeParams;
         // Append the element to the root player element
         rootEl.appendChild(cpeEmbed);
         /**
@@ -1115,12 +1235,13 @@ var PlayerManager = /** @class */ (function () {
             rootEl.insertAdjacentElement('afterbegin', preTitle);
         }
     };
-    PlayerManager.prototype.setVideo = function (video) {
+    PlayerManager.prototype.setVideo = function (video, createNew) {
         this.videoParams = video;
-        var apiReady = new CustomEvent("dm-api-ready", { detail: this.id });
-        document.dispatchEvent(apiReady);
-        var videoUpdated = new CustomEvent('dm-video-params-updated', { detail: this.id });
-        document.dispatchEvent(videoUpdated);
+        if (createNew) {
+            var apiReady = new CustomEvent("dm-api-ready", { detail: this.id });
+            document.dispatchEvent(apiReady);
+        }
+        this.updateVideoInfo();
     };
     PlayerManager.prototype.updateVideoInfo = function () {
         /**
@@ -1146,7 +1267,7 @@ var PlayerManager = /** @class */ (function () {
             this.rootEl.insertAdjacentElement('afterend', this.infoCard);
         }
     };
-    PlayerManager.prototype.getVideoInfo = function (videoId) {
+    PlayerManager.prototype.getVideoInfo = function (videoId, createNew) {
         return __awaiter(this, void 0, void 0, function () {
             var url, video;
             return __generator(this, function (_a) {
@@ -1156,7 +1277,7 @@ var PlayerManager = /** @class */ (function () {
                         return [4 /*yield*/, Object(_api_apiCall__WEBPACK_IMPORTED_MODULE_2__["fetchData"])(url)];
                     case 1:
                         video = _a.sent();
-                        this.setVideo(video);
+                        this.setVideo(video, createNew);
                         return [2 /*return*/];
                 }
             });
@@ -1187,7 +1308,7 @@ var PlayerManager = /** @class */ (function () {
                         video = _a.sent();
                         if (!video) return [3 /*break*/, 6];
                         if (!(video.total > 0)) return [3 /*break*/, 3];
-                        this.setVideo(video.list[0]);
+                        this.setVideo(video.list[0], true);
                         return [3 /*break*/, 6];
                     case 3:
                         // Strip a string to try to get video one more time if there is no video found
@@ -1225,7 +1346,7 @@ var PlayerManager = /** @class */ (function () {
                                 /**
                                  * Data return array, get the first array and pass it to setVideo function
                                  */
-                                this.setVideo(video.list[0]);
+                                this.setVideo(video.list[0], true);
                             }
                             else {
                                 if (_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {

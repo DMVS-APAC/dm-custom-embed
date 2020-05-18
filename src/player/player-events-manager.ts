@@ -22,10 +22,8 @@ export default class PlayerEventsManager {
 
                 player.addEventListener('videochange', async (e) => {
                     const video = player.video;
-                    // const url = apiUrl + "/video/" + video.videoId + '?fields=' + this.searchParams.fields;
-                    // this.videoParams = await fetchData(url);
-                    // this.updateVideoInfo(player.id);
-                    const videoUpdated = new CustomEvent('dm-video-params-updated', { detail: {}})
+                    const videoUpdated = new CustomEvent('dm-video-updated', { detail: { videoId: video.videoId }})
+                    document.dispatchEvent(videoUpdated);
                 });
 
                 /**
