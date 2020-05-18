@@ -20,6 +20,7 @@ import InfoCard from "./components/info-card";
 import '../scss/main.scss';
 
 export default class PlayerManager {
+    private id: string = "";
     private rootEl: HTMLDivElement = null;
     private playerParams: infPlayer = null;
     private searchParams: infSearch = null;
@@ -39,7 +40,6 @@ export default class PlayerManager {
 
         this.addEventListeners();
         this.extractAttrs();
-        // this.videoEvents();
     }
 
     private addEventListeners() {

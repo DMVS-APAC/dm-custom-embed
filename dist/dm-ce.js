@@ -641,8 +641,10 @@ var DmManager = /** @class */ (function () {
                         if (!(i < this.rootEls.length)) return [3 /*break*/, 4];
                         this.player[i] = new _player_player_manager__WEBPACK_IMPORTED_MODULE_1__["default"]("dm_" + i, this.rootEls[i]);
                         if (!(i === 0)) return [3 /*break*/, 3];
+                        // Waiting for the first instance filled
                         return [4 /*yield*/, Object(_utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["waitFor"])(function () { return _this.player[0] !== null; }, 500, 2000, "Timeout waiting player ready")];
                     case 2:
+                        // Waiting for the first instance filled
                         _a.sent();
                         this.loadScript(this.player[0].cpeId);
                         _a.label = 3;
@@ -928,7 +930,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 var PlayerManager = /** @class */ (function () {
     function PlayerManager(id, rootEl) {
-        this.id = '';
+        this.id = "";
         this.rootEl = null;
         this.playerParams = null;
         this.searchParams = null;
@@ -942,7 +944,6 @@ var PlayerManager = /** @class */ (function () {
         this.id = id;
         this.addEventListeners();
         this.extractAttrs();
-        this.videoEvents();
     }
     PlayerManager.prototype.addEventListeners = function () {
         var _this = this;
@@ -1236,60 +1237,6 @@ var PlayerManager = /** @class */ (function () {
                 }
             });
         });
-    };
-    PlayerManager.prototype.videoEvents = function () {
-        var _this = this;
-        // Ignore 'cpeready' event because this event is from outside the script
-        // @ts-ignore
-        window.addEventListener('cpeready', function (_a) {
-            var players = _a.detail.players;
-            _this.players = players;
-            var _loop_1 = function (i) {
-                var player = players[i];
-                player.addEventListener('videochange', function (e) { return __awaiter(_this, void 0, void 0, function () {
-                    var video, url, _a;
-                    return __generator(this, function (_b) {
-                        switch (_b.label) {
-                            case 0:
-                                console.log(player);
-                                video = player.video;
-                                url = _global_vars__WEBPACK_IMPORTED_MODULE_0__["apiUrl"] + "/video/" + video.videoId + '?fields=' + this.searchParams.fields;
-                                _a = this;
-                                return [4 /*yield*/, Object(_api_apiCall__WEBPACK_IMPORTED_MODULE_2__["fetchData"])(url)];
-                            case 1:
-                                _a.videoParams = _b.sent();
-                                this.updateVideoInfo();
-                                return [2 /*return*/];
-                        }
-                    });
-                }); });
-                /**
-                 * To handle multiple players in a page with scroll to play
-                 */
-                player.addEventListener('playing', function (e) {
-                    _this.togglePlay(player.id);
-                });
-            };
-            for (var i = 0; i < players.length; i++) {
-                _loop_1(i);
-            }
-        });
-        // Listen to PiP close to pause the video player
-        // @ts-ignore
-        window.addEventListener('cpepipclose', function (_a) {
-            var player = _a.detail.player;
-            // Do pause when cpe PiP is closed
-            player.pause();
-        });
-    };
-    PlayerManager.prototype.togglePlay = function (playerId) {
-        for (var i = 0; i < this.players.length; i++) {
-            if (this.players[i].id !== playerId) {
-                var parent_1 = this.players[i].parentNode;
-                this.players[i].pause();
-                parent_1.classList.remove('pip');
-            }
-        }
     };
     /**
      * Find keywords strings on website
