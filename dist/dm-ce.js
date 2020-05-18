@@ -983,7 +983,7 @@ var PlayerManager = /** @class */ (function () {
         document.addEventListener('dm-video-params-updated', function (e) {
             //@ts-ignore
             if (e.detail === _this.id) {
-                _this.updateVideoInfo(_this.id);
+                _this.updateVideoInfo();
             }
         });
     };
@@ -1121,12 +1121,11 @@ var PlayerManager = /** @class */ (function () {
         var videoUpdated = new CustomEvent('dm-video-params-updated', { detail: this.id });
         document.dispatchEvent(videoUpdated);
     };
-    PlayerManager.prototype.updateVideoInfo = function (id) {
-        console.log(id, this.id, this.playerParams.showInfoCard, this.playerParams.showVideoTitle);
+    PlayerManager.prototype.updateVideoInfo = function () {
         /**
          * Set a video title
          */
-        if (this.playerParams.showVideoTitle === true && id === this.id) {
+        if (this.playerParams.showVideoTitle === true) {
             var videoTitle = new _components_video_title__WEBPACK_IMPORTED_MODULE_5__["default"]();
             if (this.videoTitle !== null) {
                 this.videoTitle.remove();
@@ -1137,7 +1136,7 @@ var PlayerManager = /** @class */ (function () {
         /**
          * Set an info card
          */
-        if (this.playerParams.showInfoCard === true && id === this.id) {
+        if (this.playerParams.showInfoCard === true) {
             var infoCard = new _components_info_card__WEBPACK_IMPORTED_MODULE_6__["default"]();
             if (this.infoCard !== null) {
                 this.infoCard.remove();
@@ -1247,21 +1246,19 @@ var PlayerManager = /** @class */ (function () {
             _this.players = players;
             var _loop_1 = function (i) {
                 var player = players[i];
-                // TODO: handle on video change: for now just update the title below the video
                 player.addEventListener('videochange', function (e) { return __awaiter(_this, void 0, void 0, function () {
-                    var parent, video, url, _a;
+                    var video, url, _a;
                     return __generator(this, function (_b) {
                         switch (_b.label) {
                             case 0:
-                                parent = player.parentNode.parentNode;
-                                console.log(parent);
+                                console.log(player);
                                 video = player.video;
                                 url = _global_vars__WEBPACK_IMPORTED_MODULE_0__["apiUrl"] + "/video/" + video.videoId + '?fields=' + this.searchParams.fields;
                                 _a = this;
                                 return [4 /*yield*/, Object(_api_apiCall__WEBPACK_IMPORTED_MODULE_2__["fetchData"])(url)];
                             case 1:
                                 _a.videoParams = _b.sent();
-                                this.updateVideoInfo(this.id);
+                                this.updateVideoInfo();
                                 return [2 /*return*/];
                         }
                     });

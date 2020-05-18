@@ -20,7 +20,6 @@ import InfoCard from "./components/info-card";
 import '../scss/main.scss';
 
 export default class PlayerManager {
-    private id: string = '';
     private rootEl: HTMLDivElement = null;
     private playerParams: infPlayer = null;
     private searchParams: infSearch = null;
@@ -40,7 +39,7 @@ export default class PlayerManager {
 
         this.addEventListeners();
         this.extractAttrs();
-        this.videoEvents();
+        // this.videoEvents();
     }
 
     private addEventListeners() {
@@ -83,7 +82,7 @@ export default class PlayerManager {
         document.addEventListener('dm-video-params-updated', (e: Event) => {
             //@ts-ignore
             if (e.detail === this.id) {
-                this.updateVideoInfo(this.id);
+                this.updateVideoInfo();
             }
         });
 
@@ -245,12 +244,11 @@ export default class PlayerManager {
         document.dispatchEvent(videoUpdated);
     }
 
-    private updateVideoInfo(id: string) {
-        console.log(id, this.id, this.playerParams.showInfoCard, this.playerParams.showVideoTitle);
+    private updateVideoInfo() {
         /**
          * Set a video title
          */
-        if ( this.playerParams.showVideoTitle === true && id === this.id) {
+        if ( this.playerParams.showVideoTitle === true) {
             const videoTitle = new VideoTitle();
             if (this.videoTitle !== null) {
                 this.videoTitle.remove();
@@ -263,7 +261,7 @@ export default class PlayerManager {
         /**
          * Set an info card
          */
-        if (this.playerParams.showInfoCard === true && id === this.id) {
+        if (this.playerParams.showInfoCard === true) {
             const infoCard = new InfoCard();
             if (this.infoCard !== null) {
                 this.infoCard.remove();
@@ -342,56 +340,6 @@ export default class PlayerManager {
                 if (debugMode === true) {
                     console.warn("DM related Unable to find a fallback video");
                 }
-            }
-        }
-
-    }
-
-    private videoEvents(): void {
-
-        // Ignore 'cpeready' event because this event is from outside the script
-        // @ts-ignore
-        window.addEventListener('cpeready', ({ detail: { players } }) => {
-
-            this.players = players;
-
-            for (let i=0; i < players.length; i++) {
-                const player = players[i];
-
-                // TODO: handle on video change: for now just update the title below the video
-                player.addEventListener('videochange', async (e) => {
-                    const parent = player.parentNode.parentNode;
-                    console.log(parent);
-                    const video = player.video;
-                    const url = apiUrl + "/video/" + video.videoId + '?fields=' + this.searchParams.fields;
-                    this.videoParams = await fetchData(url);
-                    this.updateVideoInfo(this.id);
-                });
-
-                /**
-                 * To handle multiple players in a page with scroll to play
-                 */
-                player.addEventListener('playing', (e) => {
-                    this.togglePlay(player.id);
-                });
-            }
-        });
-
-        // Listen to PiP close to pause the video player
-        // @ts-ignore
-        window.addEventListener('cpepipclose', ({ detail: { player } }) => {
-            // Do pause when cpe PiP is closed
-            player.pause()
-        });
-    }
-
-    private togglePlay(playerId: string): void {
-
-        for (let i=0; i < this.players.length; i++) {
-            if (this.players[i].id !== playerId) {
-                const parent = this.players[i].parentNode;
-                this.players[i].pause();
-                parent.classList.remove('pip');
             }
         }
 

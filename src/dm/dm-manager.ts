@@ -19,6 +19,7 @@ export default class DmManager {
             this.player[i] = new PlayerManager("dm_" + i, this.rootEls[i]);
 
             if (i === 0) {
+                // Waiting for the first instance filled
                 await waitFor(() => this.player[0] !== null, 500, 2000, "Timeout waiting player ready");
                 this.loadScript(this.player[0].cpeId);
             }
