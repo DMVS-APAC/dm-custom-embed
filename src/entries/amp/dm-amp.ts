@@ -1,35 +1,36 @@
 import DmManager from '../../dm/dm-manager';
 import { waitFor } from '../../utilities/wait-for';
+import set = Reflect.set;
 
 declare global {
     interface Window {
         WDMObject: any;
         cpe: any;
-        AmpVideoIframe: any;
     }
 }
 
 /**
  * Waiting for iframe ready
  */
-const waitForIframeReady = setInterval ( () => {
-    // console.log(window.AmpVideoIframe = window.AmpVideoIframe || []);
-    if (window.AmpVideoIframe = window.AmpVideoIframe || []) {
-        clearInterval(waitForIframeReady);
-        (window.AmpVideoIframe = window.AmpVideoIframe || []).push(
-            onAmpIntegrationReady
-        );
-    }
-}, 100);
+// const waitForIframeReady = setTimeout ( () => {
+//     console.log(window.AmpVideoIframe);
+    // if (window.AmpVideoIframe) {
+    //     clearInterval(waitForIframeReady);
+    //     (window.AmpVideoIframe = window.AmpVideoIframe || []).push(
+    //         onAmpIntegrationReady
+    //     );
+    // }
+// }, 5000);
+
+setTimeout( () => {
+    ((window as any).AmpVideoIframe = (window as any).AmpVideoIframe || []).push(onAmpIntegrationReady);
+}, 1000);
 
 /**
  * Integrate with amp
  */
-const onAmpIntegrationReady = (ampIntegration) => {
-    console.log("Kok bisa?");
+const onAmpIntegrationReady = (ampIntegration: any) => {
     const meta = ampIntegration.getMetadata();
-
-    console.log('Sini?', ampIntegration);
 
     fetch(meta.sourceUrl)
         .then( (res) => {

@@ -96,20 +96,23 @@
 /**
  * Waiting for iframe ready
  */
-var waitForIframeReady = setInterval(function () {
-    // console.log(window.AmpVideoIframe = window.AmpVideoIframe || []);
-    if (window.AmpVideoIframe = window.AmpVideoIframe || []) {
-        clearInterval(waitForIframeReady);
-        (window.AmpVideoIframe = window.AmpVideoIframe || []).push(onAmpIntegrationReady);
-    }
-}, 100);
+// const waitForIframeReady = setTimeout ( () => {
+//     console.log(window.AmpVideoIframe);
+// if (window.AmpVideoIframe) {
+//     clearInterval(waitForIframeReady);
+//     (window.AmpVideoIframe = window.AmpVideoIframe || []).push(
+//         onAmpIntegrationReady
+//     );
+// }
+// }, 5000);
+setTimeout(function () {
+    (window.AmpVideoIframe = window.AmpVideoIframe || []).push(onAmpIntegrationReady);
+}, 1000);
 /**
  * Integrate with amp
  */
 var onAmpIntegrationReady = function (ampIntegration) {
-    console.log("Kok bisa?");
     var meta = ampIntegration.getMetadata();
-    console.log('Sini?', ampIntegration);
     fetch(meta.sourceUrl)
         .then(function (res) {
         return res.text();
