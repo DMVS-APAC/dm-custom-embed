@@ -7,11 +7,27 @@ import PlayerEventsManager from "../player/player-events-manager";
 export default class DmManager {
     private rootEls: NodeListOf<HTMLDivElement> = null;
     private player: PlayerManager[] = [];
+    private scriptLoaded: boolean = false;
 
     public constructor(rootEls: NodeListOf<HTMLDivElement>){
         // Pass rootEls to local variable
         this.rootEls = rootEls;
+        this.eventListeners();
         this.renderElement();
+    }
+
+    private eventListeners() {
+
+        document.addEventListener('dm-video-holder-ready', async () => {
+
+            if (this.scriptLoaded !== true) {
+                // Waiting for the first instance filled
+                await waitFor(() => this.player[0] !== null, 500, 2000, "Timeout waiting player ready");
+                this.loadScript(this.player[0].cpeId, this.player[0].cpeParams);
+
+                this.scriptLoaded = true;
+            }
+        });
     }
 
     private listenVideoEvents() {
@@ -23,12 +39,6 @@ export default class DmManager {
 
         for ( let i=0; i<this.rootEls.length; i++) {
             this.player[i] = new PlayerManager("dm_" + i, this.rootEls[i]);
-
-            if (i === 0) {
-                // Waiting for the first instance filled
-                await waitFor(() => this.player[0] !== null, 500, 2000, "Timeout waiting player ready");
-                this.loadScript(this.player[0].cpeId, this.player[0].cpeParams);
-            }
         }
 
         this.listenVideoEvents();

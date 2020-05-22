@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.1]
+
+**Fixed Bugs:**
+- Fix loading problem
+
 ## [1.2.0] (2020-05-20)
 
 **Fixed Bugs:**

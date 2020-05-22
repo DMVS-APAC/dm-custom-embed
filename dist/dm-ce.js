@@ -626,10 +626,33 @@ var DmManager = /** @class */ (function () {
     function DmManager(rootEls) {
         this.rootEls = null;
         this.player = [];
+        this.scriptLoaded = false;
         // Pass rootEls to local variable
         this.rootEls = rootEls;
+        this.eventListeners();
         this.renderElement();
     }
+    DmManager.prototype.eventListeners = function () {
+        var _this = this;
+        document.addEventListener('dm-video-holder-ready', function () { return __awaiter(_this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!(this.scriptLoaded !== true)) return [3 /*break*/, 2];
+                        // Waiting for the first instance filled
+                        return [4 /*yield*/, Object(_utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["waitFor"])(function () { return _this.player[0] !== null; }, 500, 2000, "Timeout waiting player ready")];
+                    case 1:
+                        // Waiting for the first instance filled
+                        _a.sent();
+                        this.loadScript(this.player[0].cpeId, this.player[0].cpeParams);
+                        this.scriptLoaded = true;
+                        _a.label = 2;
+                    case 2: return [2 /*return*/];
+                }
+            });
+        }); });
+    };
     DmManager.prototype.listenVideoEvents = function () {
         // It's start to listen to the video events
         new _player_player_events_manager__WEBPACK_IMPORTED_MODULE_2__["default"]();
@@ -637,30 +660,12 @@ var DmManager = /** @class */ (function () {
     DmManager.prototype.renderElement = function () {
         return __awaiter(this, void 0, void 0, function () {
             var i;
-            var _this = this;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        i = 0;
-                        _a.label = 1;
-                    case 1:
-                        if (!(i < this.rootEls.length)) return [3 /*break*/, 4];
-                        this.player[i] = new _player_player_manager__WEBPACK_IMPORTED_MODULE_1__["default"]("dm_" + i, this.rootEls[i]);
-                        if (!(i === 0)) return [3 /*break*/, 3];
-                        // Waiting for the first instance filled
-                        return [4 /*yield*/, Object(_utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["waitFor"])(function () { return _this.player[0] !== null; }, 500, 2000, "Timeout waiting player ready")];
-                    case 2:
-                        // Waiting for the first instance filled
-                        _a.sent();
-                        this.loadScript(this.player[0].cpeId, this.player[0].cpeParams);
-                        _a.label = 3;
-                    case 3:
-                        i++;
-                        return [3 /*break*/, 1];
-                    case 4:
-                        this.listenVideoEvents();
-                        return [2 /*return*/];
+                for (i = 0; i < this.rootEls.length; i++) {
+                    this.player[i] = new _player_player_manager__WEBPACK_IMPORTED_MODULE_1__["default"]("dm_" + i, this.rootEls[i]);
                 }
+                this.listenVideoEvents();
+                return [2 /*return*/];
             });
         });
     };
@@ -1234,6 +1239,9 @@ var PlayerManager = /** @class */ (function () {
             var preTitle = Object(_components_pre_video_title__WEBPACK_IMPORTED_MODULE_4__["default"])(this.playerParams.preVideoTitle);
             rootEl.insertAdjacentElement('afterbegin', preTitle);
         }
+        // Send to DmManager that element already created
+        var ElementCreated = new CustomEvent('dm-video-holder-ready');
+        document.dispatchEvent(ElementCreated);
     };
     PlayerManager.prototype.setVideo = function (video, createNew) {
         this.videoParams = video;
@@ -1319,6 +1327,7 @@ var PlayerManager = /** @class */ (function () {
                         _a.sent();
                         return [3 /*break*/, 6];
                     case 5:
+                        // TODO: separate log module to utilities
                         if (_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
                             console.log("%c DM related ", "background: #56C7FF; color: #232323", "Can not find related video. Fallback video used.");
                         }

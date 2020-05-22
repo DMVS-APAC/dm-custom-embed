@@ -242,6 +242,9 @@ export default class PlayerManager {
             rootEl.insertAdjacentElement('afterbegin', preTitle);
         }
 
+        // Send to DmManager that element already created
+        const ElementCreated = new CustomEvent('dm-video-holder-ready');
+        document.dispatchEvent(ElementCreated);
     }
 
     private setVideo(video: infVideo, createNew?: boolean): void {
@@ -306,8 +309,10 @@ export default class PlayerManager {
             return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
         }).join('&');
 
+        // Prepare the url before fetch the data
         const url = apiUrl + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties;
 
+        // Start fetch the data
         const video = await fetchData(url);
 
         if (video) {
@@ -320,6 +325,7 @@ export default class PlayerManager {
                 if( this.searchParams.search.split(' ').length >= this.playerParams.minWordSearch && this.searchParams.search.length > 0 )
                     await this.searchVideo();
                 else {
+                    // TODO: separate log module to utilities
                     if (debugMode === true) {
                         console.log("%c DM related ", "background: #56C7FF; color: #232323", "Can not find related video. Fallback video used.");
                     }
