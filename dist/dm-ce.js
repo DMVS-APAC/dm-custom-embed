@@ -923,6 +923,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 var PlayerEventsManager = /** @class */ (function () {
     function PlayerEventsManager() {
         this.players = [];
+        this.adPlaying = '';
         this.videoEvents();
     }
     PlayerEventsManager.prototype.videoEvents = function () {
@@ -943,6 +944,17 @@ var PlayerEventsManager = /** @class */ (function () {
                         return [2 /*return*/];
                     });
                 }); });
+                player.addEventListener('ad_play', function (e) {
+                    _this.adPlaying = player.id;
+                });
+                player.addEventListener('ad_end', function (e) {
+                    _this.adPlaying = '';
+                });
+                player.addEventListener('start', function (e) {
+                    if (_this.adPlaying !== player.id) {
+                        player.pause();
+                    }
+                });
                 /**
                  * To handle multiple players in a page with scroll to play
                  */
@@ -1124,6 +1136,7 @@ var PlayerManager = /** @class */ (function () {
             adsParams: rootEl.getAttribute('adsParams') ? rootEl.getAttribute('adsParams') : "contextual",
             cpeId: rootEl.getAttribute('cpeId') ? rootEl.getAttribute('cpeId').split(',') : [''],
             keywordsSelector: rootEl.getAttribute('keywordsSelector') ? rootEl.getAttribute('keywordsSelector') : null,
+            startDate: rootEl.getAttribute('startDate') ? rootEl.getAttribute('startDate') : null,
             getUpdatedVideo: (rootEl.getAttribute('getUpdatedVideo') != 'false'),
             preVideoTitle: rootEl.getAttribute('preVideoTitle') ? rootEl.getAttribute('preVideoTitle') : null,
             showVideoTitle: (rootEl.getAttribute('showVideoTitle') != 'false' && rootEl.getAttribute('showVideoTitle') != null),
@@ -1398,11 +1411,12 @@ var PlayerManager = /** @class */ (function () {
      * Alphabet: a-zA-Z0-9
      * Latin Character: \u00C0-\u00FF
      * Devanagri (India): \u0900-\u097F
+     * Urdu (Arab): \u0621-\u064A \u0660-\u0669
      */
     // TODO: improve sanitize the keywords to strip duplicate string
     PlayerManager.prototype.sanitizeKeywords = function (keywords) {
         var _this = this;
-        return keywords.replace(/[^- \u3131-\uD79D a-zA-Z0-9 \u00C0-\u00FF \u0900-\u097F \u0153]/g, ' ')
+        return keywords.replace(/[^- \u3131-\uD79D a-zA-Z0-9 \u00C0-\u00FF \u0900-\u097F \u0621-\u064A \u0660-\u0669 \u0153]/g, ' ')
             .split(' ')
             .filter(function (word) { return word.length >= _this.playerParams.minWordLength; });
     };
