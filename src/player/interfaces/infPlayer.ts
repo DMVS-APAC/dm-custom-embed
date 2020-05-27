@@ -44,6 +44,9 @@ export default interface InfPlayer {
     // Add selector to get keywords meta
     keywordsSelector: string;
 
+    // Find a video from given start date, use standard date YYYY-mm-dd e.g. 2018-05-01
+    startDate?: string;
+
     // Assign false the video inventory is not up to date
     getUpdatedVideo?: boolean;
 

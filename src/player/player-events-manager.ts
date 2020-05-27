@@ -3,9 +3,9 @@ import { fetchData } from "../api/apiCall";
 
 export default class PlayerEventsManager {
     private players: any[] = [];
+    private adPlaying: string = '';
 
     public constructor() {
-
         this.videoEvents();
     }
 
@@ -24,6 +24,22 @@ export default class PlayerEventsManager {
                     const video = player.video;
                     const videoUpdated = new CustomEvent('dm-video-updated', { detail: { videoId: video.videoId }})
                     document.dispatchEvent(videoUpdated);
+                });
+
+                player.addEventListener('ad_play', (e) => {
+                    this.adPlaying = player.id;
+                });
+
+                player.addEventListener('ad_end', (e) => {
+
+                    this.adPlaying = '';
+
+                });
+
+                player.addEventListener('start', (e) => {
+                    if (this.adPlaying !== player.id) {
+                        player.pause();
+                    }
                 });
 
                 /**
