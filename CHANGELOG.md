@@ -1,6 +1,13 @@
 # Changelog
 
-## [1.2.1]
+## [1.2.2] (2020-05-27)
+
+**Implemented enhancements:**
+- Support custom start date
+- Support ad playing before start another second video
+- Support Arabic alphabet
+
+## [1.2.1] (2020-05-22)
 
 **Fixed Bugs:**
 - Fix loading problem
