@@ -1175,6 +1175,9 @@ var PlayerManager = /** @class */ (function () {
         if (this.playerParams.sort === "relevance") {
             this.searchParams.search = keywords ? keywords.sort(function (a, b) { return b.length - a.length; }).slice(0, this.playerParams.maxWordSearch).join(' ') : "";
         }
+        if (this.playerParams.startDate !== null) {
+            this.searchParams.created_after = new Date(this.playerParams.startDate).getTime() / 1000;
+        }
         if (!this.playerParams.searchInPlaylist) {
             // TODO: test using private video
             this.searchParams.private = 0;
