@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.2.4] (2020-05-28)
+
+**Implemented enhancements:**
+- Implement start date properly
+
+## [1.2.3] (2020-05-27)
+
+**Fixed Bugs:**
+- Wrong deploy branch, see previous log to see what's added
+
 ## [1.2.2] (2020-05-27)
 
 **Implemented enhancements:**
