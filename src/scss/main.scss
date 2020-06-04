@@ -1,5 +1,6 @@
 .dailymotion-cpe {
 
+  // Show the video player responsive based on 16:9 ratio
   &:before {
     content: "";
     padding-top: 56.25%;
@@ -11,6 +12,7 @@
   }
 }
 
+// Keyframe for animate the player
 @keyframes slideInDown {
   from {
     padding-top: 0;
@@ -86,4 +88,18 @@
 .dm__owner-ava {
   width: 100%;
   height: auto;
+}
+
+.dm-player {
+
+  // Cover the video that not playing yet when ad is playing
+  .insider.dm-disabled:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .6);
+  }
 }

@@ -27,18 +27,24 @@ export default class PlayerEventsManager {
                 });
 
                 player.addEventListener('ad_play', (e) => {
-                    this.adPlaying = player.id;
+                    if (this.adPlaying === '') {
+                        this.adPlaying = player.id;
+
+                        // Disable the player that not playing yet
+                        this.toggleDisable();
+
+                        // Toggle playing video and hide the PiP
+                        this.togglePlay(player.id);
+                    }
                 });
 
                 player.addEventListener('ad_end', (e) => {
 
-                    this.adPlaying = '';
+                    if (this.adPlaying !== '') {
+                        this.adPlaying = '';
 
-                });
-
-                player.addEventListener('start', (e) => {
-                    if (this.adPlaying !== player.id) {
-                        player.pause();
+                        // Toggle disabled player
+                        this.toggleDisable();
                     }
                 });
 
@@ -62,7 +68,10 @@ export default class PlayerEventsManager {
 
     private togglePlay(playerId: string): void {
 
+        // Check every player available
         for (let i=0; i < this.players.length; i++) {
+
+            // close the PiP if other player is start playing
             if (this.players[i].id !== playerId) {
                 const parent = this.players[i].parentNode;
                 this.players[i].pause();
@@ -70,5 +79,21 @@ export default class PlayerEventsManager {
             }
         }
 
+    }
+
+    private toggleDisable(): void {
+
+        // Check every player available
+        for (let i=0; i < this.players.length; i++) {
+
+            // get parent player
+            const parent = this.players[i].parentNode;
+
+            if (this.adPlaying !== '' && this.adPlaying !== this.players[i].id) {
+                parent.classList.add('dm-disabled');
+            } else {
+                parent.classList.remove('dm-disabled');
+            }
+        }
     }
 }
