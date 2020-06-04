@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.5] (2020-06-04)
+
+**Implemented enhancements:**
+- Handle multiple player ad, others player will be disabled when ad is playing
+
 ## [1.2.4] (2020-05-28)
 
 **Implemented enhancements:**

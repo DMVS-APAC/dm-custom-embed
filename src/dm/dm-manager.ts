@@ -20,9 +20,10 @@ export default class DmManager {
 
         document.addEventListener('dm-video-holder-ready', async () => {
 
+            await waitFor(() => this.player[0] !== null, 500, 2000, "Timeout waiting player ready");
+
             if (this.scriptLoaded !== true) {
                 // Waiting for the first instance filled
-                await waitFor(() => this.player[0] !== null, 500, 2000, "Timeout waiting player ready");
                 this.loadScript(this.player[0].cpeId, this.player[0].cpeParams);
 
                 this.scriptLoaded = true;
