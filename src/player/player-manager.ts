@@ -2,6 +2,7 @@
 import infPlayer from './interfaces/infPlayer';
 import infSearch from "./interfaces/infSearch";
 import infVideo from "./interfaces/infVideo";
+import infMultiPlayer from "./interfaces/infMultiPlayer";
 
 // Global
 import {apiUrl, debugMode} from '../global/vars';
@@ -34,6 +35,7 @@ export default class PlayerManager {
 
     public cpeId: string[] = [];
     public cpeParams: object = {};
+    public multiplayerParams: infMultiPlayer = null;
 
     public constructor(id: string, rootEl: HTMLDivElement) {
         this.rootEl = rootEl;
@@ -124,6 +126,11 @@ export default class PlayerManager {
             stpSound: ( rootEl.getAttribute('stpSound') != 'false' && rootEl.getAttribute('stpSound') != null ),
             playerStyleEnable: ( rootEl.getAttribute('playerStyleEnable') != 'false' && rootEl.getAttribute('playerStyleEnable') != null ),
             playerStyleColor: rootEl.getAttribute('playerStyleColor') ? rootEl.getAttribute('playerStyleColor') : null
+        };
+
+        this.multiplayerParams = {
+            adCoverPlay: ( rootEl.getAttribute('adCoverPlay') != 'false'),
+            closePip: ( rootEl.getAttribute('closePip') != 'false'),
         };
 
         if (debugMode === true) {

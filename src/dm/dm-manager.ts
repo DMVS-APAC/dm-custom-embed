@@ -33,7 +33,7 @@ export default class DmManager {
 
     private listenVideoEvents() {
         // It's start to listen to the video events
-        new PlayerEventsManager();
+        new PlayerEventsManager(this.player[0].multiplayerParams);
     }
 
     public async renderElement() {

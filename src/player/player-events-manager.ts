@@ -1,12 +1,16 @@
 import { apiUrl } from "../global/vars";
-import { fetchData } from "../api/apiCall";
+
+import infMultiplayer from "./interfaces/infMultiPlayer";
 
 export default class PlayerEventsManager {
     private players: any[] = [];
     private adPlaying: string = '';
+    private multiplayerParams: infMultiplayer = null;
 
-    public constructor() {
+    public constructor(multiplayer: infMultiplayer) {
         this.videoEvents();
+
+        this.multiplayerParams = multiplayer;
     }
 
     private videoEvents(): void {
@@ -31,10 +35,14 @@ export default class PlayerEventsManager {
                         this.adPlaying = player.id;
 
                         // Disable the player that not playing yet
-                        this.toggleDisable();
+                        if (this.multiplayerParams.adCoverPlay === true) {
+                            this.toggleDisable();
+                        }
 
                         // Toggle playing video and hide the PiP
-                        this.togglePlay(player.id);
+                        if (this.multiplayerParams.closePip === true) {
+                            this.togglePlay(player.id);
+                        }
                     }
                 });
 
@@ -44,7 +52,9 @@ export default class PlayerEventsManager {
                         this.adPlaying = '';
 
                         // Toggle disabled player
-                        this.toggleDisable();
+                        if (this.multiplayerParams.adCoverPlay) {
+                            this.toggleDisable();
+                        }
                     }
                 });
 
@@ -52,7 +62,9 @@ export default class PlayerEventsManager {
                  * To handle multiple players in a page with scroll to play
                  */
                 player.addEventListener('playing', (e) => {
-                    this.togglePlay(player.id);
+                    if (this.multiplayerParams.closePip === true) {
+                        this.togglePlay(player.id);
+                    }
                 });
             }
         });
