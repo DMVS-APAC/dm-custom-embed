@@ -653,7 +653,7 @@ var DmManager = /** @class */ (function () {
     };
     DmManager.prototype.listenVideoEvents = function () {
         // It's start to listen to the video events
-        new _player_player_events_manager__WEBPACK_IMPORTED_MODULE_2__["default"]();
+        new _player_player_events_manager__WEBPACK_IMPORTED_MODULE_2__["default"](this.player[0].multiplayerParams);
     };
     DmManager.prototype.renderElement = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -919,10 +919,12 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
     }
 };
 var PlayerEventsManager = /** @class */ (function () {
-    function PlayerEventsManager() {
+    function PlayerEventsManager(multiplayer) {
         this.players = [];
         this.adPlaying = '';
+        this.multiplayerParams = null;
         this.videoEvents();
+        this.multiplayerParams = multiplayer;
     }
     PlayerEventsManager.prototype.videoEvents = function () {
         var _this = this;
@@ -946,23 +948,31 @@ var PlayerEventsManager = /** @class */ (function () {
                     if (_this.adPlaying === '') {
                         _this.adPlaying = player.id;
                         // Disable the player that not playing yet
-                        _this.toggleDisable();
+                        if (_this.multiplayerParams.adCoverPlay === true) {
+                            _this.toggleDisable();
+                        }
                         // Toggle playing video and hide the PiP
-                        _this.togglePlay(player.id);
+                        if (_this.multiplayerParams.closePip === true) {
+                            _this.togglePlay(player.id);
+                        }
                     }
                 });
                 player.addEventListener('ad_end', function (e) {
                     if (_this.adPlaying !== '') {
                         _this.adPlaying = '';
                         // Toggle disabled player
-                        _this.toggleDisable();
+                        if (_this.multiplayerParams.adCoverPlay) {
+                            _this.toggleDisable();
+                        }
                     }
                 });
                 /**
                  * To handle multiple players in a page with scroll to play
                  */
                 player.addEventListener('playing', function (e) {
-                    _this.togglePlay(player.id);
+                    if (_this.multiplayerParams.closePip === true) {
+                        _this.togglePlay(player.id);
+                    }
                 });
             };
             for (var i = 0; i < players.length; i++) {
@@ -1087,6 +1097,7 @@ var PlayerManager = /** @class */ (function () {
         this.players = [];
         this.cpeId = [];
         this.cpeParams = {};
+        this.multiplayerParams = null;
         this.rootEl = rootEl;
         this.id = id;
         this.addEventListeners();
@@ -1169,6 +1180,10 @@ var PlayerManager = /** @class */ (function () {
             stpSound: (rootEl.getAttribute('stpSound') != 'false' && rootEl.getAttribute('stpSound') != null),
             playerStyleEnable: (rootEl.getAttribute('playerStyleEnable') != 'false' && rootEl.getAttribute('playerStyleEnable') != null),
             playerStyleColor: rootEl.getAttribute('playerStyleColor') ? rootEl.getAttribute('playerStyleColor') : null
+        };
+        this.multiplayerParams = {
+            adCoverPlay: (rootEl.getAttribute('adCoverPlay') != 'false'),
+            closePip: (rootEl.getAttribute('closePip') != 'false'),
         };
         if (_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
             console.log("%c DM Player Params: ", "background: #56C7FF; color: #232323", this.playerParams);

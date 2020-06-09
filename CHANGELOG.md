@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.6] (2020-06-09)
+
+**Implemented enhancements:**
+- Add behaviour params for multiple player
+
 ## [1.2.5] (2020-06-04)
 
 **Implemented enhancements:**
