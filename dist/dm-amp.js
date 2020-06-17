@@ -1303,8 +1303,8 @@ var PlayerManager = /** @class */ (function () {
             playerStyleColor: rootEl.getAttribute('playerStyleColor') ? rootEl.getAttribute('playerStyleColor') : null
         };
         this.multiplayerParams = {
-            adCoverPlay: (rootEl.getAttribute('adCoverPlay') != 'false'),
-            closePip: (rootEl.getAttribute('closePip') != 'false'),
+            adCoverPlay: (rootEl.getAttribute('adCoverPlay') == 'true'),
+            closePip: (rootEl.getAttribute('closePip') == 'true'),
         };
         if (_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
             console.log("%c DM Player Params: ", "background: #56C7FF; color: #232323", this.playerParams);

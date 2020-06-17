@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.8] (2020-06-17)
+
+**Fixed Bugs:**
+- Small fixed for multiple video player
+
 ## [1.2.7] (2020-06-17)
 
 **Implemented enhancements:**

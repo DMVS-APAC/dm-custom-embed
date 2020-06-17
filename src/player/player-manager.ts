@@ -132,8 +132,8 @@ export default class PlayerManager {
         };
 
         this.multiplayerParams = {
-            adCoverPlay: ( rootEl.getAttribute('adCoverPlay') != 'false'),
-            closePip: ( rootEl.getAttribute('closePip') != 'false'),
+            adCoverPlay: ( rootEl.getAttribute('adCoverPlay') == 'true'),
+            closePip: ( rootEl.getAttribute('closePip') == 'true'),
         };
 
         if (debugMode === true) {
