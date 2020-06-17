@@ -90,29 +90,75 @@ module.exports = (env, options) => {
                 } : false,
                 hash: false
             }),
-            // new HtmlWebpackPlugin({
-            //     title: 'Dailymotion AMP Video Embed',
-            //     template: 'src/entries/amp/index.html',
-            //     filename: 'amp/index.html',
-            //     chunks: ['dm-amp'],
-            //     showErrors : isProd ? false : true,
-            //     minify: isProd ? {
-            //         html5                          : true,
-            //         collapseWhitespace             : true,
-            //         minifyCSS                      : true,
-            //         minifyJS                       : true,
-            //         minifyURLs                     : false,
-            //         removeAttributeQuotes          : true,
-            //         removeComments                 : true,
-            //         removeEmptyAttributes          : true,
-            //         removeOptionalTags             : true,
-            //         removeRedundantAttributes      : true,
-            //         removeScriptTypeAttributes     : true,
-            //         removeStyleLinkTypeAttributese : true,
-            //         useShortDoctype                : true
-            //     } : false,
-            //     hash: false
-            // }),
+            new HtmlWebpackPlugin({
+                title: 'Dailymotion Infinity Scroll Video Embed',
+                template: 'src/entries/infinity-scroll/index.html',
+                filename: 'infinity-scroll/index.html',
+                chunks: ['dm-ce'],
+                showErrors : isProd ? false : true,
+                minify: isProd ? {
+                    html5                          : true,
+                    collapseWhitespace             : true,
+                    minifyCSS                      : true,
+                    minifyJS                       : true,
+                    minifyURLs                     : false,
+                    removeAttributeQuotes          : true,
+                    removeComments                 : true,
+                    removeEmptyAttributes          : true,
+                    removeOptionalTags             : true,
+                    removeRedundantAttributes      : true,
+                    removeScriptTypeAttributes     : true,
+                    removeStyleLinkTypeAttributese : true,
+                    useShortDoctype                : true
+                } : false,
+                hash: false
+            }),
+            new HtmlWebpackPlugin({
+                title: 'Dailymotion Player AMP',
+                template: 'src/entries/dm-player.html',
+                filename: 'dm-player.html',
+                chunks: ['dm-amp'],
+                showErrors : isProd ? false : true,
+                minify: isProd ? {
+                    html5                          : true,
+                    collapseWhitespace             : true,
+                    minifyCSS                      : true,
+                    minifyJS                       : true,
+                    minifyURLs                     : false,
+                    removeAttributeQuotes          : true,
+                    removeComments                 : true,
+                    removeEmptyAttributes          : true,
+                    removeOptionalTags             : true,
+                    removeRedundantAttributes      : true,
+                    removeScriptTypeAttributes     : true,
+                    removeStyleLinkTypeAttributese : true,
+                    useShortDoctype                : true
+                } : false,
+                hash: false
+            }),
+            new HtmlWebpackPlugin({
+                title: 'Dailymotion AMP Video Embed',
+                template: 'src/entries/amp/index.html',
+                filename: 'amp/index.html',
+                excludeChunks: ['dm-ce', 'dm-amp'],
+                showErrors : isProd ? false : true,
+                minify: isProd ? {
+                    html5                          : true,
+                    collapseWhitespace             : true,
+                    minifyCSS                      : true,
+                    minifyJS                       : true,
+                    minifyURLs                     : false,
+                    removeAttributeQuotes          : true,
+                    removeComments                 : true,
+                    removeEmptyAttributes          : true,
+                    removeOptionalTags             : true,
+                    removeRedundantAttributes      : true,
+                    removeScriptTypeAttributes     : true,
+                    removeStyleLinkTypeAttributese : true,
+                    useShortDoctype                : true
+                } : false,
+                hash: false
+            }),
             // new HtmlWebpackPlugin({
             //     title: 'Dailymotion AMP Video Player',
             //     template: 'src/entries/dm-player.html',

@@ -26,6 +26,7 @@ export default class PlayerManager {
     private playerParams: infPlayer = null;
     private searchParams: infSearch = null;
     private videoParams: infVideo = null;
+    private keywords: string = null;
 
     private videoTitle: HTMLParagraphElement = null;
     private infoCard: HTMLDivElement = null;
@@ -37,9 +38,11 @@ export default class PlayerManager {
     public cpeParams: object = {};
     public multiplayerParams: infMultiPlayer = null;
 
-    public constructor(id: string, rootEl: HTMLDivElement) {
+    public constructor(id: string, rootEl: HTMLDivElement, keywords?: string) {
         this.rootEl = rootEl;
         this.id = id;
+
+        this.keywords = keywords;
 
         this.addEventListeners();
         this.extractAttrs();
@@ -157,7 +160,7 @@ export default class PlayerManager {
         };
 
         if (this.playerParams.sort === "relevance") {
-            this.searchParams.search= keywords ? keywords.sort((a, b) => b.length - a.length).slice(0, this.playerParams.maxWordSearch).join(' ') : "";
+            this.searchParams.search= this.keywords ? this.keywords : keywords.sort((a, b) => b.length - a.length).slice(0, this.playerParams.maxWordSearch).join(' ');
         }
 
         if (this.playerParams.startDate !== null) {

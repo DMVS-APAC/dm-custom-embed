@@ -623,27 +623,27 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 var DmManager = /** @class */ (function () {
-    function DmManager(rootEls) {
+    function DmManager(rootEls, keywords) {
         this.rootEls = null;
-        this.player = [];
         this.scriptLoaded = false;
+        this.keywords = null;
         // Pass rootEls to local variable
         this.rootEls = rootEls;
+        this.keywords = keywords;
         this.eventListeners();
         this.renderElement();
     }
     DmManager.prototype.eventListeners = function () {
         var _this = this;
         document.addEventListener('dm-video-holder-ready', function () { return __awaiter(_this, void 0, void 0, function () {
-            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Object(_utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["waitFor"])(function () { return _this.player[0] !== null; }, 500, 2000, "Timeout waiting player ready")];
+                    case 0: return [4 /*yield*/, Object(_utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["waitFor"])(function () { return DmManager.player[0] !== null; }, 500, 2000, "Timeout waiting player ready")];
                     case 1:
                         _a.sent();
                         if (this.scriptLoaded !== true) {
                             // Waiting for the first instance filled
-                            this.loadScript(this.player[0].cpeId, this.player[0].cpeParams);
+                            this.loadScript(DmManager.player[0].cpeId, DmManager.player[0].cpeParams);
                             this.scriptLoaded = true;
                         }
                         return [2 /*return*/];
@@ -653,17 +653,32 @@ var DmManager = /** @class */ (function () {
     };
     DmManager.prototype.listenVideoEvents = function () {
         // It's start to listen to the video events
-        new _player_player_events_manager__WEBPACK_IMPORTED_MODULE_2__["default"](this.player[0].multiplayerParams);
+        new _player_player_events_manager__WEBPACK_IMPORTED_MODULE_2__["default"](DmManager.player[0].multiplayerParams);
     };
     DmManager.prototype.renderElement = function () {
         return __awaiter(this, void 0, void 0, function () {
             var i;
             return __generator(this, function (_a) {
                 for (i = 0; i < this.rootEls.length; i++) {
-                    this.player[i] = new _player_player_manager__WEBPACK_IMPORTED_MODULE_1__["default"]("dm_" + i, this.rootEls[i]);
+                    DmManager.player[i] = new _player_player_manager__WEBPACK_IMPORTED_MODULE_1__["default"]("dm_" + i, this.rootEls[i], (i === 0 && this.keywords !== null) ? this.keywords : null);
                 }
                 this.listenVideoEvents();
                 return [2 /*return*/];
+            });
+        });
+    };
+    DmManager.renderOnDemand = function (el, keywords) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        this.player.push(new _player_player_manager__WEBPACK_IMPORTED_MODULE_1__["default"]("dm_" + this.player.length + 1, el, keywords));
+                        return [4 /*yield*/, Object(_utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["sleep"])(1000)];
+                    case 1:
+                        _a.sent();
+                        window.cpe.parse();
+                        return [2 /*return*/];
+                }
             });
         });
     };
@@ -676,6 +691,8 @@ var DmManager = /** @class */ (function () {
         // Load the CPE script
         (function (w, d, s, u, n, i, f, g, e, c) { w.WDMObject = n; w[n] = w[n] || function () { (w[n].q = w[n].q || []).push(arguments); }; w[n].l = 1 * date; w[n].i = i; w[n].f = f; w[n].g = g; e = d.createElement(s); e.async = 1; e.src = u; c = d.getElementsByTagName(s)[0]; c.parentNode.insertBefore(e, c); })(window, document, "script", "//api.dmcdn.net/pxl/cpe/client.min.js", "cpe", cpe, cpeParams);
     };
+    // TODO: Find best practice to do static variable and function
+    DmManager.player = [];
     return DmManager;
 }());
 /* harmony default export */ __webpack_exports__["default"] = (DmManager);
@@ -749,6 +766,17 @@ var init = function () { return __awaiter(void 0, void 0, void 0, function () {
     });
 }); };
 init();
+// Expose dmce method for `on the fly` rendering
+var dmce = /** @class */ (function () {
+    function dmce() {
+    }
+    dmce.prototype.render = function (el, keywords) {
+        _dm_dm_manager__WEBPACK_IMPORTED_MODULE_0__["default"].renderOnDemand(el, keywords);
+    };
+    ;
+    return dmce;
+}());
+window.dmce = new dmce();
 
 
 /***/ }),
@@ -1085,12 +1113,13 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 // Styles
 
 var PlayerManager = /** @class */ (function () {
-    function PlayerManager(id, rootEl) {
+    function PlayerManager(id, rootEl, keywords) {
         this.id = "";
         this.rootEl = null;
         this.playerParams = null;
         this.searchParams = null;
         this.videoParams = null;
+        this.keywords = null;
         this.videoTitle = null;
         this.infoCard = null;
         // From outside, it's a dailymotion player
@@ -1100,6 +1129,7 @@ var PlayerManager = /** @class */ (function () {
         this.multiplayerParams = null;
         this.rootEl = rootEl;
         this.id = id;
+        this.keywords = keywords;
         this.addEventListeners();
         this.extractAttrs();
     }
@@ -1206,7 +1236,7 @@ var PlayerManager = /** @class */ (function () {
             sort: this.playerParams.sort,
         };
         if (this.playerParams.sort === "relevance") {
-            this.searchParams.search = keywords ? keywords.sort(function (a, b) { return b.length - a.length; }).slice(0, this.playerParams.maxWordSearch).join(' ') : "";
+            this.searchParams.search = this.keywords ? this.keywords : keywords.sort(function (a, b) { return b.length - a.length; }).slice(0, this.playerParams.maxWordSearch).join(' ');
         }
         if (this.playerParams.startDate !== null) {
             this.searchParams.created_after = new Date(this.playerParams.startDate).getTime() / 1000;

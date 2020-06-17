@@ -6,6 +6,7 @@ declare global {
 		// dmEmbed: PlayerManager;
 		WDMObject: any;
 		cpe: any;
+		dmce: any;
 	}
 }
 
@@ -19,3 +20,15 @@ const init = async () => {
 };
 
 init();
+
+
+// Expose dmce method for `on the fly` rendering
+class dmce {
+
+	public render( el: HTMLDivElement, keywords?: string) {
+		DmManager.renderOnDemand(el, keywords);
+	};
+
+}
+
+window.dmce = new dmce();

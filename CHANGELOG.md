@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.7] (2020-06-17)
+
+**Implemented enhancements:**
+- Support infinite scroll
+
 ## [1.2.6] (2020-06-09)
 
 **Implemented enhancements:**
