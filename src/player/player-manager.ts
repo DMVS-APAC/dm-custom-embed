@@ -25,7 +25,7 @@ export default class PlayerManager {
     private rootEl: HTMLDivElement = null;
     private playerParams: infPlayer = null;
     private searchParams: infSearch = null;
-    private videoParams: infVideo = null;
+    public videoParams: infVideo = null;
     private keywords: string = null;
 
     private videoTitle: HTMLParagraphElement = null;

@@ -11,7 +11,8 @@ module.exports = (env, options) => {
     return {
         entry: {
             "dm-ce": "./src/entries/dm-embed.ts",
-            "dm-amp": "./src/entries/amp/dm-amp.ts"
+            "dm-amp": "./src/entries/amp/dm-amp.ts",
+            'dm-no-cpe': "./src/entries/no-cpe/dm-no-cpe.ts",
         },
         output: {
             path: path.resolve(__dirname, 'dist'),
@@ -141,6 +142,29 @@ module.exports = (env, options) => {
                 template: 'src/entries/amp/index.html',
                 filename: 'amp/index.html',
                 excludeChunks: ['dm-ce', 'dm-amp'],
+                showErrors : isProd ? false : true,
+                minify: isProd ? {
+                    html5                          : true,
+                    collapseWhitespace             : true,
+                    minifyCSS                      : true,
+                    minifyJS                       : true,
+                    minifyURLs                     : false,
+                    removeAttributeQuotes          : true,
+                    removeComments                 : true,
+                    removeEmptyAttributes          : true,
+                    removeOptionalTags             : true,
+                    removeRedundantAttributes      : true,
+                    removeScriptTypeAttributes     : true,
+                    removeStyleLinkTypeAttributese : true,
+                    useShortDoctype                : true
+                } : false,
+                hash: false
+            }),
+            new HtmlWebpackPlugin({
+                title: 'Dailymotion No CPE Video Embed',
+                template: 'src/entries/no-cpe/index.html',
+                filename: 'no-cpe/index.html',
+                chunks: ['dm-no-cpe'],
                 showErrors : isProd ? false : true,
                 minify: isProd ? {
                     html5                          : true,
