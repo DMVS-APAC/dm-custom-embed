@@ -37,10 +37,10 @@ export default class NoCpeManager {
             // @ts-ignore
             DM.player(videoPlaceholder, {
                 video: player.videoParams.id,
-                params: {
-                    autoplay: true,
-                    mute: true
-                }
+                // params: {
+                //     autoplay: true,
+                //     mute: true
+                // }
             });
         }
 

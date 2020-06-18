@@ -778,10 +778,6 @@ var NoCpeManager = /** @class */ (function () {
                                         // @ts-ignore
                                         DM.player(videoPlaceholder, {
                                             video: player.videoParams.id,
-                                            params: {
-                                                autoplay: true,
-                                                mute: true
-                                            }
                                         });
                                         return [2 /*return*/];
                                 }
