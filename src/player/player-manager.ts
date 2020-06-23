@@ -208,7 +208,7 @@ export default class PlayerManager {
         if (this.playerParams.controls !== true) queryString += "&controls=" + this.playerParams.controls;
 
         cpeEmbed.setAttribute("class", "dailymotion-cpe");
-        cpeEmbed.setAttribute("video-id", this.videoParams.id);
+        cpeEmbed.setAttribute("video-id", this.videoParams.private_id ? this.videoParams.private_id:this.videoParams.id);
         cpeEmbed.setAttribute("query-string", queryString);
 
         if (this.playerParams.pipAtStart === true) cpeEmbed.setAttribute("pip-at-start", "");
