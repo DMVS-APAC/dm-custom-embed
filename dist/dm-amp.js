@@ -544,9 +544,7 @@ function fetchData(urlParams) {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, fetch(urlParams, {
-                        mode: 'no-cors'
-                    })];
+                case 0: return [4 /*yield*/, fetch(urlParams)];
                 case 1:
                     response = _a.sent();
                     /**
@@ -890,7 +888,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // Get debug mode params from url
 var debugMode = (Object(_utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__["default"])('dmdebug') != null && Object(_utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__["default"])('dmdebug') != 'false');
-var apiUrl =  true ? "https://api.dailymotion.com/" : undefined;
+var apiUrl =  true ? "https://test-laravel.test/api/dm-api/" : undefined;
 
 
 /***/ }),
@@ -1336,7 +1334,7 @@ var PlayerManager = /** @class */ (function () {
         }
         if (!this.playerParams.searchInPlaylist) {
             // TODO: test using private video
-            this.searchParams.private = 0;
+            this.searchParams.private = 1;
             this.searchParams.flags = "no_live,exportable" + (this.playerParams.owners.length > 0 ? "" : ",verified");
             this.searchParams.longer_than = 0.35; //21sec
             if (this.playerParams.owners)

@@ -170,7 +170,7 @@ export default class PlayerManager {
         if (!this.playerParams.searchInPlaylist) {
 
             // TODO: test using private video
-            this.searchParams.private = 0;
+            this.searchParams.private = 1;
             this.searchParams.flags = "no_live,exportable" + (this.playerParams.owners.length > 0 ? "": ",verified");
             this.searchParams.longer_than = 0.35; //21sec
 
