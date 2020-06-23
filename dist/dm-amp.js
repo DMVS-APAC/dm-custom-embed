@@ -544,7 +544,9 @@ function fetchData(urlParams) {
         var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, fetch(urlParams)];
+                case 0: return [4 /*yield*/, fetch(urlParams, {
+                        mode: 'no-cors'
+                    })];
                 case 1:
                     response = _a.sent();
                     /**
@@ -888,7 +890,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // Get debug mode params from url
 var debugMode = (Object(_utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__["default"])('dmdebug') != null && Object(_utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__["default"])('dmdebug') != 'false');
-var apiUrl = "https://api.dailymotion.com/";
+var apiUrl =  true ? "https://api.dailymotion.com/" : undefined;
 
 
 /***/ }),
