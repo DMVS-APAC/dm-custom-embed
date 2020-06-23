@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.10] (2020-06-23)
+
+**Implemented enhancements:**
+- Support custom endpoint for private content purposes
+
 ## [1.2.8] (2020-06-17)
 
 **Fixed Bugs:**

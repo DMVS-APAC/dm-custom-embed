@@ -24,10 +24,17 @@ Make sure you have installed packages below:
 
 ## Getting Started
 
+Create a `.env` file contain vars below
+```
+API_URL=https://your-custom-api-endpoint.com/
+```
+
+Start build
 ```bash
 npm install
 npm run dev // Build development source
 npm run prod // Build production source
+npm run deploy // Build both development and production
 ```
 
 

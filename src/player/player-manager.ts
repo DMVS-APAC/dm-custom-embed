@@ -170,7 +170,7 @@ export default class PlayerManager {
         if (!this.playerParams.searchInPlaylist) {
 
             // TODO: test using private video
-            this.searchParams.private = 0;
+            this.searchParams.private = 1;
             this.searchParams.flags = "no_live,exportable" + (this.playerParams.owners.length > 0 ? "": ",verified");
             this.searchParams.longer_than = 0.35; //21sec
 
@@ -208,7 +208,7 @@ export default class PlayerManager {
         if (this.playerParams.controls !== true) queryString += "&controls=" + this.playerParams.controls;
 
         cpeEmbed.setAttribute("class", "dailymotion-cpe");
-        cpeEmbed.setAttribute("video-id", this.videoParams.id);
+        cpeEmbed.setAttribute("video-id", this.videoParams.private_id ? this.videoParams.private_id:this.videoParams.id);
         cpeEmbed.setAttribute("query-string", queryString);
 
         if (this.playerParams.pipAtStart === true) cpeEmbed.setAttribute("pip-at-start", "");
