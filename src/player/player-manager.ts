@@ -410,10 +410,11 @@ export default class PlayerManager {
      * Latin Character: \u00C0-\u00FF
      * Devanagri (India): \u0900-\u097F
      * Urdu (Arab): \u0621-\u064A \u0660-\u0669
+     * Thai: \u0E00-\u0E7F
      */
     // TODO: improve sanitize the keywords to strip duplicate string
     protected sanitizeKeywords(keywords: string): string[] {
-        return keywords.replace(/[^- \u3131-\uD79D a-zA-Z0-9 \u00C0-\u00FF \u0900-\u097F \u0621-\u064A \u0660-\u0669 \u0153]/g, ' ')
+        return keywords.replace(/[^- \u3131-\uD79D a-zA-Z0-9 \u00C0-\u00FF \u0900-\u097F \u0621-\u064A \u0660-\u0669 \u0E00-\u0E7F \u0153]/g, ' ')
             .split(' ')
             .filter(word => word.length >= this.playerParams.minWordLength);
     }
