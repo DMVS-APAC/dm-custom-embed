@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.3.0] (2020-06-29)
+
+**Implemented enhancements:**
+- Add basic features scroll-to-play and scroll-to-pause to no-cpe player
+
 ## [1.2.10] (2020-06-23)
 
 **Implemented enhancements:**
