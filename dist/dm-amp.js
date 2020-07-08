@@ -97,7 +97,25 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".dailymotion-cpe {\n  /* Show the video player responsive based on 16:9 ratio*/ }\n  .dailymotion-cpe:before {\n    content: \"\";\n    padding-top: 56.25%;\n    background: #000;\n    display: block;\n    -webkit-animation: slideInDown;\n    animation: slideInDown;\n    -webkit-animation-duration: 1s;\n    animation-duration: 1s;\n    -webkit-animation-iteration-count: 1;\n    animation-iteration-count: 1; }\n\n/* Keyframe for animate the player*/\n@-webkit-keyframes slideInDown {\n  from {\n    padding-top: 0; }\n  to {\n    padding-top: 56.25%; } }\n\n@keyframes slideInDown {\n  from {\n    padding-top: 0; }\n  to {\n    padding-top: 56.25%; } }\n\n.dm__pre-video-title {\n  text-align: var(--dm-video-align, center) !important;\n  margin: var(--dm-video-margin, 8px 0) !important;\n  font-style: var(--dm-video-style, normal) !important;\n  color: var(--dm-video-color, #000) !important;\n  font-size: var(--dm-video-size, 1.2em) !important;\n  font-weight: var(--dm-video-weight, 700) !important; }\n\n.dm__info-card {\n  background: var(--dm-info-card-bg, #eee) !important;\n  padding: var(--dm-info-card-padding, 8px 13px) !important;\n  display: flex;\n  text-align: var(--dm-info-card-align, left) !important;\n  /* Title*/\n  --dm-title-align: left;\n  --dm-title-weight: 700;\n  --dm-title-size: 1.1em; }\n\n.dm__text-wrapper {\n  width: calc(100% - 80px);\n  padding-right: 13px; }\n\n.dm__video-title {\n  text-align: var(--dm-title-align, center) !important;\n  margin: var(--dm-title-margin, 8px 0) !important;\n  font-style: var(--dm-title-style, normal) !important;\n  color: var(--dm-title-color, inherit) !important;\n  font-size: var(--dm-title-size, 1em) !important;\n  font-weight: var(--dm-title-weight, 400) !important;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%; }\n\n.dm__video-desc {\n  text-align: var(--dm-desc-align, left) !important;\n  margin: var(--dm-desc-margin, 0 0 8px) !important;\n  font-style: var(--dm-desc-style, normal) !important;\n  color: var(--dm-desc-color, inherit) !important;\n  font-size: var(--dm-desc-size, 0.9em) !important;\n  font-weight: var(--dm-desc-weight, inherit) !important;\n  padding-top: 13px;\n  border-top: solid #666 1px;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%;\n  display: -webkit-box !important;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 1; }\n\n.dm__ava-wrapper {\n  width: 80px; }\n\n.dm__owner-ava {\n  width: 100%;\n  height: auto; }\n\n.dm-player {\n  /* Cover the video that not playing yet when ad is playing*/ }\n  .dm-player .insider.dm-disabled:after {\n    content: \"\";\n    width: 100%;\n    height: 100%;\n    position: absolute;\n    top: 0;\n    left: 0;\n    background: rgba(0, 0, 0, 0.6); }\n", ""]);
+exports.push([module.i, ".dailymotion-cpe {\n  /*animation: slideInDown;*/\n  /*animation-duration: 1s;*/\n  /*animation-iteration-count: 1;*/\n  /*background: #000;*/\n  /* Show the video player responsive based on 16:9 ratio*/ }\n  .dailymotion-cpe:before {\n    content: \"\";\n    padding-top: 56.25%;\n    background: #000;\n    display: block;\n    -webkit-animation: slideInDown;\n    animation: slideInDown;\n    -webkit-animation-duration: 1s;\n    animation-duration: 1s;\n    -webkit-animation-iteration-count: 1;\n    animation-iteration-count: 1; }\n\n/* Keyframe for animate the player*/\n@-webkit-keyframes slideInDown {\n  from {\n    padding-top: 0; }\n  to {\n    padding-top: 56.25%; } }\n\n@keyframes slideInDown {\n  from {\n    padding-top: 0; }\n  to {\n    padding-top: 56.25%; } }\n\n.dm__pre-video-title {\n  text-align: var(--dm-video-align, center) !important;\n  margin: var(--dm-video-margin, 8px 0) !important;\n  font-style: var(--dm-video-style, normal) !important;\n  color: var(--dm-video-color, #000) !important;\n  font-size: var(--dm-video-size, 1.2em) !important;\n  font-weight: var(--dm-video-weight, 700) !important; }\n\n.dm__info-card {\n  background: var(--dm-info-card-bg, #eee) !important;\n  padding: var(--dm-info-card-padding, 8px 13px) !important;\n  display: flex;\n  text-align: var(--dm-info-card-align, left) !important;\n  /* Title*/\n  --dm-title-align: left;\n  --dm-title-weight: 700;\n  --dm-title-size: 1.1em; }\n\n.dm__text-wrapper {\n  width: calc(100% - 80px);\n  padding-right: 13px; }\n\n.dm__video-title {\n  text-align: var(--dm-title-align, center) !important;\n  margin: var(--dm-title-margin, 8px 0) !important;\n  font-style: var(--dm-title-style, normal) !important;\n  color: var(--dm-title-color, inherit) !important;\n  font-size: var(--dm-title-size, 1em) !important;\n  font-weight: var(--dm-title-weight, 400) !important;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%; }\n\n.dm__video-desc {\n  text-align: var(--dm-desc-align, left) !important;\n  margin: var(--dm-desc-margin, 0 0 8px) !important;\n  font-style: var(--dm-desc-style, normal) !important;\n  color: var(--dm-desc-color, inherit) !important;\n  font-size: var(--dm-desc-size, 0.9em) !important;\n  font-weight: var(--dm-desc-weight, inherit) !important;\n  padding-top: 13px;\n  border-top: solid #666 1px;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%;\n  display: -webkit-box !important;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 1; }\n\n.dm__ava-wrapper {\n  width: 80px; }\n\n.dm__owner-ava {\n  width: 100%;\n  height: auto; }\n\n.dm-player {\n  /* Cover the video that not playing yet when ad is playing*/ }\n  .dm-player .insider.dm-disabled:after {\n    content: \"\";\n    width: 100%;\n    height: 100%;\n    position: absolute;\n    top: 0;\n    left: 0;\n    background: rgba(0, 0, 0, 0.6); }\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src/index.js!./src/scss/playlist.scss":
+/*!***********************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src!./src/scss/playlist.scss ***!
+  \***********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".dm-playlist {\n  background: var(--dm-playlist-bg, #000) !important;\n  padding: 0 40px !important; }\n  .dm-playlist .slider {\n    position: relative !important; }\n  .dm-playlist .frame {\n    width: 100% !important;\n    position: relative !important;\n    overflow: hidden !important;\n    white-space: nowrap !important; }\n  .dm-playlist .slides {\n    display: inline-block !important;\n    width: 100% !important;\n    padding: 0 !important; }\n  .dm-playlist .prev, .dm-playlist .next {\n    position: absolute;\n    top: 50%;\n    margin-top: -25px;\n    display: block;\n    cursor: pointer;\n    background: none;\n    padding: 0;\n    border: 0; }\n\n.dm__now-playing-status {\n  --dm-now-playing-text-color: #fff;\n  --dm-now-playing-text-size: .8em;\n  --dm-now-playing-title-color: #fff;\n  --dm-now-playing-title-size: 1em;\n  --dm-now-playing-bg: transparent;\n  background: var(--dm-now-playing-bg);\n  padding: 10px 0; }\n\n.dm__now-playing-text {\n  color: var(--dm-now-playing-text-color);\n  font-size: var(--dm-now-playing-text-size);\n  margin-bottom: 10px; }\n\n.dm__now-playing-title {\n  color: var(--dm-now-playing-title-color);\n  font-size: var(--dm-now-playing-title-size);\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis; }\n\n.dm__playlist-slide {\n  cursor: pointer;\n  position: relative;\n  display: inline-block;\n  width: 143px; }\n  .dm__playlist-slide:after {\n    position: absolute;\n    content: '';\n    width: 100%;\n    height: 100%;\n    top: 0;\n    left: 0; }\n\n.dm__slide-wrapper {\n  padding: 5px; }\n\n.dm__playlist-active .dm__playlist-title {\n  --dm-playlist-title-background: var(--dm-playlist-active, #56C7FF); }\n\n.dm__playlist-cont-thumbnail {\n  width: 100%;\n  position: relative;\n  margin: 0;\n  overflow: hidden; }\n  .dm__playlist-cont-thumbnail:before {\n    content: \"\";\n    padding-top: 56.25%;\n    background: #ddd;\n    display: block;\n    -webkit-animation: slideInDown;\n    animation: slideInDown;\n    -webkit-animation-duration: 1s;\n    animation-duration: 1s;\n    -webkit-animation-iteration-count: 1;\n    animation-iteration-count: 1; }\n\n.dm__playlist-thumbnail {\n  width: 100%;\n  height: auto;\n  display: block;\n  position: absolute;\n  top: 0;\n  left: 0; }\n\n.dm__playlist-duration {\n  position: absolute;\n  bottom: 5px;\n  right: 5px;\n  color: #fff !important;\n  background: rgba(0, 0, 0, 0.6) !important;\n  padding: 4px !important;\n  font-size: .8em !important;\n  font-family: inherit !important; }\n\n.dm__playlist-title {\n  color: var(--dm-playlist-color, #000) !important;\n  font-weight: var(--dm-playlist-weight, 400) !important;\n  margin: 0 !important;\n  padding: 10px !important;\n  background: var(--dm-playlist-title-background, #fff) !important;\n  height: 30px !important;\n  line-height: 1.3em !important;\n  font-size: var(--dm-playlist-title-size, 0.9em) !important;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 2;\n  -webkit-box-orient: vertical;\n  -webkit-font-smoothing: antialiased;\n  white-space: normal !important; }\n\n.next {\n  right: -40px; }\n\n.prev {\n  left: -40px; }\n\n.next svg, .prev svg {\n  width: 25px; }\n\n/* SVG style*/\n.arrow {\n  fill: var(--arrow-color, #ddd); }\n\n.dm-playlist--right-side {\n  --dm-playlist-display: flex;\n  --dm-player-size: 50%;\n  --dm-player-ratio: 29%;\n  --dm-playlist-size: 40%;\n  --dm-playlist-bg: #000;\n  display: var(--dm-playlist-display);\n  justify-content: flex-start;\n  align-items: flex-start;\n  background: var(--dm-playlist-bg); }\n  .dm-playlist--right-side .dailymotion-cpe {\n    width: var(--dm-player-size);\n    padding-bottom: var(--dm-player-ratio); }\n  .dm-playlist--right-side .dm-playlist {\n    width: var(--dm-playlist-size); }\n\n@media (max-width: 767px) {\n  .dm-playlist--right-side {\n    --dm-playlist-display: block;\n    --dm-player-size: 100%;\n    --dm-player-ratio: 56.25%;\n    --dm-playlist-size: calc(100% - 80px); } }\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -206,6 +224,1039 @@ function toComment(sourceMap) {
   var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
   return "/*# ".concat(data, " */");
 }
+
+/***/ }),
+
+/***/ "./node_modules/lory.js/dist/lory.js":
+/*!*******************************************!*\
+  !*** ./node_modules/lory.js/dist/lory.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory();
+	else { var i, a; }
+})(typeof self !== 'undefined' ? self : this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; /* globals jQuery */
+
+exports.lory = lory;
+
+var _detectPrefixes = __webpack_require__(1);
+
+var _detectPrefixes2 = _interopRequireDefault(_detectPrefixes);
+
+var _detectSupportsPassive = __webpack_require__(2);
+
+var _detectSupportsPassive2 = _interopRequireDefault(_detectSupportsPassive);
+
+var _dispatchEvent = __webpack_require__(3);
+
+var _dispatchEvent2 = _interopRequireDefault(_dispatchEvent);
+
+var _defaults = __webpack_require__(6);
+
+var _defaults2 = _interopRequireDefault(_defaults);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var slice = Array.prototype.slice;
+
+function lory(slider, opts) {
+    var position = void 0;
+    var slidesWidth = void 0;
+    var frameWidth = void 0;
+    var slides = void 0;
+
+    /**
+     * slider DOM elements
+     */
+    var frame = void 0;
+    var slideContainer = void 0;
+    var prevCtrl = void 0;
+    var nextCtrl = void 0;
+    var prefixes = void 0;
+    var transitionEndCallback = void 0;
+
+    var index = 0;
+    var options = {};
+    var touchEventParams = (0, _detectSupportsPassive2.default)() ? { passive: true } : false;
+
+    /**
+     * if object is jQuery convert to native DOM element
+     */
+    if (typeof jQuery !== 'undefined' && slider instanceof jQuery) {
+        slider = slider[0];
+    }
+
+    /**
+     * private
+     * set active class to element which is the current slide
+     */
+    function setActiveElement(slides, currentIndex) {
+        var _options = options,
+            classNameActiveSlide = _options.classNameActiveSlide;
+
+
+        slides.forEach(function (element, index) {
+            if (element.classList.contains(classNameActiveSlide)) {
+                element.classList.remove(classNameActiveSlide);
+            }
+        });
+
+        slides[currentIndex].classList.add(classNameActiveSlide);
+    }
+
+    /**
+     * private
+     * setupInfinite: function to setup if infinite is set
+     *
+     * @param  {array} slideArray
+     * @return {array} array of updated slideContainer elements
+     */
+    function setupInfinite(slideArray) {
+        var _options2 = options,
+            infinite = _options2.infinite;
+
+
+        var front = slideArray.slice(0, infinite);
+        var back = slideArray.slice(slideArray.length - infinite, slideArray.length);
+
+        front.forEach(function (element) {
+            var cloned = element.cloneNode(true);
+
+            slideContainer.appendChild(cloned);
+        });
+
+        back.reverse().forEach(function (element) {
+            var cloned = element.cloneNode(true);
+
+            slideContainer.insertBefore(cloned, slideContainer.firstChild);
+        });
+
+        slideContainer.addEventListener(prefixes.transitionEnd, onTransitionEnd);
+
+        return slice.call(slideContainer.children);
+    }
+
+    /**
+     * [dispatchSliderEvent description]
+     * @return {[type]} [description]
+     */
+    function dispatchSliderEvent(phase, type, detail) {
+        (0, _dispatchEvent2.default)(slider, phase + '.lory.' + type, detail);
+    }
+
+    /**
+     * translates to a given position in a given time in milliseconds
+     *
+     * @to        {number} number in pixels where to translate to
+     * @duration  {number} time in milliseconds for the transistion
+     * @ease      {string} easing css property
+     */
+    function translate(to, duration, ease) {
+        var style = slideContainer && slideContainer.style;
+
+        if (style) {
+            style[prefixes.transition + 'TimingFunction'] = ease;
+            style[prefixes.transition + 'Duration'] = duration + 'ms';
+            style[prefixes.transform] = 'translateX(' + to + 'px)';
+        }
+    }
+
+    /**
+     * returns an element's width
+     */
+    function elementWidth(element) {
+        return element.getBoundingClientRect().width || element.offsetWidth;
+    }
+
+    /**
+     * slidefunction called by prev, next & touchend
+     *
+     * determine nextIndex and slide to next postion
+     * under restrictions of the defined options
+     *
+     * @direction  {boolean}
+     */
+    function slide(nextIndex, direction) {
+        var _options3 = options,
+            slideSpeed = _options3.slideSpeed,
+            slidesToScroll = _options3.slidesToScroll,
+            infinite = _options3.infinite,
+            rewind = _options3.rewind,
+            rewindPrev = _options3.rewindPrev,
+            rewindSpeed = _options3.rewindSpeed,
+            ease = _options3.ease,
+            classNameActiveSlide = _options3.classNameActiveSlide,
+            _options3$classNameDi = _options3.classNameDisabledNextCtrl,
+            classNameDisabledNextCtrl = _options3$classNameDi === undefined ? 'disabled' : _options3$classNameDi,
+            _options3$classNameDi2 = _options3.classNameDisabledPrevCtrl,
+            classNameDisabledPrevCtrl = _options3$classNameDi2 === undefined ? 'disabled' : _options3$classNameDi2;
+
+
+        var duration = slideSpeed;
+
+        var nextSlide = direction ? index + 1 : index - 1;
+        var maxOffset = Math.round(slidesWidth - frameWidth);
+
+        dispatchSliderEvent('before', 'slide', {
+            index: index,
+            nextSlide: nextSlide
+        });
+
+        /**
+         * Reset control classes
+         */
+        if (prevCtrl) {
+            prevCtrl.classList.remove(classNameDisabledPrevCtrl);
+        }
+        if (nextCtrl) {
+            nextCtrl.classList.remove(classNameDisabledNextCtrl);
+        }
+
+        if (typeof nextIndex !== 'number') {
+            if (direction) {
+                if (infinite && index + infinite * 2 !== slides.length) {
+                    nextIndex = index + (infinite - index % infinite);
+                } else {
+                    nextIndex = index + slidesToScroll;
+                }
+            } else {
+                if (infinite && index % infinite !== 0) {
+                    nextIndex = index - index % infinite;
+                } else {
+                    nextIndex = index - slidesToScroll;
+                }
+            }
+        }
+
+        nextIndex = Math.min(Math.max(nextIndex, 0), slides.length - 1);
+
+        if (infinite && direction === undefined) {
+            nextIndex += infinite;
+        }
+
+        if (rewindPrev && Math.abs(position.x) === 0 && direction === false) {
+            nextIndex = slides.length - 1;
+            duration = rewindSpeed;
+        }
+
+        var nextOffset = Math.min(Math.max(slides[nextIndex].offsetLeft * -1, maxOffset * -1), 0);
+
+        if (rewind && Math.abs(position.x) === maxOffset && direction) {
+            nextOffset = 0;
+            nextIndex = 0;
+            duration = rewindSpeed;
+        }
+
+        /**
+         * translate to the nextOffset by a defined duration and ease function
+         */
+        translate(nextOffset, duration, ease);
+
+        /**
+         * update the position with the next position
+         */
+        position.x = nextOffset;
+
+        /**
+         * update the index with the nextIndex only if
+         * the offset of the nextIndex is in the range of the maxOffset
+         */
+        if (slides[nextIndex].offsetLeft <= maxOffset) {
+            index = nextIndex;
+        }
+
+        if (infinite && (nextIndex === slides.length - infinite || nextIndex === slides.length - slides.length % infinite || nextIndex === 0)) {
+            if (direction) {
+                index = infinite;
+            }
+
+            if (!direction) {
+                index = slides.length - infinite * 2;
+            }
+
+            position.x = slides[index].offsetLeft * -1;
+
+            transitionEndCallback = function transitionEndCallback() {
+                translate(slides[index].offsetLeft * -1, 0, undefined);
+            };
+        }
+
+        if (classNameActiveSlide) {
+            setActiveElement(slice.call(slides), index);
+        }
+
+        /**
+         * update classes for next and prev arrows
+         * based on user settings
+         */
+        if (prevCtrl && !infinite && !rewindPrev && nextIndex === 0) {
+            prevCtrl.classList.add(classNameDisabledPrevCtrl);
+        }
+
+        if (nextCtrl && !infinite && !rewind && nextIndex + 1 === slides.length) {
+            nextCtrl.classList.add(classNameDisabledNextCtrl);
+        }
+
+        dispatchSliderEvent('after', 'slide', {
+            currentSlide: index
+        });
+    }
+
+    /**
+     * public
+     * setup function
+     */
+    function setup() {
+        dispatchSliderEvent('before', 'init');
+
+        prefixes = (0, _detectPrefixes2.default)();
+        options = _extends({}, _defaults2.default, opts);
+
+        var _options4 = options,
+            classNameFrame = _options4.classNameFrame,
+            classNameSlideContainer = _options4.classNameSlideContainer,
+            classNamePrevCtrl = _options4.classNamePrevCtrl,
+            classNameNextCtrl = _options4.classNameNextCtrl,
+            _options4$classNameDi = _options4.classNameDisabledNextCtrl,
+            classNameDisabledNextCtrl = _options4$classNameDi === undefined ? 'disabled' : _options4$classNameDi,
+            _options4$classNameDi2 = _options4.classNameDisabledPrevCtrl,
+            classNameDisabledPrevCtrl = _options4$classNameDi2 === undefined ? 'disabled' : _options4$classNameDi2,
+            enableMouseEvents = _options4.enableMouseEvents,
+            classNameActiveSlide = _options4.classNameActiveSlide,
+            initialIndex = _options4.initialIndex;
+
+
+        index = initialIndex;
+        frame = slider.getElementsByClassName(classNameFrame)[0];
+        slideContainer = frame.getElementsByClassName(classNameSlideContainer)[0];
+        prevCtrl = slider.getElementsByClassName(classNamePrevCtrl)[0];
+        nextCtrl = slider.getElementsByClassName(classNameNextCtrl)[0];
+
+        position = {
+            x: slideContainer.offsetLeft,
+            y: slideContainer.offsetTop
+        };
+
+        if (options.infinite) {
+            slides = setupInfinite(slice.call(slideContainer.children));
+        } else {
+            slides = slice.call(slideContainer.children);
+
+            if (prevCtrl && !options.rewindPrev) {
+                prevCtrl.classList.add(classNameDisabledPrevCtrl);
+            }
+
+            if (nextCtrl && slides.length === 1 && !options.rewind) {
+                nextCtrl.classList.add(classNameDisabledNextCtrl);
+            }
+        }
+
+        reset();
+
+        if (classNameActiveSlide) {
+            setActiveElement(slides, index);
+        }
+
+        if (prevCtrl && nextCtrl) {
+            prevCtrl.addEventListener('click', prev);
+            nextCtrl.addEventListener('click', next);
+        }
+
+        frame.addEventListener('touchstart', onTouchstart, touchEventParams);
+
+        if (enableMouseEvents) {
+            frame.addEventListener('mousedown', onTouchstart);
+            frame.addEventListener('click', onClick);
+        }
+
+        options.window.addEventListener('resize', onResize);
+
+        dispatchSliderEvent('after', 'init');
+    }
+
+    /**
+     * public
+     * reset function: called on resize
+     */
+    function reset() {
+        var _options5 = options,
+            infinite = _options5.infinite,
+            ease = _options5.ease,
+            rewindSpeed = _options5.rewindSpeed,
+            rewindOnResize = _options5.rewindOnResize,
+            classNameActiveSlide = _options5.classNameActiveSlide,
+            initialIndex = _options5.initialIndex;
+
+
+        slidesWidth = elementWidth(slideContainer);
+        frameWidth = elementWidth(frame);
+
+        if (frameWidth === slidesWidth) {
+            slidesWidth = slides.reduce(function (previousValue, slide) {
+                return previousValue + elementWidth(slide);
+            }, 0);
+        }
+
+        if (rewindOnResize) {
+            index = initialIndex;
+        } else {
+            ease = null;
+            rewindSpeed = 0;
+        }
+
+        if (infinite) {
+            translate(slides[index + infinite].offsetLeft * -1, 0, null);
+
+            index = index + infinite;
+            position.x = slides[index].offsetLeft * -1;
+        } else {
+            translate(slides[index].offsetLeft * -1, rewindSpeed, ease);
+            position.x = slides[index].offsetLeft * -1;
+        }
+
+        if (classNameActiveSlide) {
+            setActiveElement(slice.call(slides), index);
+        }
+    }
+
+    /**
+     * public
+     * slideTo: called on clickhandler
+     */
+    function slideTo(index) {
+        slide(index);
+    }
+
+    /**
+     * public
+     * returnIndex function: called on clickhandler
+     */
+    function returnIndex() {
+        return index - options.infinite || 0;
+    }
+
+    /**
+     * public
+     * prev function: called on clickhandler
+     */
+    function prev() {
+        slide(false, false);
+    }
+
+    /**
+     * public
+     * next function: called on clickhandler
+     */
+    function next() {
+        slide(false, true);
+    }
+
+    /**
+     * public
+     * destroy function: called to gracefully destroy the lory instance
+     */
+    function destroy() {
+        dispatchSliderEvent('before', 'destroy');
+
+        // remove event listeners
+        frame.removeEventListener(prefixes.transitionEnd, onTransitionEnd);
+        frame.removeEventListener('touchstart', onTouchstart, touchEventParams);
+        frame.removeEventListener('touchmove', onTouchmove, touchEventParams);
+        frame.removeEventListener('touchend', onTouchend);
+        frame.removeEventListener('mousemove', onTouchmove);
+        frame.removeEventListener('mousedown', onTouchstart);
+        frame.removeEventListener('mouseup', onTouchend);
+        frame.removeEventListener('mouseleave', onTouchend);
+        frame.removeEventListener('click', onClick);
+
+        options.window.removeEventListener('resize', onResize);
+
+        if (prevCtrl) {
+            prevCtrl.removeEventListener('click', prev);
+        }
+
+        if (nextCtrl) {
+            nextCtrl.removeEventListener('click', next);
+        }
+
+        // remove cloned slides if infinite is set
+        if (options.infinite) {
+            Array.apply(null, Array(options.infinite)).forEach(function () {
+                slideContainer.removeChild(slideContainer.firstChild);
+                slideContainer.removeChild(slideContainer.lastChild);
+            });
+        }
+
+        dispatchSliderEvent('after', 'destroy');
+    }
+
+    // event handling
+
+    var touchOffset = void 0;
+    var delta = void 0;
+    var isScrolling = void 0;
+
+    function onTransitionEnd() {
+        if (transitionEndCallback) {
+            transitionEndCallback();
+
+            transitionEndCallback = undefined;
+        }
+    }
+
+    function onTouchstart(event) {
+        var _options6 = options,
+            enableMouseEvents = _options6.enableMouseEvents;
+
+        var touches = event.touches ? event.touches[0] : event;
+
+        if (enableMouseEvents) {
+            frame.addEventListener('mousemove', onTouchmove);
+            frame.addEventListener('mouseup', onTouchend);
+            frame.addEventListener('mouseleave', onTouchend);
+        }
+
+        frame.addEventListener('touchmove', onTouchmove, touchEventParams);
+        frame.addEventListener('touchend', onTouchend);
+
+        var pageX = touches.pageX,
+            pageY = touches.pageY;
+
+
+        touchOffset = {
+            x: pageX,
+            y: pageY,
+            time: Date.now()
+        };
+
+        isScrolling = undefined;
+
+        delta = {};
+
+        dispatchSliderEvent('on', 'touchstart', {
+            event: event
+        });
+    }
+
+    function onTouchmove(event) {
+        var touches = event.touches ? event.touches[0] : event;
+        var pageX = touches.pageX,
+            pageY = touches.pageY;
+
+
+        delta = {
+            x: pageX - touchOffset.x,
+            y: pageY - touchOffset.y
+        };
+
+        if (typeof isScrolling === 'undefined') {
+            isScrolling = !!(isScrolling || Math.abs(delta.x) < Math.abs(delta.y));
+        }
+
+        if (!isScrolling && touchOffset) {
+            translate(position.x + delta.x, 0, null);
+        }
+
+        // may be
+        dispatchSliderEvent('on', 'touchmove', {
+            event: event
+        });
+    }
+
+    function onTouchend(event) {
+        /**
+         * time between touchstart and touchend in milliseconds
+         * @duration {number}
+         */
+        var duration = touchOffset ? Date.now() - touchOffset.time : undefined;
+
+        /**
+         * is valid if:
+         *
+         * -> swipe attempt time is over 300 ms
+         * and
+         * -> swipe distance is greater than 25px
+         * or
+         * -> swipe distance is more then a third of the swipe area
+         *
+         * @isValidSlide {Boolean}
+         */
+        var isValid = Number(duration) < 300 && Math.abs(delta.x) > 25 || Math.abs(delta.x) > frameWidth / 3;
+
+        /**
+         * is out of bounds if:
+         *
+         * -> index is 0 and delta x is greater than 0
+         * or
+         * -> index is the last slide and delta is smaller than 0
+         *
+         * @isOutOfBounds {Boolean}
+         */
+        var isOutOfBounds = !index && delta.x > 0 || index === slides.length - 1 && delta.x < 0;
+
+        var direction = delta.x < 0;
+
+        if (!isScrolling) {
+            if (isValid && !isOutOfBounds) {
+                slide(false, direction);
+            } else {
+                translate(position.x, options.snapBackSpeed);
+            }
+        }
+
+        touchOffset = undefined;
+
+        /**
+         * remove eventlisteners after swipe attempt
+         */
+        frame.removeEventListener('touchmove', onTouchmove);
+        frame.removeEventListener('touchend', onTouchend);
+        frame.removeEventListener('mousemove', onTouchmove);
+        frame.removeEventListener('mouseup', onTouchend);
+        frame.removeEventListener('mouseleave', onTouchend);
+
+        dispatchSliderEvent('on', 'touchend', {
+            event: event
+        });
+    }
+
+    function onClick(event) {
+        if (delta.x) {
+            event.preventDefault();
+        }
+    }
+
+    function onResize(event) {
+        if (frameWidth !== elementWidth(frame)) {
+            reset();
+
+            dispatchSliderEvent('on', 'resize', {
+                event: event
+            });
+        }
+    }
+
+    // trigger initial setup
+    setup();
+
+    // expose public api
+    return {
+        setup: setup,
+        reset: reset,
+        slideTo: slideTo,
+        returnIndex: returnIndex,
+        prev: prev,
+        next: next,
+        destroy: destroy
+    };
+}
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = detectPrefixes;
+/**
+ * Detecting prefixes for saving time and bytes
+ */
+function detectPrefixes() {
+    var transform = void 0;
+    var transition = void 0;
+    var transitionEnd = void 0;
+
+    (function () {
+        var el = document.createElement('_');
+        var style = el.style;
+
+        var prop = void 0;
+
+        if (style[prop = 'webkitTransition'] === '') {
+            transitionEnd = 'webkitTransitionEnd';
+            transition = prop;
+        }
+
+        if (style[prop = 'transition'] === '') {
+            transitionEnd = 'transitionend';
+            transition = prop;
+        }
+
+        if (style[prop = 'webkitTransform'] === '') {
+            transform = prop;
+        }
+
+        if (style[prop = 'msTransform'] === '') {
+            transform = prop;
+        }
+
+        if (style[prop = 'transform'] === '') {
+            transform = prop;
+        }
+
+        document.body.insertBefore(el, null);
+        style[transform] = 'translateX(0)';
+        document.body.removeChild(el);
+    })();
+
+    return {
+        transform: transform,
+        transition: transition,
+        transitionEnd: transitionEnd
+    };
+}
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = detectSupportsPassive;
+function detectSupportsPassive() {
+    var supportsPassive = false;
+
+    try {
+        var opts = Object.defineProperty({}, 'passive', {
+            get: function get() {
+                supportsPassive = true;
+            }
+        });
+
+        window.addEventListener('testPassive', null, opts);
+        window.removeEventListener('testPassive', null, opts);
+    } catch (e) {}
+
+    return supportsPassive;
+}
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = dispatchEvent;
+
+var _customEvent = __webpack_require__(4);
+
+var _customEvent2 = _interopRequireDefault(_customEvent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * dispatch custom events
+ *
+ * @param  {element} el         slideshow element
+ * @param  {string}  type       custom event name
+ * @param  {object}  detail     custom detail information
+ */
+function dispatchEvent(target, type, detail) {
+    var event = new _customEvent2.default(type, {
+        bubbles: true,
+        cancelable: true,
+        detail: detail
+    });
+
+    target.dispatchEvent(event);
+}
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {
+var NativeCustomEvent = global.CustomEvent;
+
+function useNative () {
+  try {
+    var p = new NativeCustomEvent('cat', { detail: { foo: 'bar' } });
+    return  'cat' === p.type && 'bar' === p.detail.foo;
+  } catch (e) {
+  }
+  return false;
+}
+
+/**
+ * Cross-browser `CustomEvent` constructor.
+ *
+ * https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent.CustomEvent
+ *
+ * @public
+ */
+
+module.exports = useNative() ? NativeCustomEvent :
+
+// IE >= 9
+'undefined' !== typeof document && 'function' === typeof document.createEvent ? function CustomEvent (type, params) {
+  var e = document.createEvent('CustomEvent');
+  if (params) {
+    e.initCustomEvent(type, params.bubbles, params.cancelable, params.detail);
+  } else {
+    e.initCustomEvent(type, false, false, void 0);
+  }
+  return e;
+} :
+
+// IE <= 8
+function CustomEvent (type, params) {
+  var e = document.createEventObject();
+  e.type = type;
+  if (params) {
+    e.bubbles = Boolean(params.bubbles);
+    e.cancelable = Boolean(params.cancelable);
+    e.detail = params.detail;
+  } else {
+    e.bubbles = false;
+    e.cancelable = false;
+    e.detail = void 0;
+  }
+  return e;
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  /**
+   * slides scrolled at once
+   * @slidesToScroll {Number}
+   */
+  slidesToScroll: 1,
+
+  /**
+   * time in milliseconds for the animation of a valid slide attempt
+   * @slideSpeed {Number}
+   */
+  slideSpeed: 300,
+
+  /**
+   * time in milliseconds for the animation of the rewind after the last slide
+   * @rewindSpeed {Number}
+   */
+  rewindSpeed: 600,
+
+  /**
+   * time for the snapBack of the slider if the slide attempt was not valid
+   * @snapBackSpeed {Number}
+   */
+  snapBackSpeed: 200,
+
+  /**
+   * Basic easing functions: https://developer.mozilla.org/de/docs/Web/CSS/transition-timing-function
+   * cubic bezier easing functions: http://easings.net/de
+   * @ease {String}
+   */
+  ease: 'ease',
+
+  /**
+   * if slider reached the last slide, with next click the slider goes back to the startindex.
+   * use infinite or rewind, not both
+   * @rewind {Boolean}
+   */
+  rewind: false,
+
+  /**
+   * number of visible slides or false
+   * use infinite or rewind, not both
+   * @infinite {number}
+   */
+  infinite: false,
+
+  /**
+   * the slide index to show when the slider is initialized.
+   * @initialIndex {number}
+   */
+  initialIndex: 0,
+
+  /**
+   * class name for slider frame
+   * @classNameFrame {string}
+   */
+  classNameFrame: 'js_frame',
+
+  /**
+   * class name for slides container
+   * @classNameSlideContainer {string}
+   */
+  classNameSlideContainer: 'js_slides',
+
+  /**
+   * class name for slider prev control
+   * @classNamePrevCtrl {string}
+   */
+  classNamePrevCtrl: 'js_prev',
+
+  /**
+   * class name for slider next control
+   * @classNameNextCtrl {string}
+   */
+  classNameNextCtrl: 'js_next',
+
+  /**
+   * class name for current active slide
+   * if emptyString then no class is set
+   * @classNameActiveSlide {string}
+   */
+  classNameActiveSlide: 'active',
+
+  /**
+   * enables mouse events for swiping on desktop devices
+   * @enableMouseEvents {boolean}
+   */
+  enableMouseEvents: false,
+
+  /**
+   * window instance
+   * @window {object}
+   */
+  window: typeof window !== 'undefined' ? window : null,
+
+  /**
+   * If false, slides lory to the first slide on window resize.
+   * @rewindOnResize {boolean}
+   */
+  rewindOnResize: true
+};
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(0);
+
+
+/***/ })
+/******/ ]);
+});
 
 /***/ }),
 
@@ -906,6 +1957,7 @@ var DmManager = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dm_dm_manager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../dm/dm-manager */ "./src/dm/dm-manager.ts");
 /* harmony import */ var _utilities_wait_for__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utilities/wait-for */ "./src/utilities/wait-for.ts");
+/* harmony import */ var _utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utilities/get-query-params */ "./src/utilities/get-query-params.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -944,6 +1996,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 };
 
 
+
 var keywords = '';
 /**
  * Waiting for iframe ready
@@ -978,17 +2031,30 @@ var onAmpIntegrationReady = function (ampIntegration) {
         ampIntegration.postEvent("canplay");
     });
 };
+var setAttributes = function (el) { return __awaiter(void 0, void 0, void 0, function () {
+    var dmPlayer;
+    return __generator(this, function (_a) {
+        dmPlayer = el[0];
+        dmPlayer.setAttribute('cpeId', Object(_utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__["default"])('cpeId'));
+        dmPlayer.setAttribute('owners', Object(_utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__["default"])('owners'));
+        dmPlayer.setAttribute('sort', Object(_utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__["default"])('sort'));
+        return [2 /*return*/];
+    });
+}); };
 var init = function () { return __awaiter(void 0, void 0, void 0, function () {
     var el;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: 
             // Wait `.dm-player` to be ready first before do everything
-            return [4 /*yield*/, Object(_utilities_wait_for__WEBPACK_IMPORTED_MODULE_1__["waitFor"])(function () { return document.querySelectorAll('.dm-player').length > 0; }, 500, 2000, "Timeout to get DM placeholder")];
+            return [4 /*yield*/, Object(_utilities_wait_for__WEBPACK_IMPORTED_MODULE_1__["waitFor"])(function () { return document.querySelectorAll('.dm-player').length > 0; }, 500, 20000, "Timeout to get DM placeholder")];
             case 1:
                 // Wait `.dm-player` to be ready first before do everything
                 _a.sent();
                 el = document.querySelectorAll('.dm-player');
+                return [4 /*yield*/, setAttributes(el)];
+            case 2:
+                _a.sent();
                 new _dm_dm_manager__WEBPACK_IMPORTED_MODULE_0__["default"](el, keywords);
                 return [2 /*return*/];
         }
@@ -1241,6 +2307,9 @@ var PlayerEventsManager = /** @class */ (function () {
         this.videoEvents();
         this.multiplayerParams = multiplayer;
     }
+    /**
+     * Listen to video events from Dailymotion player
+     */
     PlayerEventsManager.prototype.videoEvents = function () {
         var _this = this;
         // Ignore 'cpeready' event because this event is from outside the script
@@ -1259,6 +2328,11 @@ var PlayerEventsManager = /** @class */ (function () {
                         return [2 /*return*/];
                     });
                 }); });
+                /**
+                 * Listen to an ad_play
+                 *
+                 * - Cover others player when the ad is played
+                 */
                 player.addEventListener('ad_play', function (e) {
                     if (_this.adPlaying === '') {
                         _this.adPlaying = player.id;
@@ -1272,6 +2346,11 @@ var PlayerEventsManager = /** @class */ (function () {
                         }
                     }
                 });
+                /**
+                 * Listen to an ad_end event
+                 *
+                 * - Remove player cover when the ad is ended
+                 */
                 player.addEventListener('ad_end', function (e) {
                     if (_this.adPlaying !== '') {
                         _this.adPlaying = '';
@@ -1282,12 +2361,18 @@ var PlayerEventsManager = /** @class */ (function () {
                     }
                 });
                 /**
-                 * To handle multiple players in a page with scroll to play
+                 * Listening to playing event
+                 *
+                 * - Close the PiP if there are multiple players and the closePip is true
                  */
                 player.addEventListener('playing', function (e) {
                     if (_this.multiplayerParams.closePip === true) {
                         _this.togglePlay(player.id);
                     }
+                });
+                player.addEventListener('end', function (e) {
+                    var videoEnd = new CustomEvent("dm-video-end", { detail: player.video.videoId });
+                    document.dispatchEvent(videoEnd);
                 });
             };
             for (var i = 0; i < players.length; i++) {
@@ -1301,7 +2386,17 @@ var PlayerEventsManager = /** @class */ (function () {
             // Do pause when cpe PiP is closed
             player.pause();
         });
+        // TODO: support multiplayer for next development
+        document.addEventListener('dm-slide-changes', function (e) {
+            // @ts-ignore
+            _this.players[0].load({ video: e.detail });
+        });
     };
+    /**
+     * Toggle play and remove all PiP active
+     *
+     * @param playerId
+     */
     PlayerEventsManager.prototype.togglePlay = function (playerId) {
         // Check every player available
         for (var i = 0; i < this.players.length; i++) {
@@ -1313,6 +2408,9 @@ var PlayerEventsManager = /** @class */ (function () {
             }
         }
     };
+    /**
+     * Add cover to others player to be not clickable by the user
+     */
     PlayerEventsManager.prototype.toggleDisable = function () {
         // Check every player available
         for (var i = 0; i < this.players.length; i++) {
@@ -1351,6 +2449,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_info_card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/info-card */ "./src/player/components/info-card.ts");
 /* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../scss/main.scss */ "./src/scss/main.scss");
 /* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_scss_main_scss__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _playlist_playlist_manager__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../playlist/playlist-manager */ "./src/playlist/playlist-manager.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -1398,6 +2497,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 // Styles
+
 
 var PlayerManager = /** @class */ (function () {
     function PlayerManager(id, rootEl, keywords) {
@@ -1487,6 +2587,8 @@ var PlayerManager = /** @class */ (function () {
             preVideoTitle: rootEl.getAttribute('preVideoTitle') ? rootEl.getAttribute('preVideoTitle') : null,
             showVideoTitle: (rootEl.getAttribute('showVideoTitle') != 'false' && rootEl.getAttribute('showVideoTitle') != null),
             showInfoCard: (rootEl.getAttribute('showInfoCard') != 'false' && rootEl.getAttribute('showInfoCard') != null),
+            showOutsidePlaylist: (rootEl.getAttribute('showOutsidePlaylist') === 'true'),
+            showPlaynow: (rootEl.getAttribute('showPlaynow') === 'true'),
             autoPlayMute: (rootEl.getAttribute("autoPlayMute") != 'false'),
             queueEnable: (rootEl.getAttribute('queueEnable') != 'false'),
             queueEnableNext: (rootEl.getAttribute('queueEnableNext') != 'false'),
@@ -1498,6 +2600,9 @@ var PlayerManager = /** @class */ (function () {
             playerStyleEnable: (rootEl.getAttribute('playerStyleEnable') != 'false' && rootEl.getAttribute('playerStyleEnable') != null),
             playerStyleColor: rootEl.getAttribute('playerStyleColor') ? rootEl.getAttribute('playerStyleColor') : null
         };
+        /**
+         * Special multiple player params
+         */
         this.multiplayerParams = {
             adCoverPlay: (rootEl.getAttribute('adCoverPlay') == 'true'),
             closePip: (rootEl.getAttribute('closePip') == 'true'),
@@ -1517,9 +2622,11 @@ var PlayerManager = /** @class */ (function () {
     PlayerManager.prototype.prepareSearchParams = function () {
         this.cpeId = this.playerParams.cpeId;
         var keywords = this.findKeywords(this.playerParams.keywordsSelector);
+        // There are 3 conditions fields: 1. if outside playlist is true, 2. if the infocard is true, 3. last condition is default condition
+        var fields = this.playerParams.showOutsidePlaylist ? 'id,title,thumbnail_240_url,duration' : this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url' : 'id,title';
         this.searchParams = {
-            fields: this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url' : 'id,title',
-            limit: 1,
+            fields: fields,
+            limit: this.playerParams.showOutsidePlaylist ? 7 : 1,
             sort: this.playerParams.sort,
         };
         if (this.playerParams.sort === "relevance") {
@@ -1530,7 +2637,7 @@ var PlayerManager = /** @class */ (function () {
         }
         if (!this.playerParams.searchInPlaylist) {
             // TODO: test using private video
-            this.searchParams.private = 1;
+            this.searchParams.private = 0;
             this.searchParams.flags = "no_live,exportable" + (this.playerParams.owners.length > 0 ? "" : ",verified");
             this.searchParams.longer_than = 0.35; //21sec
             if (this.playerParams.owners)
@@ -1571,7 +2678,7 @@ var PlayerManager = /** @class */ (function () {
             cpeEmbed.setAttribute("no-stp", "");
         if (this.playerParams.noPip === true)
             cpeEmbed.setAttribute("no-pip", "");
-        if (this.playerParams.queueEnable === false)
+        if (this.playerParams.queueEnable === false || this.playerParams.showOutsidePlaylist === true)
             cpeEmbed.setAttribute("no-queue", "");
         if (this.playerParams.queueEnableNext === false)
             cpeEmbed.setAttribute("no-autonext", "");
@@ -1683,6 +2790,9 @@ var PlayerManager = /** @class */ (function () {
                         if (!video) return [3 /*break*/, 6];
                         if (!(video.total > 0)) return [3 /*break*/, 3];
                         this.setVideo(video.list[0], true);
+                        if (this.playerParams.showOutsidePlaylist === true) {
+                            new _playlist_playlist_manager__WEBPACK_IMPORTED_MODULE_8__["default"](this.rootEl, video, this.playerParams.showPlaynow);
+                        }
                         return [3 /*break*/, 6];
                     case 3:
                         // Strip a string to try to get video one more time if there is no video found
@@ -1781,6 +2891,182 @@ var PlayerManager = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/playlist/playlist-manager.ts":
+/*!******************************************!*\
+  !*** ./src/playlist/playlist-manager.ts ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lory_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lory.js */ "./node_modules/lory.js/dist/lory.js");
+/* harmony import */ var lory_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lory_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _scss_playlist_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../scss/playlist.scss */ "./src/scss/playlist.scss");
+/* harmony import */ var _scss_playlist_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_scss_playlist_scss__WEBPACK_IMPORTED_MODULE_1__);
+// Plugins
+
+// Styles
+
+var PlaylistManager = /** @class */ (function () {
+    function PlaylistManager(rootEl, videos, playnow) {
+        this.dmPlaylist = null;
+        this.rootEl = null;
+        this.videos = null;
+        this.slides = [];
+        this.slideActive = '';
+        this.nowPlayingTitle = null;
+        this.rootEl = rootEl;
+        this.videos = videos;
+        this.addEventListeners();
+        this.generateCarouselTag();
+        if (playnow)
+            this.generateNowPlaying();
+    }
+    PlaylistManager.prototype.addEventListeners = function () {
+        var _this = this;
+        document.addEventListener('dm-video-end', function (e) {
+            // @ts-ignore
+            _this.playNext(e.detail);
+        });
+    };
+    PlaylistManager.prototype.generateNowPlaying = function () {
+        var nowPlaying = document.createElement('div');
+        nowPlaying.className = 'dm__now-playing-status';
+        var statusText = document.createElement('div');
+        statusText.className = 'dm__now-playing-text';
+        statusText.innerText = 'Now playing:    ';
+        nowPlaying.appendChild(statusText);
+        this.nowPlayingTitle = document.createElement('div');
+        this.nowPlayingTitle.className = 'dm__now-playing-title';
+        this.nowPlayingTitle.innerText = this.videos.list[0].title;
+        nowPlaying.appendChild(this.nowPlayingTitle);
+        this.dmPlaylist.insertAdjacentElement('afterbegin', nowPlaying);
+    };
+    PlaylistManager.prototype.generateCarouselTag = function () {
+        var _this = this;
+        // Create the playlist container first
+        this.dmPlaylist = document.createElement('div');
+        this.dmPlaylist.className = 'dm-playlist';
+        var carouselPlugin = document.createElement('div');
+        carouselPlugin.className = 'slider js_slider';
+        // Track for Carousel
+        var carouselTrack = document.createElement('div');
+        carouselTrack.className = 'frame js_frame';
+        // carouselTrack.setAttribute('data-glide-el', 'track');
+        // Slides
+        var carouselSlides = document.createElement('ul');
+        carouselSlides.className = 'slides js_slides';
+        this.slideActive = this.videos.list[0].id;
+        for (var i = 0; i < this.videos.list.length; i++) {
+            // Slide
+            this.slides[i] = document.createElement('li');
+            this.slides[i].className = (i === 0) ? 'js_slide dm__playlist-slide dm__playlist-active' : 'js_slide dm__playlist-slide';
+            this.slides[i].setAttribute('data-id', this.videos.list[i].id);
+            var slideWrapper = document.createElement('div');
+            slideWrapper.className = 'dm__slide-wrapper';
+            // Thumbnail
+            var contThumbnail = document.createElement('figure');
+            contThumbnail.className = 'dm__playlist-cont-thumbnail';
+            var thumbnail = new Image();
+            thumbnail.className = 'dm__playlist-thumbnail';
+            thumbnail.src = this.videos.list[i].thumbnail_240_url;
+            contThumbnail.appendChild(thumbnail);
+            var duration = document.createElement('span');
+            duration.className = 'dm__playlist-duration';
+            duration.innerText = this.durationFormat(this.videos.list[i].duration);
+            contThumbnail.appendChild(duration);
+            slideWrapper.appendChild(contThumbnail);
+            // Title
+            var title = document.createElement('h5');
+            title.className = 'dm__playlist-title';
+            var text = document.createTextNode(this.videos.list[i].title);
+            title.appendChild(text);
+            slideWrapper.appendChild(title);
+            this.slides[i].appendChild(slideWrapper);
+            // Listen to the slide
+            this.slides[i].addEventListener('click', function (e) {
+                // @ts-ignore
+                _this.toggleActive(e.target.dataset.id);
+            });
+            carouselSlides.appendChild(this.slides[i]);
+        }
+        /**
+         * Left Arrow
+         */
+        var leftArrow = document.createElement('button');
+        leftArrow.className = 'js_prev prev';
+        // leftArrow.setAttribute('data-glide-dir', '<');
+        leftArrow.setAttribute('aria-label', 'Previous');
+        leftArrow.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 501.5 501.5"><g><path class="arrow" d="M302.67 90.877l55.77 55.508L254.575 250.75 358.44 355.116l-55.77 55.506L143.56 250.75z"/></g></svg>';
+        /**
+         * Right Arrow
+         */
+        var rightArrow = document.createElement('button');
+        rightArrow.className = 'js_next next';
+        // rightArrow.setAttribute('data-glide-dir', '>');
+        rightArrow.setAttribute('aria-label', 'Next');
+        rightArrow.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 501.5 501.5"><g><path class="arrow" d="M199.33 410.622l-55.77-55.508L247.425 250.75 143.56 146.384l55.77-55.507L358.44 250.75z"/></g></svg>';
+        /**
+         * Append component to its container
+         */
+        carouselTrack.appendChild(carouselSlides);
+        carouselPlugin.appendChild(carouselTrack);
+        carouselPlugin.appendChild(leftArrow);
+        carouselPlugin.appendChild(rightArrow);
+        this.dmPlaylist.appendChild(carouselPlugin);
+        this.rootEl.appendChild(this.dmPlaylist);
+        var self = this;
+        /**
+         * Execute the carousel
+         */
+        Object(lory_js__WEBPACK_IMPORTED_MODULE_0__["lory"])(self.dmPlaylist, {
+            slidesToScroll: 2,
+        });
+    };
+    PlaylistManager.prototype.toggleActive = function (videoId) {
+        this.slideActive = videoId;
+        for (var i = 0; i < this.slides.length; i++) {
+            this.slides[i].className = (this.slides[i].dataset.id === this.slideActive) ? 'glide__slide dm__playlist-slide dm__playlist-active' : 'glide__slide dm__playlist-slide';
+        }
+        // Seek the video active
+        for (var i = 0; i < this.videos.list.length; i++) {
+            if (videoId === this.videos.list[i].id) {
+                this.nowPlayingTitle.innerText = this.videos.list[i].title;
+                break;
+            }
+        }
+        this.slideChanges(videoId);
+    };
+    PlaylistManager.prototype.playNext = function (videoId) {
+        var slideActive = videoId;
+        // Seek the video container first
+        for (var i = 0; i < this.slides.length; i++) {
+            if (this.slides[i].dataset.id === videoId && i !== this.slides.length - 1) {
+                slideActive = this.slides[i + 1].dataset.id;
+                break;
+            }
+            else if (i === this.slides.length - 1) {
+                slideActive = this.slides[0].dataset.id;
+                break;
+            }
+        }
+        this.toggleActive(slideActive);
+    };
+    PlaylistManager.prototype.slideChanges = function (videoId) {
+        var slideChanges = new CustomEvent("dm-slide-changes", { detail: videoId });
+        document.dispatchEvent(slideChanges);
+    };
+    PlaylistManager.prototype.durationFormat = function (duration) {
+        return new Date(duration * 1000).toISOString().substr(14, 5);
+    };
+    return PlaylistManager;
+}());
+/* harmony default export */ __webpack_exports__["default"] = (PlaylistManager);
+
+
+/***/ }),
+
 /***/ "./src/scss/main.scss":
 /*!****************************!*\
   !*** ./src/scss/main.scss ***!
@@ -1790,6 +3076,37 @@ var PlayerManager = /** @class */ (function () {
 
 var api = __webpack_require__(/*! ../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
             var content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js!../../node_modules/sass-loader/dist/cjs.js!../../node_modules/postcss-loader/src!./main.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src/index.js!./src/scss/main.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
+/***/ "./src/scss/playlist.scss":
+/*!********************************!*\
+  !*** ./src/scss/playlist.scss ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js!../../node_modules/sass-loader/dist/cjs.js!../../node_modules/postcss-loader/src!./playlist.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src/index.js!./src/scss/playlist.scss");
 
             content = content.__esModule ? content.default : content;
 

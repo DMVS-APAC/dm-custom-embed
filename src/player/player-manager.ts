@@ -19,6 +19,7 @@ import InfoCard from "./components/info-card";
 
 // Styles
 import '../scss/main.scss';
+import PlaylistManager from "../playlist/playlist-manager";
 
 export default class PlayerManager {
     private id: string = "";
@@ -119,6 +120,8 @@ export default class PlayerManager {
             preVideoTitle: rootEl.getAttribute('preVideoTitle') ? rootEl.getAttribute('preVideoTitle') : null,
             showVideoTitle: ( rootEl.getAttribute('showVideoTitle') != 'false' &&  rootEl.getAttribute('showVideoTitle') != null ),
             showInfoCard: ( rootEl.getAttribute('showInfoCard') != 'false' &&  rootEl.getAttribute('showInfoCard') != null ),
+            showOutsidePlaylist: (rootEl.getAttribute('showOutsidePlaylist') === 'true'),
+            showPlaynow: (rootEl.getAttribute('showPlaynow') === 'true'),
             autoPlayMute: ( rootEl.getAttribute("autoPlayMute") != 'false'),
             queueEnable: ( rootEl.getAttribute('queueEnable') != 'false'),
             queueEnableNext: ( rootEl.getAttribute('queueEnableNext') != 'false'),
@@ -131,6 +134,9 @@ export default class PlayerManager {
             playerStyleColor: rootEl.getAttribute('playerStyleColor') ? rootEl.getAttribute('playerStyleColor') : null
         };
 
+        /**
+         * Special multiple player params
+         */
         this.multiplayerParams = {
             adCoverPlay: ( rootEl.getAttribute('adCoverPlay') == 'true'),
             closePip: ( rootEl.getAttribute('closePip') == 'true'),
@@ -153,9 +159,13 @@ export default class PlayerManager {
     private prepareSearchParams(): void {
         this.cpeId = this.playerParams.cpeId;
         const keywords = this.findKeywords(this.playerParams.keywordsSelector);
+
+        // There are 3 conditions fields: 1. if outside playlist is true, 2. if the infocard is true, 3. last condition is default condition
+        const fields = this.playerParams.showOutsidePlaylist ? 'id,title,thumbnail_240_url,duration' : this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url' : 'id,title';
+
         this.searchParams = {
-            fields: this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url' : 'id,title',
-            limit: 1,
+            fields: fields,
+            limit: this.playerParams.showOutsidePlaylist ? 7 : 1,
             sort: this.playerParams.sort,
         };
 
@@ -170,7 +180,7 @@ export default class PlayerManager {
         if (!this.playerParams.searchInPlaylist) {
 
             // TODO: test using private video
-            this.searchParams.private = 1;
+            this.searchParams.private = 0;
             this.searchParams.flags = "no_live,exportable" + (this.playerParams.owners.length > 0 ? "": ",verified");
             this.searchParams.longer_than = 0.35; //21sec
 
@@ -217,7 +227,7 @@ export default class PlayerManager {
 
         if (this.playerParams.noPip === true) cpeEmbed.setAttribute("no-pip", "");
 
-        if (this.playerParams.queueEnable === false) cpeEmbed.setAttribute("no-queue", "");
+        if (this.playerParams.queueEnable === false || this.playerParams.showOutsidePlaylist === true) cpeEmbed.setAttribute("no-queue", "");
 
         if (this.playerParams.queueEnableNext === false) cpeEmbed.setAttribute("no-autonext", "");
 
@@ -333,6 +343,10 @@ export default class PlayerManager {
         if (video) {
             if (video.total > 0) {
                 this.setVideo(video.list[0], true);
+
+                if (this.playerParams.showOutsidePlaylist === true) {
+                    new PlaylistManager(this.rootEl, video, this.playerParams.showPlaynow);
+                }
             } else {
                 // Strip a string to try to get video one more time if there is no video found
                 this.searchParams.search = this.searchParams.search.substring(0, this.searchParams.search.lastIndexOf(' '));

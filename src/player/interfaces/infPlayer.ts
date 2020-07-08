@@ -59,6 +59,12 @@ export default interface InfPlayer {
     // Info of the video in a card below the video player
     showInfoCard?: boolean;
 
+    // Enable outside playlist
+    showOutsidePlaylist?: boolean;
+
+    // Enable play now status
+    showPlaynow?: boolean;
+
     ////// Config to player
 
     // Picture-in-Picture at start

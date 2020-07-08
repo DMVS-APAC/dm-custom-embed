@@ -13,6 +13,9 @@ export default class PlayerEventsManager {
         this.multiplayerParams = multiplayer;
     }
 
+    /**
+     * Listen to video events from Dailymotion player
+     */
     private videoEvents(): void {
 
         // Ignore 'cpeready' event because this event is from outside the script
@@ -30,6 +33,11 @@ export default class PlayerEventsManager {
                     document.dispatchEvent(videoUpdated);
                 });
 
+                /**
+                 * Listen to an ad_play
+                 *
+                 * - Cover others player when the ad is played
+                 */
                 player.addEventListener('ad_play', (e) => {
                     if (this.adPlaying === '') {
                         this.adPlaying = player.id;
@@ -46,6 +54,11 @@ export default class PlayerEventsManager {
                     }
                 });
 
+                /**
+                 * Listen to an ad_end event
+                 *
+                 * - Remove player cover when the ad is ended
+                 */
                 player.addEventListener('ad_end', (e) => {
 
                     if (this.adPlaying !== '') {
@@ -59,12 +72,19 @@ export default class PlayerEventsManager {
                 });
 
                 /**
-                 * To handle multiple players in a page with scroll to play
+                 * Listening to playing event
+                 *
+                 * - Close the PiP if there are multiple players and the closePip is true
                  */
                 player.addEventListener('playing', (e) => {
                     if (this.multiplayerParams.closePip === true) {
                         this.togglePlay(player.id);
                     }
+                });
+
+                player.addEventListener('end', (e) => {
+                    const videoEnd = new CustomEvent("dm-video-end", {detail: player.video.videoId});
+                    document.dispatchEvent(videoEnd);
                 });
             }
         });
@@ -75,9 +95,19 @@ export default class PlayerEventsManager {
             // Do pause when cpe PiP is closed
             player.pause()
         });
+
+        // TODO: support multiplayer for next development
+        document.addEventListener('dm-slide-changes', ( e: Event) => {
+            // @ts-ignore
+            this.players[0].load({ video: e.detail});
+        });
     }
 
-
+    /**
+     * Toggle play and remove all PiP active
+     *
+     * @param playerId
+     */
     private togglePlay(playerId: string): void {
 
         // Check every player available
@@ -93,6 +123,9 @@ export default class PlayerEventsManager {
 
     }
 
+    /**
+     * Add cover to others player to be not clickable by the user
+     */
     private toggleDisable(): void {
 
         // Check every player available

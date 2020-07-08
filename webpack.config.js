@@ -28,7 +28,7 @@ module.exports = (env, options) => {
                     exclude: /node_modules/,
                 },
                 {
-                    test: /\.s[ac]ss$/i,
+                    test: /\.((c|sa|sc)ss)$/i,
                     use: [
                         // Creates `style` nodes from JS strings
                         'style-loader',
@@ -141,7 +141,7 @@ module.exports = (env, options) => {
                 title: 'Dailymotion AMP Video Embed',
                 template: 'src/entries/amp/index.html',
                 filename: 'amp/index.html',
-                excludeChunks: ['dm-ce', 'dm-amp'],
+                excludeChunks: ['dm-ce', 'dm-amp', 'dm-no-cpe'],
                 showErrors: isProd ? false : true,
                 minify: isProd ? {
                     html5: true,
@@ -188,6 +188,29 @@ module.exports = (env, options) => {
                 template: 'src/entries/no-cpe/index.html',
                 filename: 'no-cpe/index.html',
                 chunks: ['dm-no-cpe'],
+                showErrors: isProd ? false : true,
+                minify: isProd ? {
+                    html5: true,
+                    collapseWhitespace: true,
+                    minifyCSS: true,
+                    minifyJS: true,
+                    minifyURLs: false,
+                    removeAttributeQuotes: true,
+                    removeComments: true,
+                    removeEmptyAttributes: true,
+                    removeOptionalTags: true,
+                    removeRedundantAttributes: true,
+                    removeScriptTypeAttributes: true,
+                    removeStyleLinkTypeAttributese: true,
+                    useShortDoctype: true
+                } : false,
+                hash: false
+            }),
+            new HtmlWebpackPlugin({
+                title: 'Dailymotion Video with Playlist out the player',
+                template: 'src/entries/playlist/index.html',
+                filename: 'playlist/index.html',
+                chunks: ['dm-ce'],
                 showErrors: isProd ? false : true,
                 minify: isProd ? {
                     html5: true,

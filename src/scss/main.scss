@@ -1,5 +1,8 @@
 .dailymotion-cpe {
-
+  //animation: slideInDown;
+  //animation-duration: 1s;
+  //animation-iteration-count: 1;
+  //background: #000;
   // Show the video player responsive based on 16:9 ratio
   &:before {
     content: "";

@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.0] (2020-07-08)
+
+**Implemented enhancements:**
+- Add new feature Playlist outside the player
+- Fixed the AMP script
+
 ## [1.3.0] (2020-06-29)
 
 **Implemented enhancements:**

@@ -44,11 +44,21 @@ const onAmpIntegrationReady = (ampIntegration: any) => {
         });
 }
 
+const setAttributes = async (el: NodeListOf<HTMLDivElement>) => {
+    const dmPlayer = el[0];
+
+    dmPlayer.setAttribute('cpeId', getParam('cpeId'));
+    dmPlayer.setAttribute('owners', getParam('owners'));
+    dmPlayer.setAttribute('sort', getParam('sort'));
+}
+
 const init = async () => {
 
     // Wait `.dm-player` to be ready first before do everything
-    await waitFor(() => document.querySelectorAll('.dm-player').length > 0, 500, 2000, "Timeout to get DM placeholder");
+    await waitFor(() => document.querySelectorAll('.dm-player').length > 0, 500, 20000, "Timeout to get DM placeholder");
     const el: NodeListOf<HTMLDivElement> = document.querySelectorAll('.dm-player');
+
+    await setAttributes(el);
 
     new DmManager(el, keywords);
 };
