@@ -1,9 +1,15 @@
 # Changelog
 
+## [1.4.1] ()
+
+**Implemented enhancements:**
+- Add PiP for No CPE
+- Restructure folder naming and code
+
 ## [1.4.0] (2020-07-08)
 
 **Implemented enhancements:**
-- Add new feature Playlist outside the player
+- Add a new feature Playlist outside the player
 - Fixed the AMP script
 
 ## [1.3.0] (2020-06-29)
