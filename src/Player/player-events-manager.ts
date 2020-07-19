@@ -1,9 +1,11 @@
 import { apiUrl } from "../Libraries/global/vars";
 
 import infMultiplayer from "./interfaces/infMultiPlayer";
+import {sleep, waitFor} from "../Libraries/Utilities/wait-for";
 
 export default class PlayerEventsManager {
     private players: any[] = [];
+    private noFill: boolean = true;
     private adPlaying: string = '';
     private multiplayerParams: infMultiplayer = null;
 
@@ -11,6 +13,8 @@ export default class PlayerEventsManager {
         this.videoEvents();
 
         this.multiplayerParams = multiplayer;
+
+        this.waitForAdStart();
     }
 
     /**
@@ -31,6 +35,10 @@ export default class PlayerEventsManager {
                     const video = player.video;
                     const videoUpdated = new CustomEvent('dm-video-updated', { detail: { videoId: video.videoId }})
                     document.dispatchEvent(videoUpdated);
+                });
+
+                player.addEventListener('ad_start', (e) => {
+                    this.noFill = false;
                 });
 
                 /**
@@ -60,7 +68,6 @@ export default class PlayerEventsManager {
                  * - Remove player cover when the ad is ended
                  */
                 player.addEventListener('ad_end', (e) => {
-
                     if (this.adPlaying !== '') {
                         this.adPlaying = '';
 
@@ -86,6 +93,10 @@ export default class PlayerEventsManager {
                     const videoEnd = new CustomEvent("dm-video-end", {detail: player.video.videoId});
                     document.dispatchEvent(videoEnd);
                 });
+
+                player.addEventListener('error', (e) => {
+                    console.log(e);
+                });
             }
         });
 
@@ -93,7 +104,7 @@ export default class PlayerEventsManager {
         // @ts-ignore
         window.addEventListener('cpepipclose', ({ detail: { player } }) => {
             // Do pause when cpe PiP is closed
-            player.pause()
+            player.pause();
         });
 
         // TODO: support multiplayer for next development
@@ -101,6 +112,19 @@ export default class PlayerEventsManager {
             // @ts-ignore
             this.players[0].load({ video: e.detail});
         });
+
+        document.addEventListener('dm-destroy-player', (e: Event) => {
+            // @ts-ignore
+            console.log(this.players[0]);
+        });
+    }
+
+    private async waitForAdStart() {
+        await sleep(5000);
+        if ( this.noFill === true ) {
+            const destroyPlayer = new CustomEvent('dm-destroy-player');
+            document.dispatchEvent(destroyPlayer);
+        }
     }
 
     /**

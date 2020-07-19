@@ -81,6 +81,29 @@ module.exports = (env, options) => {
                 } : false,
                 hash: false
             }),
+            new HtmlWebpackPlugin({
+                title: 'Dailymotion Custom Embed Video',
+                template: 'src/Labs/ConditionalPlayer/index.html',
+                filename: 'conditional/index.html',
+                chunks: ['dm-ce'],
+                showErrors: isProd ? false : true,
+                minify: isProd ? {
+                    html5: true,
+                    collapseWhitespace: true,
+                    minifyCSS: true,
+                    minifyJS: true,
+                    minifyURLs: false,
+                    removeAttributeQuotes: true,
+                    removeComments: true,
+                    removeEmptyAttributes: true,
+                    removeOptionalTags: true,
+                    removeRedundantAttributes: true,
+                    removeScriptTypeAttributes: true,
+                    removeStyleLinkTypeAttributes: true,
+                    useShortDoctype: true
+                } : false,
+                hash: false
+            }),
             // new HtmlWebpackPlugin({
             //     title: 'Dailymotion Multiple Video Embed',
             //     template: 'src/entries/multiple/index.html',
@@ -200,6 +223,29 @@ module.exports = (env, options) => {
                 title: 'Dailymotion Video with Playlist out the player',
                 template: 'src/Labs/Playlist/index.html',
                 filename: 'playlist/index.html',
+                chunks: ['dm-ce'],
+                showErrors: isProd ? false : true,
+                minify: isProd ? {
+                    html5: true,
+                    collapseWhitespace: true,
+                    minifyCSS: true,
+                    minifyJS: true,
+                    minifyURLs: false,
+                    removeAttributeQuotes: true,
+                    removeComments: true,
+                    removeEmptyAttributes: true,
+                    removeOptionalTags: true,
+                    removeRedundantAttributes: true,
+                    removeScriptTypeAttributes: true,
+                    removeStyleLinkTypeAttributes: true,
+                    useShortDoctype: true
+                } : false,
+                hash: false
+            }),
+            new HtmlWebpackPlugin({
+                title: 'Dailymotion Video with Playlist out the player',
+                template: 'src/Labs/Playlist/asiaone.html',
+                filename: 'playlist/asiaone.html',
                 chunks: ['dm-ce'],
                 showErrors: isProd ? false : true,
                 minify: isProd ? {

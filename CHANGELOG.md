@@ -1,6 +1,11 @@
 # Changelog
 
-## [1.4.1] ()
+## [1.4.2] (2020-07-17)
+
+**Fixed Bugs**
+- Fix alignm
+
+## [1.4.1] (2020-07-15)
 
 **Implemented enhancements:**
 - Add PiP for No CPE
