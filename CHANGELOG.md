@@ -3,7 +3,8 @@
 ## [1.4.2] (2020-07-17)
 
 **Fixed Bugs**
-- Fix alignm
+- Fix playlist align on Safari
+- Add one more param to player showAdOnly
 
 ## [1.4.1] (2020-07-15)
 

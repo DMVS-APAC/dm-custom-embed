@@ -10,16 +10,7 @@
   }
 }
 
-// Keyframe for animate the player
-@keyframes slideInDown {
-  from {
-    padding-top: 0;
-  }
 
-  to {
-    padding-top: 56.25%;
-  }
-}
 
 .dm__pre-video-title {
   text-align: var(--dm-video-align, center) !important;
@@ -89,6 +80,22 @@
 }
 
 .dm-player {
+  overflow: hidden;
+  height: 0;
+
+  .insider {
+    display: none;
+  }
+
+  &.dm-playback-ready {
+    height: auto;
+    animation: showPlayer 1 1s;
+    transform-origin:  top;
+
+    .insider {
+      display: block;
+    }
+  }
 
   // Cover the video that not playing yet when ad is playing
   .insider.dm-disabled:after {
@@ -99,5 +106,26 @@
     top: 0;
     left: 0;
     background: rgba(0, 0, 0, .6);
+  }
+}
+
+// Keyframe for animate the player
+@keyframes slideInDown {
+  from {
+    padding-top: 0;
+  }
+
+  to {
+    padding-top: 56.25%;
+  }
+}
+
+@keyframes showPlayer {
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
   }
 }

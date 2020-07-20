@@ -122,6 +122,7 @@ export default class PlayerManager {
             showInfoCard: ( rootEl.getAttribute('showInfoCard') != 'false' &&  rootEl.getAttribute('showInfoCard') != null ),
             showOutsidePlaylist: (rootEl.getAttribute('showOutsidePlaylist') === 'true'),
             showPlaynow: (rootEl.getAttribute('showPlaynow') === 'true'),
+            showAdOnly: (rootEl.getAttribute('showAdOnly') === 'true'),
             autoPlayMute: ( rootEl.getAttribute("autoPlayMute") != 'false'),
             queueEnable: ( rootEl.getAttribute('queueEnable') != 'false'),
             queueEnableNext: ( rootEl.getAttribute('queueEnableNext') != 'false'),
@@ -307,7 +308,7 @@ export default class PlayerManager {
             }
 
             this.infoCard = infoCard.setInfoCard(this.videoParams);
-            this.rootEl.insertAdjacentElement('afterend', this.infoCard);
+            this.rootEl.insertAdjacentElement('beforeend', this.infoCard);
         }
 
     }

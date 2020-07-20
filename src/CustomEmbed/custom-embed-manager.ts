@@ -40,7 +40,7 @@ export default class CustomEmbedManager {
 
     private listenVideoEvents() {
         // It's start to listen to the video events
-        new PlayerEventsManager(CustomEmbedManager.player[0].multiplayerParams);
+        new PlayerEventsManager(CustomEmbedManager.player[0].playerParams, CustomEmbedManager.player[0].multiplayerParams);
     }
 
     public async renderElement() {

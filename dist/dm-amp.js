@@ -97,7 +97,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".dailymotion-cpe:before {\n  content: \"\";\n  padding-top: 56.25%;\n  background: #000;\n  display: block;\n  -webkit-animation: slideInDown;\n  animation: slideInDown;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1; }\n\n/* Keyframe for animate the player*/\n@-webkit-keyframes slideInDown {\n  from {\n    padding-top: 0; }\n  to {\n    padding-top: 56.25%; } }\n\n@keyframes slideInDown {\n  from {\n    padding-top: 0; }\n  to {\n    padding-top: 56.25%; } }\n\n.dm__pre-video-title {\n  text-align: var(--dm-video-align, center) !important;\n  margin: var(--dm-video-margin, 8px 0) !important;\n  font-style: var(--dm-video-style, normal) !important;\n  color: var(--dm-video-color, #000) !important;\n  font-size: var(--dm-video-size, 1.2em) !important;\n  font-weight: var(--dm-video-weight, 700) !important; }\n\n.dm__info-card {\n  background: var(--dm-info-card-bg, #eee) !important;\n  padding: var(--dm-info-card-padding, 8px 13px) !important;\n  display: flex;\n  text-align: var(--dm-info-card-align, left) !important;\n  /* Title*/\n  --dm-title-align: left;\n  --dm-title-weight: 700;\n  --dm-title-size: 1.1em; }\n\n.dm__text-wrapper {\n  width: calc(100% - 80px);\n  padding-right: 13px; }\n\n.dm__video-title {\n  text-align: var(--dm-title-align, center) !important;\n  margin: var(--dm-title-margin, 8px 0) !important;\n  font-style: var(--dm-title-style, normal) !important;\n  color: var(--dm-title-color, inherit) !important;\n  font-size: var(--dm-title-size, 1em) !important;\n  font-weight: var(--dm-title-weight, 400) !important;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%; }\n\n.dm__video-desc {\n  text-align: var(--dm-desc-align, left) !important;\n  margin: var(--dm-desc-margin, 0 0 8px) !important;\n  font-style: var(--dm-desc-style, normal) !important;\n  color: var(--dm-desc-color, inherit) !important;\n  font-size: var(--dm-desc-size, 0.9em) !important;\n  font-weight: var(--dm-desc-weight, inherit) !important;\n  padding-top: 13px;\n  border-top: solid #666 1px;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%;\n  display: -webkit-box !important;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 1; }\n\n.dm__ava-wrapper {\n  width: 80px; }\n\n.dm__owner-ava {\n  width: 100%;\n  height: auto; }\n\n.dm-player {\n  /* Cover the video that not playing yet when ad is playing*/ }\n  .dm-player .insider.dm-disabled:after {\n    content: \"\";\n    width: 100%;\n    height: 100%;\n    position: absolute;\n    top: 0;\n    left: 0;\n    background: rgba(0, 0, 0, 0.6); }\n", ""]);
+exports.push([module.i, ".dailymotion-cpe:before {\n  content: \"\";\n  padding-top: 56.25%;\n  background: #000;\n  display: block;\n  -webkit-animation: slideInDown;\n  animation: slideInDown;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1; }\n\n.dm__pre-video-title {\n  text-align: var(--dm-video-align, center) !important;\n  margin: var(--dm-video-margin, 8px 0) !important;\n  font-style: var(--dm-video-style, normal) !important;\n  color: var(--dm-video-color, #000) !important;\n  font-size: var(--dm-video-size, 1.2em) !important;\n  font-weight: var(--dm-video-weight, 700) !important; }\n\n.dm__info-card {\n  background: var(--dm-info-card-bg, #eee) !important;\n  padding: var(--dm-info-card-padding, 8px 13px) !important;\n  display: flex;\n  text-align: var(--dm-info-card-align, left) !important;\n  /* Title*/\n  --dm-title-align: left;\n  --dm-title-weight: 700;\n  --dm-title-size: 1.1em; }\n\n.dm__text-wrapper {\n  width: calc(100% - 80px);\n  padding-right: 13px; }\n\n.dm__video-title {\n  text-align: var(--dm-title-align, center) !important;\n  margin: var(--dm-title-margin, 8px 0) !important;\n  font-style: var(--dm-title-style, normal) !important;\n  color: var(--dm-title-color, inherit) !important;\n  font-size: var(--dm-title-size, 1em) !important;\n  font-weight: var(--dm-title-weight, 400) !important;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%; }\n\n.dm__video-desc {\n  text-align: var(--dm-desc-align, left) !important;\n  margin: var(--dm-desc-margin, 0 0 8px) !important;\n  font-style: var(--dm-desc-style, normal) !important;\n  color: var(--dm-desc-color, inherit) !important;\n  font-size: var(--dm-desc-size, 0.9em) !important;\n  font-weight: var(--dm-desc-weight, inherit) !important;\n  padding-top: 13px;\n  border-top: solid #666 1px;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%;\n  display: -webkit-box !important;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 1; }\n\n.dm__ava-wrapper {\n  width: 80px; }\n\n.dm__owner-ava {\n  width: 100%;\n  height: auto; }\n\n.dm-player {\n  overflow: hidden;\n  height: 0;\n  /* Cover the video that not playing yet when ad is playing*/ }\n  .dm-player .insider {\n    display: none; }\n  .dm-player.dm-playback-ready {\n    height: auto;\n    -webkit-animation: showPlayer 1 1s;\n    animation: showPlayer 1 1s;\n    transform-origin: top; }\n    .dm-player.dm-playback-ready .insider {\n      display: block; }\n  .dm-player .insider.dm-disabled:after {\n    content: \"\";\n    width: 100%;\n    height: 100%;\n    position: absolute;\n    top: 0;\n    left: 0;\n    background: rgba(0, 0, 0, 0.6); }\n\n/* Keyframe for animate the player*/\n@-webkit-keyframes slideInDown {\n  from {\n    padding-top: 0; }\n  to {\n    padding-top: 56.25%; } }\n\n@keyframes slideInDown {\n  from {\n    padding-top: 0; }\n  to {\n    padding-top: 56.25%; } }\n\n@-webkit-keyframes showPlayer {\n  from {\n    transform: scaleY(0); }\n  to {\n    transform: scaleY(1); } }\n\n@keyframes showPlayer {\n  from {\n    transform: scaleY(0); }\n  to {\n    transform: scaleY(1); } }\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -1821,7 +1821,7 @@ var CustomEmbedManager = /** @class */ (function () {
     };
     CustomEmbedManager.prototype.listenVideoEvents = function () {
         // It's start to listen to the video events
-        new _Player_player_events_manager__WEBPACK_IMPORTED_MODULE_2__["default"](CustomEmbedManager.player[0].multiplayerParams);
+        new _Player_player_events_manager__WEBPACK_IMPORTED_MODULE_2__["default"](CustomEmbedManager.player[0].playerParams, CustomEmbedManager.player[0].multiplayerParams);
     };
     CustomEmbedManager.prototype.renderElement = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -2464,121 +2464,161 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 };
 
 var PlayerEventsManager = /** @class */ (function () {
-    function PlayerEventsManager(multiplayer) {
+    function PlayerEventsManager(playerParams, multiplayer) {
         this.players = [];
         this.noFill = true;
         this.adPlaying = '';
         this.multiplayerParams = null;
+        this.playerParams = null;
         this.videoEvents();
+        this.playerParams = playerParams;
         this.multiplayerParams = multiplayer;
-        this.waitForAdStart();
     }
     /**
      * Listen to video events from Dailymotion player
      */
     PlayerEventsManager.prototype.videoEvents = function () {
-        var _this = this;
-        // Ignore 'cpeready' event because this event is from outside the script
-        // @ts-ignore
-        window.addEventListener('cpeready', function (_a) {
-            var players = _a.detail.players;
-            _this.players = players;
-            var _loop_1 = function (i) {
-                var player = players[i];
-                player.addEventListener('videochange', function (e) { return __awaiter(_this, void 0, void 0, function () {
-                    var video, videoUpdated;
-                    return __generator(this, function (_a) {
-                        video = player.video;
-                        videoUpdated = new CustomEvent('dm-video-updated', { detail: { videoId: video.videoId } });
-                        document.dispatchEvent(videoUpdated);
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        // Ignore 'cpeready' event because this event is from outside the script
+                        // @ts-ignore
+                        window.addEventListener('cpeready', function (_a) {
+                            var players = _a.detail.players;
+                            _this.players = players;
+                            var _loop_1 = function (i) {
+                                var player = players[i];
+                                player.addEventListener('videochange', function (e) { return __awaiter(_this, void 0, void 0, function () {
+                                    var video, videoUpdated;
+                                    return __generator(this, function (_a) {
+                                        video = player.video;
+                                        videoUpdated = new CustomEvent('dm-video-updated', { detail: { videoId: video.videoId } });
+                                        document.dispatchEvent(videoUpdated);
+                                        return [2 /*return*/];
+                                    });
+                                }); });
+                                player.addEventListener('ad_start', function (e) {
+                                    _this.noFill = false;
+                                });
+                                /**
+                                 * Listen to an ad_play
+                                 *
+                                 * - Cover others player when the ad is played
+                                 */
+                                player.addEventListener('ad_play', function (e) {
+                                    if (_this.adPlaying === '') {
+                                        _this.adPlaying = player.id;
+                                        // Disable the player that not playing yet
+                                        if (_this.multiplayerParams.adCoverPlay === true) {
+                                            _this.toggleDisable();
+                                        }
+                                        // Toggle playing video and hide the PiP
+                                        if (_this.multiplayerParams.closePip === true) {
+                                            _this.togglePlay(player.id);
+                                        }
+                                    }
+                                });
+                                /**
+                                 * Listen to an ad_end event
+                                 *
+                                 * - Remove player cover when the ad is ended
+                                 */
+                                player.addEventListener('ad_end', function (e) {
+                                    if (_this.adPlaying !== '') {
+                                        _this.adPlaying = '';
+                                        // Toggle disabled player
+                                        if (_this.multiplayerParams.adCoverPlay) {
+                                            _this.toggleDisable();
+                                        }
+                                    }
+                                });
+                                /**
+                                 * Listening to playing event
+                                 *
+                                 * - Close the PiP if there are multiple players and the closePip is true
+                                 */
+                                player.addEventListener('playing', function (e) {
+                                    if (_this.multiplayerParams.closePip === true) {
+                                        _this.togglePlay(player.id);
+                                    }
+                                    if (_this.playerParams.showAdOnly === true) {
+                                        _this.waitForAdStart();
+                                    }
+                                });
+                                player.addEventListener('end', function (e) {
+                                    var videoEnd = new CustomEvent("dm-video-end", { detail: player.video.videoId });
+                                    document.dispatchEvent(videoEnd);
+                                });
+                                player.addEventListener('playback_ready', function (e) { return __awaiter(_this, void 0, void 0, function () {
+                                    var dmPlayer, showPlayer;
+                                    return __generator(this, function (_a) {
+                                        dmPlayer = player.parentNode.parentNode.parentNode;
+                                        if (this.playerParams.showAdOnly === true) {
+                                            dmPlayer.classList.add('dm-wait-for-ad');
+                                            player.play();
+                                            this.waitForAdStart();
+                                        }
+                                        else {
+                                            showPlayer = new CustomEvent('dm-show-player');
+                                            document.dispatchEvent(showPlayer);
+                                        }
+                                        return [2 /*return*/];
+                                    });
+                                }); });
+                                player.addEventListener('error', function (e) {
+                                    console.log(e);
+                                });
+                            };
+                            for (var i = 0; i < players.length; i++) {
+                                _loop_1(i);
+                            }
+                        });
+                        return [4 /*yield*/, Object(_Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["waitFor"])(function () { return _this.players[0] !== undefined; }, 500, 120000, 'Timeout waiting for players')];
+                    case 1:
+                        _a.sent();
+                        // Listen to PiP close to pause the video player
+                        // @ts-ignore
+                        window.addEventListener('cpepipclose', function (_a) {
+                            var player = _a.detail.player;
+                            // Do pause when cpe PiP is closed
+                            player.pause();
+                        });
+                        // TODO: support multiplayer for next development
+                        document.addEventListener('dm-slide-changes', function (e) {
+                            // @ts-ignore
+                            _this.players[0].load({ video: e.detail });
+                        });
+                        document.addEventListener('dm-destroy-player', function (e) {
+                            // @ts-ignore
+                            _this.players[0].parentNode.parentNode.parentNode.remove(); // Get dm-player first
+                        });
+                        document.addEventListener('dm-show-player', function (e) {
+                            _this.players[0].parentNode.parentNode.parentNode.classList.add('dm-playback-ready');
+                        });
                         return [2 /*return*/];
-                    });
-                }); });
-                player.addEventListener('ad_start', function (e) {
-                    _this.noFill = false;
-                });
-                /**
-                 * Listen to an ad_play
-                 *
-                 * - Cover others player when the ad is played
-                 */
-                player.addEventListener('ad_play', function (e) {
-                    if (_this.adPlaying === '') {
-                        _this.adPlaying = player.id;
-                        // Disable the player that not playing yet
-                        if (_this.multiplayerParams.adCoverPlay === true) {
-                            _this.toggleDisable();
-                        }
-                        // Toggle playing video and hide the PiP
-                        if (_this.multiplayerParams.closePip === true) {
-                            _this.togglePlay(player.id);
-                        }
-                    }
-                });
-                /**
-                 * Listen to an ad_end event
-                 *
-                 * - Remove player cover when the ad is ended
-                 */
-                player.addEventListener('ad_end', function (e) {
-                    if (_this.adPlaying !== '') {
-                        _this.adPlaying = '';
-                        // Toggle disabled player
-                        if (_this.multiplayerParams.adCoverPlay) {
-                            _this.toggleDisable();
-                        }
-                    }
-                });
-                /**
-                 * Listening to playing event
-                 *
-                 * - Close the PiP if there are multiple players and the closePip is true
-                 */
-                player.addEventListener('playing', function (e) {
-                    if (_this.multiplayerParams.closePip === true) {
-                        _this.togglePlay(player.id);
-                    }
-                });
-                player.addEventListener('end', function (e) {
-                    var videoEnd = new CustomEvent("dm-video-end", { detail: player.video.videoId });
-                    document.dispatchEvent(videoEnd);
-                });
-                player.addEventListener('error', function (e) {
-                    console.log(e);
-                });
-            };
-            for (var i = 0; i < players.length; i++) {
-                _loop_1(i);
-            }
-        });
-        // Listen to PiP close to pause the video player
-        // @ts-ignore
-        window.addEventListener('cpepipclose', function (_a) {
-            var player = _a.detail.player;
-            // Do pause when cpe PiP is closed
-            player.pause();
-        });
-        // TODO: support multiplayer for next development
-        document.addEventListener('dm-slide-changes', function (e) {
-            // @ts-ignore
-            _this.players[0].load({ video: e.detail });
-        });
-        document.addEventListener('dm-destroy-player', function (e) {
-            // @ts-ignore
-            console.log(_this.players[0]);
+                }
+            });
         });
     };
     PlayerEventsManager.prototype.waitForAdStart = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var destroyPlayer;
+            var destroyPlayer, showPlayer;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Object(_Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["sleep"])(5000)];
+                    case 0:
+                        console.log("haha");
+                        return [4 /*yield*/, Object(_Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["sleep"])(1000)];
                     case 1:
                         _a.sent();
                         if (this.noFill === true) {
                             destroyPlayer = new CustomEvent('dm-destroy-player');
                             document.dispatchEvent(destroyPlayer);
+                        }
+                        else {
+                            showPlayer = new CustomEvent('dm-show-player');
+                            document.dispatchEvent(showPlayer);
                         }
                         return [2 /*return*/];
                 }
@@ -2783,6 +2823,7 @@ var PlayerManager = /** @class */ (function () {
             showInfoCard: (rootEl.getAttribute('showInfoCard') != 'false' && rootEl.getAttribute('showInfoCard') != null),
             showOutsidePlaylist: (rootEl.getAttribute('showOutsidePlaylist') === 'true'),
             showPlaynow: (rootEl.getAttribute('showPlaynow') === 'true'),
+            showAdOnly: (rootEl.getAttribute('showAdOnly') === 'true'),
             autoPlayMute: (rootEl.getAttribute("autoPlayMute") != 'false'),
             queueEnable: (rootEl.getAttribute('queueEnable') != 'false'),
             queueEnableNext: (rootEl.getAttribute('queueEnableNext') != 'false'),
@@ -2939,7 +2980,7 @@ var PlayerManager = /** @class */ (function () {
                 this.infoCard.remove();
             }
             this.infoCard = infoCard.setInfoCard(this.videoParams);
-            this.rootEl.insertAdjacentElement('afterend', this.infoCard);
+            this.rootEl.insertAdjacentElement('beforeend', this.infoCard);
         }
     };
     PlayerManager.prototype.getVideoInfo = function (videoId, createNew) {

@@ -65,6 +65,9 @@ export default interface InfPlayer {
     // Enable play now status
     showPlaynow?: boolean;
 
+    // Show video only if ad exist
+    showAdOnly?: boolean;
+
     ////// Config to player
 
     // Picture-in-Picture at start
