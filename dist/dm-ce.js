@@ -2441,18 +2441,29 @@ var PlayerEventsManager = /** @class */ (function () {
                                     if (_this.multiplayerParams.closePip === true) {
                                         _this.togglePlay(player.id);
                                     }
-                                    if (_this.playerParams.showAdOnly === true) {
-                                        _this.waitForAdStart();
-                                    }
                                 });
+                                /**
+                                 * Listen to video end, and process the next thing
+                                 * It will load new video from the playlist
+                                 */
                                 player.addEventListener('end', function (e) {
                                     var videoEnd = new CustomEvent("dm-video-end", { detail: player.video.videoId });
                                     document.dispatchEvent(videoEnd);
                                 });
+                                /**
+                                 * Listen to `playback_ready` to show the player
+                                 */
                                 player.addEventListener('playback_ready', function (e) { return __awaiter(_this, void 0, void 0, function () {
                                     var dmPlayer, showPlayer;
                                     return __generator(this, function (_a) {
                                         dmPlayer = player.parentNode.parentNode.parentNode;
+                                        /**
+                                         * It's only to show video when ad is filled
+                                         *
+                                         * Because we don't showing the video at first, the video won't play anymway.
+                                         * So we play it programmatically via JS and start to listen to `waitForAdStart`
+                                         * to listen to ad request
+                                         */
                                         if (this.playerParams.showAdOnly === true) {
                                             dmPlayer.classList.add('dm-wait-for-ad');
                                             player.play();
@@ -2465,6 +2476,9 @@ var PlayerEventsManager = /** @class */ (function () {
                                         return [2 /*return*/];
                                     });
                                 }); });
+                                /**
+                                 * Handle player error as well to avoid bad UX
+                                 */
                                 player.addEventListener('error', function (e) {
                                     console.log(e);
                                 });
@@ -2473,25 +2487,42 @@ var PlayerEventsManager = /** @class */ (function () {
                                 _loop_1(i);
                             }
                         });
+                        /**
+                         * Waiting for the players ready first before listen to the events
+                         */
                         return [4 /*yield*/, Object(_Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["waitFor"])(function () { return _this.players[0] !== undefined; }, 500, 120000, 'Timeout waiting for players')];
                     case 1:
+                        /**
+                         * Waiting for the players ready first before listen to the events
+                         */
                         _a.sent();
-                        // Listen to PiP close to pause the video player
+                        /**
+                         * Listen to PiP close to pause the video player
+                         */
                         // @ts-ignore
                         window.addEventListener('cpepipclose', function (_a) {
                             var player = _a.detail.player;
                             // Do pause when cpe PiP is closed
                             player.pause();
                         });
+                        /**
+                         * Listen to slide changes to set the video to play
+                         */
                         // TODO: support multiplayer for next development
                         document.addEventListener('dm-slide-changes', function (e) {
                             // @ts-ignore
                             _this.players[0].load({ video: e.detail });
                         });
+                        /**
+                         * Destroy the player if there is no ad to serve
+                         */
                         document.addEventListener('dm-destroy-player', function (e) {
                             // @ts-ignore
                             _this.players[0].parentNode.parentNode.parentNode.remove(); // Get dm-player first
                         });
+                        /**
+                         * Add new class `dm-playback-ready` to show the player
+                         */
                         document.addEventListener('dm-show-player', function (e) {
                             _this.players[0].parentNode.parentNode.parentNode.classList.add('dm-playback-ready');
                         });
@@ -2500,16 +2531,26 @@ var PlayerEventsManager = /** @class */ (function () {
             });
         });
     };
+    /**
+     * Wait and check if noFill is true or not.
+     * This function is related to `ad_start` listener as well
+     */
     PlayerEventsManager.prototype.waitForAdStart = function () {
         return __awaiter(this, void 0, void 0, function () {
             var destroyPlayer, showPlayer;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        console.log("haha");
-                        return [4 /*yield*/, Object(_Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["sleep"])(1000)];
+                    case 0: 
+                    // Waiting for 1 second to interact with ad
+                    return [4 /*yield*/, Object(_Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["sleep"])(1000)];
                     case 1:
+                        // Waiting for 1 second to interact with ad
                         _a.sent();
+                        /**
+                         * noFill means no ad to serve
+                         * It will send a custom event that let
+                         * the script continue show the player or destroy it
+                         */
                         if (this.noFill === true) {
                             destroyPlayer = new CustomEvent('dm-destroy-player');
                             document.dispatchEvent(destroyPlayer);

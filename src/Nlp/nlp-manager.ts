@@ -1,6 +1,7 @@
 import { debugMode } from "../Libraries/Global/vars";
 
 export default class NlpManager {
+    private playerParams = null;
 
     /**
      * Sanitize keywords based on language
