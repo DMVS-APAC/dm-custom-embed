@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.4.2] (2020-07-17)
+## [1.4.2] (2020-07-21)
 
 **Fixed Bugs**
 - Fix playlist align on Safari

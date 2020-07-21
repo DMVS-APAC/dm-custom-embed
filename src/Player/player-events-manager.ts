@@ -130,11 +130,6 @@ export default class PlayerEventsManager {
         });
 
         /**
-         * Waiting for the players ready first before listen to the events
-         */
-        await  waitFor( () => this.players[0] !== undefined, 500, 120000, 'Timeout waiting for players');
-
-        /**
          * Listen to PiP close to pause the video player
          */
         // @ts-ignore

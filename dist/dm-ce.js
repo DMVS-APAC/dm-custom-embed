@@ -2379,155 +2379,143 @@ var PlayerEventsManager = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        // Ignore 'cpeready' event because this event is from outside the script
-                        // @ts-ignore
-                        window.addEventListener('cpeready', function (_a) {
-                            var players = _a.detail.players;
-                            _this.players = players;
-                            var _loop_1 = function (i) {
-                                var player = players[i];
-                                player.addEventListener('videochange', function (e) { return __awaiter(_this, void 0, void 0, function () {
-                                    var video, videoUpdated;
-                                    return __generator(this, function (_a) {
-                                        video = player.video;
-                                        videoUpdated = new CustomEvent('dm-video-updated', { detail: { videoId: video.videoId } });
-                                        document.dispatchEvent(videoUpdated);
-                                        return [2 /*return*/];
-                                    });
-                                }); });
-                                player.addEventListener('ad_start', function (e) {
-                                    _this.noFill = false;
-                                });
-                                /**
-                                 * Listen to an ad_play
-                                 *
-                                 * - Cover others player when the ad is played
-                                 */
-                                player.addEventListener('ad_play', function (e) {
-                                    if (_this.adPlaying === '') {
-                                        _this.adPlaying = player.id;
-                                        // Disable the player that not playing yet
-                                        if (_this.multiplayerParams.adCoverPlay === true) {
-                                            _this.toggleDisable();
-                                        }
-                                        // Toggle playing video and hide the PiP
-                                        if (_this.multiplayerParams.closePip === true) {
-                                            _this.togglePlay(player.id);
-                                        }
-                                    }
-                                });
-                                /**
-                                 * Listen to an ad_end event
-                                 *
-                                 * - Remove player cover when the ad is ended
-                                 */
-                                player.addEventListener('ad_end', function (e) {
-                                    if (_this.adPlaying !== '') {
-                                        _this.adPlaying = '';
-                                        // Toggle disabled player
-                                        if (_this.multiplayerParams.adCoverPlay) {
-                                            _this.toggleDisable();
-                                        }
-                                    }
-                                });
-                                /**
-                                 * Listening to playing event
-                                 *
-                                 * - Close the PiP if there are multiple players and the closePip is true
-                                 */
-                                player.addEventListener('playing', function (e) {
-                                    if (_this.multiplayerParams.closePip === true) {
-                                        _this.togglePlay(player.id);
-                                    }
-                                });
-                                /**
-                                 * Listen to video end, and process the next thing
-                                 * It will load new video from the playlist
-                                 */
-                                player.addEventListener('end', function (e) {
-                                    var videoEnd = new CustomEvent("dm-video-end", { detail: player.video.videoId });
-                                    document.dispatchEvent(videoEnd);
-                                });
-                                /**
-                                 * Listen to `playback_ready` to show the player
-                                 */
-                                player.addEventListener('playback_ready', function (e) { return __awaiter(_this, void 0, void 0, function () {
-                                    var dmPlayer, showPlayer;
-                                    return __generator(this, function (_a) {
-                                        dmPlayer = player.parentNode.parentNode.parentNode;
-                                        /**
-                                         * It's only to show video when ad is filled
-                                         *
-                                         * Because we don't showing the video at first, the video won't play anymway.
-                                         * So we play it programmatically via JS and start to listen to `waitForAdStart`
-                                         * to listen to ad request
-                                         */
-                                        if (this.playerParams.showAdOnly === true) {
-                                            dmPlayer.classList.add('dm-wait-for-ad');
-                                            player.play();
-                                            this.waitForAdStart();
-                                        }
-                                        else {
-                                            showPlayer = new CustomEvent('dm-show-player');
-                                            document.dispatchEvent(showPlayer);
-                                        }
-                                        return [2 /*return*/];
-                                    });
-                                }); });
-                                /**
-                                 * Handle player error as well to avoid bad UX
-                                 */
-                                player.addEventListener('error', function (e) {
-                                    console.log(e);
-                                });
-                            };
-                            for (var i = 0; i < players.length; i++) {
-                                _loop_1(i);
+                // Ignore 'cpeready' event because this event is from outside the script
+                // @ts-ignore
+                window.addEventListener('cpeready', function (_a) {
+                    var players = _a.detail.players;
+                    _this.players = players;
+                    var _loop_1 = function (i) {
+                        var player = players[i];
+                        player.addEventListener('videochange', function (e) { return __awaiter(_this, void 0, void 0, function () {
+                            var video, videoUpdated;
+                            return __generator(this, function (_a) {
+                                video = player.video;
+                                videoUpdated = new CustomEvent('dm-video-updated', { detail: { videoId: video.videoId } });
+                                document.dispatchEvent(videoUpdated);
+                                return [2 /*return*/];
+                            });
+                        }); });
+                        player.addEventListener('ad_start', function (e) {
+                            _this.noFill = false;
+                        });
+                        /**
+                         * Listen to an ad_play
+                         *
+                         * - Cover others player when the ad is played
+                         */
+                        player.addEventListener('ad_play', function (e) {
+                            if (_this.adPlaying === '') {
+                                _this.adPlaying = player.id;
+                                // Disable the player that not playing yet
+                                if (_this.multiplayerParams.adCoverPlay === true) {
+                                    _this.toggleDisable();
+                                }
+                                // Toggle playing video and hide the PiP
+                                if (_this.multiplayerParams.closePip === true) {
+                                    _this.togglePlay(player.id);
+                                }
                             }
                         });
                         /**
-                         * Waiting for the players ready first before listen to the events
+                         * Listen to an ad_end event
+                         *
+                         * - Remove player cover when the ad is ended
                          */
-                        return [4 /*yield*/, Object(_Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["waitFor"])(function () { return _this.players[0] !== undefined; }, 500, 120000, 'Timeout waiting for players')];
-                    case 1:
-                        /**
-                         * Waiting for the players ready first before listen to the events
-                         */
-                        _a.sent();
-                        /**
-                         * Listen to PiP close to pause the video player
-                         */
-                        // @ts-ignore
-                        window.addEventListener('cpepipclose', function (_a) {
-                            var player = _a.detail.player;
-                            // Do pause when cpe PiP is closed
-                            player.pause();
+                        player.addEventListener('ad_end', function (e) {
+                            if (_this.adPlaying !== '') {
+                                _this.adPlaying = '';
+                                // Toggle disabled player
+                                if (_this.multiplayerParams.adCoverPlay) {
+                                    _this.toggleDisable();
+                                }
+                            }
                         });
                         /**
-                         * Listen to slide changes to set the video to play
+                         * Listening to playing event
+                         *
+                         * - Close the PiP if there are multiple players and the closePip is true
                          */
-                        // TODO: support multiplayer for next development
-                        document.addEventListener('dm-slide-changes', function (e) {
-                            // @ts-ignore
-                            _this.players[0].load({ video: e.detail });
+                        player.addEventListener('playing', function (e) {
+                            if (_this.multiplayerParams.closePip === true) {
+                                _this.togglePlay(player.id);
+                            }
                         });
                         /**
-                         * Destroy the player if there is no ad to serve
+                         * Listen to video end, and process the next thing
+                         * It will load new video from the playlist
                          */
-                        document.addEventListener('dm-destroy-player', function (e) {
-                            // @ts-ignore
-                            _this.players[0].parentNode.parentNode.parentNode.remove(); // Get dm-player first
+                        player.addEventListener('end', function (e) {
+                            var videoEnd = new CustomEvent("dm-video-end", { detail: player.video.videoId });
+                            document.dispatchEvent(videoEnd);
                         });
                         /**
-                         * Add new class `dm-playback-ready` to show the player
+                         * Listen to `playback_ready` to show the player
                          */
-                        document.addEventListener('dm-show-player', function (e) {
-                            _this.players[0].parentNode.parentNode.parentNode.classList.add('dm-playback-ready');
+                        player.addEventListener('playback_ready', function (e) { return __awaiter(_this, void 0, void 0, function () {
+                            var dmPlayer, showPlayer;
+                            return __generator(this, function (_a) {
+                                dmPlayer = player.parentNode.parentNode.parentNode;
+                                /**
+                                 * It's only to show video when ad is filled
+                                 *
+                                 * Because we don't showing the video at first, the video won't play anymway.
+                                 * So we play it programmatically via JS and start to listen to `waitForAdStart`
+                                 * to listen to ad request
+                                 */
+                                if (this.playerParams.showAdOnly === true) {
+                                    dmPlayer.classList.add('dm-wait-for-ad');
+                                    player.play();
+                                    this.waitForAdStart();
+                                }
+                                else {
+                                    showPlayer = new CustomEvent('dm-show-player');
+                                    document.dispatchEvent(showPlayer);
+                                }
+                                return [2 /*return*/];
+                            });
+                        }); });
+                        /**
+                         * Handle player error as well to avoid bad UX
+                         */
+                        player.addEventListener('error', function (e) {
+                            console.log(e);
                         });
-                        return [2 /*return*/];
-                }
+                    };
+                    for (var i = 0; i < players.length; i++) {
+                        _loop_1(i);
+                    }
+                });
+                /**
+                 * Listen to PiP close to pause the video player
+                 */
+                // @ts-ignore
+                window.addEventListener('cpepipclose', function (_a) {
+                    var player = _a.detail.player;
+                    // Do pause when cpe PiP is closed
+                    player.pause();
+                });
+                /**
+                 * Listen to slide changes to set the video to play
+                 */
+                // TODO: support multiplayer for next development
+                document.addEventListener('dm-slide-changes', function (e) {
+                    // @ts-ignore
+                    _this.players[0].load({ video: e.detail });
+                });
+                /**
+                 * Destroy the player if there is no ad to serve
+                 */
+                document.addEventListener('dm-destroy-player', function (e) {
+                    // @ts-ignore
+                    _this.players[0].parentNode.parentNode.parentNode.remove(); // Get dm-player first
+                });
+                /**
+                 * Add new class `dm-playback-ready` to show the player
+                 */
+                document.addEventListener('dm-show-player', function (e) {
+                    _this.players[0].parentNode.parentNode.parentNode.classList.add('dm-playback-ready');
+                });
+                return [2 /*return*/];
             });
         });
     };
