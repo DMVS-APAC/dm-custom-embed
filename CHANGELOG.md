@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.4.3] (2020-07-22)
+
+**Fixed Bugs**
+- Increase waiting time for ad
+
 ## [1.4.2] (2020-07-21)
 
 **Fixed Bugs**
