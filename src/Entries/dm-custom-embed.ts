@@ -1,5 +1,5 @@
 import CustomEmbedManager from '../CustomEmbed/custom-embed-manager';
-import { waitFor } from '../Libraries/Utilities/wait-for';
+import { waitFor } from '../Libraries/Utilities/waitFor';
 
 declare global {
 	interface Window {

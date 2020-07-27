@@ -91,6 +91,7 @@
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src!./src/NoCPE/Scss/no-cpe.scss ***!
   \***************************************************************************************************************************************************/
 /*! no static exports found */
+/*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -109,6 +110,7 @@ module.exports = exports;
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src!./src/Player/Scss/main.scss ***!
   \**************************************************************************************************************************************************/
 /*! no static exports found */
+/*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -127,6 +129,7 @@ module.exports = exports;
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src!./src/Playlist/Scss/playlist.scss ***!
   \********************************************************************************************************************************************************/
 /*! no static exports found */
+/*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -145,6 +148,7 @@ module.exports = exports;
   !*** ./node_modules/css-loader/dist/runtime/api.js ***!
   \*****************************************************/
 /*! no static exports found */
+/*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -250,6 +254,7 @@ function toComment(sourceMap) {
   !*** ./node_modules/lory.js/dist/lory.js ***!
   \*******************************************/
 /*! no static exports found */
+/*! exports used: lory */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -1283,6 +1288,7 @@ module.exports = __webpack_require__(0);
   !*** ./node_modules/process/browser.js ***!
   \*****************************************/
 /*! no static exports found */
+/*! all exports used */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -1478,6 +1484,7 @@ process.umask = function() { return 0; };
   !*** ./node_modules/scroll-out/lib/index.js ***!
   \**********************************************/
 /*! no static exports found */
+/*! exports used: default */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1751,6 +1758,7 @@ module.exports = main;
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
   \****************************************************************************/
 /*! no static exports found */
+/*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2031,12 +2039,13 @@ module.exports = function (list, options) {
   !*** ./src/Entries/dm-no-cpe.ts ***!
   \**********************************/
 /*! no exports provided */
+/*! all exports used */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NoCPE_no_cpe_manager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../NoCPE/no-cpe-manager */ "./src/NoCPE/no-cpe-manager.ts");
-/* harmony import */ var _Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Libraries/Utilities/wait-for */ "./src/Libraries/Utilities/wait-for.ts");
+/* harmony import */ var _Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Libraries/Utilities/waitFor */ "./src/Libraries/Utilities/waitFor.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2089,19 +2098,19 @@ var init = function () { return __awaiter(void 0, void 0, void 0, function () {
         switch (_a.label) {
             case 0: 
             // Wait `.dm-player` to be ready first before do everything
-            return [4 /*yield*/, Object(_Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_1__["waitFor"])(function () { return document.querySelectorAll('.dm-player').length > 0; }, 500, 5000, "Timeout to get DM placeholder")];
+            return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_1__[/* waitFor */ "b"])(function () { return document.querySelectorAll('.dm-player').length > 0; }, 500, 5000, "Timeout to get DM placeholder")];
             case 1:
                 // Wait `.dm-player` to be ready first before do everything
                 _a.sent();
                 // Wait DM sdk to be ready
                 // @ts-ignore
-                return [4 /*yield*/, Object(_Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_1__["waitFor"])(function () { return typeof DM !== 'undefined'; }, 500, 10000, "Timeout to get DM sdk")];
+                return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_1__[/* waitFor */ "b"])(function () { return typeof DM !== 'undefined'; }, 500, 10000, "Timeout to get DM sdk")];
             case 2:
                 // Wait DM sdk to be ready
                 // @ts-ignore
                 _a.sent();
                 el = document.querySelectorAll('.dm-player');
-                new _NoCPE_no_cpe_manager__WEBPACK_IMPORTED_MODULE_0__["default"](el);
+                new _NoCPE_no_cpe_manager__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](el);
                 return [2 /*return*/];
         }
     });
@@ -2116,11 +2125,11 @@ init();
   !*** ./src/Libraries/API/apiCall.ts ***!
   \**************************************/
 /*! exports provided: fetchData */
+/*! exports used: fetchData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchData", function() { return fetchData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return fetchData; });
 /* harmony import */ var _global_vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../global/vars */ "./src/Libraries/global/vars.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -2183,7 +2192,7 @@ function fetchData(urlParams) {
         });
     }); }).catch(function (err) {
         // Do nothing, just don't show to user what's happened on player
-        if (_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
+        if (_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
             console.log("API calling error");
         }
     });
@@ -2197,11 +2206,11 @@ function fetchData(urlParams) {
   !*** ./src/Libraries/Utilities/get-query-params.ts ***!
   \*****************************************************/
 /*! exports provided: default */
+/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getParam; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getParam; });
 function getParam(param) {
     var urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
@@ -2215,11 +2224,11 @@ function getParam(param) {
   !*** ./src/Libraries/Utilities/html-entities.ts ***!
   \**************************************************/
 /*! exports provided: default */
+/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return htmlEntities; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return htmlEntities; });
 function htmlEntities(str) {
     return String(str).replace(/&/g, '%26').replace(/=/g, '%3d');
 }
@@ -2227,17 +2236,17 @@ function htmlEntities(str) {
 
 /***/ }),
 
-/***/ "./src/Libraries/Utilities/wait-for.ts":
-/*!*********************************************!*\
-  !*** ./src/Libraries/Utilities/wait-for.ts ***!
-  \*********************************************/
+/***/ "./src/Libraries/Utilities/waitFor.ts":
+/*!********************************************!*\
+  !*** ./src/Libraries/Utilities/waitFor.ts ***!
+  \********************************************/
 /*! exports provided: waitFor, sleep */
+/*! exports used: sleep, waitFor */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "waitFor", function() { return waitFor; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sleep", function() { return sleep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return waitFor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return sleep; });
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2319,107 +2328,20 @@ function sleep(delay) {
   !*** ./src/Libraries/global/vars.ts ***!
   \**************************************/
 /*! exports provided: debugMode, apiUrl */
+/*! exports used: apiUrl, debugMode */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "debugMode", function() { return debugMode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "apiUrl", function() { return apiUrl; });
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return debugMode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return apiUrl; });
 /* harmony import */ var _Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Utilities/get-query-params */ "./src/Libraries/Utilities/get-query-params.ts");
 // Utilities
 
 // Get debug mode params from url
-var debugMode = (Object(_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__["default"])('dmdebug') != null && Object(_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__["default"])('dmdebug') != 'false');
+var debugMode = (Object(_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])('dmdebug') != null && Object(_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])('dmdebug') != 'false');
 var apiUrl = process.env.API_URL ? process.env.API_URL : "https://api.dailymotion.com/";
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
-
-/***/ }),
-
-/***/ "./src/Libraries/utilities/wait-for.ts":
-/*!*********************************************!*\
-  !*** ./src/Libraries/utilities/wait-for.ts ***!
-  \*********************************************/
-/*! exports provided: waitFor, sleep */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "waitFor", function() { return waitFor; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sleep", function() { return sleep; });
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-function waitFor(condition, interval, timeout, timeoutMsg) {
-    if (interval === void 0) { interval = 50; }
-    if (timeout === void 0) { timeout = Infinity; }
-    if (timeoutMsg === void 0) { timeoutMsg = ""; }
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            return [2 /*return*/, new Promise(function (resolve, reject) {
-                    var elapsedTime = 0;
-                    var timerId = setInterval(function () {
-                        var conditionFulfilled = condition();
-                        var killTimer = (elapsedTime > timeout) || conditionFulfilled;
-                        elapsedTime += interval;
-                        if (conditionFulfilled) {
-                            resolve();
-                            clearInterval(timerId);
-                        }
-                        else if (killTimer) {
-                            reject(new Error("waitFor(): " + timeoutMsg));
-                            clearInterval(timerId);
-                        }
-                    }, interval);
-                })];
-        });
-    });
-}
-function sleep(delay) {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            return [2 /*return*/, new Promise(function (resolve) {
-                    setTimeout(function () {
-                        resolve();
-                    }, delay);
-                })];
-        });
-    });
-}
-
 
 /***/ }),
 
@@ -2459,11 +2381,11 @@ module.exports = exported;
   !*** ./src/NoCPE/no-cpe-manager.ts ***!
   \*************************************/
 /*! exports provided: default */
+/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Libraries_utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Libraries/utilities/wait-for */ "./src/Libraries/utilities/wait-for.ts");
+/* harmony import */ var _Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Libraries/Utilities/waitFor */ "./src/Libraries/Utilities/waitFor.ts");
 /* harmony import */ var _Player_player_manager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Player/player-manager */ "./src/Player/player-manager.ts");
 /* harmony import */ var scroll_out__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! scroll-out */ "./node_modules/scroll-out/lib/index.js");
 /* harmony import */ var scroll_out__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(scroll_out__WEBPACK_IMPORTED_MODULE_2__);
@@ -2522,18 +2444,38 @@ var NoCpeManager = /** @class */ (function () {
         this.onViewport = false;
         this.isOnPiP = false;
         this.closeClick = false;
+        this.noFill = true;
+        this.hidden = '';
+        this.visibilityChange = '';
         // Pass rootEls to local variable
         this.rootEls = rootEls;
         this.keywords = keywords;
+        this.setVisibilitEnv();
         this.renderElement();
         this.addEventListeners();
     }
+    NoCpeManager.prototype.setVisibilitEnv = function () {
+        if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
+            this.hidden = "hidden";
+            this.visibilityChange = "visibilitychange";
+            //@ts-ignore
+        }
+        else if (typeof document.msHidden !== "undefined") {
+            this.hidden = "msHidden";
+            this.visibilityChange = "msvisibilitychange";
+            //@ts-ignore
+        }
+        else if (typeof document.webkitHidden !== "undefined") {
+            this.hidden = "webkitHidden";
+            this.visibilityChange = "webkitvisibilitychange";
+        }
+    };
     NoCpeManager.prototype.addEventListeners = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Object(_Libraries_utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["waitFor"])(function () { return _this.dm !== null; }, 500, 10000, "Timeout waiting player to be ready")];
+                    case 0: return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* waitFor */ "b"])(function () { return _this.dm !== null; }, 500, 10000, "Timeout waiting player to be ready")];
                     case 1:
                         _a.sent();
                         document.addEventListener('dm-in-viewport-change', function (e) {
@@ -2549,13 +2491,18 @@ var NoCpeManager = /** @class */ (function () {
                             // @ts-ignore
                             _this.dm.load({ video: e.detail });
                         });
-                        this.dm.addEventListener('apiready', function () {
+                        this.dm.addEventListener('apiready', function (e) {
                             _this.listenToScroll();
                             if (NoCpeManager.player[0].playerParams.pipAtStart === true) {
                                 _this.dm.play();
                                 _this.isOnPiP = true;
                                 NoCpeManager.player[0].rootEl.setAttribute('data-is-pip', 'true');
                             }
+                        });
+                        this.dm.addEventListener('playback_ready', function (e) {
+                            // TODO: handle not showing video if ad is noFill
+                            var showPlayer = new CustomEvent('dm-show-player');
+                            document.dispatchEvent(showPlayer);
                         });
                         this.dm.addEventListener('pause', function (e) {
                             if (_this.onViewport === true) {
@@ -2573,6 +2520,34 @@ var NoCpeManager = /** @class */ (function () {
                         this.dm.addEventListener('end', function (e) {
                             var videoEnd = new CustomEvent("dm-video-end", { detail: _this.dm.video.videoId });
                             document.dispatchEvent(videoEnd);
+                        });
+                        this.dm.addEventListener('ad_start', function (e) {
+                            _this.noFill = false;
+                        });
+                        this.dm.addEventListener('ad_play', function (e) {
+                            // TODO: do some stuff related to ad playing
+                        });
+                        this.dm.addEventListener('ad_end', function (e) {
+                            // TODO: do some stuff related to ad end
+                        });
+                        /**
+                         * Add new class `dm-playback-ready` to show the player
+                         */
+                        document.addEventListener('dm-show-player', function (e) {
+                            _this.dm.parentNode.parentNode.parentNode.classList.add('dm-playback-ready');
+                        });
+                        /**
+                         * Handle change tab by user
+                         */
+                        document.addEventListener(this.visibilityChange, function (e) {
+                            if (document[_this.hidden]) {
+                                if (_this.pauseOnClick !== false)
+                                    _this.dm.pause();
+                            }
+                            else {
+                                if (_this.pauseOnClick !== false)
+                                    _this.dm.play();
+                            }
                         });
                         return [2 /*return*/];
                 }
@@ -2604,9 +2579,9 @@ var NoCpeManager = /** @class */ (function () {
                             return __generator(this, function (_a) {
                                 switch (_a.label) {
                                     case 0:
-                                        NoCpeManager.player[i] = new _Player_player_manager__WEBPACK_IMPORTED_MODULE_1__["default"]("dm_" + i, this_1.rootEls[i], (i === 0 && this_1.keywords !== null) ? this_1.keywords : null);
+                                        NoCpeManager.player[i] = new _Player_player_manager__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]("dm_" + i, this_1.rootEls[i], (i === 0 && this_1.keywords !== null) ? this_1.keywords : null);
                                         player = NoCpeManager.player[i];
-                                        return [4 /*yield*/, Object(_Libraries_utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["waitFor"])(function () { return player.videoParams !== null; }, 500, 10000, "Timeout waiting videoParams")];
+                                        return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* waitFor */ "b"])(function () { return player.videoParams !== null; }, 500, 10000, "Timeout waiting videoParams")];
                                     case 1:
                                         _a.sent();
                                         this_1.videoInside = document.createElement('div');
@@ -2702,7 +2677,7 @@ var NoCpeManager = /** @class */ (function () {
     NoCpeManager.player = [];
     return NoCpeManager;
 }());
-/* harmony default export */ __webpack_exports__["default"] = (NoCpeManager);
+/* harmony default export */ __webpack_exports__["a"] = (NoCpeManager);
 
 
 /***/ }),
@@ -2712,10 +2687,10 @@ var NoCpeManager = /** @class */ (function () {
   !*** ./src/Player/Components/info-card.ts ***!
   \********************************************/
 /*! exports provided: default */
+/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 var InfoCard = /** @class */ (function () {
     function InfoCard() {
         this.infoCardEl = null;
@@ -2751,7 +2726,7 @@ var InfoCard = /** @class */ (function () {
     };
     return InfoCard;
 }());
-/* harmony default export */ __webpack_exports__["default"] = (InfoCard);
+/* harmony default export */ __webpack_exports__["a"] = (InfoCard);
 
 
 /***/ }),
@@ -2761,11 +2736,11 @@ var InfoCard = /** @class */ (function () {
   !*** ./src/Player/Components/pre-video-title.ts ***!
   \**************************************************/
 /*! exports provided: default */
+/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return setPreVideoTitle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return setPreVideoTitle; });
 function setPreVideoTitle(text) {
     var preTitle = document.createElement('p');
     preTitle.innerHTML = text;
@@ -2781,10 +2756,10 @@ function setPreVideoTitle(text) {
   !*** ./src/Player/Components/video-title.ts ***!
   \**********************************************/
 /*! exports provided: default */
+/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 var VideoTitle = /** @class */ (function () {
     function VideoTitle() {
         this.titleEl = null;
@@ -2801,7 +2776,7 @@ var VideoTitle = /** @class */ (function () {
     };
     return VideoTitle;
 }());
-/* harmony default export */ __webpack_exports__["default"] = (VideoTitle);
+/* harmony default export */ __webpack_exports__["a"] = (VideoTitle);
 
 
 /***/ }),
@@ -2842,14 +2817,14 @@ module.exports = exported;
   !*** ./src/Player/player-manager.ts ***!
   \**************************************/
 /*! exports provided: default */
+/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Libraries/global/vars */ "./src/Libraries/global/vars.ts");
 /* harmony import */ var _Libraries_Utilities_html_entities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Libraries/Utilities/html-entities */ "./src/Libraries/Utilities/html-entities.ts");
 /* harmony import */ var _Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Libraries/API/apiCall */ "./src/Libraries/API/apiCall.ts");
-/* harmony import */ var _Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Libraries/Utilities/wait-for */ "./src/Libraries/Utilities/wait-for.ts");
+/* harmony import */ var _Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Libraries/Utilities/waitFor */ "./src/Libraries/Utilities/waitFor.ts");
 /* harmony import */ var _Player_Components_pre_video_title__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Player/Components/pre-video-title */ "./src/Player/Components/pre-video-title.ts");
 /* harmony import */ var _Player_Components_video_title__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Player/Components/video-title */ "./src/Player/Components/video-title.ts");
 /* harmony import */ var _Player_Components_info_card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Player/Components/info-card */ "./src/Player/Components/info-card.ts");
@@ -3015,7 +2990,7 @@ var PlayerManager = /** @class */ (function () {
             adCoverPlay: (rootEl.getAttribute('adCoverPlay') == 'true'),
             closePip: (rootEl.getAttribute('closePip') == 'true'),
         };
-        if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
+        if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
             console.log("%c DM Player Params: ", "background: #56C7FF; color: #232323", this.playerParams);
         }
         // Tell the event listener that player parameters is extracted
@@ -3071,7 +3046,7 @@ var PlayerManager = /** @class */ (function () {
             queryString += "ads_params=contextual";
         }
         else {
-            queryString += "ads_params=" + Object(_Libraries_Utilities_html_entities__WEBPACK_IMPORTED_MODULE_1__["default"])(this.playerParams.adsParams);
+            queryString += "ads_params=" + Object(_Libraries_Utilities_html_entities__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(this.playerParams.adsParams);
         }
         if (this.playerParams.syndication !== "")
             queryString += "&syndication=" + this.playerParams.syndication;
@@ -3117,7 +3092,7 @@ var PlayerManager = /** @class */ (function () {
          * Set pre title for video
          */
         if (this.playerParams.preVideoTitle !== null) {
-            var preTitle = Object(_Player_Components_pre_video_title__WEBPACK_IMPORTED_MODULE_4__["default"])(this.playerParams.preVideoTitle);
+            var preTitle = Object(_Player_Components_pre_video_title__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(this.playerParams.preVideoTitle);
             rootEl.insertAdjacentElement('afterbegin', preTitle);
         }
         // Send to DmManager that element already created
@@ -3137,7 +3112,7 @@ var PlayerManager = /** @class */ (function () {
          * Set a video title
          */
         if (this.playerParams.showVideoTitle === true) {
-            var videoTitle = new _Player_Components_video_title__WEBPACK_IMPORTED_MODULE_5__["default"]();
+            var videoTitle = new _Player_Components_video_title__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]();
             if (this.videoTitle !== null) {
                 this.videoTitle.remove();
             }
@@ -3148,7 +3123,7 @@ var PlayerManager = /** @class */ (function () {
          * Set an info card
          */
         if (this.playerParams.showInfoCard === true) {
-            var infoCard = new _Player_Components_info_card__WEBPACK_IMPORTED_MODULE_6__["default"]();
+            var infoCard = new _Player_Components_info_card__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"]();
             if (this.infoCard !== null) {
                 this.infoCard.remove();
             }
@@ -3162,8 +3137,8 @@ var PlayerManager = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        url = _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__["apiUrl"] + "/video/" + videoId + '?fields=' + this.searchParams.fields;
-                        return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__["fetchData"])(url)];
+                        url = _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + "/video/" + videoId + '?fields=' + this.searchParams.fields;
+                        return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__[/* fetchData */ "a"])(url)];
                     case 1:
                         video = _a.sent();
                         this.setVideo(video, createNew);
@@ -3179,11 +3154,11 @@ var PlayerManager = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true && this.playerParams.sort === 'relevance') {
+                        if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true && this.playerParams.sort === 'relevance') {
                             console.log("%c DM related ", "background: #56C7FF; color: #232323", "Search: " + this.searchParams.search);
                         }
                         // Waiting for search params to be ready
-                        return [4 /*yield*/, Object(_Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_3__["waitFor"])(function () { return _this.searchParams !== null; }, 100, 5000, "Timeout waiting for searchParams not null")];
+                        return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_3__[/* waitFor */ "b"])(function () { return _this.searchParams !== null; }, 100, 5000, "Timeout waiting for searchParams not null")];
                     case 1:
                         // Waiting for search params to be ready
                         _a.sent();
@@ -3191,15 +3166,15 @@ var PlayerManager = /** @class */ (function () {
                             var key = _a[0], value = _a[1];
                             return encodeURIComponent(key) + "=" + encodeURIComponent(value);
                         }).join('&');
-                        url = _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__["apiUrl"] + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties;
-                        return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__["fetchData"])(url)];
+                        url = _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties;
+                        return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__[/* fetchData */ "a"])(url)];
                     case 2:
                         video = _a.sent();
                         if (!video) return [3 /*break*/, 6];
                         if (!(video.total > 0)) return [3 /*break*/, 3];
                         this.setVideo(video.list[0], true);
                         if (this.playerParams.showOutsidePlaylist === true) {
-                            new _Playlist_playlist_manager__WEBPACK_IMPORTED_MODULE_7__["default"](this.rootEl, video, this.playerParams.showPlaynow);
+                            new _Playlist_playlist_manager__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"](this.rootEl, video, this.playerParams.showPlaynow);
                         }
                         return [3 /*break*/, 6];
                     case 3:
@@ -3212,7 +3187,7 @@ var PlayerManager = /** @class */ (function () {
                         return [3 /*break*/, 6];
                     case 5:
                         // TODO: separate log module to utilities
-                        if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
+                        if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
                             console.log("%c DM related ", "background: #56C7FF; color: #232323", "Can not find related video. Fallback video used.");
                         }
                         this.getFallbackVideo();
@@ -3230,8 +3205,8 @@ var PlayerManager = /** @class */ (function () {
                     case 0:
                         currentTime = Math.floor(Date.now() / 1000);
                         thirtyDays = 2592000;
-                        url = _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__["apiUrl"] + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners) + (this.playerParams.getUpdatedVideo ? "&created_after=" + (currentTime - thirtyDays) : "") + "&sort=random&limit=1&fields=" + this.searchParams.fields;
-                        return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__["fetchData"])(url)];
+                        url = _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners) + (this.playerParams.getUpdatedVideo ? "&created_after=" + (currentTime - thirtyDays) : "") + "&sort=random&limit=1&fields=" + this.searchParams.fields;
+                        return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__[/* fetchData */ "a"])(url)];
                     case 1:
                         video = _a.sent();
                         if (video) {
@@ -3242,7 +3217,7 @@ var PlayerManager = /** @class */ (function () {
                                 this.setVideo(video.list[0], true);
                             }
                             else {
-                                if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
+                                if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
                                     console.warn("DM related Unable to find a fallback video");
                                 }
                             }
@@ -3265,7 +3240,7 @@ var PlayerManager = /** @class */ (function () {
                 keywords = this.sanitizeKeywords(keywordContainer.textContent ? keywordContainer.textContent : keywordContainer.getAttribute("content"));
             }
             catch (e) {
-                if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
+                if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
                     console.error("Can't find selector: ", selector);
                 }
             }
@@ -3294,7 +3269,7 @@ var PlayerManager = /** @class */ (function () {
     };
     return PlayerManager;
 }());
-/* harmony default export */ __webpack_exports__["default"] = (PlayerManager);
+/* harmony default export */ __webpack_exports__["a"] = (PlayerManager);
 
 
 /***/ }),
@@ -3335,10 +3310,10 @@ module.exports = exported;
   !*** ./src/Playlist/playlist-manager.ts ***!
   \******************************************/
 /*! exports provided: default */
+/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lory_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lory.js */ "./node_modules/lory.js/dist/lory.js");
 /* harmony import */ var lory_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lory_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Playlist_Scss_playlist_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Playlist/Scss/playlist.scss */ "./src/Playlist/Scss/playlist.scss");
@@ -3503,7 +3478,7 @@ var PlaylistManager = /** @class */ (function () {
     };
     return PlaylistManager;
 }());
-/* harmony default export */ __webpack_exports__["default"] = (PlaylistManager);
+/* harmony default export */ __webpack_exports__["a"] = (PlaylistManager);
 
 
 /***/ })

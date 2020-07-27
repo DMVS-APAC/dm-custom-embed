@@ -1,7 +1,7 @@
 import infMultiplayer from "./Interfaces/infMultiPlayer";
 import infPlayer from "./Interfaces/infPlayer";
 
-import { sleep, waitFor } from "../Libraries/Utilities/wait-for";
+import { sleep, waitFor } from "../Libraries/Utilities/waitFor";
 
 export default class PlayerEventsManager {
     private players: any[] = [];
@@ -36,7 +36,7 @@ export default class PlayerEventsManager {
                     document.dispatchEvent(videoUpdated);
                 });
 
-                player.addEventListener('ad_start', (e) => {
+                player.addEventListener('ad_start', (e: Event) => {
                     this.noFill = false;
                 });
 
@@ -45,7 +45,7 @@ export default class PlayerEventsManager {
                  *
                  * - Cover others player when the ad is played
                  */
-                player.addEventListener('ad_play', (e) => {
+                player.addEventListener('ad_play', (e: Event) => {
                     if (this.adPlaying === '') {
                         this.adPlaying = player.id;
 
@@ -66,7 +66,7 @@ export default class PlayerEventsManager {
                  *
                  * - Remove player cover when the ad is ended
                  */
-                player.addEventListener('ad_end', (e) => {
+                player.addEventListener('ad_end', (e: Event) => {
                     if (this.adPlaying !== '') {
                         this.adPlaying = '';
 
@@ -82,7 +82,7 @@ export default class PlayerEventsManager {
                  *
                  * - Close the PiP if there are multiple players and the closePip is true
                  */
-                player.addEventListener('playing', (e) => {
+                player.addEventListener('playing', (e: Event) => {
                     if (this.multiplayerParams.closePip === true) {
                         this.togglePlay(player.id);
                     }
@@ -92,7 +92,7 @@ export default class PlayerEventsManager {
                  * Listen to video end, and process the next thing
                  * It will load new video from the playlist
                  */
-                player.addEventListener('end', (e) => {
+                player.addEventListener('end', (e: Event) => {
                     const videoEnd = new CustomEvent("dm-video-end", {detail: player.video.videoId});
                     document.dispatchEvent(videoEnd);
                 });
@@ -100,7 +100,7 @@ export default class PlayerEventsManager {
                 /**
                  * Listen to `playback_ready` to show the player
                  */
-                player.addEventListener('playback_ready', async (e) => {
+                player.addEventListener('playback_ready', async (e: Event) => {
                     const dmPlayer = player.parentNode.parentNode.parentNode;
 
                     /**

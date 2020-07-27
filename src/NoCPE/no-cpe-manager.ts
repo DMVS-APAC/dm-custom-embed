@@ -1,7 +1,5 @@
-import infPlayer from "../Player/Interfaces/infPlayer";
-
 // Utilities
-import { waitFor } from "../Libraries/utilities/wait-for";
+import { waitFor } from "../Libraries/Utilities/waitFor";
 
 import PlayerManager from "../Player/player-manager";
 import ScrollOut from "scroll-out";
@@ -23,13 +21,34 @@ export default class NoCpeManager {
     private onViewport: boolean = false;
     private isOnPiP: boolean = false;
     private closeClick: boolean = false;
+    private noFill: boolean = true;
+    private hidden: string = '';
+    private visibilityChange: string = '';
 
     public constructor(rootEls: NodeListOf<HTMLDivElement>, keywords?: string){
         // Pass rootEls to local variable
         this.rootEls = rootEls;
         this.keywords = keywords;
+        this.setVisibilitEnv();
         this.renderElement();
         this.addEventListeners();
+    }
+
+    private setVisibilitEnv() {
+        if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
+            this.hidden = "hidden";
+            this.visibilityChange = "visibilitychange";
+
+            //@ts-ignore
+        } else if (typeof document.msHidden !== "undefined") {
+            this.hidden = "msHidden";
+            this.visibilityChange = "msvisibilitychange";
+
+            //@ts-ignore
+        } else if (typeof document.webkitHidden !== "undefined") {
+            this.hidden = "webkitHidden";
+            this.visibilityChange = "webkitvisibilitychange";
+        }
     }
 
     private async addEventListeners() {
@@ -50,7 +69,7 @@ export default class NoCpeManager {
             this.dm.load({video: e.detail});
         });
 
-        this.dm.addEventListener('apiready', () => {
+        this.dm.addEventListener('apiready', (e: Event) => {
             this.listenToScroll();
 
             if (NoCpeManager.player[0].playerParams.pipAtStart === true) {
@@ -58,6 +77,13 @@ export default class NoCpeManager {
                 this.isOnPiP = true;
                 NoCpeManager.player[0].rootEl.setAttribute('data-is-pip', 'true');
             }
+        });
+
+        this.dm.addEventListener('playback_ready', (e: Event) => {
+            // TODO: handle not showing video if ad is noFill
+
+            const showPlayer = new CustomEvent('dm-show-player');
+            document.dispatchEvent(showPlayer);
         });
 
         this.dm.addEventListener('pause', (e: Event) => {
@@ -79,6 +105,36 @@ export default class NoCpeManager {
         this.dm.addEventListener('end', (e: Event) => {
             const videoEnd = new CustomEvent("dm-video-end", {detail: this.dm.video.videoId});
             document.dispatchEvent(videoEnd);
+        });
+
+        this.dm.addEventListener('ad_start', (e: Event) => {
+            this.noFill = false;
+        });
+
+        this.dm.addEventListener('ad_play', (e: Event) => {
+            // TODO: do some stuff related to ad playing
+        });
+
+        this.dm.addEventListener('ad_end', (e: Event) => {
+            // TODO: do some stuff related to ad end
+        });
+
+        /**
+         * Add new class `dm-playback-ready` to show the player
+         */
+        document.addEventListener('dm-show-player', (e: Event) => {
+            this.dm.parentNode.parentNode.parentNode.classList.add('dm-playback-ready');
+        });
+
+        /**
+         * Handle change tab by user
+         */
+        document.addEventListener(this.visibilityChange, (e: Event) => {
+            if (document[this.hidden]) {
+                if (this.pauseOnClick !== false) this.dm.pause();
+            } else {
+                if (this.pauseOnClick !== false) this.dm.play();
+            }
         });
     }
 

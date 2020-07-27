@@ -1,5 +1,5 @@
 import NoCpeManager from '../NoCPE/no-cpe-manager';
-import { waitFor } from '../Libraries/Utilities/wait-for';
+import { waitFor } from '../Libraries/Utilities/waitFor';
 
 declare global {
     interface Window {

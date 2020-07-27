@@ -91,6 +91,7 @@
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src!./src/Player/Scss/main.scss ***!
   \**************************************************************************************************************************************************/
 /*! no static exports found */
+/*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -109,6 +110,7 @@ module.exports = exports;
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src!./src/Playlist/Scss/playlist.scss ***!
   \********************************************************************************************************************************************************/
 /*! no static exports found */
+/*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -127,6 +129,7 @@ module.exports = exports;
   !*** ./node_modules/css-loader/dist/runtime/api.js ***!
   \*****************************************************/
 /*! no static exports found */
+/*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -232,6 +235,7 @@ function toComment(sourceMap) {
   !*** ./node_modules/lory.js/dist/lory.js ***!
   \*******************************************/
 /*! no static exports found */
+/*! exports used: lory */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -1265,6 +1269,7 @@ module.exports = __webpack_require__(0);
   !*** ./node_modules/process/browser.js ***!
   \*****************************************/
 /*! no static exports found */
+/*! all exports used */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -1460,6 +1465,7 @@ process.umask = function() { return 0; };
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
   \****************************************************************************/
 /*! no static exports found */
+/*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1740,11 +1746,11 @@ module.exports = function (list, options) {
   !*** ./src/CustomEmbed/custom-embed-manager.ts ***!
   \*************************************************/
 /*! exports provided: default */
+/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Libraries/Utilities/wait-for */ "./src/Libraries/Utilities/wait-for.ts");
+/* harmony import */ var _Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Libraries/Utilities/waitFor */ "./src/Libraries/Utilities/waitFor.ts");
 /* harmony import */ var _Player_player_manager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Player/player-manager */ "./src/Player/player-manager.ts");
 /* harmony import */ var _Player_player_events_manager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Player/player-events-manager */ "./src/Player/player-events-manager.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -1803,7 +1809,7 @@ var CustomEmbedManager = /** @class */ (function () {
         document.addEventListener('dm-video-holder-ready', function () { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Object(_Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["waitFor"])(function () { return CustomEmbedManager.player[0] !== null; }, 500, 2000, "Timeout waiting player ready")];
+                    case 0: return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* waitFor */ "b"])(function () { return CustomEmbedManager.player[0] !== null; }, 500, 2000, "Timeout waiting player ready")];
                     case 1:
                         _a.sent();
                         /**
@@ -1821,14 +1827,14 @@ var CustomEmbedManager = /** @class */ (function () {
     };
     CustomEmbedManager.prototype.listenVideoEvents = function () {
         // It's start to listen to the video events
-        new _Player_player_events_manager__WEBPACK_IMPORTED_MODULE_2__["default"](CustomEmbedManager.player[0].playerParams, CustomEmbedManager.player[0].multiplayerParams);
+        new _Player_player_events_manager__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"](CustomEmbedManager.player[0].playerParams, CustomEmbedManager.player[0].multiplayerParams);
     };
     CustomEmbedManager.prototype.renderElement = function () {
         return __awaiter(this, void 0, void 0, function () {
             var i;
             return __generator(this, function (_a) {
                 for (i = 0; i < this.rootEls.length; i++) {
-                    CustomEmbedManager.player[i] = new _Player_player_manager__WEBPACK_IMPORTED_MODULE_1__["default"]("dm_" + i, this.rootEls[i], (i === 0 && this.keywords !== null) ? this.keywords : null);
+                    CustomEmbedManager.player[i] = new _Player_player_manager__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]("dm_" + i, this.rootEls[i], (i === 0 && this.keywords !== null) ? this.keywords : null);
                 }
                 this.listenVideoEvents();
                 return [2 /*return*/];
@@ -1840,8 +1846,8 @@ var CustomEmbedManager = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        this.player.push(new _Player_player_manager__WEBPACK_IMPORTED_MODULE_1__["default"]("dm_" + this.player.length + 1, el, keywords));
-                        return [4 /*yield*/, Object(_Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["sleep"])(1000)];
+                        this.player.push(new _Player_player_manager__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]("dm_" + this.player.length + 1, el, keywords));
+                        return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* sleep */ "a"])(1000)];
                     case 1:
                         _a.sent();
                         window.cpe.parse();
@@ -1869,7 +1875,7 @@ var CustomEmbedManager = /** @class */ (function () {
     CustomEmbedManager.player = [];
     return CustomEmbedManager;
 }());
-/* harmony default export */ __webpack_exports__["default"] = (CustomEmbedManager);
+/* harmony default export */ __webpack_exports__["a"] = (CustomEmbedManager);
 
 
 /***/ }),
@@ -1879,12 +1885,13 @@ var CustomEmbedManager = /** @class */ (function () {
   !*** ./src/Entries/dm-amp.ts ***!
   \*******************************/
 /*! no exports provided */
+/*! all exports used */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CustomEmbed_custom_embed_manager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../CustomEmbed/custom-embed-manager */ "./src/CustomEmbed/custom-embed-manager.ts");
-/* harmony import */ var _Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Libraries/Utilities/wait-for */ "./src/Libraries/Utilities/wait-for.ts");
+/* harmony import */ var _Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Libraries/Utilities/waitFor */ "./src/Libraries/Utilities/waitFor.ts");
 /* harmony import */ var _Libraries_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Libraries/Utilities/get-query-params */ "./src/Libraries/Utilities/get-query-params.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -1932,7 +1939,7 @@ var keywords = '';
 var waitForIframeReady = function () { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, Object(_Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_1__["waitFor"])(function () { return window.AmpVideoIframe !== undefined; }, 100, 5000, "Timeout to get AmpVideoIframe")];
+            case 0: return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_1__[/* waitFor */ "b"])(function () { return window.AmpVideoIframe !== undefined; }, 100, 5000, "Timeout to get AmpVideoIframe")];
             case 1:
                 _a.sent();
                 (window.AmpVideoIframe = window.AmpVideoIframe || []).push(onAmpIntegrationReady);
@@ -1963,9 +1970,9 @@ var setAttributes = function (el) { return __awaiter(void 0, void 0, void 0, fun
     var dmPlayer;
     return __generator(this, function (_a) {
         dmPlayer = el[0];
-        dmPlayer.setAttribute('cpeId', Object(_Libraries_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__["default"])('cpeId'));
-        dmPlayer.setAttribute('owners', Object(_Libraries_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__["default"])('owners'));
-        dmPlayer.setAttribute('sort', Object(_Libraries_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__["default"])('sort'));
+        dmPlayer.setAttribute('cpeId', Object(_Libraries_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])('cpeId'));
+        dmPlayer.setAttribute('owners', Object(_Libraries_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])('owners'));
+        dmPlayer.setAttribute('sort', Object(_Libraries_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])('sort'));
         return [2 /*return*/];
     });
 }); };
@@ -1975,7 +1982,7 @@ var init = function () { return __awaiter(void 0, void 0, void 0, function () {
         switch (_a.label) {
             case 0: 
             // Wait `.dm-player` to be ready first before do everything
-            return [4 /*yield*/, Object(_Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_1__["waitFor"])(function () { return document.querySelectorAll('.dm-player').length > 0; }, 500, 20000, "Timeout to get DM placeholder")];
+            return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_1__[/* waitFor */ "b"])(function () { return document.querySelectorAll('.dm-player').length > 0; }, 500, 20000, "Timeout to get DM placeholder")];
             case 1:
                 // Wait `.dm-player` to be ready first before do everything
                 _a.sent();
@@ -1983,7 +1990,7 @@ var init = function () { return __awaiter(void 0, void 0, void 0, function () {
                 return [4 /*yield*/, setAttributes(el)];
             case 2:
                 _a.sent();
-                new _CustomEmbed_custom_embed_manager__WEBPACK_IMPORTED_MODULE_0__["default"](el, keywords);
+                new _CustomEmbed_custom_embed_manager__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](el, keywords);
                 return [2 /*return*/];
         }
     });
@@ -1997,7 +2004,7 @@ window.addEventListener('cpeready', function (_a) {
             switch (_b.label) {
                 case 0:
                     player = players[0];
-                    return [4 /*yield*/, Object(_Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_1__["waitFor"])(function () { return AMP !== null; }, 500, 2000, "Timeout to get AMP Ready")];
+                    return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_1__[/* waitFor */ "b"])(function () { return AMP !== null; }, 500, 2000, "Timeout to get AMP Ready")];
                 case 1:
                     _b.sent();
                     /**
@@ -2066,11 +2073,11 @@ window.addEventListener('cpeready', function (_a) {
   !*** ./src/Libraries/API/apiCall.ts ***!
   \**************************************/
 /*! exports provided: fetchData */
+/*! exports used: fetchData */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchData", function() { return fetchData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return fetchData; });
 /* harmony import */ var _global_vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../global/vars */ "./src/Libraries/global/vars.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -2133,7 +2140,7 @@ function fetchData(urlParams) {
         });
     }); }).catch(function (err) {
         // Do nothing, just don't show to user what's happened on player
-        if (_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
+        if (_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
             console.log("API calling error");
         }
     });
@@ -2147,11 +2154,11 @@ function fetchData(urlParams) {
   !*** ./src/Libraries/Utilities/get-query-params.ts ***!
   \*****************************************************/
 /*! exports provided: default */
+/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return getParam; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getParam; });
 function getParam(param) {
     var urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
@@ -2165,11 +2172,11 @@ function getParam(param) {
   !*** ./src/Libraries/Utilities/html-entities.ts ***!
   \**************************************************/
 /*! exports provided: default */
+/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return htmlEntities; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return htmlEntities; });
 function htmlEntities(str) {
     return String(str).replace(/&/g, '%26').replace(/=/g, '%3d');
 }
@@ -2177,17 +2184,17 @@ function htmlEntities(str) {
 
 /***/ }),
 
-/***/ "./src/Libraries/Utilities/wait-for.ts":
-/*!*********************************************!*\
-  !*** ./src/Libraries/Utilities/wait-for.ts ***!
-  \*********************************************/
+/***/ "./src/Libraries/Utilities/waitFor.ts":
+/*!********************************************!*\
+  !*** ./src/Libraries/Utilities/waitFor.ts ***!
+  \********************************************/
 /*! exports provided: waitFor, sleep */
+/*! exports used: sleep, waitFor */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "waitFor", function() { return waitFor; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sleep", function() { return sleep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return waitFor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return sleep; });
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2269,17 +2276,17 @@ function sleep(delay) {
   !*** ./src/Libraries/global/vars.ts ***!
   \**************************************/
 /*! exports provided: debugMode, apiUrl */
+/*! exports used: apiUrl, debugMode */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "debugMode", function() { return debugMode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "apiUrl", function() { return apiUrl; });
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return debugMode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return apiUrl; });
 /* harmony import */ var _Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Utilities/get-query-params */ "./src/Libraries/Utilities/get-query-params.ts");
 // Utilities
 
 // Get debug mode params from url
-var debugMode = (Object(_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__["default"])('dmdebug') != null && Object(_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__["default"])('dmdebug') != 'false');
+var debugMode = (Object(_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])('dmdebug') != null && Object(_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])('dmdebug') != 'false');
 var apiUrl = process.env.API_URL ? process.env.API_URL : "https://api.dailymotion.com/";
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
@@ -2291,10 +2298,10 @@ var apiUrl = process.env.API_URL ? process.env.API_URL : "https://api.dailymotio
   !*** ./src/Player/Components/info-card.ts ***!
   \********************************************/
 /*! exports provided: default */
+/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 var InfoCard = /** @class */ (function () {
     function InfoCard() {
         this.infoCardEl = null;
@@ -2330,7 +2337,7 @@ var InfoCard = /** @class */ (function () {
     };
     return InfoCard;
 }());
-/* harmony default export */ __webpack_exports__["default"] = (InfoCard);
+/* harmony default export */ __webpack_exports__["a"] = (InfoCard);
 
 
 /***/ }),
@@ -2340,11 +2347,11 @@ var InfoCard = /** @class */ (function () {
   !*** ./src/Player/Components/pre-video-title.ts ***!
   \**************************************************/
 /*! exports provided: default */
+/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return setPreVideoTitle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return setPreVideoTitle; });
 function setPreVideoTitle(text) {
     var preTitle = document.createElement('p');
     preTitle.innerHTML = text;
@@ -2360,10 +2367,10 @@ function setPreVideoTitle(text) {
   !*** ./src/Player/Components/video-title.ts ***!
   \**********************************************/
 /*! exports provided: default */
+/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 var VideoTitle = /** @class */ (function () {
     function VideoTitle() {
         this.titleEl = null;
@@ -2380,7 +2387,7 @@ var VideoTitle = /** @class */ (function () {
     };
     return VideoTitle;
 }());
-/* harmony default export */ __webpack_exports__["default"] = (VideoTitle);
+/* harmony default export */ __webpack_exports__["a"] = (VideoTitle);
 
 
 /***/ }),
@@ -2421,11 +2428,11 @@ module.exports = exported;
   !*** ./src/Player/player-events-manager.ts ***!
   \*********************************************/
 /*! exports provided: default */
+/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Libraries/Utilities/wait-for */ "./src/Libraries/Utilities/wait-for.ts");
+/* harmony import */ var _Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Libraries/Utilities/waitFor */ "./src/Libraries/Utilities/waitFor.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2632,7 +2639,7 @@ var PlayerEventsManager = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: 
                     // Waiting for 1 second to interact with ad
-                    return [4 /*yield*/, Object(_Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_0__["sleep"])(2000)];
+                    return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* sleep */ "a"])(2000)];
                     case 1:
                         // Waiting for 1 second to interact with ad
                         _a.sent();
@@ -2688,7 +2695,7 @@ var PlayerEventsManager = /** @class */ (function () {
     };
     return PlayerEventsManager;
 }());
-/* harmony default export */ __webpack_exports__["default"] = (PlayerEventsManager);
+/* harmony default export */ __webpack_exports__["a"] = (PlayerEventsManager);
 
 
 /***/ }),
@@ -2698,14 +2705,14 @@ var PlayerEventsManager = /** @class */ (function () {
   !*** ./src/Player/player-manager.ts ***!
   \**************************************/
 /*! exports provided: default */
+/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Libraries/global/vars */ "./src/Libraries/global/vars.ts");
 /* harmony import */ var _Libraries_Utilities_html_entities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Libraries/Utilities/html-entities */ "./src/Libraries/Utilities/html-entities.ts");
 /* harmony import */ var _Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Libraries/API/apiCall */ "./src/Libraries/API/apiCall.ts");
-/* harmony import */ var _Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Libraries/Utilities/wait-for */ "./src/Libraries/Utilities/wait-for.ts");
+/* harmony import */ var _Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Libraries/Utilities/waitFor */ "./src/Libraries/Utilities/waitFor.ts");
 /* harmony import */ var _Player_Components_pre_video_title__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Player/Components/pre-video-title */ "./src/Player/Components/pre-video-title.ts");
 /* harmony import */ var _Player_Components_video_title__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Player/Components/video-title */ "./src/Player/Components/video-title.ts");
 /* harmony import */ var _Player_Components_info_card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Player/Components/info-card */ "./src/Player/Components/info-card.ts");
@@ -2871,7 +2878,7 @@ var PlayerManager = /** @class */ (function () {
             adCoverPlay: (rootEl.getAttribute('adCoverPlay') == 'true'),
             closePip: (rootEl.getAttribute('closePip') == 'true'),
         };
-        if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
+        if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
             console.log("%c DM Player Params: ", "background: #56C7FF; color: #232323", this.playerParams);
         }
         // Tell the event listener that player parameters is extracted
@@ -2927,7 +2934,7 @@ var PlayerManager = /** @class */ (function () {
             queryString += "ads_params=contextual";
         }
         else {
-            queryString += "ads_params=" + Object(_Libraries_Utilities_html_entities__WEBPACK_IMPORTED_MODULE_1__["default"])(this.playerParams.adsParams);
+            queryString += "ads_params=" + Object(_Libraries_Utilities_html_entities__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(this.playerParams.adsParams);
         }
         if (this.playerParams.syndication !== "")
             queryString += "&syndication=" + this.playerParams.syndication;
@@ -2973,7 +2980,7 @@ var PlayerManager = /** @class */ (function () {
          * Set pre title for video
          */
         if (this.playerParams.preVideoTitle !== null) {
-            var preTitle = Object(_Player_Components_pre_video_title__WEBPACK_IMPORTED_MODULE_4__["default"])(this.playerParams.preVideoTitle);
+            var preTitle = Object(_Player_Components_pre_video_title__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"])(this.playerParams.preVideoTitle);
             rootEl.insertAdjacentElement('afterbegin', preTitle);
         }
         // Send to DmManager that element already created
@@ -2993,7 +3000,7 @@ var PlayerManager = /** @class */ (function () {
          * Set a video title
          */
         if (this.playerParams.showVideoTitle === true) {
-            var videoTitle = new _Player_Components_video_title__WEBPACK_IMPORTED_MODULE_5__["default"]();
+            var videoTitle = new _Player_Components_video_title__WEBPACK_IMPORTED_MODULE_5__[/* default */ "a"]();
             if (this.videoTitle !== null) {
                 this.videoTitle.remove();
             }
@@ -3004,7 +3011,7 @@ var PlayerManager = /** @class */ (function () {
          * Set an info card
          */
         if (this.playerParams.showInfoCard === true) {
-            var infoCard = new _Player_Components_info_card__WEBPACK_IMPORTED_MODULE_6__["default"]();
+            var infoCard = new _Player_Components_info_card__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"]();
             if (this.infoCard !== null) {
                 this.infoCard.remove();
             }
@@ -3018,8 +3025,8 @@ var PlayerManager = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        url = _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__["apiUrl"] + "/video/" + videoId + '?fields=' + this.searchParams.fields;
-                        return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__["fetchData"])(url)];
+                        url = _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + "/video/" + videoId + '?fields=' + this.searchParams.fields;
+                        return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__[/* fetchData */ "a"])(url)];
                     case 1:
                         video = _a.sent();
                         this.setVideo(video, createNew);
@@ -3035,11 +3042,11 @@ var PlayerManager = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true && this.playerParams.sort === 'relevance') {
+                        if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true && this.playerParams.sort === 'relevance') {
                             console.log("%c DM related ", "background: #56C7FF; color: #232323", "Search: " + this.searchParams.search);
                         }
                         // Waiting for search params to be ready
-                        return [4 /*yield*/, Object(_Libraries_Utilities_wait_for__WEBPACK_IMPORTED_MODULE_3__["waitFor"])(function () { return _this.searchParams !== null; }, 100, 5000, "Timeout waiting for searchParams not null")];
+                        return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_3__[/* waitFor */ "b"])(function () { return _this.searchParams !== null; }, 100, 5000, "Timeout waiting for searchParams not null")];
                     case 1:
                         // Waiting for search params to be ready
                         _a.sent();
@@ -3047,15 +3054,15 @@ var PlayerManager = /** @class */ (function () {
                             var key = _a[0], value = _a[1];
                             return encodeURIComponent(key) + "=" + encodeURIComponent(value);
                         }).join('&');
-                        url = _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__["apiUrl"] + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties;
-                        return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__["fetchData"])(url)];
+                        url = _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties;
+                        return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__[/* fetchData */ "a"])(url)];
                     case 2:
                         video = _a.sent();
                         if (!video) return [3 /*break*/, 6];
                         if (!(video.total > 0)) return [3 /*break*/, 3];
                         this.setVideo(video.list[0], true);
                         if (this.playerParams.showOutsidePlaylist === true) {
-                            new _Playlist_playlist_manager__WEBPACK_IMPORTED_MODULE_7__["default"](this.rootEl, video, this.playerParams.showPlaynow);
+                            new _Playlist_playlist_manager__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"](this.rootEl, video, this.playerParams.showPlaynow);
                         }
                         return [3 /*break*/, 6];
                     case 3:
@@ -3068,7 +3075,7 @@ var PlayerManager = /** @class */ (function () {
                         return [3 /*break*/, 6];
                     case 5:
                         // TODO: separate log module to utilities
-                        if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
+                        if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
                             console.log("%c DM related ", "background: #56C7FF; color: #232323", "Can not find related video. Fallback video used.");
                         }
                         this.getFallbackVideo();
@@ -3086,8 +3093,8 @@ var PlayerManager = /** @class */ (function () {
                     case 0:
                         currentTime = Math.floor(Date.now() / 1000);
                         thirtyDays = 2592000;
-                        url = _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__["apiUrl"] + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners) + (this.playerParams.getUpdatedVideo ? "&created_after=" + (currentTime - thirtyDays) : "") + "&sort=random&limit=1&fields=" + this.searchParams.fields;
-                        return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__["fetchData"])(url)];
+                        url = _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners) + (this.playerParams.getUpdatedVideo ? "&created_after=" + (currentTime - thirtyDays) : "") + "&sort=random&limit=1&fields=" + this.searchParams.fields;
+                        return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__[/* fetchData */ "a"])(url)];
                     case 1:
                         video = _a.sent();
                         if (video) {
@@ -3098,7 +3105,7 @@ var PlayerManager = /** @class */ (function () {
                                 this.setVideo(video.list[0], true);
                             }
                             else {
-                                if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
+                                if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
                                     console.warn("DM related Unable to find a fallback video");
                                 }
                             }
@@ -3121,7 +3128,7 @@ var PlayerManager = /** @class */ (function () {
                 keywords = this.sanitizeKeywords(keywordContainer.textContent ? keywordContainer.textContent : keywordContainer.getAttribute("content"));
             }
             catch (e) {
-                if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__["debugMode"] === true) {
+                if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
                     console.error("Can't find selector: ", selector);
                 }
             }
@@ -3150,7 +3157,7 @@ var PlayerManager = /** @class */ (function () {
     };
     return PlayerManager;
 }());
-/* harmony default export */ __webpack_exports__["default"] = (PlayerManager);
+/* harmony default export */ __webpack_exports__["a"] = (PlayerManager);
 
 
 /***/ }),
@@ -3191,10 +3198,10 @@ module.exports = exported;
   !*** ./src/Playlist/playlist-manager.ts ***!
   \******************************************/
 /*! exports provided: default */
+/*! exports used: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lory_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lory.js */ "./node_modules/lory.js/dist/lory.js");
 /* harmony import */ var lory_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lory_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Playlist_Scss_playlist_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Playlist/Scss/playlist.scss */ "./src/Playlist/Scss/playlist.scss");
@@ -3359,7 +3366,7 @@ var PlaylistManager = /** @class */ (function () {
     };
     return PlaylistManager;
 }());
-/* harmony default export */ __webpack_exports__["default"] = (PlaylistManager);
+/* harmony default export */ __webpack_exports__["a"] = (PlaylistManager);
 
 
 /***/ })

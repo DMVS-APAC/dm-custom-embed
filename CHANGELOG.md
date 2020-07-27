@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.4] (2020-07-27)
+
+**Implemented enhancements:**
+- Rename wait-for.ts to waitFor.ts
+
+**Fixed Bugs**
+- No-cpe floating is not showing
+
 ## [1.4.3] (2020-07-22)
 
 **Fixed Bugs**

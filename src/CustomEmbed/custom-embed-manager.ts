@@ -1,5 +1,5 @@
 // utilities
-import {waitFor, sleep} from "../Libraries/Utilities/wait-for";
+import {waitFor, sleep} from "../Libraries/Utilities/waitFor";
 
 import PlayerManager from "../Player/player-manager";
 import PlayerEventsManager from "../Player/player-events-manager";

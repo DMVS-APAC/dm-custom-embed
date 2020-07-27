@@ -21,6 +21,9 @@ module.exports = (env, options) => {
             chunkFilename: isProd ? '[id].min.chunk.js' : '[id].chunk.js',
         },
         devtool: 'source-map',
+        optimization: {
+            usedExports: true
+        },
         module: {
             rules: [
                 {
