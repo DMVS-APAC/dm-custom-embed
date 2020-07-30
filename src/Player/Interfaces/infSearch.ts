@@ -1,6 +1,6 @@
 export default interface infSearchParams {
     fields: string;
-    sort: string;
+    sort?: string;
     limit: number;
     created_after?: number;
     search?: string;

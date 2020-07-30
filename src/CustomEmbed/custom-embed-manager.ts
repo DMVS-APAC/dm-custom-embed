@@ -79,4 +79,25 @@ export default class CustomEmbedManager {
         (function(w,d,s,u,n,i,f,g,e,c){w.WDMObject=n;w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments);};w[n].l=1*date;w[n].i=i;w[n].f=f;w[n].g=g;e=d.createElement(s);e.async=1;e.src=u;c=d.getElementsByTagName(s)[0];c.parentNode.insertBefore(e,c);})(window,document,"script","//api.dmcdn.net/pxl/cpe/client.min.js","cpe", cpe, cpeParams);
     }
 
+    /**
+     * Extracted CPE function
+     */
+    private loadCpeScript() {
+        // (function(w, d, s, u, n, i, f, g, e, c) {
+        //     w.WDMObject = n;
+        //     w[n] = w[n] || function() {
+        //         (w[n].q = w[n].q || []).push(arguments);
+        //     };
+        //     w[n].l = 1 * date;
+        //     w[n].i = i;
+        //     w[n].f = f;
+        //     w[n].g = g;
+        //     e = d.createElement(s);
+        //     e.async = 1;
+        //     e.src = u;
+        //     c = d.getElementsByTagName(s)[0];
+        //     c.parentNode.insertBefore(e, c);
+        // })(window, document, "script", "//api.dmcdn.net/pxl/cpe/client.min.js", "cpe", cpe, cpeParams);
+    }
+
 }

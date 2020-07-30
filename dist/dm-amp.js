@@ -1871,6 +1871,26 @@ var CustomEmbedManager = /** @class */ (function () {
         // Load the CPE script
         (function (w, d, s, u, n, i, f, g, e, c) { w.WDMObject = n; w[n] = w[n] || function () { (w[n].q = w[n].q || []).push(arguments); }; w[n].l = 1 * date; w[n].i = i; w[n].f = f; w[n].g = g; e = d.createElement(s); e.async = 1; e.src = u; c = d.getElementsByTagName(s)[0]; c.parentNode.insertBefore(e, c); })(window, document, "script", "//api.dmcdn.net/pxl/cpe/client.min.js", "cpe", cpe, cpeParams);
     };
+    /**
+     * Extracted CPE function
+     */
+    CustomEmbedManager.prototype.loadCpeScript = function () {
+        // (function(w, d, s, u, n, i, f, g, e, c) {
+        //     w.WDMObject = n;
+        //     w[n] = w[n] || function() {
+        //         (w[n].q = w[n].q || []).push(arguments);
+        //     };
+        //     w[n].l = 1 * date;
+        //     w[n].i = i;
+        //     w[n].f = f;
+        //     w[n].g = g;
+        //     e = d.createElement(s);
+        //     e.async = 1;
+        //     e.src = u;
+        //     c = d.getElementsByTagName(s)[0];
+        //     c.parentNode.insertBefore(e, c);
+        // })(window, document, "script", "//api.dmcdn.net/pxl/cpe/client.min.js", "cpe", cpe, cpeParams);
+    };
     // TODO: Find best practice to do static variable and function
     CustomEmbedManager.player = [];
     return CustomEmbedManager;
@@ -2842,7 +2862,7 @@ var PlayerManager = /** @class */ (function () {
             minWordSearch: rootEl.getAttribute('minWordSearch') ? Number(rootEl.getAttribute('minWordSearch')) : 2,
             videoId: rootEl.getAttribute('videoId') ? rootEl.getAttribute('videoId') : null,
             language: rootEl.getAttribute("language") ? rootEl.getAttribute("language") : "",
-            sort: rootEl.getAttribute("sort") ? rootEl.getAttribute("sort") : "recent",
+            sort: rootEl.getAttribute("sort") ? rootEl.getAttribute("sort").split(',') : ["recent"],
             owners: rootEl.getAttribute("owners") ? rootEl.getAttribute("owners") : "",
             category: rootEl.getAttribute("category") ? rootEl.getAttribute("category") : "",
             excludeIds: rootEl.getAttribute("excludeIds") ? rootEl.getAttribute("excludeIds") : "",
@@ -2852,6 +2872,7 @@ var PlayerManager = /** @class */ (function () {
             adsParams: rootEl.getAttribute('adsParams') ? rootEl.getAttribute('adsParams') : "contextual",
             cpeId: rootEl.getAttribute('cpeId') ? rootEl.getAttribute('cpeId').split(',') : [''],
             keywordsSelector: rootEl.getAttribute('keywordsSelector') ? rootEl.getAttribute('keywordsSelector') : null,
+            rangeDay: rootEl.getAttribute('rangeDay') ? rootEl.getAttribute('rangeDay').split(",") : [0],
             startDate: rootEl.getAttribute('startDate') ? rootEl.getAttribute('startDate') : null,
             getUpdatedVideo: (rootEl.getAttribute('getUpdatedVideo') != 'false'),
             preVideoTitle: rootEl.getAttribute('preVideoTitle') ? rootEl.getAttribute('preVideoTitle') : null,
@@ -2892,20 +2913,19 @@ var PlayerManager = /** @class */ (function () {
      */
     PlayerManager.prototype.prepareSearchParams = function () {
         this.cpeId = this.playerParams.cpeId;
-        var keywords = this.findKeywords(this.playerParams.keywordsSelector);
-        // There are 3 conditions fields: 1. if outside playlist is true, 2. if the infocard is true, 3. last condition is default condition
+        /**
+         * There are 3 conditions fields:
+         * 1. if outside playlist is true
+         * 2. if the infocard is true
+         * 3. last condition is default condition
+         */
         var fields = this.playerParams.showOutsidePlaylist ? 'id,title,thumbnail_240_url,duration' : this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url' : 'id,title';
         this.searchParams = {
             fields: fields,
             limit: this.playerParams.showOutsidePlaylist ? 7 : 1,
-            sort: this.playerParams.sort,
         };
-        if (this.playerParams.sort === "relevance") {
-            this.searchParams.search = this.keywords ? this.keywords : keywords.sort(function (a, b) { return b.length - a.length; }).slice(0, this.playerParams.maxWordSearch).join(' ');
-        }
-        if (this.playerParams.startDate !== null) {
-            this.searchParams.created_after = new Date(this.playerParams.startDate).getTime() / 1000;
-        }
+        var keywords = this.findKeywords(this.playerParams.keywordsSelector);
+        this.keywords = this.keywords ? this.keywords : keywords.sort(function (a, b) { return b.length - a.length; }).slice(0, this.playerParams.maxWordSearch).join(' ');
         if (!this.playerParams.searchInPlaylist) {
             // TODO: test using private video
             this.searchParams.private = 0;
@@ -3035,52 +3055,97 @@ var PlayerManager = /** @class */ (function () {
             });
         });
     };
-    PlayerManager.prototype.searchVideo = function () {
+    PlayerManager.prototype.generateQuery = function (sort, rangeDay) {
         return __awaiter(this, void 0, void 0, function () {
-            var properties, url, video;
+            var currentTime, day, properties, addProps;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true && this.playerParams.sort === 'relevance') {
-                            console.log("%c DM related ", "background: #56C7FF; color: #232323", "Search: " + this.searchParams.search);
-                        }
-                        // Waiting for search params to be ready
-                        return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_3__[/* waitFor */ "b"])(function () { return _this.searchParams !== null; }, 100, 5000, "Timeout waiting for searchParams not null")];
+                    case 0: 
+                    // Waiting for search params to be ready
+                    return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_3__[/* waitFor */ "b"])(function () { return _this.searchParams !== null; }, 100, 5000, "Timeout waiting for searchParams not null")];
                     case 1:
                         // Waiting for search params to be ready
                         _a.sent();
+                        currentTime = Math.floor(Date.now() / 1000);
+                        day = 86400;
+                        if (this.playerParams.startDate !== null && (rangeDay === null || rangeDay === 0)) {
+                            this.searchParams.created_after = new Date(this.playerParams.startDate).getTime() / 1000;
+                        }
+                        if (sort === 'relevance') {
+                            this.searchParams.search = this.keywords;
+                        }
+                        else {
+                            delete this.searchParams.search;
+                        }
                         properties = Object.entries(this.searchParams).map(function (_a) {
                             var key = _a[0], value = _a[1];
                             return encodeURIComponent(key) + "=" + encodeURIComponent(value);
                         }).join('&');
-                        url = _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties;
-                        return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__[/* fetchData */ "a"])(url)];
-                    case 2:
-                        video = _a.sent();
-                        if (!video) return [3 /*break*/, 6];
-                        if (!(video.total > 0)) return [3 /*break*/, 3];
+                        addProps = '&sort=' + sort + ((typeof rangeDay !== 'undefined' && rangeDay !== 0) ? "&created_after=" + day * rangeDay : '');
+                        return [2 /*return*/, new Promise(function (resolve, reject) {
+                                var url = _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + (_this.playerParams.searchInPlaylist ? "playlist/" + _this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties + addProps;
+                                resolve(url);
+                            })];
+                }
+            });
+        });
+    };
+    PlayerManager.prototype.searchVideo = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var i, video, _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        i = 0;
+                        _c.label = 1;
+                    case 1:
+                        if (!(i < this.playerParams.sort.length)) return [3 /*break*/, 10];
+                        _a = _Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__[/* fetchData */ "a"];
+                        return [4 /*yield*/, this.generateQuery(this.playerParams.sort[i], Number(this.playerParams.rangeDay[i]))];
+                    case 2: return [4 /*yield*/, _a.apply(void 0, [_c.sent()])];
+                    case 3:
+                        video = _c.sent();
+                        if (!video) return [3 /*break*/, 9];
+                        if (!(video.total > 0)) return [3 /*break*/, 4];
                         this.setVideo(video.list[0], true);
                         if (this.playerParams.showOutsidePlaylist === true) {
                             new _Playlist_playlist_manager__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"](this.rootEl, video, this.playerParams.showPlaynow);
                         }
-                        return [3 /*break*/, 6];
-                    case 3:
-                        // Strip a string to try to get video one more time if there is no video found
-                        this.searchParams.search = this.searchParams.search.substring(0, this.searchParams.search.lastIndexOf(' '));
-                        if (!(this.searchParams.search.split(' ').length >= this.playerParams.minWordSearch && this.searchParams.search.length > 0)) return [3 /*break*/, 5];
-                        return [4 /*yield*/, this.searchVideo()];
+                        return [3 /*break*/, 10];
                     case 4:
-                        _a.sent();
-                        return [3 /*break*/, 6];
+                        if (!(this.playerParams.sort[i] === 'relevance')) return [3 /*break*/, 8];
+                        _c.label = 5;
                     case 5:
-                        // TODO: separate log module to utilities
-                        if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
-                            console.log("%c DM related ", "background: #56C7FF; color: #232323", "Can not find related video. Fallback video used.");
+                        if (!(this.keywords.split(' ').length >= this.playerParams.minWordSearch && this.keywords.length > 0)) return [3 /*break*/, 8];
+                        // Strip a string to try to get video one more time if there is no video found
+                        this.keywords = this.keywords.substring(0, this.searchParams.search.lastIndexOf(' '));
+                        _b = _Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__[/* fetchData */ "a"];
+                        return [4 /*yield*/, this.generateQuery(this.playerParams.sort[i], Number(this.playerParams.rangeDay[i]))];
+                    case 6: return [4 /*yield*/, _b.apply(void 0, [_c.sent()])];
+                    case 7:
+                        video = _c.sent();
+                        if (video.total > 0) {
+                            this.setVideo(video.list[0], true);
+                            if (this.playerParams.showOutsidePlaylist === true) {
+                                new _Playlist_playlist_manager__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"](this.rootEl, video, this.playerParams.showPlaynow);
+                            }
+                            return [3 /*break*/, 8];
                         }
-                        this.getFallbackVideo();
-                        _a.label = 6;
-                    case 6: return [2 /*return*/];
+                        return [3 /*break*/, 5];
+                    case 8:
+                        /**
+                         * This condition is to check if no videos found
+                         */
+                        if (video.total === 0 && i === this.playerParams.sort.length - 1) {
+                            this.getFallbackVideo();
+                            return [3 /*break*/, 10];
+                        }
+                        _c.label = 9;
+                    case 9:
+                        i++;
+                        return [3 /*break*/, 1];
+                    case 10: return [2 /*return*/];
                 }
             });
         });

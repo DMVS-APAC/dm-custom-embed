@@ -15,7 +15,7 @@ export default interface InfPlayer {
     language: string;
 
     //Which sort to use. List of available values: https://developer.dailymotion.com/api#video-sort-filter
-    sort: string;
+    sort: string[];
 
     //xid OR username of the channels to search separated by ","
     owners: string;
@@ -43,6 +43,9 @@ export default interface InfPlayer {
 
     // Add selector to get keywords meta
     keywordsSelector: string;
+
+    // A range day to find a video, it's a string that will be converted to number in process
+    rangeDay?: string[] | number[];
 
     // Find a video from given start date, use standard date YYYY-mm-dd e.g. 2018-05-01
     startDate?: string;

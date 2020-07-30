@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.5] (2020-07-30)
+
+**Implemented enhancments:**
+- Create new module on player-manager for generate query
+- Enhance the sort params for possibilty to have multiple fallback
+- Add new param to find the video based on range day.
+
 ## [1.4.4] (2020-07-27)
 
 **Implemented enhancements:**

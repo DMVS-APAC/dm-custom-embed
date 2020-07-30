@@ -105,7 +105,7 @@ export default class PlayerManager {
             minWordSearch: rootEl.getAttribute('minWordSearch') ? Number(rootEl.getAttribute('minWordSearch')) : 2,
             videoId: rootEl.getAttribute('videoId') ? rootEl.getAttribute('videoId') : null,
             language: rootEl.getAttribute("language") ? rootEl.getAttribute("language") : "",
-            sort:  rootEl.getAttribute("sort") ? rootEl.getAttribute("sort") : "recent",
+            sort:  rootEl.getAttribute("sort") ? rootEl.getAttribute("sort").split(',') : ["recent"],
             owners: rootEl.getAttribute("owners") ? rootEl.getAttribute("owners") : "",
             category: rootEl.getAttribute("category") ? rootEl.getAttribute("category") : "",
             excludeIds: rootEl.getAttribute("excludeIds") ? rootEl.getAttribute("excludeIds") : "",
@@ -115,6 +115,7 @@ export default class PlayerManager {
             adsParams: rootEl.getAttribute('adsParams') ? rootEl.getAttribute('adsParams') : "contextual",
             cpeId: rootEl.getAttribute('cpeId') ? rootEl.getAttribute('cpeId').split(',') : [''],
             keywordsSelector: rootEl.getAttribute('keywordsSelector') ? rootEl.getAttribute('keywordsSelector') : null,
+            rangeDay: rootEl.getAttribute('rangeDay') ? rootEl.getAttribute('rangeDay').split(",") : [0],
             startDate: rootEl.getAttribute('startDate') ? rootEl.getAttribute('startDate') : null,
             getUpdatedVideo: ( rootEl.getAttribute('getUpdatedVideo') != 'false' ) ,
             preVideoTitle: rootEl.getAttribute('preVideoTitle') ? rootEl.getAttribute('preVideoTitle') : null,
@@ -159,24 +160,22 @@ export default class PlayerManager {
      */
     private prepareSearchParams(): void {
         this.cpeId = this.playerParams.cpeId;
-        const keywords = this.findKeywords(this.playerParams.keywordsSelector);
 
-        // There are 3 conditions fields: 1. if outside playlist is true, 2. if the infocard is true, 3. last condition is default condition
+        /**
+         * There are 3 conditions fields:
+         * 1. if outside playlist is true
+         * 2. if the infocard is true
+         * 3. last condition is default condition
+         */
         const fields = this.playerParams.showOutsidePlaylist ? 'id,title,thumbnail_240_url,duration' : this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url' : 'id,title';
 
         this.searchParams = {
             fields: fields,
             limit: this.playerParams.showOutsidePlaylist ? 7 : 1,
-            sort: this.playerParams.sort,
         };
 
-        if (this.playerParams.sort === "relevance") {
-            this.searchParams.search= this.keywords ? this.keywords : keywords.sort((a, b) => b.length - a.length).slice(0, this.playerParams.maxWordSearch).join(' ');
-        }
-
-        if (this.playerParams.startDate !== null) {
-            this.searchParams.created_after = new Date(this.playerParams.startDate).getTime() / 1000;
-        }
+        const keywords = this.findKeywords(this.playerParams.keywordsSelector);
+        this.keywords = this.keywords ? this.keywords : keywords.sort((a, b) => b.length - a.length).slice(0, this.playerParams.maxWordSearch).join(' ');
 
         if (!this.playerParams.searchInPlaylist) {
 
@@ -320,49 +319,76 @@ export default class PlayerManager {
         this.setVideo(video, createNew);
     }
 
-
-    private async searchVideo(): Promise<void> {
-
-        if (debugMode === true && this.playerParams.sort === 'relevance') {
-            console.log("%c DM related ", "background: #56C7FF; color: #232323", "Search: " + this.searchParams.search);
-        }
-
+    private async generateQuery(sort: string, rangeDay?: number): Promise<string> {
         // Waiting for search params to be ready
         await waitFor( () => this.searchParams !== null, 100, 5000, "Timeout waiting for searchParams not null");
+
+        const currentTime = Math.floor(Date.now()/1000);
+        const day = 86400;
+
+        if (this.playerParams.startDate !== null && (rangeDay === null || rangeDay === 0 ) ) {
+            this.searchParams.created_after = new Date(this.playerParams.startDate).getTime() / 1000;
+        }
+
+        if (sort === 'relevance') {
+            this.searchParams.search = this.keywords;
+        } else {
+            delete this.searchParams.search;
+        }
 
         // Serialize search params before send it
         const properties = Object.entries( this.searchParams ).map( ([ key, value] ) => {
             return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
         }).join('&');
 
-        // Prepare the url before fetch the data
-        const url = apiUrl + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties;
+        const addProps = '&sort=' + sort + ( (typeof rangeDay !== 'undefined' && rangeDay !== 0) ? "&created_after=" + day*rangeDay: '' );
 
-        // Start fetch the data
-        const video = await fetchData(url);
+        return new Promise((resolve, reject) => {
+            const url = apiUrl + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties + addProps;
 
-        if (video) {
-            if (video.total > 0) {
-                this.setVideo(video.list[0], true);
+            resolve(url);
+        });
+    }
 
-                if (this.playerParams.showOutsidePlaylist === true) {
-                    new PlaylistManager(this.rootEl, video, this.playerParams.showPlaynow);
-                }
-            } else {
-                // Strip a string to try to get video one more time if there is no video found
-                this.searchParams.search = this.searchParams.search.substring(0, this.searchParams.search.lastIndexOf(' '));
+    private async searchVideo(): Promise<void> {
+        for ( let i = 0; i < this.playerParams.sort.length ; i++) {
+            // Start fetch the data
+            let video = await fetchData(await this.generateQuery(this.playerParams.sort[i], Number(this.playerParams.rangeDay[i])));
 
-                if( this.searchParams.search.split(' ').length >= this.playerParams.minWordSearch && this.searchParams.search.length > 0 )
-                    await this.searchVideo();
-                else {
-                    // TODO: separate log module to utilities
-                    if (debugMode === true) {
-                        console.log("%c DM related ", "background: #56C7FF; color: #232323", "Can not find related video. Fallback video used.");
+            if (video) {
+                if (video.total > 0) {
+                    this.setVideo(video.list[0], true);
+
+                    if (this.playerParams.showOutsidePlaylist === true) {
+                        new PlaylistManager(this.rootEl, video, this.playerParams.showPlaynow);
                     }
-                    this.getFallbackVideo();
-                }
-            }
+                    break;
+                } else if (this.playerParams.sort[i] === 'relevance') {
+                    while (this.keywords.split(' ').length >= this.playerParams.minWordSearch && this.keywords.length > 0) {
+                        // Strip a string to try to get video one more time if there is no video found
+                        this.keywords = this.keywords.substring(0, this.searchParams.search.lastIndexOf(' '));
+                        video = await fetchData(await this.generateQuery(this.playerParams.sort[i], Number(this.playerParams.rangeDay[i])));
 
+                        if (video.total > 0) {
+                            this.setVideo(video.list[0], true);
+
+                            if (this.playerParams.showOutsidePlaylist === true) {
+                                new PlaylistManager(this.rootEl, video, this.playerParams.showPlaynow);
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                /**
+                 * This condition is to check if no videos found
+                 */
+                if (video.total === 0 && i === this.playerParams.sort.length - 1) {
+                    this.getFallbackVideo();
+                    break;
+                }
+
+            }
         }
 
     }
