@@ -11,7 +11,7 @@ export default function playereExtractor(rootEl: HTMLDivElement): infPlayer {
         minWordSearch: rootEl.getAttribute('minWordSearch') ? Number(rootEl.getAttribute('minWordSearch')) : 2,
         videoId: rootEl.getAttribute('videoId') ? rootEl.getAttribute('videoId') : null,
         language: rootEl.getAttribute("language") ? rootEl.getAttribute("language") : "",
-        sort:  rootEl.getAttribute("sort") ? rootEl.getAttribute("sort") : "recent",
+        sort:  rootEl.getAttribute("sort") ? rootEl.getAttribute("sort").split(',') : ["recent"],
         owners: rootEl.getAttribute("owners") ? rootEl.getAttribute("owners") : "",
         category: rootEl.getAttribute("category") ? rootEl.getAttribute("category") : "",
         excludeIds: rootEl.getAttribute("excludeIds") ? rootEl.getAttribute("excludeIds") : "",
