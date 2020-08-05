@@ -3164,7 +3164,7 @@ var PlayerManager = /** @class */ (function () {
                         if (this.playerParams.startDate !== null && (rangeDay === null || rangeDay === 0)) {
                             this.searchParams.created_after = new Date(this.playerParams.startDate).getTime() / 1000;
                         }
-                        if (sort === 'relevance') {
+                        if (sort === 'relevance' || sort === 'recent') {
                             this.searchParams.search = this.keywords;
                         }
                         else {
@@ -3206,7 +3206,7 @@ var PlayerManager = /** @class */ (function () {
                         }
                         return [3 /*break*/, 10];
                     case 4:
-                        if (!(this.playerParams.sort[i] === 'relevance')) return [3 /*break*/, 8];
+                        if (!(this.playerParams.sort[i] === 'relevance' || this.playerParams.sort[i] === 'recent')) return [3 /*break*/, 8];
                         _c.label = 5;
                     case 5:
                         if (!(this.keywords.split(' ').length >= this.playerParams.minWordSearch && this.keywords.length > 0)) return [3 /*break*/, 8];

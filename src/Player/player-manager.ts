@@ -330,7 +330,7 @@ export default class PlayerManager {
             this.searchParams.created_after = new Date(this.playerParams.startDate).getTime() / 1000;
         }
 
-        if (sort === 'relevance') {
+        if (sort === 'relevance' || sort === 'recent') {
             this.searchParams.search = this.keywords;
         } else {
             delete this.searchParams.search;
@@ -363,7 +363,7 @@ export default class PlayerManager {
                         new PlaylistManager(this.rootEl, video, this.playerParams.showPlaynow);
                     }
                     break;
-                } else if (this.playerParams.sort[i] === 'relevance') {
+                } else if (this.playerParams.sort[i] === 'relevance' || this.playerParams.sort[i] === 'recent') {
                     while (this.keywords.split(' ').length >= this.playerParams.minWordSearch && this.keywords.length > 0) {
                         // Strip a string to try to get video one more time if there is no video found
                         this.keywords = this.keywords.substring(0, this.searchParams.search.lastIndexOf(' '));

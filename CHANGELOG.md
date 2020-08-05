@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.4.6] (2020-08-05)
+
+**Fixed Bugs:**
+- Hotfix filtering status for sort param "recent"
+
 ## [1.4.5] (2020-07-30)
 
 **Implemented enhancments:**
