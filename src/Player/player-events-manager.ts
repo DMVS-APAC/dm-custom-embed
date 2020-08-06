@@ -58,6 +58,10 @@ export default class PlayerEventsManager {
                         if (this.multiplayerParams.closePip === true) {
                             this.togglePlay(player.id);
                         }
+
+                        if (this.playerParams.adHideControls === true) {
+                            player.setControls(false);
+                        }
                     }
                 });
 
@@ -73,6 +77,10 @@ export default class PlayerEventsManager {
                         // Toggle disabled player
                         if (this.multiplayerParams.adCoverPlay) {
                             this.toggleDisable();
+                        }
+
+                        if (this.playerParams.adHideControls === true) {
+                            player.setControls(true);
                         }
                     }
                 });

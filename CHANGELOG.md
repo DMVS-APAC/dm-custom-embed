@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.4.7] (2020-08-06)
+
+**Implemented enhancements:**
+- Add param for hide controls when ad playing: This issue is related to controls position and skip ad button from IMA SDK
+
 ## [1.4.6] (2020-08-05)
 
 **Fixed Bugs:**

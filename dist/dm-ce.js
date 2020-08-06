@@ -2441,6 +2441,9 @@ var PlayerEventsManager = /** @class */ (function () {
                                 if (_this.multiplayerParams.closePip === true) {
                                     _this.togglePlay(player.id);
                                 }
+                                if (_this.playerParams.adHideControls === true) {
+                                    player.setControls(false);
+                                }
                             }
                         });
                         /**
@@ -2454,6 +2457,9 @@ var PlayerEventsManager = /** @class */ (function () {
                                 // Toggle disabled player
                                 if (_this.multiplayerParams.adCoverPlay) {
                                     _this.toggleDisable();
+                                }
+                                if (_this.playerParams.adHideControls === true) {
+                                    player.setControls(true);
                                 }
                             }
                         });
@@ -2779,6 +2785,7 @@ var PlayerManager = /** @class */ (function () {
             showOutsidePlaylist: (rootEl.getAttribute('showOutsidePlaylist') === 'true'),
             showPlaynow: (rootEl.getAttribute('showPlaynow') === 'true'),
             showAdOnly: (rootEl.getAttribute('showAdOnly') === 'true'),
+            adHideControls: (rootEl.getAttribute('adHideControls') === 'true'),
             autoPlayMute: (rootEl.getAttribute("autoPlayMute") != 'false'),
             queueEnable: (rootEl.getAttribute('queueEnable') != 'false'),
             queueEnableNext: (rootEl.getAttribute('queueEnableNext') != 'false'),

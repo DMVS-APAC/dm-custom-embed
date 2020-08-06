@@ -107,6 +107,29 @@ module.exports = (env, options) => {
                 } : false,
                 hash: false
             }),
+            new HtmlWebpackPlugin({
+                title: 'Dailymotion Hide Controls When Ad Playing',
+                template: 'src/Labs/HideControls/index.html',
+                filename: 'hide-controls/index.html',
+                chunks: ['dm-ce'],
+                showErrors: isProd ? false : true,
+                minify: isProd ? {
+                    html5: true,
+                    collapseWhitespace: true,
+                    minifyCSS: true,
+                    minifyJS: true,
+                    minifyURLs: false,
+                    removeAttributeQuotes: true,
+                    removeComments: true,
+                    removeEmptyAttributes: true,
+                    removeOptionalTags: true,
+                    removeRedundantAttributes: true,
+                    removeScriptTypeAttributes: true,
+                    removeStyleLinkTypeAttributes: true,
+                    useShortDoctype: true
+                } : false,
+                hash: false
+            }),
             // new HtmlWebpackPlugin({
             //     title: 'Dailymotion Multiple Video Embed',
             //     template: 'src/entries/multiple/index.html',
@@ -130,29 +153,29 @@ module.exports = (env, options) => {
             //     } : false,
             //     hash: false
             // }),
-            // new HtmlWebpackPlugin({
-            //     title: 'Dailymotion Infinity Scroll Video Embed',
-            //     template: 'src/entries/infinity-scroll/index.html',
-            //     filename: 'infinity-scroll/index.html',
-            //     chunks: ['dm-ce'],
-            //     showErrors: isProd ? false : true,
-            //     minify: isProd ? {
-            //         html5: true,
-            //         collapseWhitespace: true,
-            //         minifyCSS: true,
-            //         minifyJS: true,
-            //         minifyURLs: false,
-            //         removeAttributeQuotes: true,
-            //         removeComments: true,
-            //         removeEmptyAttributes: true,
-            //         removeOptionalTags: true,
-            //         removeRedundantAttributes: true,
-            //         removeScriptTypeAttributes: true,
-            //         removeStyleLinkTypeAttributes: true,
-            //         useShortDoctype: true
-            //     } : false,
-            //     hash: false
-            // }),
+            new HtmlWebpackPlugin({
+                title: 'Dailymotion Infinity Scroll Video Embed',
+                template: 'src/Labs/InfiniteScroll/index.html',
+                filename: 'infinity-scroll/index.html',
+                chunks: ['dm-ce'],
+                showErrors: isProd ? false : true,
+                minify: isProd ? {
+                    html5: true,
+                    collapseWhitespace: true,
+                    minifyCSS: true,
+                    minifyJS: true,
+                    minifyURLs: false,
+                    removeAttributeQuotes: true,
+                    removeComments: true,
+                    removeEmptyAttributes: true,
+                    removeOptionalTags: true,
+                    removeRedundantAttributes: true,
+                    removeScriptTypeAttributes: true,
+                    removeStyleLinkTypeAttributes: true,
+                    useShortDoctype: true
+                } : false,
+                hash: false
+            }),
             // new HtmlWebpackPlugin({
             //     title: 'Dailymotion Player AMP',
             //     template: 'src/entries/dm-player.html',

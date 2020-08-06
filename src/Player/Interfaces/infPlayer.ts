@@ -71,6 +71,9 @@ export default interface InfPlayer {
     // Show video only if ad exist
     showAdOnly?: boolean;
 
+    // Hide controls when ad playing
+    adHideControls?: boolean;
+
     ////// Config to player
 
     // Picture-in-Picture at start

@@ -2973,6 +2973,7 @@ var PlayerManager = /** @class */ (function () {
             showOutsidePlaylist: (rootEl.getAttribute('showOutsidePlaylist') === 'true'),
             showPlaynow: (rootEl.getAttribute('showPlaynow') === 'true'),
             showAdOnly: (rootEl.getAttribute('showAdOnly') === 'true'),
+            adHideControls: (rootEl.getAttribute('adHideControls') === 'true'),
             autoPlayMute: (rootEl.getAttribute("autoPlayMute") != 'false'),
             queueEnable: (rootEl.getAttribute('queueEnable') != 'false'),
             queueEnableNext: (rootEl.getAttribute('queueEnableNext') != 'false'),
