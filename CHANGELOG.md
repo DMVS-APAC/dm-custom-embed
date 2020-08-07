@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.4.8] (2020-08-07)
+
+**Fixed Bugs:**
+- Fix api calling for recent sort param
+
 ## [1.4.7] (2020-08-06)
 
 **Implemented enhancements:**

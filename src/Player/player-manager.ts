@@ -331,7 +331,7 @@ export default class PlayerManager {
             this.searchParams.created_after = new Date(this.playerParams.startDate).getTime() / 1000;
         }
 
-        if (sort === 'relevance' || sort === 'recent') {
+        if (this.keywords !== '' && (sort === 'relevance' || sort === 'recent') ) {
             this.searchParams.search = this.keywords;
         } else {
             delete this.searchParams.search;

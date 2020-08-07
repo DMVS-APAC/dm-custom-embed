@@ -2977,7 +2977,7 @@ var PlayerManager = /** @class */ (function () {
                         if (this.playerParams.startDate !== null && (rangeDay === null || rangeDay === 0)) {
                             this.searchParams.created_after = new Date(this.playerParams.startDate).getTime() / 1000;
                         }
-                        if (sort === 'relevance' || sort === 'recent') {
+                        if (this.keywords !== '' && (sort === 'relevance' || sort === 'recent')) {
                             this.searchParams.search = this.keywords;
                         }
                         else {
