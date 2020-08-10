@@ -176,52 +176,52 @@ module.exports = (env, options) => {
                 } : false,
                 hash: false
             }),
-            // new HtmlWebpackPlugin({
-            //     title: 'Dailymotion Player AMP',
-            //     template: 'src/entries/dm-player.html',
-            //     filename: 'dm-player.html',
-            //     chunks: ['dm-amp'],
-            //     showErrors: isProd ? false : true,
-            //     minify: isProd ? {
-            //         html5: true,
-            //         collapseWhitespace: true,
-            //         minifyCSS: true,
-            //         minifyJS: true,
-            //         minifyURLs: false,
-            //         removeAttributeQuotes: true,
-            //         removeComments: true,
-            //         removeEmptyAttributes: true,
-            //         removeOptionalTags: true,
-            //         removeRedundantAttributes: true,
-            //         removeScriptTypeAttributes: true,
-            //         removeStyleLinkTypeAttributes: true,
-            //         useShortDoctype: true
-            //     } : false,
-            //     hash: false
-            // }),
-            // new HtmlWebpackPlugin({
-            //     title: 'Dailymotion AMP Video Embed',
-            //     template: 'src/entries/amp/index.html',
-            //     filename: 'amp/index.html',
-            //     excludeChunks: ['dm-ce', 'dm-amp', 'dm-no-cpe'],
-            //     showErrors: isProd ? false : true,
-            //     minify: isProd ? {
-            //         html5: true,
-            //         collapseWhitespace: true,
-            //         minifyCSS: true,
-            //         minifyJS: true,
-            //         minifyURLs: false,
-            //         removeAttributeQuotes: true,
-            //         removeComments: true,
-            //         removeEmptyAttributes: true,
-            //         removeOptionalTags: true,
-            //         removeRedundantAttributes: true,
-            //         removeScriptTypeAttributes: true,
-            //         removeStyleLinkTypeAttributes: true,
-            //         useShortDoctype: true
-            //     } : false,
-            //     hash: false
-            // }),
+            new HtmlWebpackPlugin({
+                title: 'Dailymotion Player AMP',
+                template: 'src/AMP/dm-player.html',
+                filename: 'dm-player.html',
+                chunks: ['dm-amp'],
+                showErrors: isProd ? false : true,
+                minify: isProd ? {
+                    html5: true,
+                    collapseWhitespace: true,
+                    minifyCSS: true,
+                    minifyJS: true,
+                    minifyURLs: false,
+                    removeAttributeQuotes: true,
+                    removeComments: true,
+                    removeEmptyAttributes: true,
+                    removeOptionalTags: true,
+                    removeRedundantAttributes: true,
+                    removeScriptTypeAttributes: true,
+                    removeStyleLinkTypeAttributes: true,
+                    useShortDoctype: true
+                } : false,
+                hash: false
+            }),
+            new HtmlWebpackPlugin({
+                title: 'Dailymotion AMP Video Embed',
+                template: 'src/Labs/AMP/index.html',
+                filename: 'amp/index.html',
+                excludeChunks: ['dm-ce', 'dm-amp', 'dm-no-cpe'],
+                showErrors: isProd ? false : true,
+                minify: isProd ? {
+                    html5: true,
+                    collapseWhitespace: true,
+                    minifyCSS: true,
+                    minifyJS: true,
+                    minifyURLs: false,
+                    removeAttributeQuotes: true,
+                    removeComments: true,
+                    removeEmptyAttributes: true,
+                    removeOptionalTags: true,
+                    removeRedundantAttributes: true,
+                    removeScriptTypeAttributes: true,
+                    removeStyleLinkTypeAttributes: true,
+                    useShortDoctype: true
+                } : false,
+                hash: false
+            }),
             // new HtmlWebpackPlugin({
             //     title: 'Dailymotion private video',
             //     template: 'src/entries/private-video/index.html',

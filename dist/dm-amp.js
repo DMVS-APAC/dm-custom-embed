@@ -86,6 +86,25 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src/index.js!./src/NoCPE/Scss/no-cpe.scss":
+/*!***************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src!./src/NoCPE/Scss/no-cpe.scss ***!
+  \***************************************************************************************************************************************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".dailymotion-cpe {\n  position: relative; }\n  .dailymotion-cpe .dm__close-button {\n    display: none; }\n\n.dailymotion-no-cpe {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.dm-player:not([noPip=\"true\"])[data-is-pip=\"true\"] .dailymotion-cpe .inside {\n  position: fixed;\n  width: var(--dm-pip-size, 365px) !important;\n  height: auto;\n  right: var(--dm-pip-right-pos, 20px) !important;\n  bottom: var(--dm-pip-bottom-pos, 20px) !important;\n  top: auto;\n  z-index: 999; }\n  .dm-player:not([noPip=\"true\"])[data-is-pip=\"true\"] .dailymotion-cpe .inside:before {\n    content: \"\";\n    padding-top: 56.25%;\n    background: #000;\n    display: block;\n    -webkit-animation: slideInDown;\n    animation: slideInDown;\n    -webkit-animation-duration: .5s;\n    animation-duration: .5s;\n    -webkit-animation-iteration-count: 1;\n    animation-iteration-count: 1; }\n\n.dm-player:not([noPip=\"true\"])[data-is-pip=\"true\"] .dm__close-button {\n  display: block;\n  background: rgba(0, 0, 0, 0.4) !important;\n  border-radius: 50% !important;\n  padding: 8px !important;\n  position: absolute;\n  bottom: 104% !important;\n  right: 0 !important;\n  border: 0 !important;\n  width: 32px !important;\n  height: 32px !important;\n  cursor: pointer; }\n  .dm-player:not([noPip=\"true\"])[data-is-pip=\"true\"] .dm__close-button img {\n    width: 100%;\n    display: block !important; }\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src/index.js!./src/Player/Scss/main.scss":
 /*!**************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src!./src/Player/Scss/main.scss ***!
@@ -1460,6 +1479,280 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/scroll-out/lib/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/scroll-out/lib/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/*! exports used: default */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function clamp(v, min, max) {
+    return min > v ? min : max < v ? max : v;
+}
+function sign(x) {
+    return (+(x > 0) - +(x < 0));
+}
+function round(n) {
+    return Math.round(n * 10000) / 10000;
+}
+
+var cache = {};
+function replacer(match) {
+    return '-' + match[0].toLowerCase();
+}
+function hyphenate(value) {
+    return cache[value] || (cache[value] = value.replace(/([A-Z])/g, replacer));
+}
+
+/** find elements */
+function $(e, parent) {
+    return !e || e.length === 0
+        ? // null or empty string returns empty array
+            []
+        : e.nodeName
+            ? // a single element is wrapped in an array
+                [e]
+            : // selector and NodeList are converted to Element[]
+                [].slice.call(e[0].nodeName ? e : (parent || document.documentElement).querySelectorAll(e));
+}
+function setAttrs(el, attrs) {
+    // tslint:disable-next-line:forin
+    for (var key in attrs) {
+        if (key.indexOf('_')) {
+            el.setAttribute('data-' + hyphenate(key), attrs[key]);
+        }
+    }
+}
+function setProps(cssProps) {
+    return function (el, props) {
+        for (var key in props) {
+            if (key.indexOf('_') && (cssProps === true || cssProps[key])) {
+                el.style.setProperty('--' + hyphenate(key), round(props[key]));
+            }
+        }
+    };
+}
+
+var clearTask;
+var subscribers = [];
+function loop() {
+    clearTask = 0;
+    subscribers.slice().forEach(function (s2) { return s2(); });
+    enqueue();
+}
+function enqueue() {
+    if (!clearTask && subscribers.length) {
+        clearTask = requestAnimationFrame(loop);
+    }
+}
+function subscribe(fn) {
+    subscribers.push(fn);
+    enqueue();
+    return function () {
+        subscribers = subscribers.filter(function (s) { return s !== fn; });
+        if (!subscribers.length && clearTask) {
+            cancelAnimationFrame(clearTask);
+            clearTask = 0;
+        }
+    };
+}
+
+function unwrap(value, el, ctx, doc) {
+    return typeof value === 'function' ? value(el, ctx, doc) : value;
+}
+function noop() { }
+
+/**
+ * Creates a new instance of ScrollOut that marks elements in the viewport with
+ * an "in" class and marks elements outside of the viewport with an "out"
+ */
+// tslint:disable-next-line:no-default-export
+function main (opts) {
+    // Apply default options.
+    opts = opts || {};
+    // Debounce onChange/onHidden/onShown.
+    var onChange = opts.onChange || noop;
+    var onHidden = opts.onHidden || noop;
+    var onShown = opts.onShown || noop;
+    var onScroll = opts.onScroll || noop;
+    var props = opts.cssProps ? setProps(opts.cssProps) : noop;
+    var se = opts.scrollingElement;
+    var container = se ? $(se)[0] : window;
+    var doc = se ? $(se)[0] : document.documentElement;
+    var rootChanged = false;
+    var scrollingElementContext = {};
+    var elementContextList = [];
+    var clientOffsetX, clientOffsety;
+    var sub;
+    function index() {
+        elementContextList = $(opts.targets || '[data-scroll]', $(opts.scope || doc)[0]).map(function (el) { return ({ element: el }); });
+    }
+    function update() {
+        // Calculate position, direction and ratio.
+        var clientWidth = doc.clientWidth;
+        var clientHeight = doc.clientHeight;
+        var scrollDirX = sign(-clientOffsetX + (clientOffsetX = doc.scrollLeft || window.pageXOffset));
+        var scrollDirY = sign(-clientOffsety + (clientOffsety = doc.scrollTop || window.pageYOffset));
+        var scrollPercentX = doc.scrollLeft / (doc.scrollWidth - clientWidth || 1);
+        var scrollPercentY = doc.scrollTop / (doc.scrollHeight - clientHeight || 1);
+        // Detect if the root context has changed.
+        rootChanged =
+            rootChanged ||
+                scrollingElementContext.scrollDirX !== scrollDirX ||
+                scrollingElementContext.scrollDirY !== scrollDirY ||
+                scrollingElementContext.scrollPercentX !== scrollPercentX ||
+                scrollingElementContext.scrollPercentY !== scrollPercentY;
+        scrollingElementContext.scrollDirX = scrollDirX;
+        scrollingElementContext.scrollDirY = scrollDirY;
+        scrollingElementContext.scrollPercentX = scrollPercentX;
+        scrollingElementContext.scrollPercentY = scrollPercentY;
+        var childChanged = false;
+        for (var index_1 = 0; index_1 < elementContextList.length; index_1++) {
+            var ctx = elementContextList[index_1];
+            var element = ctx.element;
+            // find the distance from the element to the scrolling container
+            var target = element;
+            var offsetX = 0;
+            var offsetY = 0;
+            do {
+                offsetX += target.offsetLeft;
+                offsetY += target.offsetTop;
+                target = target.offsetParent;
+            } while (target && target !== container);
+            // Get element dimensions.
+            var elementHeight = element.clientHeight || element.offsetHeight || 0;
+            var elementWidth = element.clientWidth || element.offsetWidth || 0;
+            // Find visible ratios for each element.
+            var visibleX = (clamp(offsetX + elementWidth, clientOffsetX, clientOffsetX + clientWidth) -
+                clamp(offsetX, clientOffsetX, clientOffsetX + clientWidth)) /
+                elementWidth;
+            var visibleY = (clamp(offsetY + elementHeight, clientOffsety, clientOffsety + clientHeight) -
+                clamp(offsetY, clientOffsety, clientOffsety + clientHeight)) /
+                elementHeight;
+            var intersectX = visibleX === 1 ? 0 : sign(offsetX - clientOffsetX);
+            var intersectY = visibleY === 1 ? 0 : sign(offsetY - clientOffsety);
+            var viewportX = clamp((clientOffsetX - (elementWidth / 2 + offsetX - clientWidth / 2)) / (clientWidth / 2), -1, 1);
+            var viewportY = clamp((clientOffsety - (elementHeight / 2 + offsetY - clientHeight / 2)) / (clientHeight / 2), -1, 1);
+            var visible = void 0;
+            if (opts.offset) {
+                visible = unwrap(opts.offset, element, ctx, doc) <= clientOffsety ? 1 : 0;
+            }
+            else if ((unwrap(opts.threshold, element, ctx, doc) || 0) < visibleX * visibleY) {
+                visible = 1;
+            }
+            else {
+                visible = 0;
+            }
+            var changedVisible = ctx.visible !== visible;
+            var changed = ctx._changed ||
+                changedVisible ||
+                ctx.visibleX !== visibleX ||
+                ctx.visibleY !== visibleY ||
+                ctx.index !== index_1 ||
+                ctx.elementHeight !== elementHeight ||
+                ctx.elementWidth !== elementWidth ||
+                ctx.offsetX !== offsetX ||
+                ctx.offsetY !== offsetY ||
+                ctx.intersectX !== ctx.intersectX ||
+                ctx.intersectY !== ctx.intersectY ||
+                ctx.viewportX !== viewportX ||
+                ctx.viewportY !== viewportY;
+            if (changed) {
+                childChanged = true;
+                ctx._changed = true;
+                ctx._visibleChanged = changedVisible;
+                ctx.visible = visible;
+                ctx.elementHeight = elementHeight;
+                ctx.elementWidth = elementWidth;
+                ctx.index = index_1;
+                ctx.offsetX = offsetX;
+                ctx.offsetY = offsetY;
+                ctx.visibleX = visibleX;
+                ctx.visibleY = visibleY;
+                ctx.intersectX = intersectX;
+                ctx.intersectY = intersectY;
+                ctx.viewportX = viewportX;
+                ctx.viewportY = viewportY;
+                ctx.visible = visible;
+            }
+        }
+        if (!sub && (rootChanged || childChanged)) {
+            sub = subscribe(render);
+        }
+    }
+    function render() {
+        maybeUnsubscribe();
+        // Update root attributes if they have changed.
+        if (rootChanged) {
+            rootChanged = false;
+            setAttrs(doc, {
+                scrollDirX: scrollingElementContext.scrollDirX,
+                scrollDirY: scrollingElementContext.scrollDirY
+            });
+            props(doc, scrollingElementContext);
+            onScroll(doc, scrollingElementContext, elementContextList);
+        }
+        var len = elementContextList.length;
+        for (var x = len - 1; x > -1; x--) {
+            var ctx = elementContextList[x];
+            var el = ctx.element;
+            var visible = ctx.visible;
+            if (ctx._changed) {
+                ctx._changed = false;
+                props(el, ctx);
+            }
+            if (ctx._visibleChanged) {
+                setAttrs(el, { scroll: visible ? 'in' : 'out' });
+                onChange(el, ctx, doc);
+                (visible ? onShown : onHidden)(el, ctx, doc);
+            }
+            // if this is shown multiple times, keep it in the list
+            if (visible && opts.once) {
+                elementContextList.splice(x, 1);
+            }
+        }
+    }
+    function maybeUnsubscribe() {
+        if (sub) {
+            sub();
+            sub = undefined;
+        }
+    }
+    // Run initialize index.
+    index();
+    update();
+    render();
+    // Collapses sequential updates into a single update.
+    var updateTaskId = 0;
+    var onUpdate = function () {
+        updateTaskId = updateTaskId || setTimeout(function () {
+            updateTaskId = 0;
+            update();
+        }, 0);
+    };
+    // Hook up document listeners to automatically detect changes.
+    window.addEventListener('resize', onUpdate);
+    container.addEventListener('scroll', onUpdate);
+    return {
+        index: index,
+        update: update,
+        teardown: function () {
+            maybeUnsubscribe();
+            window.removeEventListener('resize', onUpdate);
+            container.removeEventListener('scroll', onUpdate);
+        }
+    };
+}
+
+module.exports = main;
+
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -1741,165 +2034,6 @@ module.exports = function (list, options) {
 
 /***/ }),
 
-/***/ "./src/CustomEmbed/custom-embed-manager.ts":
-/*!*************************************************!*\
-  !*** ./src/CustomEmbed/custom-embed-manager.ts ***!
-  \*************************************************/
-/*! exports provided: default */
-/*! exports used: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Libraries/Utilities/waitFor */ "./src/Libraries/Utilities/waitFor.ts");
-/* harmony import */ var _Player_player_manager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Player/player-manager */ "./src/Player/player-manager.ts");
-/* harmony import */ var _Player_player_events_manager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Player/player-events-manager */ "./src/Player/player-events-manager.ts");
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-// utilities
-
-
-
-var CustomEmbedManager = /** @class */ (function () {
-    function CustomEmbedManager(rootEls, keywords) {
-        this.rootEls = null;
-        this.scriptLoaded = false;
-        this.keywords = null;
-        // Pass rootEls to local variable
-        this.rootEls = rootEls;
-        this.keywords = keywords;
-        this.eventListeners();
-        this.renderElement();
-    }
-    CustomEmbedManager.prototype.eventListeners = function () {
-        var _this = this;
-        document.addEventListener('dm-video-holder-ready', function () { return __awaiter(_this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* waitFor */ "b"])(function () { return CustomEmbedManager.player[0] !== null; }, 500, 2000, "Timeout waiting player ready")];
-                    case 1:
-                        _a.sent();
-                        /**
-                         * Waiting for the first instance filled and only load script once
-                         */
-                        if (this.scriptLoaded !== true) {
-                            this.loadScript(CustomEmbedManager.player[0].cpeId, CustomEmbedManager.player[0].cpeParams);
-                            // Set scriptLoaded status
-                            this.scriptLoaded = true;
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        }); });
-    };
-    CustomEmbedManager.prototype.listenVideoEvents = function () {
-        // It's start to listen to the video events
-        new _Player_player_events_manager__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"](CustomEmbedManager.player[0].playerParams, CustomEmbedManager.player[0].multiplayerParams);
-    };
-    CustomEmbedManager.prototype.renderElement = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var i;
-            return __generator(this, function (_a) {
-                for (i = 0; i < this.rootEls.length; i++) {
-                    CustomEmbedManager.player[i] = new _Player_player_manager__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]("dm_" + i, this.rootEls[i], (i === 0 && this.keywords !== null) ? this.keywords : null);
-                }
-                this.listenVideoEvents();
-                return [2 /*return*/];
-            });
-        });
-    };
-    CustomEmbedManager.renderOnDemand = function (el, keywords) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.player.push(new _Player_player_manager__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]("dm_" + this.player.length + 1, el, keywords));
-                        return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* sleep */ "a"])(1000)];
-                    case 1:
-                        _a.sent();
-                        window.cpe.parse();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    /**
-     * Load CPE script
-     * @param cpeId
-     * @param cpeParams
-     */
-    CustomEmbedManager.prototype.loadScript = function (cpeId, cpeParams) {
-        var cpe = cpeId[0];
-        // Set different cpeId for mobile
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
-            cpe = cpeId[1] ? cpeId[1] : cpeId[0];
-        // Avoid error while building
-        var date = new Date();
-        // Load the CPE script
-        (function (w, d, s, u, n, i, f, g, e, c) { w.WDMObject = n; w[n] = w[n] || function () { (w[n].q = w[n].q || []).push(arguments); }; w[n].l = 1 * date; w[n].i = i; w[n].f = f; w[n].g = g; e = d.createElement(s); e.async = 1; e.src = u; c = d.getElementsByTagName(s)[0]; c.parentNode.insertBefore(e, c); })(window, document, "script", "//api.dmcdn.net/pxl/cpe/client.min.js", "cpe", cpe, cpeParams);
-    };
-    /**
-     * Extracted CPE function
-     */
-    CustomEmbedManager.prototype.loadCpeScript = function () {
-        // (function(w, d, s, u, n, i, f, g, e, c) {
-        //     w.WDMObject = n;
-        //     w[n] = w[n] || function() {
-        //         (w[n].q = w[n].q || []).push(arguments);
-        //     };
-        //     w[n].l = 1 * date;
-        //     w[n].i = i;
-        //     w[n].f = f;
-        //     w[n].g = g;
-        //     e = d.createElement(s);
-        //     e.async = 1;
-        //     e.src = u;
-        //     c = d.getElementsByTagName(s)[0];
-        //     c.parentNode.insertBefore(e, c);
-        // })(window, document, "script", "//api.dmcdn.net/pxl/cpe/client.min.js", "cpe", cpe, cpeParams);
-    };
-    // TODO: Find best practice to do static variable and function
-    CustomEmbedManager.player = [];
-    return CustomEmbedManager;
-}());
-/* harmony default export */ __webpack_exports__["a"] = (CustomEmbedManager);
-
-
-/***/ }),
-
 /***/ "./src/Entries/dm-amp.ts":
 /*!*******************************!*\
   !*** ./src/Entries/dm-amp.ts ***!
@@ -1910,7 +2044,7 @@ var CustomEmbedManager = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CustomEmbed_custom_embed_manager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../CustomEmbed/custom-embed-manager */ "./src/CustomEmbed/custom-embed-manager.ts");
+/* harmony import */ var _NoCPE_no_cpe_manager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../NoCPE/no-cpe-manager */ "./src/NoCPE/no-cpe-manager.ts");
 /* harmony import */ var _Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Libraries/Utilities/waitFor */ "./src/Libraries/Utilities/waitFor.ts");
 /* harmony import */ var _Libraries_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Libraries/Utilities/get-query-params */ "./src/Libraries/Utilities/get-query-params.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -1949,10 +2083,19 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+// import CustomEmbedManager from '../CustomEmbed/custom-embed-manager';
 
 
 
 var keywords = '';
+// Load SDK first before start
+(function () {
+    var e = document.createElement('script');
+    e.async = true;
+    e.src = 'https://api.dmcdn.net/all.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(e, s);
+}());
 /**
  * Waiting for iframe ready
  */
@@ -1974,17 +2117,10 @@ var AMP;
  */
 var onAmpIntegrationReady = function (ampIntegration) {
     AMP = ampIntegration;
-    var meta = ampIntegration.getMetadata();
-    fetch(meta.sourceUrl)
-        .then(function (res) {
-        return res.text();
-    })
-        .then(function (html) {
-        keywords = html.match("<title>(.*?)</title>")[1];
-        init();
-        // Tell amp that player is ready, so loader will be removed
-        ampIntegration.postEvent("canplay");
-    });
+    keywords = Object(_Libraries_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])('keywords');
+    init();
+    // Tell amp that player is ready, so loader will be removed
+    ampIntegration.postEvent("canplay");
 };
 var setAttributes = function (el) { return __awaiter(void 0, void 0, void 0, function () {
     var dmPlayer;
@@ -1997,7 +2133,7 @@ var setAttributes = function (el) { return __awaiter(void 0, void 0, void 0, fun
     });
 }); };
 var init = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var el;
+    var el, playerManager;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: 
@@ -2006,84 +2142,85 @@ var init = function () { return __awaiter(void 0, void 0, void 0, function () {
             case 1:
                 // Wait `.dm-player` to be ready first before do everything
                 _a.sent();
+                // Wait DM sdk to be ready
+                // @ts-ignore
+                return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_1__[/* waitFor */ "b"])(function () { return typeof DM !== 'undefined'; }, 500, 10000, "Timeout to get DM sdk")];
+            case 2:
+                // Wait DM sdk to be ready
+                // @ts-ignore
+                _a.sent();
                 el = document.querySelectorAll('.dm-player');
                 return [4 /*yield*/, setAttributes(el)];
-            case 2:
+            case 3:
                 _a.sent();
-                new _CustomEmbed_custom_embed_manager__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](el, keywords);
+                playerManager = new _NoCPE_no_cpe_manager__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"](el, keywords);
+                return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_1__[/* waitFor */ "b"])(function () { return playerManager.dm !== null; }, 500, 10000, "Timeout to get player ready")];
+            case 4:
+                _a.sent();
+                addEventListeners(playerManager.dm);
                 return [2 /*return*/];
         }
     });
 }); };
-// @ts-ignore
-window.addEventListener('cpeready', function (_a) {
-    var players = _a.detail.players;
-    return __awaiter(void 0, void 0, void 0, function () {
-        var player;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    player = players[0];
-                    return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_1__[/* waitFor */ "b"])(function () { return AMP !== null; }, 500, 2000, "Timeout to get AMP Ready")];
-                case 1:
-                    _b.sent();
-                    /**
-                     * Send post event to AMP
-                     */
-                    player.addEventListener('playing', function (e) {
-                        console.log("playing");
-                        AMP.postEvent("playing");
-                    });
-                    player.addEventListener("pause", function (e) {
-                        console.log("pause");
-                        AMP.postEvent("pause");
-                    });
-                    player.addEventListener("end", function (e) {
-                        console.log("end");
-                        AMP.postEvent("ended");
-                    });
-                    player.addEventListener('controlschange', function (e) {
-                        console.log("changing", player);
-                    });
-                    player.addEventListener("volumechange", function (e) {
-                        console.log("volumechange");
-                        if (player.muted === true) {
-                            AMP.postEvent("muted");
-                        }
-                        else {
-                            AMP.postEvent("unmuted");
-                        }
-                    });
-                    /**
-                     * Send a event to player
-                     */
-                    AMP.method("play", function () {
-                        console.log("AMP play");
-                        player.play();
-                    });
-                    AMP.method("pause", function () {
-                        console.log("AMP pause");
-                        player.pause();
-                    });
-                    AMP.method("mute", function () {
-                        console.log("AMP mute");
-                        player.setMuted(true);
-                    });
-                    AMP.method("unmute", function () {
-                        console.log("AMP unmute");
-                        player.setMuted(false);
-                    });
-                    AMP.method("fullscreenenter", function () {
-                        player.setFullscreen(true);
-                    });
-                    AMP.method("fullscreenexit", function () {
-                        player.setFullscreen(false);
-                    });
-                    return [2 /*return*/];
-            }
-        });
+var addEventListeners = function (player) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_1__[/* waitFor */ "b"])(function () { return AMP !== null; }, 500, 2000, "Timeout to get AMP Ready")];
+            case 1:
+                _a.sent();
+                /**
+                 * Send post event to AMP
+                 */
+                player.addEventListener('playing', function (e) {
+                    AMP.postEvent("playing");
+                });
+                player.addEventListener("pause", function (e) {
+                    AMP.postEvent("pause");
+                });
+                player.addEventListener("end", function (e) {
+                    AMP.postEvent("ended");
+                });
+                player.addEventListener('controlschange', function (e) {
+                });
+                player.addEventListener("volumechange", function (e) {
+                    if (player.muted === true) {
+                        AMP.postEvent("muted");
+                    }
+                    else {
+                        AMP.postEvent("unmuted");
+                    }
+                });
+                player.addEventListener('ad_start', function (e) {
+                    AMP.postEvent('ad_start');
+                });
+                player.addEventListener('ad_end', function (e) {
+                    AMP.postEvent('ad_end');
+                });
+                /**
+                 * Send a event to player
+                 */
+                AMP.method("play", function () {
+                    player.play();
+                });
+                AMP.method("pause", function () {
+                    player.pause();
+                });
+                AMP.method("mute", function () {
+                    player.setMuted(true);
+                });
+                AMP.method("unmute", function () {
+                    player.setMuted(false);
+                });
+                AMP.method("fullscreenenter", function () {
+                    player.setFullscreen(true);
+                });
+                AMP.method("fullscreenexit", function () {
+                    player.setFullscreen(false);
+                });
+                return [2 /*return*/];
+        }
     });
-});
+}); };
 
 
 /***/ }),
@@ -2313,6 +2450,343 @@ var apiUrl = process.env.API_URL ? process.env.API_URL : "https://api.dailymotio
 
 /***/ }),
 
+/***/ "./src/NoCPE/Scss/no-cpe.scss":
+/*!************************************!*\
+  !*** ./src/NoCPE/Scss/no-cpe.scss ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/dist/cjs.js!../../../node_modules/postcss-loader/src!./no-cpe.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src/index.js!./src/NoCPE/Scss/no-cpe.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
+/***/ "./src/NoCPE/no-cpe-manager.ts":
+/*!*************************************!*\
+  !*** ./src/NoCPE/no-cpe-manager.ts ***!
+  \*************************************/
+/*! exports provided: default */
+/*! exports used: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Libraries/Utilities/waitFor */ "./src/Libraries/Utilities/waitFor.ts");
+/* harmony import */ var _Player_player_manager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Player/player-manager */ "./src/Player/player-manager.ts");
+/* harmony import */ var scroll_out__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! scroll-out */ "./node_modules/scroll-out/lib/index.js");
+/* harmony import */ var scroll_out__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(scroll_out__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _NoCPE_Scss_no_cpe_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../NoCPE/Scss/no-cpe.scss */ "./src/NoCPE/Scss/no-cpe.scss");
+/* harmony import */ var _NoCPE_Scss_no_cpe_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_NoCPE_Scss_no_cpe_scss__WEBPACK_IMPORTED_MODULE_3__);
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+// Utilities
+
+
+
+// Assets
+
+var NoCpeManager = /** @class */ (function () {
+    function NoCpeManager(rootEls, keywords) {
+        this.rootEls = null;
+        this.keywords = null;
+        this.videoInside = null;
+        // Player stuffs
+        this.dm = null;
+        this.pauseOnClick = false;
+        this.onViewport = false;
+        this.isOnPiP = false;
+        this.closeClick = false;
+        this.noFill = true;
+        this.hidden = '';
+        this.visibilityChange = '';
+        // Pass rootEls to local variable
+        this.rootEls = rootEls;
+        this.keywords = keywords;
+        this.setVisibilitEnv();
+        this.renderElement();
+        this.addEventListeners();
+    }
+    NoCpeManager.prototype.setVisibilitEnv = function () {
+        if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
+            this.hidden = "hidden";
+            this.visibilityChange = "visibilitychange";
+            //@ts-ignore
+        }
+        else if (typeof document.msHidden !== "undefined") {
+            this.hidden = "msHidden";
+            this.visibilityChange = "msvisibilitychange";
+            //@ts-ignore
+        }
+        else if (typeof document.webkitHidden !== "undefined") {
+            this.hidden = "webkitHidden";
+            this.visibilityChange = "webkitvisibilitychange";
+        }
+    };
+    NoCpeManager.prototype.addEventListeners = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* waitFor */ "b"])(function () { return _this.dm !== null; }, 500, 10000, "Timeout waiting player to be ready")];
+                    case 1:
+                        _a.sent();
+                        document.addEventListener('dm-in-viewport-change', function (e) {
+                            //@ts-ignore
+                            if (e.detail === true) {
+                                _this.isInViewport();
+                            }
+                            else {
+                                _this.isNotInViewport();
+                            }
+                        });
+                        document.addEventListener('dm-slide-changes', function (e) {
+                            // @ts-ignore
+                            _this.dm.load({ video: e.detail });
+                        });
+                        this.dm.addEventListener('apiready', function (e) {
+                            _this.listenToScroll();
+                            if (NoCpeManager.player[0].playerParams.pipAtStart === true) {
+                                _this.dm.play();
+                                _this.isOnPiP = true;
+                                NoCpeManager.player[0].rootEl.setAttribute('data-is-pip', 'true');
+                            }
+                        });
+                        this.dm.addEventListener('playback_ready', function (e) {
+                            // TODO: handle not showing video if ad is noFill
+                            var showPlayer = new CustomEvent('dm-show-player');
+                            document.dispatchEvent(showPlayer);
+                        });
+                        this.dm.addEventListener('pause', function (e) {
+                            if (_this.onViewport === true) {
+                                _this.pauseOnClick = true;
+                            }
+                        });
+                        this.dm.addEventListener('play', function (e) {
+                            if (_this.onViewport === true && _this.pauseOnClick === true) {
+                                _this.pauseOnClick = false;
+                            }
+                            if (_this.onViewport === true && _this.closeClick === true) {
+                                _this.closeClick = false;
+                            }
+                        });
+                        this.dm.addEventListener('end', function (e) {
+                            var videoEnd = new CustomEvent("dm-video-end", { detail: _this.dm.video.videoId });
+                            document.dispatchEvent(videoEnd);
+                        });
+                        this.dm.addEventListener('ad_start', function (e) {
+                            _this.noFill = false;
+                        });
+                        this.dm.addEventListener('ad_play', function (e) {
+                            // TODO: do some stuff related to ad playing
+                        });
+                        this.dm.addEventListener('ad_end', function (e) {
+                            // TODO: do some stuff related to ad end
+                        });
+                        /**
+                         * Add new class `dm-playback-ready` to show the player
+                         */
+                        document.addEventListener('dm-show-player', function (e) {
+                            _this.dm.parentNode.parentNode.parentNode.classList.add('dm-playback-ready');
+                        });
+                        /**
+                         * Handle change tab by user
+                         */
+                        document.addEventListener(this.visibilityChange, function (e) {
+                            if (document[_this.hidden]) {
+                                if (_this.pauseOnClick !== false)
+                                    _this.dm.pause();
+                            }
+                            else {
+                                if (_this.pauseOnClick !== false)
+                                    _this.dm.play();
+                            }
+                        });
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    NoCpeManager.prototype.listenToScroll = function () {
+        scroll_out__WEBPACK_IMPORTED_MODULE_2___default()({
+            targets: this.rootEls[0],
+            onShown: function (element, ctx, scrollingElement) {
+                var isInViewport = new CustomEvent('dm-in-viewport-change', { detail: true });
+                document.dispatchEvent(isInViewport);
+            },
+            onHidden: function (element, ctx, scrollingElement) {
+                var isInViewport = new CustomEvent('dm-in-viewport-change', { detail: false });
+                document.dispatchEvent(isInViewport);
+            }
+        });
+    };
+    NoCpeManager.prototype.renderElement = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _loop_1, this_1, i;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _loop_1 = function (i) {
+                            var player, videoPlaceholder, closeButton, closeImg;
+                            return __generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        NoCpeManager.player[i] = new _Player_player_manager__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]("dm_" + i, this_1.rootEls[i], (i === 0 && this_1.keywords !== null) ? this_1.keywords : null);
+                                        player = NoCpeManager.player[i];
+                                        return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* waitFor */ "b"])(function () { return player.videoParams !== null; }, 500, 10000, "Timeout waiting videoParams")];
+                                    case 1:
+                                        _a.sent();
+                                        this_1.videoInside = document.createElement('div');
+                                        this_1.videoInside.className = 'inside';
+                                        videoPlaceholder = document.createElement('div');
+                                        videoPlaceholder.className = 'dailymotion-no-cpe';
+                                        closeButton = document.createElement('button');
+                                        closeButton.className = 'dm__close-button';
+                                        closeButton.setAttribute('aria-label', 'Close Picture-in-Picture video player');
+                                        closeImg = new Image();
+                                        closeImg.src = 'https://api.dmcdn.net/pxl/cpe/btnClose.png';
+                                        closeImg.alt = 'Close Picture-in-Picture video player';
+                                        closeButton.appendChild(closeImg);
+                                        this_1.videoInside.appendChild(closeButton);
+                                        this_1.videoInside.appendChild(videoPlaceholder);
+                                        // Add closeButton and videoPlaceholder
+                                        this_1.rootEls[i].querySelector('.dailymotion-cpe').appendChild(this_1.videoInside);
+                                        // @ts-ignore
+                                        this_1.dm = DM.player(videoPlaceholder, {
+                                            video: player.videoParams.id,
+                                            params: {
+                                                mute: true,
+                                                'queue-enable': (NoCpeManager.player[i].playerParams.showOutsidePlaylist === true) ? false : true,
+                                            }
+                                        });
+                                        closeButton.addEventListener('click', function () { _this.closePip(); });
+                                        return [2 /*return*/];
+                                }
+                            });
+                        };
+                        this_1 = this;
+                        i = 0;
+                        _a.label = 1;
+                    case 1:
+                        if (!(i < this.rootEls.length)) return [3 /*break*/, 4];
+                        return [5 /*yield**/, _loop_1(i)];
+                    case 2:
+                        _a.sent();
+                        _a.label = 3;
+                    case 3:
+                        i++;
+                        return [3 /*break*/, 1];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    NoCpeManager.prototype.closePip = function () {
+        this.dm.pause();
+        NoCpeManager.player[0].rootEl.setAttribute('data-is-pip', 'false');
+        this.closeClick = true;
+    };
+    NoCpeManager.prototype.isNotInViewport = function () {
+        /**
+         * This is condition for no PiP
+         */
+        if (this.dm.paused !== true &&
+            NoCpeManager.player[0].playerParams.scrollToPause === true) {
+            this.dm.pause();
+        }
+        /**
+         * This is condition for default PiP
+         */
+        if (this.closeClick !== true &&
+            NoCpeManager.player[0].playerParams.noPip !== true &&
+            NoCpeManager.player[0].playerParams.scrollToPause !== true &&
+            this.dm.paused !== true) {
+            this.isOnPiP = true;
+            NoCpeManager.player[0].rootEl.setAttribute('data-is-pip', 'true');
+        }
+        // Change flag for auto play and auto pause purposes
+        this.onViewport = false;
+    };
+    NoCpeManager.prototype.isInViewport = function () {
+        /**
+         * This is condition for no PiP
+         */
+        if (this.dm.paused === true &&
+            this.closeClick !== true &&
+            this.pauseOnClick === false &&
+            NoCpeManager.player[0].playerParams.noStp !== true) {
+            this.dm.play();
+        }
+        if (this.closeClick !== true &&
+            NoCpeManager.player[0].playerParams.noPip !== true) {
+            this.isOnPiP = false;
+            NoCpeManager.player[0].rootEl.setAttribute('data-is-pip', 'false');
+        }
+        // Change flag for auto play and auto pause purposes
+        this.onViewport = true;
+    };
+    // TODO: Find best practice to do static variable and function
+    NoCpeManager.player = [];
+    return NoCpeManager;
+}());
+/* harmony default export */ __webpack_exports__["a"] = (NoCpeManager);
+
+
+/***/ }),
+
 /***/ "./src/Player/Components/info-card.ts":
 /*!********************************************!*\
   !*** ./src/Player/Components/info-card.ts ***!
@@ -2440,289 +2914,6 @@ var exported = content.locals ? content.locals : {};
 
 
 module.exports = exported;
-
-/***/ }),
-
-/***/ "./src/Player/player-events-manager.ts":
-/*!*********************************************!*\
-  !*** ./src/Player/player-events-manager.ts ***!
-  \*********************************************/
-/*! exports provided: default */
-/*! exports used: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Libraries/Utilities/waitFor */ "./src/Libraries/Utilities/waitFor.ts");
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-var PlayerEventsManager = /** @class */ (function () {
-    function PlayerEventsManager(playerParams, multiplayer) {
-        this.players = [];
-        this.noFill = true;
-        this.adPlaying = '';
-        this.multiplayerParams = null;
-        this.playerParams = null;
-        this.videoEvents();
-        this.playerParams = playerParams;
-        this.multiplayerParams = multiplayer;
-    }
-    /**
-     * Listen to video events from Dailymotion player
-     */
-    PlayerEventsManager.prototype.videoEvents = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            return __generator(this, function (_a) {
-                // Ignore 'cpeready' event because this event is from outside the script
-                // @ts-ignore
-                window.addEventListener('cpeready', function (_a) {
-                    var players = _a.detail.players;
-                    _this.players = players;
-                    var _loop_1 = function (i) {
-                        var player = players[i];
-                        player.addEventListener('videochange', function (e) { return __awaiter(_this, void 0, void 0, function () {
-                            var video, videoUpdated;
-                            return __generator(this, function (_a) {
-                                video = player.video;
-                                videoUpdated = new CustomEvent('dm-video-updated', { detail: { videoId: video.videoId } });
-                                document.dispatchEvent(videoUpdated);
-                                return [2 /*return*/];
-                            });
-                        }); });
-                        player.addEventListener('ad_start', function (e) {
-                            _this.noFill = false;
-                        });
-                        /**
-                         * Listen to an ad_play
-                         *
-                         * - Cover others player when the ad is played
-                         */
-                        player.addEventListener('ad_play', function (e) {
-                            if (_this.adPlaying === '') {
-                                _this.adPlaying = player.id;
-                                // Disable the player that not playing yet
-                                if (_this.multiplayerParams.adCoverPlay === true) {
-                                    _this.toggleDisable();
-                                }
-                                // Toggle playing video and hide the PiP
-                                if (_this.multiplayerParams.closePip === true) {
-                                    _this.togglePlay(player.id);
-                                }
-                                if (_this.playerParams.adHideControls === true) {
-                                    player.setControls(false);
-                                }
-                            }
-                        });
-                        /**
-                         * Listen to an ad_end event
-                         *
-                         * - Remove player cover when the ad is ended
-                         */
-                        player.addEventListener('ad_end', function (e) {
-                            if (_this.adPlaying !== '') {
-                                _this.adPlaying = '';
-                                // Toggle disabled player
-                                if (_this.multiplayerParams.adCoverPlay) {
-                                    _this.toggleDisable();
-                                }
-                                if (_this.playerParams.adHideControls === true) {
-                                    player.setControls(true);
-                                }
-                            }
-                        });
-                        /**
-                         * Listening to playing event
-                         *
-                         * - Close the PiP if there are multiple players and the closePip is true
-                         */
-                        player.addEventListener('playing', function (e) {
-                            if (_this.multiplayerParams.closePip === true) {
-                                _this.togglePlay(player.id);
-                            }
-                        });
-                        /**
-                         * Listen to video end, and process the next thing
-                         * It will load new video from the playlist
-                         */
-                        player.addEventListener('end', function (e) {
-                            var videoEnd = new CustomEvent("dm-video-end", { detail: player.video.videoId });
-                            document.dispatchEvent(videoEnd);
-                        });
-                        /**
-                         * Listen to `playback_ready` to show the player
-                         */
-                        player.addEventListener('playback_ready', function (e) { return __awaiter(_this, void 0, void 0, function () {
-                            var dmPlayer, showPlayer;
-                            return __generator(this, function (_a) {
-                                dmPlayer = player.parentNode.parentNode.parentNode;
-                                /**
-                                 * It's only to show video when ad is filled
-                                 *
-                                 * Because we don't showing the video at first, the video won't play anymway.
-                                 * So we play it programmatically via JS and start to listen to `waitForAdStart`
-                                 * to listen to ad request
-                                 */
-                                if (this.playerParams.showAdOnly === true) {
-                                    dmPlayer.classList.add('dm-wait-for-ad');
-                                    player.play();
-                                    this.waitForAdStart();
-                                }
-                                else {
-                                    showPlayer = new CustomEvent('dm-show-player');
-                                    document.dispatchEvent(showPlayer);
-                                }
-                                return [2 /*return*/];
-                            });
-                        }); });
-                        /**
-                         * Handle player error as well to avoid bad UX
-                         */
-                        player.addEventListener('error', function (e) {
-                            console.log(e);
-                        });
-                    };
-                    for (var i = 0; i < players.length; i++) {
-                        _loop_1(i);
-                    }
-                });
-                /**
-                 * Listen to PiP close to pause the video player
-                 */
-                // @ts-ignore
-                window.addEventListener('cpepipclose', function (_a) {
-                    var player = _a.detail.player;
-                    // Do pause when cpe PiP is closed
-                    player.pause();
-                });
-                /**
-                 * Listen to slide changes to set the video to play
-                 */
-                // TODO: support multiplayer for next development
-                document.addEventListener('dm-slide-changes', function (e) {
-                    // @ts-ignore
-                    _this.players[0].load({ video: e.detail });
-                });
-                /**
-                 * Destroy the player if there is no ad to serve
-                 */
-                document.addEventListener('dm-destroy-player', function (e) {
-                    // @ts-ignore
-                    _this.players[0].parentNode.parentNode.parentNode.remove(); // Get dm-player first
-                });
-                /**
-                 * Add new class `dm-playback-ready` to show the player
-                 */
-                document.addEventListener('dm-show-player', function (e) {
-                    _this.players[0].parentNode.parentNode.parentNode.classList.add('dm-playback-ready');
-                });
-                return [2 /*return*/];
-            });
-        });
-    };
-    /**
-     * Wait and check if noFill is true or not.
-     * This function is related to `ad_start` listener as well
-     */
-    PlayerEventsManager.prototype.waitForAdStart = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var destroyPlayer, showPlayer;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: 
-                    // Waiting for 1 second to interact with ad
-                    return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* sleep */ "a"])(2000)];
-                    case 1:
-                        // Waiting for 1 second to interact with ad
-                        _a.sent();
-                        /**
-                         * noFill means no ad to serve
-                         * It will send a custom event that let
-                         * the script continue show the player or destroy it
-                         */
-                        if (this.noFill === true) {
-                            destroyPlayer = new CustomEvent('dm-destroy-player');
-                            document.dispatchEvent(destroyPlayer);
-                        }
-                        else {
-                            showPlayer = new CustomEvent('dm-show-player');
-                            document.dispatchEvent(showPlayer);
-                        }
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    /**
-     * Toggle play and remove all PiP active
-     *
-     * @param playerId
-     */
-    PlayerEventsManager.prototype.togglePlay = function (playerId) {
-        // Check every player available
-        for (var i = 0; i < this.players.length; i++) {
-            // close the PiP if other player is start playing
-            if (this.players[i].id !== playerId) {
-                var parent_1 = this.players[i].parentNode;
-                this.players[i].pause();
-                parent_1.classList.remove('pip');
-            }
-        }
-    };
-    /**
-     * Add cover to others player to be not clickable by the user
-     */
-    PlayerEventsManager.prototype.toggleDisable = function () {
-        // Check every player available
-        for (var i = 0; i < this.players.length; i++) {
-            // get parent player
-            var parent_2 = this.players[i].parentNode;
-            if (this.adPlaying !== '' && this.adPlaying !== this.players[i].id) {
-                parent_2.classList.add('dm-disabled');
-            }
-            else {
-                parent_2.classList.remove('dm-disabled');
-            }
-        }
-    };
-    return PlayerEventsManager;
-}());
-/* harmony default export */ __webpack_exports__["a"] = (PlayerEventsManager);
-
 
 /***/ }),
 

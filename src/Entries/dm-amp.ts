@@ -1,5 +1,6 @@
-import CustomEmbedManager from '../CustomEmbed/custom-embed-manager';
-import { waitFor } from '../Libraries/Utilities/waitFor';
+// import CustomEmbedManager from '../CustomEmbed/custom-embed-manager';
+import NoCpeManager from '../NoCPE/no-cpe-manager';
+import { waitFor, sleep } from '../Libraries/Utilities/waitFor';
 import getParam from '../Libraries/Utilities/get-query-params';
 
 declare global {
@@ -11,6 +12,16 @@ declare global {
 }
 
 let keywords: string = '';
+
+// Load SDK first before start
+(function() {
+    var e = document.createElement('script');
+    e.async = true;
+    e.src = 'https://api.dmcdn.net/all.js';
+
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(e, s);
+}());
 
 /**
  * Waiting for iframe ready
@@ -29,19 +40,11 @@ let AMP;
  */
 const onAmpIntegrationReady = (ampIntegration: any) => {
     AMP = ampIntegration;
-    const meta = ampIntegration.getMetadata();
+    keywords = getParam('keywords');
 
-    fetch(meta.sourceUrl)
-        .then((res) => {
-            return res.text();
-        })
-        .then((html) => {
-            keywords = html.match(`<title>(.*?)</title>`)[1];
-
-            init();
-            // Tell amp that player is ready, so loader will be removed
-            ampIntegration.postEvent("canplay");
-        });
+    init();
+    // Tell amp that player is ready, so loader will be removed
+    ampIntegration.postEvent("canplay");
 }
 
 const setAttributes = async (el: NodeListOf<HTMLDivElement>) => {
@@ -56,17 +59,22 @@ const init = async () => {
 
     // Wait `.dm-player` to be ready first before do everything
     await waitFor(() => document.querySelectorAll('.dm-player').length > 0, 500, 20000, "Timeout to get DM placeholder");
+
+    // Wait DM sdk to be ready
+    // @ts-ignore
+    await waitFor( () => typeof DM !== 'undefined', 500, 10000, "Timeout to get DM sdk");
+
     const el: NodeListOf<HTMLDivElement> = document.querySelectorAll('.dm-player');
 
     await setAttributes(el);
 
-    new CustomEmbedManager(el, keywords);
+    const playerManager = new NoCpeManager(el, keywords);
+
+    await waitFor(() => playerManager.dm !== null, 500, 10000, "Timeout to get player ready");
+    addEventListeners(playerManager.dm);
 };
 
-// @ts-ignore
-window.addEventListener('cpeready', async ({detail: {players}}) => {
-
-    const player = players[0];
+const addEventListeners = async (player) => {
 
     await waitFor(() => AMP !== null, 500, 2000, "Timeout to get AMP Ready");
 
@@ -75,26 +83,21 @@ window.addEventListener('cpeready', async ({detail: {players}}) => {
      * Send post event to AMP
      */
     player.addEventListener('playing', (e) => {
-        console.log("playing");
         AMP.postEvent("playing");
     });
 
     player.addEventListener("pause", (e) => {
-        console.log("pause");
         AMP.postEvent("pause");
     });
 
     player.addEventListener("end", (e) => {
-        console.log("end");
         AMP.postEvent("ended");
     });
 
     player.addEventListener('controlschange', (e) => {
-        console.log("changing", player);
     });
 
     player.addEventListener("volumechange", (e) => {
-        console.log("volumechange");
         if (player.muted === true) {
             AMP.postEvent("muted");
         } else {
@@ -102,26 +105,30 @@ window.addEventListener('cpeready', async ({detail: {players}}) => {
         }
     });
 
+    player.addEventListener('ad_start', (e) => {
+        AMP.postEvent('ad_start');
+    });
+
+    player.addEventListener('ad_end', (e) => {
+        AMP.postEvent('ad_end');
+    });
+
     /**
      * Send a event to player
      */
     AMP.method("play", () => {
-        console.log("AMP play");
         player.play();
     });
 
     AMP.method("pause", () => {
-        console.log("AMP pause");
         player.pause();
     });
 
     AMP.method("mute", () => {
-        console.log("AMP mute");
         player.setMuted(true);
     });
 
     AMP.method("unmute", () => {
-        console.log("AMP unmute");
         player.setMuted(false);
     });
 
@@ -132,4 +139,4 @@ window.addEventListener('cpeready', async ({detail: {players}}) => {
     AMP.method("fullscreenexit", () => {
         player.setFullscreen(false);
     });
-});
+};

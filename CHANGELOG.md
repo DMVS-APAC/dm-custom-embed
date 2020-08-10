@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.4.9] (2020-08-10)
+
+**Implemented enhancements:**
+- Improve AMP script to be more faster to load
+
 ## [1.4.8] (2020-08-07)
 
 **Fixed Bugs:**

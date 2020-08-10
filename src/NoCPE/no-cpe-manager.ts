@@ -16,7 +16,7 @@ export default class NoCpeManager {
     private static player: PlayerManager[] = [];
 
     // Player stuffs
-    private dm: any = null;
+    public dm: any = null;
     private pauseOnClick: boolean = false;
     private onViewport: boolean = false;
     private isOnPiP: boolean = false;
