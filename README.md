@@ -20,7 +20,7 @@ Or if you just want to test just use cdn below (again this is only for test purp
 
 Make sure you have installed packages below:
 
-1. NPM / Yarn / PNPM (yes you are safe to use all of them)
+1. NPM 
 2. Git
 
 ## Getting Started
