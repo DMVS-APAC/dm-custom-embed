@@ -98,6 +98,9 @@ export default class PlaylistManager {
 
             slideWrapper.appendChild(contThumbnail);
 
+            const thumbInfo = document.createElement('div');
+            thumbInfo.className = 'dm__playlist-info-container';
+
             // Title
             const title = document.createElement('h5');
             title.className = 'dm__playlist-title';
@@ -105,7 +108,25 @@ export default class PlaylistManager {
             const text = document.createTextNode(this.videos.list[i].title);
             title.appendChild(text);
 
-            slideWrapper.appendChild(title);
+            thumbInfo.appendChild(title);
+
+            const publisherName = document.createElement('p');
+            publisherName.className = 'dm__playlist-publisher-name';
+
+            const publisherAva = new Image();
+            publisherAva.className = 'dm__playlist-publisher-ava';
+            publisherAva.src = this.videos.list[i]['owner.avatar_25_url'];
+
+            publisherName.appendChild(publisherAva);
+
+            const name = document.createElement('span');
+            name.innerText = "Anu ini kok panjang banget sih"; //this.videos.list[i]['owner.screenname'];
+
+            publisherName.appendChild(name);
+
+            thumbInfo.appendChild(publisherName);
+
+            slideWrapper.appendChild(thumbInfo);
 
             this.slides[i].appendChild(slideWrapper);
 
