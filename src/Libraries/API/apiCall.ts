@@ -1,5 +1,5 @@
 // Global
-import { debugMode } from "../global/vars";
+import { debugMode } from "../Global/vars";
 
 export function fetchData(urlParams: string): Promise<any> {
     return new Promise( async (resolve, reject) => {

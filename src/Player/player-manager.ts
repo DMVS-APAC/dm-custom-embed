@@ -5,7 +5,7 @@ import infVideo from "../Player/Interfaces/infVideo";
 import infMultiPlayer from "../Player/Interfaces/infMultiPlayer";
 
 // Global
-import { apiUrl, debugMode } from '../Libraries/global/vars';
+import { apiUrl, debugMode } from '../Libraries/Global/vars';
 
 // Utilities
 import htmlEntities from "../Libraries/Utilities/html-entities";
