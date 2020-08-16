@@ -137,7 +137,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".dm-playlist {\n  background: var(--dm-playlist-bg, #232323) !important;\n  padding: 0 40px !important; }\n  .dm-playlist .slider {\n    position: relative !important; }\n  .dm-playlist .frame {\n    width: 100% !important;\n    position: relative !important;\n    overflow: hidden !important;\n    white-space: nowrap !important; }\n  .dm-playlist .slides {\n    display: inline-block !important;\n    width: 100% !important;\n    padding: 0 !important; }\n  .dm-playlist .prev, .dm-playlist .next {\n    position: absolute;\n    top: 50%;\n    margin-top: -25px;\n    display: block;\n    cursor: pointer;\n    background: none;\n    padding: 0;\n    border: 0; }\n\n/*.dm__now-playing-status {*/\n/*  --dm-now-playing-text-color: #fff;*/\n/*  --dm-now-playing-text-size: .8em;*/\n/*  --dm-now-playing-title-color: #fff;*/\n/*  --dm-now-playing-title-size: 1em;*/\n/*  --dm-now-playing-bg: transparent;*/\n/**/\n/*  padding: 10px 0;*/\n/*}*/\n/**/\n/*.dm__now-playing-text {*/\n/*  color: var(--dm-now-playing-text-color);*/\n/*  font-size: var(--dm-now-playing-text-size);*/\n/*  margin-bottom: 10px;*/\n/*}*/\n/*.dm__now-playing-title {*/\n/*  color: var(--dm-now-playing-title-color);*/\n/*  font-size: var(--dm-now-playing-title-size);*/\n/*  white-space: nowrap;*/\n/*  overflow: hidden;*/\n/*  text-overflow: ellipsis;*/\n/*}*/\n.dm__playlist-slide {\n  cursor: pointer;\n  position: relative;\n  display: inline-block;\n  width: 133px;\n  vertical-align: top; }\n  .dm__playlist-slide:after {\n    position: absolute;\n    content: '';\n    width: 100%;\n    height: 100%;\n    top: 0;\n    left: 0; }\n\n.dm__slide-wrapper {\n  padding: 5px; }\n\n.dm__playlist-active .dm__playlist-cont-thumbnail:after {\n  content: \"Playing now\";\n  display: block; }\n\n.dm__playlist-active + .dm__playlist-slide .dm__playlist-cont-thumbnail:after {\n  content: \"Playing next\";\n  background: var(--dm-next-playing-bg, rgba(35, 35, 35, 0.95));\n  display: block; }\n\n.dm__playlist-active .dm__playlist-duration, .dm__playlist-active + .dm__playlist-slide .dm__playlist-duration {\n  background: none !important; }\n\n.dm__playlist-cont-thumbnail {\n  width: 100%;\n  position: relative;\n  margin: 0;\n  overflow: hidden; }\n  .dm__playlist-cont-thumbnail:before {\n    content: \"\";\n    padding-top: 56.25%;\n    background: #ddd;\n    display: block;\n    -webkit-animation: slideInDown;\n    animation: slideInDown;\n    -webkit-animation-duration: 1s;\n    animation-duration: 1s;\n    -webkit-animation-iteration-count: 1;\n    animation-iteration-count: 1; }\n  .dm__playlist-cont-thumbnail:after {\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    background: var(--dm-now-playing-bg, #56c7ff);\n    color: var(--dm-now-playing-color, #fff) !important;\n    padding: 4px 10px;\n    font-size: var(--dm-playlist-publisher-size, 0.6em) !important;\n    font-family: \"Noto Sans\", Arial, sans-serif;\n    display: none; }\n\n.dm__playlist-thumbnail {\n  width: 100%;\n  height: auto;\n  display: block;\n  position: absolute;\n  top: 0;\n  left: 0; }\n\n.dm__playlist-duration {\n  position: absolute;\n  bottom: 1px;\n  right: 1px;\n  color: #fff !important;\n  background: rgba(0, 0, 0, 0.6) !important;\n  padding: 4px !important;\n  font-size: .6em !important;\n  font-family: \"Noto Sans\", Arial, sans-serif !important;\n  z-index: 1; }\n\n.dm__playlist-info-container {\n  background: var(--dm-playlist-info-bg, #414141) !important;\n  padding: 6px 10px !important;\n  font-family: var(--dm-playlist-font-family, \"Noto Sans\", Arial, sans-serif) !important;\n  font-weight: var(--dm-playlist-weight, 700) !important;\n  color: var(--dm-playlist-color, #fff) !important; }\n\n.dm__playlist-publisher-name {\n  margin: 12px 0 0 !important;\n  color: inherit !important;\n  font-size: var(--dm-playlist-publisher-size, 0.6em) !important;\n  line-height: 1.3em !important;\n  display: flex; }\n\n.dm__playlist-publisher-ava {\n  width: 12px;\n  margin-right: 8px; }\n\n.dm__playlist-title {\n  margin: 0 !important;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 3;\n  -webkit-box-orient: vertical;\n  -webkit-font-smoothing: antialiased;\n  white-space: normal !important;\n  font-size: var(--dm-playlist-title-size, 0.7em) !important;\n  font-width: inherit !important;\n  line-height: 1.3em !important;\n  height: 3.87em !important; }\n\n.next {\n  right: -40px; }\n\n.prev {\n  left: -40px; }\n\n.next svg, .prev svg {\n  width: 25px; }\n\n/* SVG style*/\n.arrow {\n  fill: var(--arrow-color, #ddd); }\n\n.dm-playlist--right-side {\n  --dm-playlist-display: flex;\n  --dm-player-size: 50%;\n  --dm-player-ratio: 29%;\n  --dm-playlist-size: 40%;\n  --dm-playlist-bg: #000;\n  display: var(--dm-playlist-display);\n  justify-content: flex-start;\n  align-items: flex-start;\n  background: var(--dm-playlist-bg); }\n  .dm-playlist--right-side .dailymotion-cpe {\n    width: var(--dm-player-size);\n    padding-bottom: var(--dm-player-ratio); }\n  .dm-playlist--right-side .dm-playlist {\n    width: var(--dm-playlist-size); }\n\n@media (max-width: 767px) {\n  .dm-playlist--right-side {\n    --dm-playlist-display: block;\n    --dm-player-size: 100%;\n    --dm-player-ratio: 56.25%;\n    --dm-playlist-size: calc(100% - 80px); } }\n", ""]);
+exports.push([module.i, ".dm-playlist {\n  background: var(--dm-playlist-bg, #232323) !important;\n  padding: 0 40px !important; }\n  .dm-playlist .slider {\n    position: relative !important; }\n  .dm-playlist .frame {\n    width: 100% !important;\n    position: relative !important;\n    overflow: hidden !important;\n    white-space: nowrap !important; }\n  .dm-playlist .slides {\n    display: inline-block !important;\n    width: 100% !important;\n    padding: 0 !important; }\n  .dm-playlist .prev, .dm-playlist .next {\n    position: absolute;\n    top: 50%;\n    margin-top: -25px;\n    display: block;\n    cursor: pointer;\n    background: none;\n    padding: 0;\n    border: 0; }\n\n.dm__video-info {\n  background: var(--dm-video-info-bg, #fff);\n  border-top: 6px solid var(--dm-top-line-color, #232323);\n  text-align: left; }\n\n.dm__playlist-slide {\n  cursor: pointer;\n  position: relative;\n  display: inline-block;\n  width: 133px;\n  vertical-align: top; }\n  .dm__playlist-slide:after {\n    position: absolute;\n    content: '';\n    width: 100%;\n    height: 100%;\n    top: 0;\n    left: 0; }\n\n.dm__slide-wrapper {\n  padding: 5px; }\n\n/**\n * A sign for now playing and next playing on thumbnail\n */\n.dm__playlist-active .dm__playlist-cont-thumbnail:after {\n  content: \"Playing now\";\n  display: block; }\n\n.dm__playlist-active + .dm__playlist-slide .dm__playlist-cont-thumbnail:after {\n  content: \"Playing next\";\n  background: var(--dm-next-playing-bg, rgba(35, 35, 35, 0.95));\n  display: block; }\n\n.dm__playlist-active .dm__playlist-duration, .dm__playlist-active + .dm__playlist-slide .dm__playlist-duration {\n  background: none !important; }\n\n.dm__playlist-cont-thumbnail {\n  width: 100%;\n  position: relative;\n  margin: 0;\n  overflow: hidden; }\n  .dm__playlist-cont-thumbnail:before {\n    content: \"\";\n    padding-top: 56.25%;\n    background: #ddd;\n    display: block;\n    -webkit-animation: slideInDown;\n    animation: slideInDown;\n    -webkit-animation-duration: 1s;\n    animation-duration: 1s;\n    -webkit-animation-iteration-count: 1;\n    animation-iteration-count: 1; }\n  .dm__playlist-cont-thumbnail:after {\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    background: var(--dm-now-playing-bg, #56c7ff);\n    color: var(--dm-now-playing-color, #fff) !important;\n    padding: 4px 10px;\n    font-size: var(--dm-playlist-publisher-size, 0.6em) !important;\n    font-family: \"Noto Sans\", Arial, sans-serif;\n    display: none; }\n\n.dm__playlist-thumbnail {\n  width: 100%;\n  height: auto;\n  display: block;\n  position: absolute;\n  top: 0;\n  left: 0; }\n\n.dm__playlist-duration {\n  position: absolute;\n  bottom: 1px;\n  right: 1px;\n  color: #fff !important;\n  background: rgba(0, 0, 0, 0.6) !important;\n  padding: 4px !important;\n  font-size: .6em !important;\n  font-family: \"Noto Sans\", Arial, sans-serif !important;\n  z-index: 1; }\n\n.dm__playlist-info-container {\n  background: var(--dm-playlist-info-bg, #414141) !important;\n  padding: 6px 10px !important;\n  font-family: var(--dm-playlist-font-family, \"Noto Sans\", Arial, sans-serif) !important;\n  font-weight: var(--dm-playlist-weight, 700) !important;\n  color: var(--dm-playlist-color, #fff) !important; }\n\n.dm__playlist-publisher-name {\n  margin: 12px 0 0 !important;\n  color: inherit !important;\n  font-size: var(--dm-playlist-publisher-size, 0.6em) !important;\n  line-height: 1.3em !important;\n  display: inline-block;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  width: 100%; }\n\n.dm__playlist-publisher-ava {\n  width: 12px;\n  margin-right: 6px;\n  vertical-align: middle; }\n\n.dm__playlist-title {\n  margin: 0 !important;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 3;\n  -webkit-box-orient: vertical;\n  -webkit-font-smoothing: antialiased;\n  white-space: normal !important;\n  font-size: var(--dm-playlist-title-size, 0.7em) !important;\n  font-width: inherit !important;\n  line-height: 1.3em !important;\n  height: 3.87em !important; }\n\n.next {\n  right: -40px; }\n\n.prev {\n  left: -40px; }\n\n.next svg, .prev svg {\n  width: 25px; }\n\n/* SVG style*/\n.arrow {\n  fill: var(--arrow-color, #ddd); }\n\n.dm-playlist--right-side {\n  --dm-playlist-display: flex;\n  --dm-player-size: 50%;\n  --dm-player-ratio: 29%;\n  --dm-playlist-size: 40%;\n  --dm-playlist-bg: #000;\n  display: var(--dm-playlist-display);\n  justify-content: flex-start;\n  align-items: flex-start;\n  background: var(--dm-playlist-bg); }\n  .dm-playlist--right-side .dailymotion-cpe {\n    width: var(--dm-player-size);\n    padding-bottom: var(--dm-player-ratio); }\n  .dm-playlist--right-side .dm-playlist {\n    width: var(--dm-playlist-size); }\n\n@media (max-width: 767px) {\n  .dm-playlist--right-side {\n    --dm-playlist-display: block;\n    --dm-player-size: 100%;\n    --dm-player-ratio: 56.25%;\n    --dm-playlist-size: calc(100% - 80px); } }\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -3013,7 +3013,7 @@ var PlayerManager = /** @class */ (function () {
          * 2. if the infocard is true
          * 3. last condition is default condition
          */
-        var fields = this.playerParams.showOutsidePlaylist ? 'id,title,thumbnail_240_url,duration,owner.avatar_25_url,owner.screenname' : this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url' : 'id,title';
+        var fields = this.playerParams.showOutsidePlaylist ? 'id,title,description,thumbnail_240_url,duration,owner.avatar_25_url,owner.screenname' : this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url' : 'id,title';
         this.searchParams = {
             fields: fields,
             limit: this.playerParams.showOutsidePlaylist ? 7 : 1,
@@ -3376,11 +3376,13 @@ var PlaylistManager = /** @class */ (function () {
         this.videos = null;
         this.slides = [];
         this.slideActive = '';
-        this.nowPlayingTitle = null;
+        this.videoTitle = null;
+        this.videoDesc = null;
         this.rootEl = rootEl;
         this.videos = videos;
         this.addEventListeners();
         this.generateCarouselTag();
+        this.generateVideoInfo();
         if (playnow)
             this.generateNowPlaying();
     }
@@ -3398,11 +3400,24 @@ var PlaylistManager = /** @class */ (function () {
         statusText.className = 'dm__now-playing-text';
         statusText.innerText = 'Now playing:    ';
         nowPlaying.appendChild(statusText);
-        this.nowPlayingTitle = document.createElement('div');
-        this.nowPlayingTitle.className = 'dm__now-playing-title';
-        this.nowPlayingTitle.innerText = this.videos.list[0].title;
-        nowPlaying.appendChild(this.nowPlayingTitle);
+        this.videoTitle = document.createElement('div');
+        this.videoTitle.className = 'dm__now-playing-title';
+        this.videoTitle.innerText = this.videos.list[0].title;
+        nowPlaying.appendChild(this.videoTitle);
         this.dmPlaylist.insertAdjacentElement('afterbegin', nowPlaying);
+    };
+    PlaylistManager.prototype.generateVideoInfo = function () {
+        var videoInfo = document.createElement('div');
+        videoInfo.className = 'dm__video-info';
+        this.videoTitle = document.createElement('h3');
+        this.videoTitle.className = 'dm__video-title';
+        this.videoTitle.innerText = this.videos.list[0].title;
+        this.videoDesc = document.createElement('div');
+        this.videoDesc.className = 'dm__video-description';
+        this.videoDesc.innerHTML = this.videos.list[0].description;
+        videoInfo.appendChild(this.videoTitle);
+        videoInfo.appendChild(this.videoDesc);
+        this.rootEl.insertAdjacentElement('afterbegin', videoInfo);
     };
     PlaylistManager.prototype.generateCarouselTag = function () {
         var _this = this;
@@ -3504,10 +3519,11 @@ var PlaylistManager = /** @class */ (function () {
             this.slides[i].className = (this.slides[i].dataset.id === this.slideActive) ? 'glide__slide dm__playlist-slide dm__playlist-active' : 'glide__slide dm__playlist-slide';
         }
         // Seek the video active
-        if (this.nowPlayingTitle) {
+        if (this.videoTitle) {
             for (var i = 0; i < this.videos.list.length; i++) {
                 if (videoId === this.videos.list[i].id) {
-                    this.nowPlayingTitle.innerText = this.videos.list[i].title;
+                    this.videoTitle.innerText = this.videos.list[i].title;
+                    this.videoDesc.innerText = this.videos.list[i].description;
                     break;
                 }
             }

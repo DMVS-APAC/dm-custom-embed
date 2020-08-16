@@ -13,7 +13,8 @@ export default class PlaylistManager {
     private videos: infVideoApi = null;
     private slides: HTMLLIElement[] = [];
     private slideActive: string = '';
-    private nowPlayingTitle: HTMLElement = null;
+    private videoTitle: HTMLElement = null;
+    private videoDesc: HTMLElement = null;
 
     public constructor(rootEl: HTMLDivElement, videos: infVideoApi, playnow?: boolean) {
         this.rootEl = rootEl;
@@ -21,6 +22,7 @@ export default class PlaylistManager {
 
         this.addEventListeners();
         this.generateCarouselTag();
+        this.generateVideoInfo();
 
         if (playnow) this.generateNowPlaying();
 
@@ -43,13 +45,31 @@ export default class PlaylistManager {
 
         nowPlaying.appendChild(statusText);
 
-        this.nowPlayingTitle = document.createElement('div');
-        this.nowPlayingTitle.className = 'dm__now-playing-title';
-        this.nowPlayingTitle.innerText = this.videos.list[0].title;
+        this.videoTitle = document.createElement('div');
+        this.videoTitle.className = 'dm__now-playing-title';
+        this.videoTitle.innerText = this.videos.list[0].title;
 
-        nowPlaying.appendChild(this.nowPlayingTitle);
+        nowPlaying.appendChild(this.videoTitle);
 
         this.dmPlaylist.insertAdjacentElement('afterbegin', nowPlaying);
+    }
+
+    private generateVideoInfo() {
+        const videoInfo = document.createElement('div');
+        videoInfo.className = 'dm__video-info';
+
+        this.videoTitle = document.createElement('h3');
+        this.videoTitle.className = 'dm__video-title';
+        this.videoTitle.innerText = this.videos.list[0].title;
+
+        this.videoDesc = document.createElement('div');
+        this.videoDesc.className = 'dm__video-description';
+        this.videoDesc.innerHTML = this.videos.list[0].description;
+
+        videoInfo.appendChild(this.videoTitle);
+        videoInfo.appendChild(this.videoDesc);
+
+        this.rootEl.insertAdjacentElement('afterbegin', videoInfo);
     }
 
     private generateCarouselTag() {
@@ -185,10 +205,11 @@ export default class PlaylistManager {
         }
 
         // Seek the video active
-        if (this.nowPlayingTitle) {
+        if (this.videoTitle) {
             for (let i = 0; i < this.videos.list.length; i++) {
                 if (videoId === this.videos.list[i].id) {
-                    this.nowPlayingTitle.innerText = this.videos.list[i].title;
+                    this.videoTitle.innerText = this.videos.list[i].title;
+                    this.videoDesc.innerText = this.videos.list[i].description;
                     break;
                 }
             }

@@ -36,28 +36,11 @@ $playlist-active-bg: #56c7ff;
   }
 }
 
-//.dm__now-playing-status {
-//  --dm-now-playing-text-color: #fff;
-//  --dm-now-playing-text-size: .8em;
-//  --dm-now-playing-title-color: #fff;
-//  --dm-now-playing-title-size: 1em;
-//  --dm-now-playing-bg: transparent;
-//
-//  padding: 10px 0;
-//}
-//
-//.dm__now-playing-text {
-//  color: var(--dm-now-playing-text-color);
-//  font-size: var(--dm-now-playing-text-size);
-//  margin-bottom: 10px;
-//}
-//.dm__now-playing-title {
-//  color: var(--dm-now-playing-title-color);
-//  font-size: var(--dm-now-playing-title-size);
-//  white-space: nowrap;
-//  overflow: hidden;
-//  text-overflow: ellipsis;
-//}
+.dm__video-info {
+  background: var(--dm-video-info-bg, #fff);
+  border-top: 6px solid var(--dm-top-line-color, $playlist-bg);
+  text-align: left;
+}
 
 .dm__playlist-slide {
   cursor: pointer;
@@ -80,6 +63,9 @@ $playlist-active-bg: #56c7ff;
   padding: 5px;
 }
 
+/**
+ * A sign for now playing and next playing on thumbnail
+ */
 .dm__playlist-active {
   .dm__playlist-cont-thumbnail:after {
     content: "Playing now";
@@ -161,12 +147,17 @@ $playlist-active-bg: #56c7ff;
   color: inherit !important;
   font-size: var(--dm-playlist-publisher-size, .6em) !important;
   line-height: 1.3em !important;
-  display: flex;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
 
 .dm__playlist-publisher-ava {
   width: 12px;
-  margin-right: 8px;
+  margin-right: 6px;
+  vertical-align: middle;
 }
 
 .dm__playlist-title {
