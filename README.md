@@ -2,6 +2,7 @@
 
 [![Version](https://badge.fury.io/js/%40dmvs-apac%2Fdm-custom-embed.svg)](https://www.npmjs.com/package/@dmvs-apac/dm-custom-embed)
 [![License](https://img.shields.io/github/license/DMVS-APAC/dm-custom-embed)](https://github.com/DMVS-APAC/dm-custom-embed/blob/master/LICENSE)
+[![Build Status](https://github.com/DMVS-APAC/dm-custom-embed/workflows/Stage%20Runner/badge.svg)](https://github.com/DMVS-APAC/dm-custom-embed/actions?query=workflow%3A%22Stage+Runner%22)
 [![](https://data.jsdelivr.com/v1/package/npm/@dmvs-apac/dm-custom-embed/badge)](https://www.jsdelivr.com/package/npm/@dmvs-apac/dm-custom-embed)
 
 This library is to embed Dailymotion video programmatically. Build using Typescript and much <3
