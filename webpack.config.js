@@ -293,7 +293,7 @@ module.exports = (env, options) => {
             }),
             new HtmlWebpackPlugin({
                 title: 'Dailymotion No CPE Default Embed',
-                template: 'src/Labs/NoCpe/default/index.html',
+                template: 'src/Labs/NoCPE/default/index.html',
                 filename: 'no-cpe/index.html',
                 chunks: ['dm-no-cpe'],
                 showErrors: isProd ? false : true,
@@ -316,7 +316,7 @@ module.exports = (env, options) => {
             }),
             new HtmlWebpackPlugin({
                 title: 'Dailymotion No CPE Embed No PiP',
-                template: 'src/Labs/NoCpe/no-pip/index.html',
+                template: 'src/Labs/NoCPE/no-pip/index.html',
                 filename: 'no-cpe/no-pip.html',
                 chunks: ['dm-no-cpe'],
                 showErrors: isProd ? false : true,
@@ -339,7 +339,7 @@ module.exports = (env, options) => {
             }),
             new HtmlWebpackPlugin({
                 title: 'Dailymotion No CPE Embed No Scroll To Play',
-                template: 'src/Labs/NoCpe/no-scroll-to-play/index.html',
+                template: 'src/Labs/NoCPE/no-scroll-to-play/index.html',
                 filename: 'no-cpe/no-scroll-to-play.html',
                 chunks: ['dm-no-cpe'],
                 showErrors: isProd ? false : true,
@@ -362,7 +362,7 @@ module.exports = (env, options) => {
             }),
             new HtmlWebpackPlugin({
                 title: 'Dailymotion No CPE Embed Scroll To Play and Scroll To Pause',
-                template: 'src/Labs/NoCpe/scroll-to-pause-play/index.html',
+                template: 'src/Labs/NoCPE/scroll-to-pause-play/index.html',
                 filename: 'no-cpe/scroll-to-pause-play.html',
                 chunks: ['dm-no-cpe'],
                 showErrors: isProd ? false : true,
@@ -385,7 +385,7 @@ module.exports = (env, options) => {
             }),
             new HtmlWebpackPlugin({
                 title: 'Dailymotion No CPE Embed With Playlist',
-                template: 'src/Labs/NoCpe/playlist/index.html',
+                template: 'src/Labs/NoCPE/playlist/index.html',
                 filename: 'no-cpe/playlist.html',
                 chunks: ['dm-no-cpe'],
                 showErrors: isProd ? false : true,

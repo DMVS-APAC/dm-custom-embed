@@ -2131,7 +2131,7 @@ init();
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return fetchData; });
-/* harmony import */ var _global_vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../global/vars */ "./src/Libraries/global/vars.ts");
+/* harmony import */ var _Global_vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Global/vars */ "./src/Libraries/Global/vars.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2193,12 +2193,34 @@ function fetchData(urlParams) {
         });
     }); }).catch(function (err) {
         // Do nothing, just don't show to user what's happened on player
-        if (_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
+        if (_Global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
             console.log("API calling error");
         }
     });
 }
 
+
+/***/ }),
+
+/***/ "./src/Libraries/Global/vars.ts":
+/*!**************************************!*\
+  !*** ./src/Libraries/Global/vars.ts ***!
+  \**************************************/
+/*! exports provided: debugMode, apiUrl */
+/*! exports used: apiUrl, debugMode */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return debugMode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return apiUrl; });
+/* harmony import */ var _Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Utilities/get-query-params */ "./src/Libraries/Utilities/get-query-params.ts");
+// Utilities
+
+// Get debug mode params from url
+var debugMode = (Object(_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])('dmdebug') != null && Object(_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])('dmdebug') != 'false');
+var apiUrl = process.env.API_URL ? process.env.API_URL : "https://api.dailymotion.com/";
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
 
 /***/ }),
 
@@ -2321,28 +2343,6 @@ function sleep(delay) {
     });
 }
 
-
-/***/ }),
-
-/***/ "./src/Libraries/global/vars.ts":
-/*!**************************************!*\
-  !*** ./src/Libraries/global/vars.ts ***!
-  \**************************************/
-/*! exports provided: debugMode, apiUrl */
-/*! exports used: apiUrl, debugMode */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return debugMode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return apiUrl; });
-/* harmony import */ var _Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Utilities/get-query-params */ "./src/Libraries/Utilities/get-query-params.ts");
-// Utilities
-
-// Get debug mode params from url
-var debugMode = (Object(_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])('dmdebug') != null && Object(_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])('dmdebug') != 'false');
-var apiUrl = process.env.API_URL ? process.env.API_URL : "https://api.dailymotion.com/";
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
 
 /***/ }),
 
@@ -2822,7 +2822,7 @@ module.exports = exported;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Libraries/global/vars */ "./src/Libraries/global/vars.ts");
+/* harmony import */ var _Libraries_Global_vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Libraries/Global/vars */ "./src/Libraries/Global/vars.ts");
 /* harmony import */ var _Libraries_Utilities_html_entities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Libraries/Utilities/html-entities */ "./src/Libraries/Utilities/html-entities.ts");
 /* harmony import */ var _Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Libraries/API/apiCall */ "./src/Libraries/API/apiCall.ts");
 /* harmony import */ var _Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Libraries/Utilities/waitFor */ "./src/Libraries/Utilities/waitFor.ts");
@@ -2993,7 +2993,7 @@ var PlayerManager = /** @class */ (function () {
             adCoverPlay: (rootEl.getAttribute('adCoverPlay') == 'true'),
             closePip: (rootEl.getAttribute('closePip') == 'true'),
         };
-        if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
+        if (_Libraries_Global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
             console.log("%c DM Player Params: ", "background: #56C7FF; color: #232323", this.playerParams);
         }
         // Tell the event listener that player parameters is extracted
@@ -3139,7 +3139,7 @@ var PlayerManager = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        url = _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + "/video/" + videoId + '?fields=' + this.searchParams.fields;
+                        url = _Libraries_Global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + "/video/" + videoId + '?fields=' + this.searchParams.fields;
                         return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__[/* fetchData */ "a"])(url)];
                     case 1:
                         video = _a.sent();
@@ -3178,7 +3178,7 @@ var PlayerManager = /** @class */ (function () {
                         }).join('&');
                         addProps = '&sort=' + sort + ((typeof rangeDay !== 'undefined' && rangeDay !== 0) ? "&created_after=" + day * rangeDay : '');
                         return [2 /*return*/, new Promise(function (resolve, reject) {
-                                var url = _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + (_this.playerParams.searchInPlaylist ? "playlist/" + _this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties + addProps;
+                                var url = _Libraries_Global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + (_this.playerParams.searchInPlaylist ? "playlist/" + _this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties + addProps;
                                 resolve(url);
                             })];
                 }
@@ -3252,7 +3252,7 @@ var PlayerManager = /** @class */ (function () {
                     case 0:
                         currentTime = Math.floor(Date.now() / 1000);
                         thirtyDays = 2592000;
-                        url = _Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners) + (this.playerParams.getUpdatedVideo ? "&created_after=" + (currentTime - thirtyDays) : "") + "&sort=random&limit=1&fields=" + this.searchParams.fields;
+                        url = _Libraries_Global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners) + (this.playerParams.getUpdatedVideo ? "&created_after=" + (currentTime - thirtyDays) : "") + "&sort=random&limit=1&fields=" + this.searchParams.fields;
                         return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__[/* fetchData */ "a"])(url)];
                     case 1:
                         video = _a.sent();
@@ -3264,7 +3264,7 @@ var PlayerManager = /** @class */ (function () {
                                 this.setVideo(video.list[0], true);
                             }
                             else {
-                                if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
+                                if (_Libraries_Global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
                                     console.warn("DM related Unable to find a fallback video");
                                 }
                             }
@@ -3287,7 +3287,7 @@ var PlayerManager = /** @class */ (function () {
                 keywords = this.sanitizeKeywords(keywordContainer.textContent ? keywordContainer.textContent : keywordContainer.getAttribute("content"));
             }
             catch (e) {
-                if (_Libraries_global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
+                if (_Libraries_Global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {
                     console.error("Can't find selector: ", selector);
                 }
             }

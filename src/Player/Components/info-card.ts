@@ -1,4 +1,4 @@
-import infVideo from "player/interfaces/infVideo";
+import infVideo from "../Interfaces/infVideo";
 
 export default class InfoCard {
     private infoCardEl: HTMLDivElement = null;
