@@ -209,7 +209,7 @@ export default class PlaylistManager {
             for (let i = 0; i < this.videos.list.length; i++) {
                 if (videoId === this.videos.list[i].id) {
                     this.videoTitle.innerText = this.videos.list[i].title;
-                    this.videoDesc.innerText = this.videos.list[i].description;
+                    this.videoDesc.innerHTML = this.videos.list[i].description;
                     break;
                 }
             }

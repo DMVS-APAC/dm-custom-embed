@@ -39,7 +39,27 @@ $playlist-active-bg: #56c7ff;
 .dm__video-info {
   background: var(--dm-video-info-bg, #fff);
   border-top: 6px solid var(--dm-top-line-color, $playlist-bg);
-  text-align: left;
+  margin-bottom: 13px;
+
+  .dm__video-title {
+    --dm-title-align: left;
+    --dm-title-weight: 700;
+    font-family: var(--dm__video-title, $playlist-font-family) !important;
+  }
+
+  .dm__video-description {
+    font-family: $playlist-font-family !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    height: 3.1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    font-size: .8em;
+
+    p { margin: 0 0 13px;}
+  }
 }
 
 .dm__playlist-slide {
