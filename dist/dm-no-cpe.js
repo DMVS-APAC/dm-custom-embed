@@ -3468,7 +3468,7 @@ var PlaylistManager = /** @class */ (function () {
             publisherAva.src = this.videos.list[i]['owner.avatar_25_url'];
             publisherName.appendChild(publisherAva);
             var name_1 = document.createElement('span');
-            name_1.innerText = "Anu ini kok panjang banget sih"; //this.videos.list[i]['owner.screenname'];
+            name_1.innerText = this.videos.list[i]['owner.screenname'];
             publisherName.appendChild(name_1);
             thumbInfo.appendChild(publisherName);
             slideWrapper.appendChild(thumbInfo);

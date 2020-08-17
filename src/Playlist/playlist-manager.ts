@@ -140,7 +140,7 @@ export default class PlaylistManager {
             publisherName.appendChild(publisherAva);
 
             const name = document.createElement('span');
-            name.innerText = "Anu ini kok panjang banget sih"; //this.videos.list[i]['owner.screenname'];
+            name.innerText = this.videos.list[i]['owner.screenname'];
 
             publisherName.appendChild(name);
 
