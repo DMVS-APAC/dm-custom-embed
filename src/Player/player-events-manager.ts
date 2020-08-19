@@ -206,7 +206,7 @@ export default class PlayerEventsManager {
          * Handle change tab by user
          */
         document.addEventListener(this.visibilityChange, (e: Event) => {
-            if (this.adPause === true) {
+            if (document[this.hidden] && this.adPause === true) {
                 this.players[0].play();
                 this.adPause = false;
             }

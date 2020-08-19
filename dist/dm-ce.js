@@ -2582,7 +2582,7 @@ var PlayerEventsManager = /** @class */ (function () {
                  * Handle change tab by user
                  */
                 document.addEventListener(this.visibilityChange, function (e) {
-                    if (_this.adPause === true) {
+                    if (document[_this.hidden] && _this.adPause === true) {
                         _this.players[0].play();
                         _this.adPause = false;
                     }
