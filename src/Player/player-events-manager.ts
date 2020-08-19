@@ -9,15 +9,37 @@ export default class PlayerEventsManager {
     private adPlaying: string = '';
     private multiplayerParams: infMultiplayer = null;
     private playerParams: infPlayer = null;
+    private hidden: string = '';
+    private visibilityChange: string = '';
+    private adPause: boolean = false;
+    private pauseOnClick: boolean = false;
 
     public constructor(playerParams: infPlayer, multiplayer: infMultiplayer) {
+        this.setVisibilitEnv();
         this.videoEvents();
 
         this.playerParams = playerParams;
         this.multiplayerParams = multiplayer;
     }
 
-    /**
+    private setVisibilitEnv() {
+        if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
+            this.hidden = "hidden";
+            this.visibilityChange = "visibilitychange";
+
+            //@ts-ignore
+        } else if (typeof document.msHidden !== "undefined") {
+            this.hidden = "msHidden";
+            this.visibilityChange = "msvisibilitychange";
+
+            //@ts-ignore
+        } else if (typeof document.webkitHidden !== "undefined") {
+            this.hidden = "webkitHidden";
+            this.visibilityChange = "webkitvisibilitychange";
+        }
+    }
+
+            /**
      * Listen to video events from Dailymotion player
      */
     private async videoEvents() {
@@ -83,6 +105,16 @@ export default class PlayerEventsManager {
                             player.setControls(true);
                         }
                     }
+                });
+
+                /**
+                 * Listen to ad_pause to handle the pause event
+                 * when player is clicked by user
+                 *
+                 * - Tell the listener that the ad is paused by user click
+                 */
+                player.addEventListener('ad_pause', (e: Event) => {
+                    this.adPause = true;
                 });
 
                 /**
@@ -168,6 +200,16 @@ export default class PlayerEventsManager {
          */
         document.addEventListener('dm-show-player', (e: Event) => {
             this.players[0].parentNode.parentNode.parentNode.classList.add('dm-playback-ready');
+        });
+
+        /**
+         * Handle change tab by user
+         */
+        document.addEventListener(this.visibilityChange, (e: Event) => {
+            if (this.adPause === true) {
+                this.players[0].play();
+                this.adPause = false;
+            }
         });
     }
 

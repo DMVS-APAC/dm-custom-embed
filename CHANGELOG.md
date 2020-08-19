@@ -2,8 +2,12 @@
 
 ## [1.5.0] ()
 
-**Implemented enhancements:**
 - New Outside Playlist theme
+
+## [1.4.10] (2020-08-19)
+
+**Implemented enhancements:**
+- Add handling ad_pause by a user click
 
 ## [1.4.9] (2020-08-10)
 
