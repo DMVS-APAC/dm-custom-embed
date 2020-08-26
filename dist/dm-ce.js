@@ -2396,13 +2396,34 @@ var PlayerEventsManager = /** @class */ (function () {
         this.adPlaying = '';
         this.multiplayerParams = null;
         this.playerParams = null;
+        this.hidden = '';
+        this.visibilityChange = '';
+        this.adPause = false;
+        this.pauseOnClick = false;
+        this.setVisibilitEnv();
         this.videoEvents();
         this.playerParams = playerParams;
         this.multiplayerParams = multiplayer;
     }
+    PlayerEventsManager.prototype.setVisibilitEnv = function () {
+        if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
+            this.hidden = "hidden";
+            this.visibilityChange = "visibilitychange";
+            //@ts-ignore
+        }
+        else if (typeof document.msHidden !== "undefined") {
+            this.hidden = "msHidden";
+            this.visibilityChange = "msvisibilitychange";
+            //@ts-ignore
+        }
+        else if (typeof document.webkitHidden !== "undefined") {
+            this.hidden = "webkitHidden";
+            this.visibilityChange = "webkitvisibilitychange";
+        }
+    };
     /**
-     * Listen to video events from Dailymotion player
-     */
+* Listen to video events from Dailymotion player
+*/
     PlayerEventsManager.prototype.videoEvents = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
@@ -2463,6 +2484,15 @@ var PlayerEventsManager = /** @class */ (function () {
                                     player.setControls(true);
                                 }
                             }
+                        });
+                        /**
+                         * Listen to ad_pause to handle the pause event
+                         * when player is clicked by user
+                         *
+                         * - Tell the listener that the ad is paused by user click
+                         */
+                        player.addEventListener('ad_pause', function (e) {
+                            _this.adPause = true;
                         });
                         /**
                          * Listening to playing event
@@ -2548,6 +2578,15 @@ var PlayerEventsManager = /** @class */ (function () {
                  */
                 document.addEventListener('dm-show-player', function (e) {
                     _this.players[0].parentNode.parentNode.parentNode.classList.add('dm-playback-ready');
+                });
+                /**
+                 * Handle change tab by user
+                 */
+                document.addEventListener(this.visibilityChange, function (e) {
+                    if (!document[_this.hidden] && _this.adPause === true) {
+                        _this.players[0].play();
+                        _this.adPause = false;
+                    }
                 });
                 return [2 /*return*/];
             });
