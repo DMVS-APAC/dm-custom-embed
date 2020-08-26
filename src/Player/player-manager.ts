@@ -168,7 +168,7 @@ export default class PlayerManager {
          * 2. if the infocard is true
          * 3. last condition is default condition
          */
-        const fields = this.playerParams.showOutsidePlaylist ? 'id,title,thumbnail_240_url,duration' : this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url' : 'id,title';
+        const fields = this.playerParams.showOutsidePlaylist ? 'id,title,description,thumbnail_240_url,duration,owner.avatar_25_url,owner.screenname' : this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url' : 'id,title';
 
         this.searchParams = {
             fields: fields,

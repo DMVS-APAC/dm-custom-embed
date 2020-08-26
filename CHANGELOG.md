@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.0] (2020-08-26)
+
+**Implemented enhancements:**
+- New Outside Playlist theme
+
 ## [1.4.10] (2020-08-19)
 
 **Implemented enhancements:**
