@@ -74,6 +74,9 @@ export default interface InfPlayer {
     // Hide controls when ad playing
     adHideControls?: boolean;
 
+    // Close button
+    closeButton?: boolean;
+
     ////// Config to player
 
     // Picture-in-Picture at start
