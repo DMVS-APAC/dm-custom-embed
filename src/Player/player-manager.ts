@@ -10,7 +10,7 @@ import { apiUrl, debugMode } from '../Libraries/Global/vars';
 // Utilities
 import htmlEntities from "../Libraries/Utilities/html-entities";
 import { fetchData } from "../Libraries/API/apiCall";
-import { waitFor } from "../Libraries/Utilities/waitFor";
+import {sleep, waitFor} from "../Libraries/Utilities/waitFor";
 
 // Components
 import setPreVideoTitle from "../Player/Components/pre-video-title";
@@ -258,17 +258,9 @@ export default class PlayerManager {
 
         this.cpeParams = cpeParams;
 
-        if (this.playerParams.closeButton === true) {
-            const closeButton = document.createElement('button');
-            closeButton.className = 'dm__close-button';
-            closeButton.innerHTML = '<svg fill="none" height="32" viewBox="0 0 31 32" width="31" xmlns="http://www.w3.org/2000/svg"><g stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><path d="m2.12132 3 26.16298 26.163"/><path d="m1.5-1.5h37" transform="matrix(.707107 -.707107 -.707107 -.707107 0 29.2843)"/></g></svg>';
-
-            rootEl.appendChild(closeButton);
-
-        }
-
         // Append the element to the root player element
         rootEl.appendChild(cpeEmbed);
+
 
         /**
          * Set pre title for video
