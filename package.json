@@ -1,7 +1,7 @@
 {
   "name": "@dmvs-apac/dm-custom-embed",
-  "version": "1.4.10",
-  "version_short": "1.4",
+  "version": "1.5.1",
+  "version_short": "1.5",
   "description": "A library to embed video from Dailymotion",
   "main": "dist/dm-ce.min.js",
   "unpkg": "dist/dm-ce.min.js",
