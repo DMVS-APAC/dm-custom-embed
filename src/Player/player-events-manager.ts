@@ -176,7 +176,9 @@ export default class PlayerEventsManager {
                             }, 1000);
                         });
 
-                        await this.waitForAdStart();
+                        // Wait for 2 seconds if ad exist
+                        if ( this.noFill !== true ) await sleep(2000);
+
                         dmPlayer.classList.add('dm--has-close-button');
                         const playerContainer = dmPlayer.childNodes[0].childNodes[0];
                         playerContainer.appendChild(closeButton);

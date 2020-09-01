@@ -2537,7 +2537,7 @@ var PlayerEventsManager = /** @class */ (function () {
                                             showPlayer = new CustomEvent('dm-show-player');
                                             document.dispatchEvent(showPlayer);
                                         }
-                                        if (!(this.playerParams.closeButton === true)) return [3 /*break*/, 2];
+                                        if (!(this.playerParams.closeButton === true)) return [3 /*break*/, 3];
                                         closeButton = document.createElement('button');
                                         closeButton.className = 'dm__close-button';
                                         closeButton.innerHTML = '<svg fill="none" height="32" viewBox="0 0 31 32" width="31" xmlns="http://www.w3.org/2000/svg"><g stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><path d="m2.12132 3 26.16298 26.163"/><path d="m1.5-1.5h37" transform="matrix(.707107 -.707107 -.707107 -.707107 0 29.2843)"/></g></svg>';
@@ -2548,14 +2548,17 @@ var PlayerEventsManager = /** @class */ (function () {
                                                 dmPlayer.remove();
                                             }, 1000);
                                         });
-                                        return [4 /*yield*/, this.waitForAdStart()];
+                                        if (!(this.noFill !== true)) return [3 /*break*/, 2];
+                                        return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* sleep */ "a"])(2000)];
                                     case 1:
                                         _a.sent();
+                                        _a.label = 2;
+                                    case 2:
                                         dmPlayer.classList.add('dm--has-close-button');
                                         playerContainer = dmPlayer.childNodes[0].childNodes[0];
                                         playerContainer.appendChild(closeButton);
-                                        _a.label = 2;
-                                    case 2: return [2 /*return*/];
+                                        _a.label = 3;
+                                    case 3: return [2 /*return*/];
                                 }
                             });
                         }); });
