@@ -158,6 +158,31 @@ export default class PlayerEventsManager {
                         const showPlayer = new CustomEvent('dm-show-player');
                         document.dispatchEvent(showPlayer);
                     }
+
+
+                    /**
+                     * Build the custom close button
+                     */
+                    if (this.playerParams.closeButton === true) {
+                        const closeButton = document.createElement('button');
+                        closeButton.className = 'dm__close-button';
+                        closeButton.innerHTML = '<svg fill="none" height="32" viewBox="0 0 31 32" width="31" xmlns="http://www.w3.org/2000/svg"><g stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><path d="m2.12132 3 26.16298 26.163"/><path d="m1.5-1.5h37" transform="matrix(.707107 -.707107 -.707107 -.707107 0 29.2843)"/></g></svg>';
+
+                        closeButton.addEventListener('click', () => {
+                            dmPlayer.classList.add('dm--hidding-player');
+                            setTimeout( () => {
+                                dmPlayer.classList.add('dm--player-hidden');
+                                dmPlayer.remove();
+                            }, 1000);
+                        });
+
+                        // Wait for 2 seconds if ad exist
+                        if ( this.noFill !== true ) await sleep(2000);
+
+                        dmPlayer.classList.add('dm--has-close-button');
+                        const playerContainer = dmPlayer.childNodes[0].childNodes[0];
+                        playerContainer.appendChild(closeButton);
+                    }
                 });
 
                 /**

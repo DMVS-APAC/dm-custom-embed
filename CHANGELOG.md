@@ -2,8 +2,8 @@
 
 ## [1.5.1] (2020-09-02)
 
-**Implmented enhancements:**
-- Add custum close button to close the video player
+**Implemented enhancements:**
+- Add new custom close button to remove video player
 
 ## [1.5.0] (2020-08-26)
 
