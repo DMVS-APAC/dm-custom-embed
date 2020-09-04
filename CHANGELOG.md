@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.5.1] (2020-08-31)
+## [1.5.1] (2020-09-02)
 
 **Implemented enhancements:**
 - Add new custom close button to remove video player
