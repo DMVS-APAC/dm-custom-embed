@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.2] (2020-09-04)
+
+**Implemented enhancements:**
+- Update endpoint
+
 ## [1.5.1] (2020-09-02)
 
 **Implemented enhancements:**
