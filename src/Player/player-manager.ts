@@ -367,6 +367,10 @@ export default class PlayerManager {
                     }
                     break;
                 } else if (this.playerParams.sort[i] === 'relevance' || this.playerParams.sort[i] === 'recent') {
+
+                    /**
+                     * It will loop until the keywords less than minWordSearch
+                     */
                     while (this.keywords.split(' ').length >= this.playerParams.minWordSearch && this.keywords.length > 0) {
                         // Strip a string to try to get video one more time if there is no video found
                         this.keywords = this.keywords.substring(0, this.searchParams.search.lastIndexOf(' '));
@@ -381,6 +385,9 @@ export default class PlayerManager {
                             break;
                         }
                     }
+
+                    // Let the looper know that video is found
+                    if (video.total > 0) break;
                 }
 
                 /**
@@ -412,6 +419,8 @@ export default class PlayerManager {
                  * Data return array, get the first array and pass it to setVideo function
                  */
                 this.setVideo(video.list[0], true);
+
+                console.log("last option");
             } else {
                 if (debugMode === true) {
                     console.warn("DM related Unable to find a fallback video");

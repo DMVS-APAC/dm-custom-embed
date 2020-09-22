@@ -3070,21 +3070,21 @@ var PlayerManager = /** @class */ (function () {
                         i = 0;
                         _c.label = 1;
                     case 1:
-                        if (!(i < this.playerParams.sort.length)) return [3 /*break*/, 10];
+                        if (!(i < this.playerParams.sort.length)) return [3 /*break*/, 11];
                         _a = _Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__[/* fetchData */ "a"];
                         return [4 /*yield*/, this.generateQuery(this.playerParams.sort[i], Number(this.playerParams.rangeDay[i]))];
                     case 2: return [4 /*yield*/, _a.apply(void 0, [_c.sent()])];
                     case 3:
                         video = _c.sent();
-                        if (!video) return [3 /*break*/, 9];
+                        if (!video) return [3 /*break*/, 10];
                         if (!(video.total > 0)) return [3 /*break*/, 4];
                         this.setVideo(video.list[0], true);
                         if (this.playerParams.showOutsidePlaylist === true) {
                             new _Playlist_playlist_manager__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"](this.rootEl, video, this.playerParams.showPlaynow);
                         }
-                        return [3 /*break*/, 10];
+                        return [3 /*break*/, 11];
                     case 4:
-                        if (!(this.playerParams.sort[i] === 'relevance' || this.playerParams.sort[i] === 'recent')) return [3 /*break*/, 8];
+                        if (!(this.playerParams.sort[i] === 'relevance' || this.playerParams.sort[i] === 'recent')) return [3 /*break*/, 9];
                         _c.label = 5;
                     case 5:
                         if (!(this.keywords.split(' ').length >= this.playerParams.minWordSearch && this.keywords.length > 0)) return [3 /*break*/, 8];
@@ -3104,18 +3104,23 @@ var PlayerManager = /** @class */ (function () {
                         }
                         return [3 /*break*/, 5];
                     case 8:
+                        // Let the looper know that video is found
+                        if (video.total > 0)
+                            return [3 /*break*/, 11];
+                        _c.label = 9;
+                    case 9:
                         /**
                          * This condition is to check if no videos found
                          */
                         if (video.total === 0 && i === this.playerParams.sort.length - 1) {
                             this.getFallbackVideo();
-                            return [3 /*break*/, 10];
+                            return [3 /*break*/, 11];
                         }
-                        _c.label = 9;
-                    case 9:
+                        _c.label = 10;
+                    case 10:
                         i++;
                         return [3 /*break*/, 1];
-                    case 10: return [2 /*return*/];
+                    case 11: return [2 /*return*/];
                 }
             });
         });
@@ -3138,6 +3143,7 @@ var PlayerManager = /** @class */ (function () {
                                  * Data return array, get the first array and pass it to setVideo function
                                  */
                                 this.setVideo(video.list[0], true);
+                                console.log("last option");
                             }
                             else {
                                 if (_Libraries_Global_vars__WEBPACK_IMPORTED_MODULE_0__[/* debugMode */ "b"] === true) {

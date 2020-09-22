@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.3] (2020-09-22)
+
+**Fixed Bugs:**
+- Multiple fallback is still looping when video is found
+
 ## [1.5.2] (2020-09-04)
 
 **Implemented enhancements:**
