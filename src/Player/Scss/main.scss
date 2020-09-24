@@ -101,6 +101,21 @@
   height: 0;
   overflow: hidden;
 
+  &.dm--has-placeholder {
+    overflow: visible;
+
+    &:before {
+      background: #000;
+      padding-bottom: 56.25%;
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
+
   &.dm--has-close-button {
     padding-top: 40px;
 
@@ -118,8 +133,11 @@
 
   &.dm-playback-ready {
     height: auto;
-    animation: showPlayer 1 1s;
-    transform-origin: top;
+
+    .dailymotion-cpe {
+      animation: showPlayer 1 1s;
+      transform-origin: top;
+    }
 
     .insider {
       display: block;
