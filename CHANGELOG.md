@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.5.4] (2020-09-28)
+## [1.5.5] (2020-09-28)
 
 **Implemented enhancements:**
 - Add thumbnail before video ready to play
