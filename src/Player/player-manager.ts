@@ -169,7 +169,7 @@ export default class PlayerManager {
          * 2. if the infocard is true
          * 3. last condition is default condition
          */
-        const fields = this.playerParams.showOutsidePlaylist ? 'id,title,description,thumbnail_240_url,duration,owner.avatar_25_url,owner.screenname' : this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url' : 'id,title';
+        const fields = this.playerParams.showOutsidePlaylist ? 'id,title,description,thumbnail_240_url,thumbnail_480_url,duration,owner.avatar_25_url,owner.screenname' : this.playerParams.showInfoCard ? 'id,title,description,owner.avatar_190_url,thumbnail_480_url' : 'id,title,thumbnail_480_url';
 
         this.searchParams = {
             fields: fields,
@@ -203,6 +203,9 @@ export default class PlayerManager {
 
     private loadDmPlayer(rootEl: HTMLDivElement): void {
         const cpeEmbed = document.createElement("div");
+
+        // Set thumbnail
+        rootEl.setAttribute('style', '--dm-thumbnail: url(' + this.videoParams.thumbnail_480_url) + ')';
 
         /**
          * Set attributes part
@@ -419,8 +422,6 @@ export default class PlayerManager {
                  * Data return array, get the first array and pass it to setVideo function
                  */
                 this.setVideo(video.list[0], true);
-
-                console.log("last option");
             } else {
                 if (debugMode === true) {
                     console.warn("DM related Unable to find a fallback video");

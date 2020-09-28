@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.5.6] (2020-09-28)
+
+**Fixed Bugs:**
+- Hotfix style issue
+
+## [1.5.5] (2020-09-28)
+
+**Implemented enhancements:**
+- Add thumbnail before video ready to play
+
 ## [1.5.3] (2020-09-22)
 
 **Fixed Bugs:**
