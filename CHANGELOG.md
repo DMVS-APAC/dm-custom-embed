@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.6] (2020-09-28)
+
+**Fixed Bugs:**
+- Hotfix style issue
+
 ## [1.5.5] (2020-09-28)
 
 **Implemented enhancements:**
