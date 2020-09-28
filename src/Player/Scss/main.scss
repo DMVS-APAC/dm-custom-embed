@@ -101,18 +101,39 @@
   height: 0;
   overflow: hidden;
 
+
   &.dm--has-placeholder {
     overflow: visible;
+    background-color: #000;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: var(--dm-thumbnail);
+    padding-bottom: 56.25%;
+    width: 100%;
 
     &:before {
-      background: #000;
-      padding-bottom: 56.25%;
       content: "";
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      position: absolute;
+      left: 45px;
+      top: calc(50% - 42px);
       display: block;
+      background: rgba(255,255,255,.4);
+      animation: showPlayer infinite 1s;
+    }
+
+    .dailymotion-cpe {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
+
+      // Remove the slidedown animation
+      &:before {
+        display: none;
+      }
     }
   }
 
@@ -134,9 +155,12 @@
   &.dm-playback-ready {
     height: auto;
 
+    &.dm--has-placeholder:before {
+      display: none;
+    }
+
     .dailymotion-cpe {
       animation: showPlayer 1 1s;
-      transform-origin: top;
     }
 
     .insider {
@@ -191,11 +215,11 @@
 
 @keyframes showPlayer {
   from {
-    transform: scaleY(0);
+    opacity: 0;
   }
 
   to {
-    transform: scaleY(1);
+    opacity: 1;
   }
 }
 
