@@ -1,5 +1,11 @@
 # Changelog
 
+
+## [1.5.8] (2020-09-29)
+
+**Fixed Bugs:**
+- Thumbnail not showing
+
 ## [1.5.7] (2020-09-29)
 
 **Fixed Bugs:**
