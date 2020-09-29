@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.7] (2020-09-29)
+
+**Fixed Bugs:**
+- Fixed style issue in small player size
+
 ## [1.5.6] (2020-09-28)
 
 **Fixed Bugs:**
