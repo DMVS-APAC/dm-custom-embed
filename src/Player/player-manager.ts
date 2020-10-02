@@ -329,14 +329,15 @@ export default class PlayerManager {
         // Waiting for search params to be ready
         await waitFor( () => this.searchParams !== null, 100, 5000, "Timeout waiting for searchParams not null");
 
-        const currentTime = Math.floor(Date.now()/1000);
         const day = 86400;
 
         if (this.playerParams.startDate !== null && (rangeDay === null || rangeDay === 0 ) ) {
             this.searchParams.created_after = new Date(this.playerParams.startDate).getTime() / 1000;
+        } else if (typeof rangeDay !== 'undefined' && rangeDay !== 0) {
+            this.searchParams.created_after = day*rangeDay;
         }
 
-        if (this.keywords !== '' && (sort === 'relevance' || sort === 'recent') ) {
+        if (this.keywords !== '' && sort === 'relevance' || ( sort === 'recent' && this.playerParams.keywordsSelector !== null) ) {
             this.searchParams.search = this.keywords;
         } else {
             delete this.searchParams.search;
@@ -347,7 +348,7 @@ export default class PlayerManager {
             return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
         }).join('&');
 
-        const addProps = '&sort=' + sort + ( (typeof rangeDay !== 'undefined' && rangeDay !== 0) ? "&created_after=" + day*rangeDay: '' );
+        const addProps = '&sort=' + sort;
 
         return new Promise((resolve, reject) => {
             const url = apiUrl + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos" : "videos") + "?" + properties + addProps;

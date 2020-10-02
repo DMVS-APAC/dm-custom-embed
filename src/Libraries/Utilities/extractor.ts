@@ -1,6 +1,6 @@
 import infPlayer from '../../Player/Interfaces/infPlayer';
 
-export default function playereExtractor(rootEl: HTMLDivElement): infPlayer {
+export default function playerExtractor(rootEl: HTMLDivElement): infPlayer {
 
     /**
      * See interfaces/infPlayer.ts to know further
