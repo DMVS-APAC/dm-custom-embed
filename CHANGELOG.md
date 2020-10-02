@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.9] (2020-10-02)
+
+**Fixed Bugs:**
+- The recent fallback is still using keywords
+- Double `created_after` param if the `rangeDay` and `startDate` exist
 
 ## [1.5.8] (2020-09-29)
 
