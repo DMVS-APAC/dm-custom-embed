@@ -174,8 +174,9 @@ $playlist-active-bg: #56c7ff;
   width: 100%;
 }
 
-.dm__playlist-publisher-ava {
-  width: 12px;
+img.dm__playlist-publisher-ava {
+  all: unset;
+  width: 12px !important;
   margin-right: 6px;
   vertical-align: middle;
 }
