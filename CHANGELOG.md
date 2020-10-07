@@ -5,6 +5,7 @@
 **Fixed Bugs:**
 - The recent fallback is still using keywords
 - Double `created_after` param if the `rangeDay` and `startDate` exist
+- Fixed random video falback when playlist actived
 
 ## [1.5.8] (2020-09-29)
 

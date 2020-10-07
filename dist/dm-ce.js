@@ -3029,7 +3029,7 @@ var PlayerManager = /** @class */ (function () {
     };
     PlayerManager.prototype.generateQuery = function (sort, rangeDay) {
         return __awaiter(this, void 0, void 0, function () {
-            var day, properties, addProps;
+            var date, properties, addProps;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -3039,14 +3039,15 @@ var PlayerManager = /** @class */ (function () {
                     case 1:
                         // Waiting for search params to be ready
                         _a.sent();
-                        day = 86400;
+                        date = new Date();
                         if (this.playerParams.startDate !== null && (rangeDay === null || rangeDay === 0)) {
                             this.searchParams.created_after = new Date(this.playerParams.startDate).getTime() / 1000;
                         }
                         else if (typeof rangeDay !== 'undefined' && rangeDay !== 0) {
-                            this.searchParams.created_after = day * rangeDay;
+                            this.searchParams.created_after = Math.floor(date.setDate(date.getDate() - (rangeDay - 1)) / 1000);
                         }
-                        if (this.keywords !== '' && sort === 'relevance' || (sort === 'recent' && this.playerParams.keywordsSelector !== null)) {
+                        if (this.keywords !== '' && sort === 'relevance' ||
+                            (sort === 'recent' && this.keywords.split(' ').length > this.playerParams.minWordSearch)) {
                             this.searchParams.search = this.keywords;
                         }
                         else {
@@ -3091,7 +3092,7 @@ var PlayerManager = /** @class */ (function () {
                         if (!(this.playerParams.sort[i] === 'relevance' || this.playerParams.sort[i] === 'recent')) return [3 /*break*/, 9];
                         _c.label = 5;
                     case 5:
-                        if (!(this.keywords.split(' ').length >= this.playerParams.minWordSearch && this.keywords.length > 0)) return [3 /*break*/, 8];
+                        if (!(this.keywords.split(' ').length > this.playerParams.minWordSearch && this.keywords.length > 0)) return [3 /*break*/, 8];
                         // Strip a string to try to get video one more time if there is no video found
                         this.keywords = this.keywords.substring(0, this.searchParams.search.lastIndexOf(' '));
                         _b = _Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__[/* fetchData */ "a"];
@@ -3137,10 +3138,11 @@ var PlayerManager = /** @class */ (function () {
                     case 0:
                         currentTime = Math.floor(Date.now() / 1000);
                         thirtyDays = 2592000;
-                        url = _Libraries_Global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners) + (this.playerParams.getUpdatedVideo ? "&created_after=" + (currentTime - thirtyDays) : "") + "&sort=random&limit=1&fields=" + this.searchParams.fields;
+                        url = _Libraries_Global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners + "&") + ((this.playerParams.getUpdatedVideo && this.playerParams.searchInPlaylist === false) ? "created_after=" + (currentTime - thirtyDays) + "&" : "") + "sort=random&limit=1&fields=" + this.searchParams.fields;
                         return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__[/* fetchData */ "a"])(url)];
                     case 1:
                         video = _a.sent();
+                        console.log(url);
                         if (video) {
                             if (video.list.length > 0) {
                                 /**
