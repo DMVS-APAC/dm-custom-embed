@@ -329,15 +329,16 @@ export default class PlayerManager {
         // Waiting for search params to be ready
         await waitFor( () => this.searchParams !== null, 100, 5000, "Timeout waiting for searchParams not null");
 
-        const day = 86400;
+        const date = new Date();
 
         if (this.playerParams.startDate !== null && (rangeDay === null || rangeDay === 0 ) ) {
             this.searchParams.created_after = new Date(this.playerParams.startDate).getTime() / 1000;
         } else if (typeof rangeDay !== 'undefined' && rangeDay !== 0) {
-            this.searchParams.created_after = day*rangeDay;
+            this.searchParams.created_after = Math.floor(date.setDate(date.getDate() - (rangeDay - 1) ) / 1000);
         }
 
-        if (this.keywords !== '' && sort === 'relevance' || ( sort === 'recent' && this.playerParams.keywordsSelector !== null) ) {
+        if ( this.keywords !== '' && sort === 'relevance' ||
+            ( sort === 'recent' && this.keywords.split(' ').length > this.playerParams.minWordSearch) ) {
             this.searchParams.search = this.keywords;
         } else {
             delete this.searchParams.search;
@@ -375,7 +376,7 @@ export default class PlayerManager {
                     /**
                      * It will loop until the keywords less than minWordSearch
                      */
-                    while (this.keywords.split(' ').length >= this.playerParams.minWordSearch && this.keywords.length > 0) {
+                    while (this.keywords.split(' ').length > this.playerParams.minWordSearch && this.keywords.length > 0) {
                         // Strip a string to try to get video one more time if there is no video found
                         this.keywords = this.keywords.substring(0, this.searchParams.search.lastIndexOf(' '));
                         video = await fetchData(await this.generateQuery(this.playerParams.sort[i], Number(this.playerParams.rangeDay[i])));
@@ -414,8 +415,10 @@ export default class PlayerManager {
         const thirtyDays = 2592000;
 
         // Generate url to call
-        const url = apiUrl + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners)  + (this.playerParams.getUpdatedVideo ? "&created_after=" + (currentTime - thirtyDays) : "") + "&sort=random&limit=1&fields=" + this.searchParams.fields;
+        const url = apiUrl + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners + "&" ) + ( (this.playerParams.getUpdatedVideo && this.playerParams.searchInPlaylist === false) ? "created_after=" + (currentTime - thirtyDays) + "&" : "") + "sort=random&limit=1&fields=" + this.searchParams.fields;
         const video = await fetchData(url);
+
+        console.log(url);
 
         if (video) {
             if (video.list.length > 0) {
