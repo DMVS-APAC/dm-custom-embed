@@ -2627,7 +2627,7 @@ var PlayerEventsManager = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: 
                     // Waiting for 1 second to interact with ad
-                    return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* sleep */ "a"])(2000)];
+                    return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* sleep */ "a"])(3000)];
                     case 1:
                         // Waiting for 1 second to interact with ad
                         _a.sent();
