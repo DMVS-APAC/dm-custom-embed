@@ -2525,10 +2525,10 @@ var PlayerEventsManager = /** @class */ (function () {
                                         console.log('dm: Playback ready');
                                         if (!(this.playerParams.showAdOnly === true)) return [3 /*break*/, 2];
                                         dmPlayer.classList.add('dm-wait-for-ad');
+                                        player.play();
                                         return [4 /*yield*/, this.waitForAdStart()];
                                     case 1:
                                         _a.sent();
-                                        player.play();
                                         return [3 /*break*/, 3];
                                     case 2:
                                         showPlayer = new CustomEvent('dm-show-player');
@@ -2623,13 +2623,13 @@ var PlayerEventsManager = /** @class */ (function () {
             var destroyPlayer, showPlayer;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: 
-                    // Waiting for 1 second to interact with ad
-                    return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* sleep */ "a"])(3000)];
+                    case 0:
+                        console.log('dm: Waiting ad');
+                        // Waiting for 1 second to interact with ad
+                        return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* sleep */ "a"])(3000)];
                     case 1:
                         // Waiting for 1 second to interact with ad
                         _a.sent();
-                        console.log('dm: Waiting ad');
                         /**
                          * noFill means no ad to serve
                          * It will send a custom event that let

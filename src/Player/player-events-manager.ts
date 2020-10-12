@@ -155,8 +155,8 @@ export default class PlayerEventsManager {
                      */
                     if (this.playerParams.showAdOnly === true) {
                         dmPlayer.classList.add('dm-wait-for-ad');
-                        await this.waitForAdStart();
                         player.play();
+                        await this.waitForAdStart();
                     } else {
                         const showPlayer = new CustomEvent('dm-show-player');
                         document.dispatchEvent(showPlayer);
@@ -246,10 +246,10 @@ export default class PlayerEventsManager {
      * This function is related to `ad_start` listener as well
      */
     private async waitForAdStart() {
+        console.log('dm: Waiting ad');
         // Waiting for 1 second to interact with ad
         await sleep(3000);
 
-        console.log('dm: Waiting ad');
         /**
          * noFill means no ad to serve
          * It will send a custom event that let
