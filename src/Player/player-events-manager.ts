@@ -60,6 +60,7 @@ export default class PlayerEventsManager {
 
                 player.addEventListener('ad_start', (e: Event) => {
                     this.noFill = false;
+                    console.log('dm: Ad start');
                 });
 
                 /**
@@ -143,6 +144,8 @@ export default class PlayerEventsManager {
                 player.addEventListener('playback_ready', async (e: Event) => {
                     const dmPlayer = player.parentNode.parentNode.parentNode;
 
+                    console.log('dm: Playback ready');
+
                     /**
                      * It's only to show video when ad is filled
                      *
@@ -152,8 +155,8 @@ export default class PlayerEventsManager {
                      */
                     if (this.playerParams.showAdOnly === true) {
                         dmPlayer.classList.add('dm-wait-for-ad');
+                        await this.waitForAdStart();
                         player.play();
-                        this.waitForAdStart();
                     } else {
                         const showPlayer = new CustomEvent('dm-show-player');
                         document.dispatchEvent(showPlayer);
@@ -246,6 +249,7 @@ export default class PlayerEventsManager {
         // Waiting for 1 second to interact with ad
         await sleep(3000);
 
+        console.log('dm: Waiting ad');
         /**
          * noFill means no ad to serve
          * It will send a custom event that let
@@ -254,9 +258,13 @@ export default class PlayerEventsManager {
         if ( this.noFill === true ) {
             const destroyPlayer = new CustomEvent('dm-destroy-player');
             document.dispatchEvent(destroyPlayer);
+
+            console.log('dm: No fill');
         } else {
             const showPlayer = new CustomEvent('dm-show-player');
             document.dispatchEvent(showPlayer);
+
+            console.log('dm: Filled');
         }
     }
 
