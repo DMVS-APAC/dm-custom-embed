@@ -2446,7 +2446,6 @@ var PlayerEventsManager = /** @class */ (function () {
                         }); });
                         player.addEventListener('ad_start', function (e) {
                             _this.noFill = false;
-                            console.log('dm: Ad start');
                         });
                         /**
                          * Listen to an ad_play
@@ -2500,11 +2499,22 @@ var PlayerEventsManager = /** @class */ (function () {
                          *
                          * - Close the PiP if there are multiple players and the closePip is true
                          */
-                        player.addEventListener('playing', function (e) {
-                            if (_this.multiplayerParams.closePip === true) {
-                                _this.togglePlay(player.id);
-                            }
-                        });
+                        player.addEventListener('playing', function (e) { return __awaiter(_this, void 0, void 0, function () {
+                            return __generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        if (this.multiplayerParams.closePip === true) {
+                                            this.togglePlay(player.id);
+                                        }
+                                        if (!(this.playerParams.showAdOnly === true)) return [3 /*break*/, 2];
+                                        return [4 /*yield*/, this.waitForAdStart()];
+                                    case 1:
+                                        _a.sent();
+                                        _a.label = 2;
+                                    case 2: return [2 /*return*/];
+                                }
+                            });
+                        }); });
                         /**
                          * Listen to video end, and process the next thing
                          * It will load new video from the playlist
@@ -2623,10 +2633,9 @@ var PlayerEventsManager = /** @class */ (function () {
             var destroyPlayer, showPlayer;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        console.log('dm: Waiting ad');
-                        // Waiting for 1 second to interact with ad
-                        return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* sleep */ "a"])(3000)];
+                    case 0: 
+                    // Waiting for 1 second to interact with ad
+                    return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* sleep */ "a"])(5000)];
                     case 1:
                         // Waiting for 1 second to interact with ad
                         _a.sent();
@@ -2638,12 +2647,10 @@ var PlayerEventsManager = /** @class */ (function () {
                         if (this.noFill === true) {
                             destroyPlayer = new CustomEvent('dm-destroy-player');
                             document.dispatchEvent(destroyPlayer);
-                            console.log('dm: No fill');
                         }
                         else {
                             showPlayer = new CustomEvent('dm-show-player');
                             document.dispatchEvent(showPlayer);
-                            console.log('dm: Filled');
                         }
                         return [2 /*return*/];
                 }
