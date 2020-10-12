@@ -2446,6 +2446,7 @@ var PlayerEventsManager = /** @class */ (function () {
                         }); });
                         player.addEventListener('ad_start', function (e) {
                             _this.noFill = false;
+                            console.log('dm: Ad start');
                         });
                         /**
                          * Listen to an ad_play
@@ -2521,23 +2522,20 @@ var PlayerEventsManager = /** @class */ (function () {
                                 switch (_a.label) {
                                     case 0:
                                         dmPlayer = player.parentNode.parentNode.parentNode;
-                                        /**
-                                         * It's only to show video when ad is filled
-                                         *
-                                         * Because we don't showing the video at first, the video won't play anymway.
-                                         * So we play it programmatically via JS and start to listen to `waitForAdStart`
-                                         * to listen to ad request
-                                         */
-                                        if (this.playerParams.showAdOnly === true) {
-                                            dmPlayer.classList.add('dm-wait-for-ad');
-                                            player.play();
-                                            this.waitForAdStart();
-                                        }
-                                        else {
-                                            showPlayer = new CustomEvent('dm-show-player');
-                                            document.dispatchEvent(showPlayer);
-                                        }
-                                        if (!(this.playerParams.closeButton === true)) return [3 /*break*/, 3];
+                                        console.log('dm: Playback ready');
+                                        if (!(this.playerParams.showAdOnly === true)) return [3 /*break*/, 2];
+                                        dmPlayer.classList.add('dm-wait-for-ad');
+                                        return [4 /*yield*/, this.waitForAdStart()];
+                                    case 1:
+                                        _a.sent();
+                                        player.play();
+                                        return [3 /*break*/, 3];
+                                    case 2:
+                                        showPlayer = new CustomEvent('dm-show-player');
+                                        document.dispatchEvent(showPlayer);
+                                        _a.label = 3;
+                                    case 3:
+                                        if (!(this.playerParams.closeButton === true)) return [3 /*break*/, 6];
                                         closeButton = document.createElement('button');
                                         closeButton.className = 'dm__close-button';
                                         closeButton.innerHTML = '<svg fill="none" height="32" viewBox="0 0 31 32" width="31" xmlns="http://www.w3.org/2000/svg"><g stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><path d="m2.12132 3 26.16298 26.163"/><path d="m1.5-1.5h37" transform="matrix(.707107 -.707107 -.707107 -.707107 0 29.2843)"/></g></svg>';
@@ -2548,17 +2546,17 @@ var PlayerEventsManager = /** @class */ (function () {
                                                 dmPlayer.remove();
                                             }, 1000);
                                         });
-                                        if (!(this.noFill !== true)) return [3 /*break*/, 2];
+                                        if (!(this.noFill !== true)) return [3 /*break*/, 5];
                                         return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* sleep */ "a"])(2000)];
-                                    case 1:
+                                    case 4:
                                         _a.sent();
-                                        _a.label = 2;
-                                    case 2:
+                                        _a.label = 5;
+                                    case 5:
                                         dmPlayer.classList.add('dm--has-close-button');
                                         playerContainer = dmPlayer.childNodes[0].childNodes[0];
                                         playerContainer.appendChild(closeButton);
-                                        _a.label = 3;
-                                    case 3: return [2 /*return*/];
+                                        _a.label = 6;
+                                    case 6: return [2 /*return*/];
                                 }
                             });
                         }); });
@@ -2631,6 +2629,7 @@ var PlayerEventsManager = /** @class */ (function () {
                     case 1:
                         // Waiting for 1 second to interact with ad
                         _a.sent();
+                        console.log('dm: Waiting ad');
                         /**
                          * noFill means no ad to serve
                          * It will send a custom event that let
@@ -2639,10 +2638,12 @@ var PlayerEventsManager = /** @class */ (function () {
                         if (this.noFill === true) {
                             destroyPlayer = new CustomEvent('dm-destroy-player');
                             document.dispatchEvent(destroyPlayer);
+                            console.log('dm: No fill');
                         }
                         else {
                             showPlayer = new CustomEvent('dm-show-player');
                             document.dispatchEvent(showPlayer);
+                            console.log('dm: Filled');
                         }
                         return [2 /*return*/];
                 }
