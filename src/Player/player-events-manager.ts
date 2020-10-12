@@ -60,7 +60,6 @@ export default class PlayerEventsManager {
 
                 player.addEventListener('ad_start', (e: Event) => {
                     this.noFill = false;
-                    console.log('dm: Ad start');
                 });
 
                 /**
@@ -123,9 +122,13 @@ export default class PlayerEventsManager {
                  *
                  * - Close the PiP if there are multiple players and the closePip is true
                  */
-                player.addEventListener('playing', (e: Event) => {
+                player.addEventListener('playing', async (e: Event) => {
                     if (this.multiplayerParams.closePip === true) {
                         this.togglePlay(player.id);
+                    }
+
+                    if (this.playerParams.showAdOnly === true) {
+                        await this.waitForAdStart();
                     }
                 });
 
@@ -246,9 +249,8 @@ export default class PlayerEventsManager {
      * This function is related to `ad_start` listener as well
      */
     private async waitForAdStart() {
-        console.log('dm: Waiting ad');
         // Waiting for 1 second to interact with ad
-        await sleep(3000);
+        await sleep(5000);
 
         /**
          * noFill means no ad to serve
@@ -258,13 +260,9 @@ export default class PlayerEventsManager {
         if ( this.noFill === true ) {
             const destroyPlayer = new CustomEvent('dm-destroy-player');
             document.dispatchEvent(destroyPlayer);
-
-            console.log('dm: No fill');
         } else {
             const showPlayer = new CustomEvent('dm-show-player');
             document.dispatchEvent(showPlayer);
-
-            console.log('dm: Filled');
         }
     }
 
