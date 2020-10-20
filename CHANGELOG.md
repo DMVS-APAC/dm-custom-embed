@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.10] (2020-10-)
+
+**Fixed Bugs:**
+- Increase waiting time for ad filled
+- Add width 100% to fit its container
+- Fixed overwriting inline style in `dm-player` element
+- Add `clear` to avoid oldschool floating layout
+
 ## [1.5.9] (2020-10-02)
 
 **Fixed Bugs:**

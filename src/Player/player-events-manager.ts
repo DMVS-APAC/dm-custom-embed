@@ -39,7 +39,7 @@ export default class PlayerEventsManager {
         }
     }
 
-            /**
+    /**
      * Listen to video events from Dailymotion player
      */
     private async videoEvents() {
@@ -122,7 +122,7 @@ export default class PlayerEventsManager {
                  *
                  * - Close the PiP if there are multiple players and the closePip is true
                  */
-                player.addEventListener('playing', (e: Event) => {
+                player.addEventListener('playing', async (e: Event) => {
                     if (this.multiplayerParams.closePip === true) {
                         this.togglePlay(player.id);
                     }
@@ -144,16 +144,16 @@ export default class PlayerEventsManager {
                     const dmPlayer = player.parentNode.parentNode.parentNode;
 
                     /**
-                     * It's only to show video when ad is filled
+                     * It's only to show video when the ad is filled
                      *
-                     * Because we don't showing the video at first, the video won't play anymway.
+                     * Because we don't showing the video at first, the video won't play anyway.
                      * So we play it programmatically via JS and start to listen to `waitForAdStart`
                      * to listen to ad request
                      */
                     if (this.playerParams.showAdOnly === true) {
                         dmPlayer.classList.add('dm-wait-for-ad');
                         player.play();
-                        this.waitForAdStart();
+                        await this.waitForAdStart();
                     } else {
                         const showPlayer = new CustomEvent('dm-show-player');
                         document.dispatchEvent(showPlayer);
@@ -189,7 +189,7 @@ export default class PlayerEventsManager {
                  * Handle player error as well to avoid bad UX
                  */
                 player.addEventListener('error', (e) => {
-                    console.log(e);
+                    // console.log(e);
                 });
             }
         });
@@ -244,7 +244,7 @@ export default class PlayerEventsManager {
      */
     private async waitForAdStart() {
         // Waiting for 1 second to interact with ad
-        await sleep(2000);
+        await sleep(5000);
 
         /**
          * noFill means no ad to serve
