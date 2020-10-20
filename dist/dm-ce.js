@@ -86,10 +86,10 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src/index.js!./src/Player/Scss/main.scss":
-/*!**************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src!./src/Player/Scss/main.scss ***!
-  \**************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src/index.js!./src/Player/Scss/player.scss":
+/*!****************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src!./src/Player/Scss/player.scss ***!
+  \****************************************************************************************************************************************************/
 /*! no static exports found */
 /*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
@@ -99,7 +99,7 @@ var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/
 exports = ___CSS_LOADER_API_IMPORT___(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap);"]);
 // Module
-exports.push([module.i, ".dailymotion-cpe:before {\n  content: \"\";\n  padding-top: 56.25%;\n  background: #000;\n  display: block;\n  -webkit-animation: slideInDown;\n  animation: slideInDown;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1; }\n\n.dm__close-button {\n  position: absolute !important;\n  top: -38px !important;\n  right: 0 !important;\n  width: 33px !important;\n  height: 33px !important;\n  background: #000 !important;\n  opacity: .45 !important;\n  border-radius: 50% !important;\n  padding: 9px !important; }\n  .dm__close-button svg {\n    width: 100%;\n    height: 100%; }\n\n.dm__pre-video-title {\n  text-align: var(--dm-video-align, center) !important;\n  margin: var(--dm-video-margin, 8px 0) !important;\n  font-style: var(--dm-video-style, normal) !important;\n  color: var(--dm-video-color, #000) !important;\n  font-size: var(--dm-video-size, 1.2em) !important;\n  font-weight: var(--dm-video-weight, 700) !important; }\n\n.dm__info-card {\n  background: var(--dm-info-card-bg, #eee) !important;\n  padding: var(--dm-info-card-padding, 8px 13px) !important;\n  display: flex;\n  text-align: var(--dm-info-card-align, left) !important;\n  /* Title*/\n  --dm-title-align: left;\n  --dm-title-weight: 700;\n  --dm-title-size: 1.1em; }\n\n.dm__text-wrapper {\n  width: calc(100% - 80px);\n  padding-right: 13px; }\n\n.dm__video-title {\n  text-align: var(--dm-title-align, center) !important;\n  margin: var(--dm-title-margin, 8px 0) !important;\n  font-style: var(--dm-title-style, normal) !important;\n  color: var(--dm-title-color, inherit) !important;\n  font-size: var(--dm-title-size, 1em) !important;\n  font-weight: var(--dm-title-weight, 400) !important;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%; }\n\n.dm__video-desc {\n  text-align: var(--dm-desc-align, left) !important;\n  margin: var(--dm-desc-margin, 0 0 8px) !important;\n  font-style: var(--dm-desc-style, normal) !important;\n  color: var(--dm-desc-color, inherit) !important;\n  font-size: var(--dm-desc-size, 0.9em) !important;\n  font-weight: var(--dm-desc-weight, inherit) !important;\n  padding-top: 13px;\n  border-top: solid #666 1px;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%;\n  display: -webkit-box !important;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 1; }\n\n.dm__ava-wrapper {\n  width: 80px; }\n\n.dm__owner-ava {\n  width: 100%;\n  height: auto; }\n\n.dm-player {\n  position: relative;\n  height: 0;\n  overflow: hidden;\n  /* Cover the video that not playing yet when ad is playing*/ }\n  .dm-player.dm--has-placeholder {\n    overflow: visible;\n    background-color: #000;\n    background-size: cover;\n    background-repeat: no-repeat;\n    background-image: var(--dm-thumbnail);\n    background-position: center;\n    padding-bottom: 56.25%;\n    width: 100%;\n    /*&:before {*/\n    /*  content: \"\";*/\n    /*  width: 100%;*/\n    /*  height: 4px;*/\n    /*  position: absolute;*/\n    /*  left: 0;*/\n    /*  bottom: 0;*/\n    /*  display: block;*/\n    /*  background: #fff;*/\n    /*  animation: runningLoader infinite 1s;*/\n    /*  transform-origin: left;*/\n    /*}*/ }\n    .dm-player.dm--has-placeholder .dailymotion-cpe {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      /* Remove the slidedown animation*/ }\n      .dm-player.dm--has-placeholder .dailymotion-cpe:before {\n        display: none; }\n  .dm-player.dm--has-close-button {\n    padding-top: 40px; }\n    .dm-player.dm--has-close-button .dailymotion-cpe {\n      overflow: visible; }\n    .dm-player.dm--has-close-button .cpeClosePipBtn {\n      display: none; }\n  .dm-player .insider {\n    display: none; }\n  .dm-player.dm-playback-ready {\n    height: auto;\n    /*&.dm--has-placeholder:before {*/\n    /*  display: none;*/\n    /*}*/ }\n    .dm-player.dm-playback-ready .dailymotion-cpe {\n      -webkit-animation: scaling 1 1s;\n      animation: scaling 1 1s;\n      transform-origin: top; }\n    .dm-player.dm-playback-ready.dm--has-placeholder .dailymotion-cpe {\n      -webkit-animation: visibility 1 1s;\n      animation: visibility 1 1s;\n      transform-origin: unset; }\n    .dm-player.dm-playback-ready .insider {\n      display: block; }\n  .dm-player.dm--hidding-player, .dm-player.dm--hidding-player .insider iframe {\n    -webkit-animation: hidePlayer forwards 1s;\n    animation: hidePlayer forwards 1s;\n    transform-origin: top; }\n  .dm-player.dm--hidding-player .dailymotion-cpe {\n    -webkit-animation: slideOutUp forwards 1s;\n    animation: slideOutUp forwards 1s; }\n  .dm-player.dm--player-hidden {\n    height: 0;\n    padding: 0;\n    display: none; }\n  .dm-player .insider.dm-disabled:after {\n    content: \"\";\n    width: 100%;\n    height: 100%;\n    position: absolute;\n    top: 0;\n    left: 0;\n    background: rgba(0, 0, 0, 0.6); }\n\n/* Keyframe for animate the player*/\n@-webkit-keyframes slideInDown {\n  from {\n    padding-top: 0; }\n  to {\n    padding-top: 56.25%; } }\n\n@keyframes slideInDown {\n  from {\n    padding-top: 0; }\n  to {\n    padding-top: 56.25%; } }\n\n@-webkit-keyframes slideOutUp {\n  from {\n    padding-bottom: 56.25%; }\n  to {\n    padding-bottom: 0; } }\n\n@keyframes slideOutUp {\n  from {\n    padding-bottom: 56.25%; }\n  to {\n    padding-bottom: 0; } }\n\n@-webkit-keyframes visibility {\n  from {\n    opacity: 0; }\n  to {\n    opacity: 1; } }\n\n@keyframes visibility {\n  from {\n    opacity: 0; }\n  to {\n    opacity: 1; } }\n\n@-webkit-keyframes runningLoader {\n  0% {\n    transform: scaleX(0); }\n  50% {\n    transform: scaleX(1); }\n  100% {\n    transform: scaleX(-1); } }\n\n@keyframes runningLoader {\n  0% {\n    transform: scaleX(0); }\n  50% {\n    transform: scaleX(1); }\n  100% {\n    transform: scaleX(-1); } }\n\n@-webkit-keyframes scaling {\n  from {\n    transform: scaleY(0); }\n  to {\n    transform: scaleY(1); } }\n\n@keyframes scaling {\n  from {\n    transform: scaleY(0); }\n  to {\n    transform: scaleY(1); } }\n\n@-webkit-keyframes hidePlayer {\n  from {\n    transform: scaleY(1); }\n  to {\n    transform: scaleY(0); } }\n\n@keyframes hidePlayer {\n  from {\n    transform: scaleY(1); }\n  to {\n    transform: scaleY(0); } }\n", ""]);
+exports.push([module.i, "@keyframes slideInDown {\n  from {\n    padding-top: 0; }\n  to {\n    padding-top: 56.25%; } }\n\n@keyframes slideOutUp {\n  from {\n    padding-bottom: 56.25%; }\n  to {\n    padding-bottom: 0; } }\n\n@keyframes visibility {\n  from {\n    opacity: 0; }\n  to {\n    opacity: 1; } }\n\n@keyframes runningLoader {\n  0% {\n    transform: scaleX(0); }\n  50% {\n    transform: scaleX(1); }\n  100% {\n    transform: scaleX(-1); } }\n\n@keyframes scaling {\n  from {\n    transform: scaleY(0); }\n  to {\n    transform: scaleY(1); } }\n\n@keyframes hidePlayer {\n  from {\n    transform: scaleY(1); }\n  to {\n    transform: scaleY(0); } }\n\n.dailymotion-cpe:before {\n  content: \"\";\n  padding-top: 56.25%;\n  background: #000;\n  display: block;\n  -webkit-animation: slideInDown;\n  animation: slideInDown;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-iteration-count: 1;\n  animation-iteration-count: 1; }\n\n.dm__close-button {\n  position: absolute !important;\n  top: -38px !important;\n  right: 0 !important;\n  width: 33px !important;\n  height: 33px !important;\n  background: #000 !important;\n  opacity: .45 !important;\n  border-radius: 50% !important;\n  padding: 9px !important; }\n  .dm__close-button svg {\n    width: 100%;\n    height: 100%; }\n\n.dm__pre-video-title {\n  text-align: var(--dm-video-align, center) !important;\n  margin: var(--dm-video-margin, 8px 0) !important;\n  font-style: var(--dm-video-style, normal) !important;\n  color: var(--dm-video-color, #000) !important;\n  font-size: var(--dm-video-size, 1.2em) !important;\n  font-weight: var(--dm-video-weight, 700) !important; }\n\n.dm__info-card {\n  background: var(--dm-info-card-bg, #eee) !important;\n  padding: var(--dm-info-card-padding, 8px 13px) !important;\n  display: flex;\n  text-align: var(--dm-info-card-align, left) !important;\n  /* Title*/\n  --dm-title-align: left;\n  --dm-title-weight: 700;\n  --dm-title-size: 1.1em; }\n\n.dm__text-wrapper {\n  width: calc(100% - 80px);\n  padding-right: 13px; }\n\n.dm__video-title {\n  text-align: var(--dm-title-align, center) !important;\n  margin: var(--dm-title-margin, 8px 0) !important;\n  font-style: var(--dm-title-style, normal) !important;\n  color: var(--dm-title-color, inherit) !important;\n  font-size: var(--dm-title-size, 1em) !important;\n  font-weight: var(--dm-title-weight, 400) !important;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%; }\n\n.dm__video-desc {\n  text-align: var(--dm-desc-align, left) !important;\n  margin: var(--dm-desc-margin, 0 0 8px) !important;\n  font-style: var(--dm-desc-style, normal) !important;\n  color: var(--dm-desc-color, inherit) !important;\n  font-size: var(--dm-desc-size, 0.9em) !important;\n  font-weight: var(--dm-desc-weight, inherit) !important;\n  padding-top: 13px;\n  border-top: solid #666 1px;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  max-width: 100%;\n  display: -webkit-box !important;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 1; }\n\n.dm__ava-wrapper {\n  width: 80px; }\n\n.dm__owner-ava {\n  width: 100%;\n  height: auto; }\n\n.dm-player {\n  position: relative;\n  height: 0;\n  overflow: hidden;\n  width: var(--dm-player-width, 100%) !important;\n  clear: left !important;\n  /* in some partner website still implement floating grid. this will clear the floating part*/\n  /* Cover the video that not playing yet when ad is playing*/ }\n  .dm-player.dm--has-placeholder {\n    overflow: visible;\n    background-color: #000;\n    background-size: cover;\n    background-repeat: no-repeat;\n    background-image: var(--dm-thumbnail);\n    background-position: center;\n    padding-bottom: 56.25%;\n    width: 100%; }\n    .dm-player.dm--has-placeholder .dailymotion-cpe {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      /* Remove the slidedown animation*/ }\n      .dm-player.dm--has-placeholder .dailymotion-cpe:before {\n        display: none; }\n  .dm-player.dm--has-close-button {\n    padding-top: 40px; }\n    .dm-player.dm--has-close-button .dailymotion-cpe {\n      overflow: visible; }\n    .dm-player.dm--has-close-button .cpeClosePipBtn {\n      display: none; }\n  .dm-player .insider {\n    display: none; }\n  .dm-player.dm-playback-ready {\n    height: auto; }\n    .dm-player.dm-playback-ready .dailymotion-cpe {\n      -webkit-animation: scaling 1 1s;\n      animation: scaling 1 1s;\n      transform-origin: top; }\n    .dm-player.dm-playback-ready.dm--has-placeholder .dailymotion-cpe {\n      -webkit-animation: visibility 1 1s;\n      animation: visibility 1 1s;\n      transform-origin: unset; }\n    .dm-player.dm-playback-ready .insider {\n      display: block; }\n  .dm-player.dm--hidding-player, .dm-player.dm--hidding-player .insider iframe {\n    -webkit-animation: hidePlayer forwards 1s;\n    animation: hidePlayer forwards 1s;\n    transform-origin: top; }\n  .dm-player.dm--hidding-player .dailymotion-cpe {\n    -webkit-animation: slideOutUp forwards 1s;\n    animation: slideOutUp forwards 1s; }\n  .dm-player.dm--player-hidden {\n    height: 0;\n    padding: 0;\n    display: none; }\n  .dm-player .insider.dm-disabled:after {\n    content: \"\";\n    width: 100%;\n    height: 100%;\n    position: absolute;\n    top: 0;\n    left: 0;\n    background: rgba(0, 0, 0, 0.6); }\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -2311,15 +2311,15 @@ var VideoTitle = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/Player/Scss/main.scss":
-/*!***********************************!*\
-  !*** ./src/Player/Scss/main.scss ***!
-  \***********************************/
+/***/ "./src/Player/Scss/player.scss":
+/*!*************************************!*\
+  !*** ./src/Player/Scss/player.scss ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 var api = __webpack_require__(/*! ../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-            var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/dist/cjs.js!../../../node_modules/postcss-loader/src!./main.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src/index.js!./src/Player/Scss/main.scss");
+            var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/dist/cjs.js!../../../node_modules/postcss-loader/src!./player.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src/index.js!./src/Player/Scss/player.scss");
 
             content = content.__esModule ? content.default : content;
 
@@ -2422,8 +2422,8 @@ var PlayerEventsManager = /** @class */ (function () {
         }
     };
     /**
-* Listen to video events from Dailymotion player
-*/
+     * Listen to video events from Dailymotion player
+     */
     PlayerEventsManager.prototype.videoEvents = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
@@ -2501,18 +2501,10 @@ var PlayerEventsManager = /** @class */ (function () {
                          */
                         player.addEventListener('playing', function (e) { return __awaiter(_this, void 0, void 0, function () {
                             return __generator(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        if (this.multiplayerParams.closePip === true) {
-                                            this.togglePlay(player.id);
-                                        }
-                                        if (!(this.playerParams.showAdOnly === true)) return [3 /*break*/, 2];
-                                        return [4 /*yield*/, this.waitForAdStart()];
-                                    case 1:
-                                        _a.sent();
-                                        _a.label = 2;
-                                    case 2: return [2 /*return*/];
+                                if (this.multiplayerParams.closePip === true) {
+                                    this.togglePlay(player.id);
                                 }
+                                return [2 /*return*/];
                             });
                         }); });
                         /**
@@ -2532,7 +2524,6 @@ var PlayerEventsManager = /** @class */ (function () {
                                 switch (_a.label) {
                                     case 0:
                                         dmPlayer = player.parentNode.parentNode.parentNode;
-                                        console.log('dm: Playback ready');
                                         if (!(this.playerParams.showAdOnly === true)) return [3 /*break*/, 2];
                                         dmPlayer.classList.add('dm-wait-for-ad');
                                         player.play();
@@ -2574,7 +2565,7 @@ var PlayerEventsManager = /** @class */ (function () {
                          * Handle player error as well to avoid bad UX
                          */
                         player.addEventListener('error', function (e) {
-                            console.log(e);
+                            // console.log(e);
                         });
                     };
                     for (var i = 0; i < players.length; i++) {
@@ -2713,8 +2704,8 @@ var PlayerEventsManager = /** @class */ (function () {
 /* harmony import */ var _Player_Components_video_title__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Player/Components/video-title */ "./src/Player/Components/video-title.ts");
 /* harmony import */ var _Player_Components_info_card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Player/Components/info-card */ "./src/Player/Components/info-card.ts");
 /* harmony import */ var _Playlist_playlist_manager__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Playlist/playlist-manager */ "./src/Playlist/playlist-manager.ts");
-/* harmony import */ var _Player_Scss_main_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Player/Scss/main.scss */ "./src/Player/Scss/main.scss");
-/* harmony import */ var _Player_Scss_main_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_Player_Scss_main_scss__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _Scss_player_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Scss/player.scss */ "./src/Player/Scss/player.scss");
+/* harmony import */ var _Scss_player_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_Scss_player_scss__WEBPACK_IMPORTED_MODULE_8__);
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -2924,8 +2915,9 @@ var PlayerManager = /** @class */ (function () {
     };
     PlayerManager.prototype.loadDmPlayer = function (rootEl) {
         var cpeEmbed = document.createElement("div");
+        var currentStyle = rootEl.getAttribute('style');
         // Set thumbnail
-        rootEl.setAttribute('style', '--dm-thumbnail: url(' + this.videoParams.thumbnail_480_url) + ')';
+        rootEl.setAttribute('style',  true ? currentStyle : undefined);
         /**
          * Set attributes part
          */
