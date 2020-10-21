@@ -1,6 +1,11 @@
 # Changelog
 
-## [1.5.10] (2020-10-)
+## [1.5.11] (2020-10-21)
+
+**Implemented enhancements:**
+- Add feature to hide close button in ad playing on PiP mode
+
+## [1.5.10] (2020-10-20)
 
 **Fixed Bugs:**
 - Increase waiting time for ad filled
