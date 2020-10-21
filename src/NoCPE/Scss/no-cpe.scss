@@ -37,7 +37,7 @@
   }
 
   .dm__close-button {
-    display: block;
+    display: none;
     background: rgba(0,0,0, .4) !important;
     border-radius: 50% !important;
     padding: 8px !important;
@@ -53,5 +53,13 @@
       width: 100%;
       display: block !important;
     }
+  }
+  
+  &.dm__playing .dm__close-button {
+    display: block;
+  }
+
+  &.dm__ad-playing .dm__close-button {
+    display: none;
   }
 }

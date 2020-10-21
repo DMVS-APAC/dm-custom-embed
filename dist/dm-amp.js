@@ -98,7 +98,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".dailymotion-cpe {\n  position: relative; }\n  .dailymotion-cpe .dm__close-button {\n    display: none; }\n\n.dailymotion-no-cpe {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.dm-player:not([noPip=\"true\"])[data-is-pip=\"true\"] .dailymotion-cpe .inside {\n  position: fixed;\n  width: var(--dm-pip-size, 365px) !important;\n  height: auto;\n  right: var(--dm-pip-right-pos, 20px) !important;\n  bottom: var(--dm-pip-bottom-pos, 20px) !important;\n  top: auto;\n  z-index: 999; }\n  .dm-player:not([noPip=\"true\"])[data-is-pip=\"true\"] .dailymotion-cpe .inside:before {\n    content: \"\";\n    padding-top: 56.25%;\n    background: #000;\n    display: block;\n    -webkit-animation: slideInDown;\n    animation: slideInDown;\n    -webkit-animation-duration: .5s;\n    animation-duration: .5s;\n    -webkit-animation-iteration-count: 1;\n    animation-iteration-count: 1; }\n\n.dm-player:not([noPip=\"true\"])[data-is-pip=\"true\"] .dm__close-button {\n  display: block;\n  background: rgba(0, 0, 0, 0.4) !important;\n  border-radius: 50% !important;\n  padding: 8px !important;\n  position: absolute;\n  bottom: 104% !important;\n  right: 0 !important;\n  border: 0 !important;\n  width: 32px !important;\n  height: 32px !important;\n  cursor: pointer; }\n  .dm-player:not([noPip=\"true\"])[data-is-pip=\"true\"] .dm__close-button img {\n    width: 100%;\n    display: block !important; }\n", ""]);
+exports.push([module.i, ".dailymotion-cpe {\n  position: relative; }\n  .dailymotion-cpe .dm__close-button {\n    display: none; }\n\n.dailymotion-no-cpe {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%; }\n\n.dm-player:not([noPip=\"true\"])[data-is-pip=\"true\"] .dailymotion-cpe .inside {\n  position: fixed;\n  width: var(--dm-pip-size, 365px) !important;\n  height: auto;\n  right: var(--dm-pip-right-pos, 20px) !important;\n  bottom: var(--dm-pip-bottom-pos, 20px) !important;\n  top: auto;\n  z-index: 999; }\n  .dm-player:not([noPip=\"true\"])[data-is-pip=\"true\"] .dailymotion-cpe .inside:before {\n    content: \"\";\n    padding-top: 56.25%;\n    background: #000;\n    display: block;\n    -webkit-animation: slideInDown;\n    animation: slideInDown;\n    -webkit-animation-duration: .5s;\n    animation-duration: .5s;\n    -webkit-animation-iteration-count: 1;\n    animation-iteration-count: 1; }\n\n.dm-player:not([noPip=\"true\"])[data-is-pip=\"true\"] .dm__close-button {\n  display: none;\n  background: rgba(0, 0, 0, 0.4) !important;\n  border-radius: 50% !important;\n  padding: 8px !important;\n  position: absolute;\n  bottom: 104% !important;\n  right: 0 !important;\n  border: 0 !important;\n  width: 32px !important;\n  height: 32px !important;\n  cursor: pointer; }\n  .dm-player:not([noPip=\"true\"])[data-is-pip=\"true\"] .dm__close-button img {\n    width: 100%;\n    display: block !important; }\n\n.dm-player:not([noPip=\"true\"])[data-is-pip=\"true\"].dm__playing .dm__close-button {\n  display: block; }\n\n.dm-player:not([noPip=\"true\"])[data-is-pip=\"true\"].dm__ad-playing .dm__close-button {\n  display: none; }\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -2622,16 +2622,20 @@ var NoCpeManager = /** @class */ (function () {
                             if (_this.onViewport === true && _this.closeClick === true) {
                                 _this.closeClick = false;
                             }
+                            // Add `.dm__playing` to start show the close button
+                            _this.dm.parentNode.parentNode.parentNode.classList.add('dm__playing');
                         });
                         this.dm.addEventListener('end', function (e) {
                             var videoEnd = new CustomEvent("dm-video-end", { detail: _this.dm.video.videoId });
                             document.dispatchEvent(videoEnd);
+                            // Remove `.dm__playing` to hide the close button
+                            _this.dm.parentNode.parentNode.parentNode.classList.remove('dm__playing');
                         });
                         this.dm.addEventListener('ad_start', function (e) {
                             _this.noFill = false;
                         });
                         this.dm.addEventListener('ad_play', function (e) {
-                            // TODO: do some stuff related to ad playing
+                            _this.dm.parentNode.parentNode.parentNode.classList.remove('dm__playing');
                         });
                         this.dm.addEventListener('ad_end', function (e) {
                             // TODO: do some stuff related to ad end
