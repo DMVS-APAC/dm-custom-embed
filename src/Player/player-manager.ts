@@ -19,7 +19,7 @@ import InfoCard from "../Player/Components/info-card";
 import PlaylistManager from "../Playlist/playlist-manager";
 
 // Styles
-import '../Player/Scss/main.scss';
+import './Scss/player.scss';
 
 /**
  * An agnostic player renderer
@@ -204,8 +204,9 @@ export default class PlayerManager {
     private loadDmPlayer(rootEl: HTMLDivElement): void {
         const cpeEmbed = document.createElement("div");
 
+        const currentStyle = rootEl.getAttribute('style');
         // Set thumbnail
-        rootEl.setAttribute('style', '--dm-thumbnail: url(' + this.videoParams.thumbnail_480_url) + ')';
+        rootEl.setAttribute('style', '--dm-thumbnail:url(' + this.videoParams.thumbnail_480_url + ');' + ( currentStyle !== null) ? currentStyle : '');
 
         /**
          * Set attributes part

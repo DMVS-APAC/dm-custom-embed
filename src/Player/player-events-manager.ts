@@ -39,7 +39,7 @@ export default class PlayerEventsManager {
         }
     }
 
-            /**
+    /**
      * Listen to video events from Dailymotion player
      */
     private async videoEvents() {
@@ -126,10 +126,6 @@ export default class PlayerEventsManager {
                     if (this.multiplayerParams.closePip === true) {
                         this.togglePlay(player.id);
                     }
-
-                    if (this.playerParams.showAdOnly === true) {
-                        await this.waitForAdStart();
-                    }
                 });
 
                 /**
@@ -147,12 +143,10 @@ export default class PlayerEventsManager {
                 player.addEventListener('playback_ready', async (e: Event) => {
                     const dmPlayer = player.parentNode.parentNode.parentNode;
 
-                    console.log('dm: Playback ready');
-
                     /**
-                     * It's only to show video when ad is filled
+                     * It's only to show video when the ad is filled
                      *
-                     * Because we don't showing the video at first, the video won't play anymway.
+                     * Because we don't showing the video at first, the video won't play anyway.
                      * So we play it programmatically via JS and start to listen to `waitForAdStart`
                      * to listen to ad request
                      */
@@ -195,7 +189,7 @@ export default class PlayerEventsManager {
                  * Handle player error as well to avoid bad UX
                  */
                 player.addEventListener('error', (e) => {
-                    console.log(e);
+                    // console.log(e);
                 });
             }
         });

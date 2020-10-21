@@ -100,11 +100,17 @@ export default class NoCpeManager {
             if (this.onViewport === true && this.closeClick === true) {
                 this.closeClick = false;
             }
+
+            // Add `.dm__playing` to start show the close button
+            this.dm.parentNode.parentNode.parentNode.classList.add('dm__playing');
         });
 
         this.dm.addEventListener('end', (e: Event) => {
             const videoEnd = new CustomEvent("dm-video-end", {detail: this.dm.video.videoId});
             document.dispatchEvent(videoEnd);
+
+            // Remove `.dm__playing` to hide the close button
+            this.dm.parentNode.parentNode.parentNode.classList.remove('dm__playing');
         });
 
         this.dm.addEventListener('ad_start', (e: Event) => {
@@ -112,7 +118,7 @@ export default class NoCpeManager {
         });
 
         this.dm.addEventListener('ad_play', (e: Event) => {
-            // TODO: do some stuff related to ad playing
+            this.dm.parentNode.parentNode.parentNode.classList.remove('dm__playing');
         });
 
         this.dm.addEventListener('ad_end', (e: Event) => {
