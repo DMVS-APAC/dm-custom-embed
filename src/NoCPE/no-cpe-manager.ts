@@ -1,6 +1,8 @@
 // Utilities
 import { waitFor } from "../Libraries/Utilities/waitFor";
 
+import infParams from "../NoCPE/Interfaces/infParams";
+
 import PlayerManager from "../Player/player-manager";
 import ScrollOut from "scroll-out";
 
@@ -189,14 +191,21 @@ export default class NoCpeManager {
             // Add closeButton and videoPlaceholder
             this.rootEls[i].querySelector('.dailymotion-cpe').appendChild(this.videoInside);
 
+            const params: infParams = {
+                mute: true,
+                'queue-enable': ( NoCpeManager.player[i].playerParams.showOutsidePlaylist === true ) ? false : true,
+            }
+
+            const appParam = this.rootEls[i].getAttribute('appParam');
+            if (appParam !== null) params.app = appParam;
+
             // @ts-ignore
             this.dm = DM.player(videoPlaceholder, {
                 video: player.videoParams.id,
-                params: {
-                    mute: true,
-                    'queue-enable': ( NoCpeManager.player[i].playerParams.showOutsidePlaylist === true ) ? false : true,
-                }
+                params: params
             });
+
+            console.log(this.dm);
 
             closeButton.addEventListener('click', () => { this.closePip(); });
 
