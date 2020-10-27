@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.12] ()
+
+**Implemented enhancements:**
+- Add new parameter to dm-player on AMP
+
+**Fixed Bugs:**
+- Add unrewrite style to avoid the style changes on partner website
+
 ## [1.5.11] (2020-10-21)
 
 **Implemented enhancements:**
