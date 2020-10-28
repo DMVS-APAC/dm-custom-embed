@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.12] (2020-10-28)
+
+**Fixed Bugs:**
+- API calling on video id is error
+
 ## [1.5.11] (2020-10-21)
 
 **Implemented enhancements:**

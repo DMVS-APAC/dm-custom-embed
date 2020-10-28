@@ -320,7 +320,7 @@ export default class PlayerManager {
     }
 
     private async getVideoInfo(videoId: string, createNew: boolean) {
-        const url = apiUrl + "/video/" + videoId + '?fields=' + this.searchParams.fields;
+        const url = apiUrl + "video/" + videoId + '?fields=' + this.searchParams.fields;
         const video: infVideo = await fetchData(url);
 
         this.setVideo(video, createNew);
