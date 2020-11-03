@@ -3152,7 +3152,7 @@ var PlayerManager = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        url = _Libraries_Global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + "/video/" + videoId + '?fields=' + this.searchParams.fields;
+                        url = _Libraries_Global_vars__WEBPACK_IMPORTED_MODULE_0__[/* apiUrl */ "a"] + "video/" + videoId + '?fields=' + this.searchParams.fields;
                         return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__[/* fetchData */ "a"])(url)];
                     case 1:
                         video = _a.sent();
