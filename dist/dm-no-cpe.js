@@ -3321,13 +3321,14 @@ var PlayerManager = /** @class */ (function () {
      * Alphabet: a-zA-Z0-9
      * Latin Character: \u00C0-\u00FF
      * Devanagri (India): \u0900-\u097F
-     * Urdu (Arab): \u0621-\u064A \u0660-\u0669
+     * Urdu (India): \u0621-\u064A \u0660-\u0669
+     * Tamil (India): \u0b80-\u0bff \u0B82-\u0BFA
      * Thai: \u0E00-\u0E7F
      */
     // TODO: improve sanitize the keywords to strip duplicate string
     PlayerManager.prototype.sanitizeKeywords = function (keywords) {
         var _this = this;
-        return keywords.replace(/[^- \u3131-\uD79D a-zA-Z0-9 \u00C0-\u00FF \u0900-\u097F \u0621-\u064A \u0660-\u0669 \u0E00-\u0E7F \u0153]/g, ' ')
+        return keywords.replace(/[^- \u3131-\uD79D a-zA-Z0-9 \u00C0-\u00FF \u0900-\u097F \u0621-\u064A \u0660-\u0669 \u0b80-\u0bff \u0B82-\u0BFA \u0E00-\u0E7F \u0153]/g, ' ')
             .split(' ')
             .filter(function (word) { return word.length >= _this.playerParams.minWordLength; });
     };

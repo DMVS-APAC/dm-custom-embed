@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.13] (2020-11-17)
+
+**Implemented enhancements:**
+- Add Tamil alphabet
+
 ## [1.5.12] (2020-10-28)
 
 **Fixed Bugs:**
