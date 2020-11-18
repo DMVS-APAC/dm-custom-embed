@@ -157,6 +157,8 @@ export default class PlayerEventsManager {
                     } else {
                         const showPlayer = new CustomEvent('dm-show-player');
                         document.dispatchEvent(showPlayer);
+                        // console.log("playback ready");
+                        // player.parentNode.parentNode.parentNode.classList.add('dm-playback-ready');
                     }
 
 
