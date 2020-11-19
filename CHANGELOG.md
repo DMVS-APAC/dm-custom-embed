@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.14] (2020-11-19)
+
+**Implemented enhancements:**
+- Add new param to block some keywords
+
 ## [1.5.13] (2020-11-17)
 
 **Implemented enhancements:**

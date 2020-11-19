@@ -2859,7 +2859,8 @@ var PlayerManager = /** @class */ (function () {
             scrollToPause: (rootEl.getAttribute('scrollToPause') != 'false' && rootEl.getAttribute('scrollToPause') != null),
             stpSound: (rootEl.getAttribute('stpSound') != 'false' && rootEl.getAttribute('stpSound') != null),
             playerStyleEnable: (rootEl.getAttribute('playerStyleEnable') != 'false' && rootEl.getAttribute('playerStyleEnable') != null),
-            playerStyleColor: rootEl.getAttribute('playerStyleColor') ? rootEl.getAttribute('playerStyleColor') : null
+            playerStyleColor: rootEl.getAttribute('playerStyleColor') ? rootEl.getAttribute('playerStyleColor') : null,
+            blockKeywords: rootEl.getAttribute('blockKeywords') ? rootEl.getAttribute('blockKeywords').split(',') : null,
         };
         /**
          * Special multiple player params
@@ -3142,7 +3143,6 @@ var PlayerManager = /** @class */ (function () {
                         return [4 /*yield*/, Object(_Libraries_API_apiCall__WEBPACK_IMPORTED_MODULE_2__[/* fetchData */ "a"])(url)];
                     case 1:
                         video = _a.sent();
-                        console.log(url);
                         if (video) {
                             if (video.list.length > 0) {
                                 /**
@@ -3198,6 +3198,12 @@ var PlayerManager = /** @class */ (function () {
     // TODO: improve sanitize the keywords to strip duplicate string
     PlayerManager.prototype.sanitizeKeywords = function (keywords) {
         var _this = this;
+        if (this.playerParams.blockKeywords !== null) {
+            this.playerParams.blockKeywords.forEach(function (word) {
+                // const regex = new RegExp(`/${word}/g`);
+                keywords = keywords.replace(word, '');
+            });
+        }
         return keywords.replace(/[^- \u3131-\uD79D a-zA-Z0-9 \u00C0-\u00FF \u0900-\u097F \u0621-\u064A \u0660-\u0669 \u0b80-\u0bff \u0B82-\u0BFA \u0E00-\u0E7F \u0153]/g, ' ')
             .split(' ')
             .filter(function (word) { return word.length >= _this.playerParams.minWordLength; });

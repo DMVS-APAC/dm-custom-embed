@@ -135,7 +135,8 @@ export default class PlayerManager {
             scrollToPause: ( rootEl.getAttribute('scrollToPause') != 'false' && rootEl.getAttribute('scrollToPause') != null ),
             stpSound: ( rootEl.getAttribute('stpSound') != 'false' && rootEl.getAttribute('stpSound') != null ),
             playerStyleEnable: ( rootEl.getAttribute('playerStyleEnable') != 'false' && rootEl.getAttribute('playerStyleEnable') != null ),
-            playerStyleColor: rootEl.getAttribute('playerStyleColor') ? rootEl.getAttribute('playerStyleColor') : null
+            playerStyleColor: rootEl.getAttribute('playerStyleColor') ? rootEl.getAttribute('playerStyleColor') : null,
+            blockKeywords: rootEl.getAttribute('blockKeywords') ? rootEl.getAttribute('blockKeywords').split(',') : null,
         };
 
         /**
@@ -419,8 +420,6 @@ export default class PlayerManager {
         const url = apiUrl + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners + "&" ) + ( (this.playerParams.getUpdatedVideo && this.playerParams.searchInPlaylist === false) ? "created_after=" + (currentTime - thirtyDays) + "&" : "") + "sort=random&limit=1&fields=" + this.searchParams.fields;
         const video = await fetchData(url);
 
-        console.log(url);
-
         if (video) {
             if (video.list.length > 0) {
                 /**
@@ -474,6 +473,14 @@ export default class PlayerManager {
      */
     // TODO: improve sanitize the keywords to strip duplicate string
     protected sanitizeKeywords(keywords: string): string[] {
+
+        if ( this.playerParams.blockKeywords !== null ) {
+            this.playerParams.blockKeywords.forEach((word: string) => {
+                // const regex = new RegExp(`/${word}/g`);
+                keywords = keywords.replace(word, '');
+            });
+        }
+
         return keywords.replace(/[^- \u3131-\uD79D a-zA-Z0-9 \u00C0-\u00FF \u0900-\u097F \u0621-\u064A \u0660-\u0669 \u0b80-\u0bff \u0B82-\u0BFA \u0E00-\u0E7F \u0153]/g, ' ')
             .split(' ')
             .filter(word => word.length >= this.playerParams.minWordLength);
