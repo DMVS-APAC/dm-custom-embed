@@ -103,13 +103,16 @@ export default interface InfPlayer {
     stpSound?: boolean;
 
     // Video auto play
-    autoPlayMute: boolean;
+    autoPlayMute?: boolean;
 
     // Custom player style
-    playerStyleEnable: boolean;
+    playerStyleEnable?: boolean;
 
     // Define player style
-    playerStyleColor: string;
+    playerStyleColor?: string;
+
+    // add to block some keywords
+    blockKeywords?: string[];
 
     width?: number;
     height?: number;
