@@ -53,6 +53,7 @@ const setAttributes = async (el: NodeListOf<HTMLDivElement>) => {
     dmPlayer.setAttribute('cpeId', getParam('cpeId'));
     dmPlayer.setAttribute('owners', getParam('owners'));
     dmPlayer.setAttribute('sort', getParam('sort'));
+    dmPlayer.setAttribute('searchInPlaylist', getParam('searchinplaylist'));
 }
 
 const init = async () => {

@@ -2130,6 +2130,7 @@ var setAttributes = function (el) { return __awaiter(void 0, void 0, void 0, fun
         dmPlayer.setAttribute('cpeId', Object(_Libraries_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])('cpeId'));
         dmPlayer.setAttribute('owners', Object(_Libraries_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])('owners'));
         dmPlayer.setAttribute('sort', Object(_Libraries_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])('sort'));
+        dmPlayer.setAttribute('searchInPlaylist', Object(_Libraries_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])('searchinplaylist'));
         return [2 /*return*/];
     });
 }); };
