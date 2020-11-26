@@ -2623,28 +2623,22 @@ var PlayerEventsManager = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var destroyPlayer, showPlayer;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: 
-                    // Waiting for 1 second to interact with ad
-                    return [4 /*yield*/, Object(_Libraries_Utilities_waitFor__WEBPACK_IMPORTED_MODULE_0__[/* sleep */ "a"])(5000)];
-                    case 1:
-                        // Waiting for 1 second to interact with ad
-                        _a.sent();
-                        /**
-                         * noFill means no ad to serve
-                         * It will send a custom event that let
-                         * the script continue show the player or destroy it
-                         */
-                        if (this.noFill === true) {
-                            destroyPlayer = new CustomEvent('dm-destroy-player');
-                            document.dispatchEvent(destroyPlayer);
-                        }
-                        else {
-                            showPlayer = new CustomEvent('dm-show-player');
-                            document.dispatchEvent(showPlayer);
-                        }
-                        return [2 /*return*/];
+                // Waiting for 1 second to interact with ad
+                // await sleep(2000);
+                /**
+                 * noFill means no ad to serve
+                 * It will send a custom event that let
+                 * the script continue show the player or destroy it
+                 */
+                if (this.noFill === true) {
+                    destroyPlayer = new CustomEvent('dm-destroy-player');
+                    document.dispatchEvent(destroyPlayer);
                 }
+                else {
+                    showPlayer = new CustomEvent('dm-show-player');
+                    document.dispatchEvent(showPlayer);
+                }
+                return [2 /*return*/];
             });
         });
     };
