@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.16] (2020-11-26)
+
+**Implemented enhancements:**
+- Remove waiting for ad fill
+
 ## [1.5.15] (2020-11-24)
 
 **Implemented enhancements:**

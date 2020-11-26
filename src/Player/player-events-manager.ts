@@ -244,7 +244,7 @@ export default class PlayerEventsManager {
      */
     private async waitForAdStart() {
         // Waiting for 1 second to interact with ad
-        await sleep(5000);
+        // await sleep(2000);
 
         /**
          * noFill means no ad to serve
