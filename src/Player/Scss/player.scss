@@ -15,14 +15,16 @@
 
 .dm__close-button {
   position: absolute !important;
-  top: -38px !important;
-  right: 0 !important;
-  width: 33px !important;
-  height: 33px !important;
-  background: #000 !important;
-  opacity: .45 !important;
+  top: var( --dm-close-top, -38px) !important;
+  right: var( --dm-close-right, 0) !important;
+  width: var( --dm-close-width, 33px) !important;
+  height: var( --dm-close-height, 33px) !important;
+  background: var( --dm-close-bg, #000) !important;
+  opacity: var( --dm-close-opacity, .45) !important;
   border-radius: 50% !important;
-  padding: 9px !important;
+  padding: var( --dm-close-padding, 9px ) !important;
+  border: var( --dm-close-border, 0) !important;
+  cursor: pointer;
 
   svg {
     width: 100%;
@@ -128,13 +130,31 @@
     }
   }
 
-  &.dm--has-close-button {
-    padding-top: 40px;
-
+  &.dm--has-close-button, &.dm--has-close-pip {
     .dailymotion-cpe {
       overflow: visible;
     }
     .cpeClosePipBtn {
+      display: none;
+    }
+  }
+
+  &.dm--has-close-button {
+    padding-top: 40px;
+  }
+
+  &.dm--has-close-pip {
+    .dm__close-button {
+      display: none;
+    }
+
+    .insider.pip .dm__close-button {
+      display: block;
+    }
+  }
+
+  &.dm--pip-closed.dm-playback-ready {
+    .insider.pip {
       display: none;
     }
   }

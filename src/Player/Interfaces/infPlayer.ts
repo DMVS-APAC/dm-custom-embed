@@ -114,6 +114,8 @@ export default interface InfPlayer {
     // add to block some keywords
     blockKeywords?: string[];
 
+    showCloseButtonPip?: boolean;
+
     width?: number;
     height?: number;
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.5.17] (2020-12-02)
+
+**Implemented enhancements:**
+- Add delay to show the close button on PiP
+- Add CSS variables to customize close button from outside the script
+
 ## [1.5.16] (2020-11-26)
 
 **Implemented enhancements:**

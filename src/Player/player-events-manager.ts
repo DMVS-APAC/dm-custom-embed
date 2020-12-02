@@ -161,6 +161,27 @@ export default class PlayerEventsManager {
 
 
                     /**
+                     * Force close button PiP to show
+                     */
+                    if (this.playerParams.showCloseButtonPip === true) {
+                        const customClosePip = document.createElement('button');
+                        customClosePip.className = 'dm__close-button';
+                        customClosePip.innerHTML = '<svg fill="none" height="32" viewBox="0 0 31 32" width="31" xmlns="http://www.w3.org/2000/svg"><g stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"><path d="m2.12132 3 26.16298 26.163"/><path d="m1.5-1.5h37" transform="matrix(.707107 -.707107 -.707107 -.707107 0 29.2843)"/></g></svg>';
+                        customClosePip.addEventListener('click', () => {
+                            const cpeClose = new CustomEvent('customClosePip');
+                            document.dispatchEvent(cpeClose);
+                            dmPlayer.classList.add('dm--pip-closed');
+                        });
+
+                        await sleep(3000);
+
+                        dmPlayer.classList.add('dm--has-close-pip');
+                        const playerContainer = dmPlayer.childNodes[0].childNodes[0];
+                        playerContainer.appendChild(customClosePip);
+                    }
+
+
+                    /**
                      * Build the custom close button
                      */
                     if (this.playerParams.closeButton === true) {
@@ -201,6 +222,11 @@ export default class PlayerEventsManager {
         window.addEventListener('cpepipclose', ({ detail: { player } }) => {
             // Do pause when cpe PiP is closed
             player.pause();
+        });
+
+        document.addEventListener('customClosePip', (e: Event) => {
+            // Do pause when cpe PiP is closed
+            this.players[0].pause();
         });
 
         /**
