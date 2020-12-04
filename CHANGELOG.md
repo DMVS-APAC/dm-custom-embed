@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.18] (2020-12-04)
+
+**Fixed Bugs:**
+- Fixed condition for custom close PiP button
+
 ## [1.5.17] (2020-12-02)
 
 **Implemented enhancements:**

@@ -137,7 +137,7 @@ export default class PlayerManager {
             playerStyleEnable: ( rootEl.getAttribute('playerStyleEnable') != 'false' && rootEl.getAttribute('playerStyleEnable') != null ),
             playerStyleColor: rootEl.getAttribute('playerStyleColor') ? rootEl.getAttribute('playerStyleColor') : null,
             blockKeywords: rootEl.getAttribute('blockKeywords') ? rootEl.getAttribute('blockKeywords').split(',') : null,
-            showCloseButtonPip: ( rootEl.getAttribute('showCloseButtonPip') != 'false'),
+            showCloseButtonPip: ( rootEl.getAttribute('showCloseButtonPip') === 'true'),
         };
 
         /**
