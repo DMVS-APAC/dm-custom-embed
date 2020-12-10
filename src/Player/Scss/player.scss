@@ -204,4 +204,8 @@
     left: 0;
     background: rgba(0, 0, 0, .6);
   }
+  // adding padding to close pip image
+  .insider div.cpeClosePipBtn img.cpeClosePipPicto {
+    padding: 0px;
+  }
 }
