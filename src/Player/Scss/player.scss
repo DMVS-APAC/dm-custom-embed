@@ -13,6 +13,17 @@
   }
 }
 
+// This is for fixing default style. In some website, the position is not correct
+.dailymotion-cpe .pip div.cpeClosePipBtn {
+  padding: 0 !important;
+
+  img.cpeClosePipPicto {
+    display: block;
+    padding: 9px;
+  }
+}
+
+
 .dm__close-button {
   position: absolute !important;
   top: var( --dm-close-top, -38px) !important;
