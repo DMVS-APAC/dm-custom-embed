@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.19] (2020-12-11)
+
+**Fixed Bugs:**
+- Fixed the padding overide in close pip button
+
 ## [1.5.18] (2020-12-04)
 
 **Fixed Bugs:**
