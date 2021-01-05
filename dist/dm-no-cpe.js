@@ -1702,6 +1702,7 @@ function main (opts) {
             var ctx = elementContextList[x];
             var el = ctx.element;
             var visible = ctx.visible;
+            var justOnce = el.hasAttribute('scrollout-once') || false; // Once
             if (ctx._changed) {
                 ctx._changed = false;
                 props(el, ctx);
@@ -1712,7 +1713,7 @@ function main (opts) {
                 (visible ? onShown : onHidden)(el, ctx, doc);
             }
             // if this is shown multiple times, keep it in the list
-            if (visible && opts.once) {
+            if (visible && (opts.once || justOnce)) { // or if this element just display it once
                 elementContextList.splice(x, 1);
             }
         }
@@ -1938,7 +1939,7 @@ function applyToTag(style, options, obj) {
     style.removeAttribute('media');
   }
 
-  if (sourceMap && btoa) {
+  if (sourceMap && typeof btoa !== 'undefined') {
     css += "\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))), " */");
   } // For old IE
 
@@ -2369,11 +2370,9 @@ options.singleton = false;
 
 var update = api(content, options);
 
-var exported = content.locals ? content.locals : {};
 
 
-
-module.exports = exported;
+module.exports = content.locals || {};
 
 /***/ }),
 
@@ -2809,11 +2808,9 @@ options.singleton = false;
 
 var update = api(content, options);
 
-var exported = content.locals ? content.locals : {};
 
 
-
-module.exports = exported;
+module.exports = content.locals || {};
 
 /***/ }),
 
@@ -3369,11 +3366,9 @@ options.singleton = false;
 
 var update = api(content, options);
 
-var exported = content.locals ? content.locals : {};
 
 
-
-module.exports = exported;
+module.exports = content.locals || {};
 
 /***/ }),
 

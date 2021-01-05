@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.20] (2021-01-05)
+
+**Fixed Bugs:**
+- Fixed `searchInPlaylist` param for AMP
+
 ## [1.5.19] (2020-12-11)
 
 **Fixed Bugs:**
