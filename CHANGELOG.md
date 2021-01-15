@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.21] (2021-01-15)
+
+**Fixed Bugs:**
+- Fixed iframe style override by parent web styling
+
 ## [1.5.20] (2021-01-05)
 
 **Fixed Bugs:**

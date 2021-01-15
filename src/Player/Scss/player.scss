@@ -106,6 +106,14 @@
   width: var(--dm-player-width, 100%) !important;
   clear: left !important; // in some partner website still implement floating grid. this will clear the floating part
 
+  .dailymotion-cpe iframe {
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
 
   &.dm--has-placeholder {
     overflow: visible;
