@@ -9,6 +9,8 @@ export default class CustomEmbedManager {
     private scriptLoaded: boolean = false;
     private keywords: string = null;
 
+    private built: boolean = false;
+
     // TODO: Find best practice to do static variable and function
     private static player: PlayerManager[] = [];
 
@@ -18,6 +20,8 @@ export default class CustomEmbedManager {
         this.keywords = keywords;
         this.eventListeners();
         this.renderElement();
+        // this.waitScroll();
+        console.log("DM: is this executed?");
     }
 
     private eventListeners() {
@@ -58,6 +62,24 @@ export default class CustomEmbedManager {
 
         await sleep(1000);
         window.cpe.parse();
+    }
+
+    private waitScroll() {
+
+        window.addEventListener('scroll', e => {
+            const heightOfWindow = window.innerHeight;
+            const contentScrolled = window.pageYOffset;
+            const bodyHeight = document.body.offsetHeight;
+            const total = bodyHeight - heightOfWindow;
+            const got = contentScrolled;
+            const percent = parseInt(String((got / total) * 100));
+
+            if (percent > 20 && this.built === false) {
+                this.renderElement();
+                this.built = true;
+                window.removeEventListener('scroll', () => {});
+            }
+        });
     }
 
     /**

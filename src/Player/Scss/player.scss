@@ -105,7 +105,7 @@
   overflow: hidden;
   width: var(--dm-player-width, 100%) !important;
   clear: left !important; // in some partner website still implement floating grid. this will clear the floating part
-
+  
 
   &.dm--has-placeholder {
     overflow: visible;

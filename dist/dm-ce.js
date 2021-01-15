@@ -1799,11 +1799,14 @@ var CustomEmbedManager = /** @class */ (function () {
         this.rootEls = null;
         this.scriptLoaded = false;
         this.keywords = null;
+        this.built = false;
         // Pass rootEls to local variable
         this.rootEls = rootEls;
         this.keywords = keywords;
         this.eventListeners();
         this.renderElement();
+        // this.waitScroll();
+        console.log("DM: is this executed?");
     }
     CustomEmbedManager.prototype.eventListeners = function () {
         var _this = this;
@@ -1855,6 +1858,22 @@ var CustomEmbedManager = /** @class */ (function () {
                         return [2 /*return*/];
                 }
             });
+        });
+    };
+    CustomEmbedManager.prototype.waitScroll = function () {
+        var _this = this;
+        window.addEventListener('scroll', function (e) {
+            var heightOfWindow = window.innerHeight;
+            var contentScrolled = window.pageYOffset;
+            var bodyHeight = document.body.offsetHeight;
+            var total = bodyHeight - heightOfWindow;
+            var got = contentScrolled;
+            var percent = parseInt(String((got / total) * 100));
+            if (percent > 20 && _this.built === false) {
+                _this.renderElement();
+                _this.built = true;
+                window.removeEventListener('scroll', function () { });
+            }
         });
     };
     /**
