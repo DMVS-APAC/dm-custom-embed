@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.22] (2021-01-19)
+
+**Implemented enhancements**
+- Add videoid param to AMP
+
 ## [1.5.21] (2021-01-15)
 
 **Fixed Bugs:**

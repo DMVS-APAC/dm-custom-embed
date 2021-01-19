@@ -57,6 +57,10 @@ const setAttributes = async (el: NodeListOf<HTMLDivElement>) => {
     if (getParam('searchinplaylist') !== null) {
         dmPlayer.setAttribute('searchInPlaylist', getParam('searchinplaylist'));
     }
+
+    if (getParam('videoid') !== null) {
+        dmPlayer.setAttribute('videoId', getParam('videoid'));
+    }
 }
 
 const init = async () => {

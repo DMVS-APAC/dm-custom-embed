@@ -2134,6 +2134,9 @@ var setAttributes = function (el) { return __awaiter(void 0, void 0, void 0, fun
         if (Object(_Libraries_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])('searchinplaylist') !== null) {
             dmPlayer.setAttribute('searchInPlaylist', Object(_Libraries_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])('searchinplaylist'));
         }
+        if (Object(_Libraries_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])('videoid') !== null) {
+            dmPlayer.setAttribute('videoId', Object(_Libraries_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])('videoid'));
+        }
         return [2 /*return*/];
     });
 }); };
