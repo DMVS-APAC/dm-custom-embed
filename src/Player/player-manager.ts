@@ -367,7 +367,7 @@ export default class PlayerManager {
             let video = await fetchData(await this.generateQuery(this.playerParams.sort[i], Number(this.playerParams.rangeDay[i])));
 
             if (video) {
-                if (video.total > 0) {
+                if (video.list.length > 0) {
                     this.setVideo(video.list[0], true);
 
                     if (this.playerParams.showOutsidePlaylist === true) {
@@ -384,7 +384,7 @@ export default class PlayerManager {
                         this.keywords = this.keywords.substring(0, this.searchParams.search.lastIndexOf(' '));
                         video = await fetchData(await this.generateQuery(this.playerParams.sort[i], Number(this.playerParams.rangeDay[i])));
 
-                        if (video.total > 0) {
+                        if (video.list.length > 0) {
                             this.setVideo(video.list[0], true);
 
                             if (this.playerParams.showOutsidePlaylist === true) {
@@ -395,13 +395,13 @@ export default class PlayerManager {
                     }
 
                     // Let the looper know that video is found
-                    if (video.total > 0) break;
+                    if (video.list.length > 0) break;
                 }
 
                 /**
                  * This condition is to check if no videos found
                  */
-                if (video.total === 0 && i === this.playerParams.sort.length - 1) {
+                if (video.list.length === 0 && i === this.playerParams.sort.length - 1) {
                     this.getFallbackVideo();
                     break;
                 }

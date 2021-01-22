@@ -3211,7 +3211,7 @@ var PlayerManager = /** @class */ (function () {
                     case 3:
                         video = _c.sent();
                         if (!video) return [3 /*break*/, 10];
-                        if (!(video.total > 0)) return [3 /*break*/, 4];
+                        if (!(video.list.length > 0)) return [3 /*break*/, 4];
                         this.setVideo(video.list[0], true);
                         if (this.playerParams.showOutsidePlaylist === true) {
                             new _Playlist_playlist_manager__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"](this.rootEl, video, this.playerParams.showPlaynow);
@@ -3229,7 +3229,7 @@ var PlayerManager = /** @class */ (function () {
                     case 6: return [4 /*yield*/, _b.apply(void 0, [_c.sent()])];
                     case 7:
                         video = _c.sent();
-                        if (video.total > 0) {
+                        if (video.list.length > 0) {
                             this.setVideo(video.list[0], true);
                             if (this.playerParams.showOutsidePlaylist === true) {
                                 new _Playlist_playlist_manager__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"](this.rootEl, video, this.playerParams.showPlaynow);
@@ -3239,14 +3239,14 @@ var PlayerManager = /** @class */ (function () {
                         return [3 /*break*/, 5];
                     case 8:
                         // Let the looper know that video is found
-                        if (video.total > 0)
+                        if (video.list.length > 0)
                             return [3 /*break*/, 11];
                         _c.label = 9;
                     case 9:
                         /**
                          * This condition is to check if no videos found
                          */
-                        if (video.total === 0 && i === this.playerParams.sort.length - 1) {
+                        if (video.list.length === 0 && i === this.playerParams.sort.length - 1) {
                             this.getFallbackVideo();
                             return [3 /*break*/, 11];
                         }
