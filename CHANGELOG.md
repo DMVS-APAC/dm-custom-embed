@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.23] (2021-01-22)
+
+**Fixed Bugs:**
+- Change param `total` to `length` of result. Seems `total` is deprecated.
+
 ## [1.5.22] (2021-01-19)
 
 **Implemented enhancements**
