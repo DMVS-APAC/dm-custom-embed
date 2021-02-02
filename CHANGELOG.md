@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.24] (2021-02-02)
+
+**Implemented enhancements:**
+- Improve keywords algorithm
+
 ## [1.5.23] (2021-01-22)
 
 **Fixed Bugs:**
