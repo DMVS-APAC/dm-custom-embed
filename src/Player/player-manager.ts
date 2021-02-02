@@ -179,7 +179,7 @@ export default class PlayerManager {
         };
 
         const keywords = this.findKeywords(this.playerParams.keywordsSelector);
-        this.keywords = this.keywords ? this.keywords : keywords.sort((a, b) => b.length - a.length).slice(0, this.playerParams.maxWordSearch).join(' ');
+        this.keywords = this.keywords ? this.keywords : keywords.slice(0, this.playerParams.maxWordSearch).join(' ');
 
         if (!this.playerParams.searchInPlaylist) {
 
