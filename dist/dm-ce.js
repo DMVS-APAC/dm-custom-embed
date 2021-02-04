@@ -118,7 +118,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".dm-playlist {\n  background: var(--dm-playlist-bg, #232323) !important;\n  padding: 0 40px !important; }\n  .dm-playlist .slider {\n    position: relative !important; }\n  .dm-playlist .frame {\n    width: 100% !important;\n    position: relative !important;\n    overflow: hidden !important;\n    white-space: nowrap !important; }\n  .dm-playlist .slides {\n    display: inline-block !important;\n    width: 100% !important;\n    padding: 0 !important; }\n  .dm-playlist .prev, .dm-playlist .next {\n    position: absolute;\n    top: 50%;\n    margin-top: -25px;\n    display: block;\n    cursor: pointer;\n    background: none;\n    padding: 0;\n    border: 0; }\n\n.dm__video-info {\n  background: var(--dm-video-info-bg, #fff);\n  border-top: 6px solid var(--dm-top-line-color, #232323);\n  margin-bottom: 13px; }\n  .dm__video-info .dm__video-title {\n    --dm-title-align: left;\n    --dm-title-weight: 700;\n    font-family: var(--dm__video-title, \"Noto Sans\", Arial, sans-serif) !important; }\n  .dm__video-info .dm__video-description {\n    font-family: \"Noto Sans\", Arial, sans-serif !important;\n    display: -webkit-box;\n    -webkit-line-clamp: 2;\n    height: 3.1em;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-box-orient: vertical;\n    white-space: normal;\n    font-size: .8em; }\n    .dm__video-info .dm__video-description p {\n      margin: 0 0 13px; }\n\n.dm__playlist-slide {\n  cursor: pointer;\n  position: relative;\n  display: inline-block;\n  width: 133px;\n  vertical-align: top; }\n  .dm__playlist-slide:after {\n    position: absolute;\n    content: '';\n    width: 100%;\n    height: 100%;\n    top: 0;\n    left: 0; }\n\n.dm__slide-wrapper {\n  padding: 5px; }\n\n/**\n * A sign for now playing and next playing on thumbnail\n */\n.dm__playlist-active .dm__playlist-cont-thumbnail:after {\n  content: \"Playing now\";\n  display: block; }\n\n.dm__playlist-active + .dm__playlist-slide .dm__playlist-cont-thumbnail:after {\n  content: \"Playing next\";\n  background: var(--dm-next-playing-bg, rgba(35, 35, 35, 0.95));\n  display: block; }\n\n.dm__playlist-active .dm__playlist-duration, .dm__playlist-active + .dm__playlist-slide .dm__playlist-duration {\n  background: none !important; }\n\n.dm__playlist-cont-thumbnail {\n  width: 100%;\n  position: relative;\n  margin: 0;\n  overflow: hidden; }\n  .dm__playlist-cont-thumbnail:before {\n    content: \"\";\n    padding-top: 56.25%;\n    background: #ddd;\n    display: block;\n    -webkit-animation: slideInDown;\n    animation: slideInDown;\n    -webkit-animation-duration: 1s;\n    animation-duration: 1s;\n    -webkit-animation-iteration-count: 1;\n    animation-iteration-count: 1; }\n  .dm__playlist-cont-thumbnail:after {\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    background: var(--dm-now-playing-bg, #56c7ff);\n    color: var(--dm-now-playing-color, #fff) !important;\n    padding: 4px 10px;\n    font-size: var(--dm-playlist-publisher-size, 0.6em) !important;\n    font-family: \"Noto Sans\", Arial, sans-serif;\n    display: none; }\n\n.dm__playlist-thumbnail {\n  width: 100%;\n  height: auto;\n  display: block;\n  position: absolute;\n  top: 0;\n  left: 0; }\n\n.dm__playlist-duration {\n  position: absolute;\n  bottom: 1px;\n  right: 1px;\n  color: #fff !important;\n  background: rgba(0, 0, 0, 0.6) !important;\n  padding: 4px !important;\n  font-size: .6em !important;\n  font-family: \"Noto Sans\", Arial, sans-serif !important;\n  z-index: 1; }\n\n.dm__playlist-info-container {\n  background: var(--dm-playlist-info-bg, #414141) !important;\n  padding: 6px 10px !important;\n  font-family: var(--dm-playlist-font-family, \"Noto Sans\", Arial, sans-serif) !important;\n  font-weight: var(--dm-playlist-weight, 700) !important;\n  color: var(--dm-playlist-color, #fff) !important; }\n\n.dm__playlist-publisher-name {\n  margin: 12px 0 0 !important;\n  color: inherit !important;\n  font-size: var(--dm-playlist-publisher-size, 0.6em) !important;\n  line-height: 1.3em !important;\n  display: inline-block;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  width: 100%; }\n\nimg.dm__playlist-publisher-ava {\n  all: unset;\n  width: 12px !important;\n  margin-right: 6px;\n  vertical-align: middle; }\n\n.dm__playlist-title {\n  margin: 0 !important;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 3;\n  -webkit-box-orient: vertical;\n  -webkit-font-smoothing: antialiased;\n  white-space: normal !important;\n  font-size: var(--dm-playlist-title-size, 0.7em) !important;\n  font-width: inherit !important;\n  line-height: 1.3em !important;\n  height: 3.87em !important; }\n\n.next {\n  right: -40px; }\n\n.prev {\n  left: -40px; }\n\n.next svg, .prev svg {\n  width: 25px; }\n\n/* SVG style*/\n.arrow {\n  fill: var(--arrow-color, #ddd); }\n\n.dm-playlist--right-side {\n  --dm-playlist-display: flex;\n  --dm-player-size: 50%;\n  --dm-player-ratio: 29%;\n  --dm-playlist-size: 40%;\n  --dm-playlist-bg: #000;\n  display: var(--dm-playlist-display);\n  justify-content: flex-start;\n  align-items: flex-start;\n  background: var(--dm-playlist-bg); }\n  .dm-playlist--right-side .dailymotion-cpe {\n    width: var(--dm-player-size);\n    padding-bottom: var(--dm-player-ratio); }\n  .dm-playlist--right-side .dm-playlist {\n    width: var(--dm-playlist-size); }\n\n@media (max-width: 767px) {\n  .dm-playlist--right-side {\n    --dm-playlist-display: block;\n    --dm-player-size: 100%;\n    --dm-player-ratio: 56.25%;\n    --dm-playlist-size: calc(100% - 80px); } }\n", ""]);
+exports.push([module.i, ".dm-playlist {\n  background: var(--dm-playlist-bg, #232323) !important;\n  padding: 0 40px !important; }\n  .dm-playlist .slider {\n    position: relative !important; }\n  .dm-playlist .frame {\n    width: 100% !important;\n    position: relative !important;\n    overflow: hidden !important;\n    white-space: nowrap !important; }\n  .dm-playlist .slides {\n    display: inline-block !important;\n    width: 100% !important;\n    padding: 0 !important; }\n  .dm-playlist .prev, .dm-playlist .next {\n    position: absolute;\n    top: 50%;\n    margin-top: -25px;\n    display: block;\n    cursor: pointer;\n    background: none;\n    padding: 0;\n    border: 0; }\n\n.dm__video-info {\n  background: var(--dm-video-info-bg, #fff);\n  border-top: 6px solid var(--dm-top-line-color, #232323);\n  margin-bottom: 13px; }\n  .dm__video-info .dm__video-title {\n    --dm-title-align: left;\n    --dm-title-weight: 700;\n    font-family: var(--dm__video-title, \"Noto Sans\", Arial, sans-serif) !important; }\n  .dm__video-info .dm__video-description {\n    font-family: \"Noto Sans\", Arial, sans-serif !important;\n    display: -webkit-box;\n    -webkit-line-clamp: 2;\n    height: 3.1em;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-box-orient: vertical;\n    white-space: normal;\n    font-size: .8em; }\n    .dm__video-info .dm__video-description p {\n      margin: 0 0 13px; }\n\n.dm__playlist-slide {\n  cursor: pointer;\n  position: relative;\n  display: inline-block;\n  width: 133px;\n  vertical-align: top; }\n  .dm__playlist-slide:after {\n    position: absolute;\n    content: '';\n    width: 100%;\n    height: 100%;\n    top: 0;\n    left: 0; }\n\n.dm__slide-wrapper {\n  padding: 5px; }\n\n/**\r\n * A sign for now playing and next playing on thumbnail\r\n */\n.dm__playlist-active .dm__playlist-cont-thumbnail:after {\n  content: \"Playing now\";\n  display: block; }\n\n.dm__playlist-active + .dm__playlist-slide .dm__playlist-cont-thumbnail:after {\n  content: \"Playing next\";\n  background: var(--dm-next-playing-bg, rgba(35, 35, 35, 0.95));\n  display: block; }\n\n.dm__playlist-active .dm__playlist-duration, .dm__playlist-active + .dm__playlist-slide .dm__playlist-duration {\n  background: none !important; }\n\n.dm__playlist-cont-thumbnail {\n  width: 100%;\n  position: relative;\n  margin: 0;\n  overflow: hidden; }\n  .dm__playlist-cont-thumbnail:before {\n    content: \"\";\n    padding-top: 56.25%;\n    background: #ddd;\n    display: block;\n    -webkit-animation: slideInDown;\n    animation: slideInDown;\n    -webkit-animation-duration: 1s;\n    animation-duration: 1s;\n    -webkit-animation-iteration-count: 1;\n    animation-iteration-count: 1; }\n  .dm__playlist-cont-thumbnail:after {\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    background: var(--dm-now-playing-bg, #56c7ff);\n    color: var(--dm-now-playing-color, #fff) !important;\n    padding: 4px 10px;\n    font-size: var(--dm-playlist-publisher-size, 0.6em) !important;\n    font-family: \"Noto Sans\", Arial, sans-serif;\n    display: none; }\n\n.dm__playlist-thumbnail {\n  width: 100%;\n  height: auto;\n  display: block;\n  position: absolute;\n  top: 0;\n  left: 0; }\n\n.dm__playlist-duration {\n  position: absolute;\n  bottom: 1px;\n  right: 1px;\n  color: #fff !important;\n  background: rgba(0, 0, 0, 0.6) !important;\n  padding: 4px !important;\n  font-size: .6em !important;\n  font-family: \"Noto Sans\", Arial, sans-serif !important;\n  z-index: 1; }\n\n.dm__playlist-info-container {\n  background: var(--dm-playlist-info-bg, #414141) !important;\n  padding: 6px 10px !important;\n  font-family: var(--dm-playlist-font-family, \"Noto Sans\", Arial, sans-serif) !important;\n  font-weight: var(--dm-playlist-weight, 700) !important;\n  color: var(--dm-playlist-color, #fff) !important; }\n\n.dm__playlist-publisher-name {\n  margin: 12px 0 0 !important;\n  color: inherit !important;\n  font-size: var(--dm-playlist-publisher-size, 0.6em) !important;\n  line-height: 1.3em !important;\n  display: inline-block;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  width: 100%; }\n\nimg.dm__playlist-publisher-ava {\n  all: unset;\n  width: 12px !important;\n  margin-right: 6px;\n  vertical-align: middle; }\n\n.dm__playlist-title {\n  margin: 0 !important;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 3;\n  -webkit-box-orient: vertical;\n  -webkit-font-smoothing: antialiased;\n  white-space: normal !important;\n  font-size: var(--dm-playlist-title-size, 0.7em) !important;\n  font-width: inherit !important;\n  line-height: 1.3em !important;\n  height: 3.87em !important; }\n\n.next {\n  right: -40px; }\n\n.prev {\n  left: -40px; }\n\n.next svg, .prev svg {\n  width: 25px; }\n\n/* SVG style*/\n.arrow {\n  fill: var(--arrow-color, #ddd); }\n\n.dm-playlist--right-side {\n  --dm-playlist-display: flex;\n  --dm-player-size: 50%;\n  --dm-player-ratio: 29%;\n  --dm-playlist-size: 40%;\n  --dm-playlist-bg: #000;\n  display: var(--dm-playlist-display);\n  justify-content: flex-start;\n  align-items: flex-start;\n  background: var(--dm-playlist-bg); }\n  .dm-playlist--right-side .dailymotion-cpe {\n    width: var(--dm-player-size);\n    padding-bottom: var(--dm-player-ratio); }\n  .dm-playlist--right-side .dm-playlist {\n    width: var(--dm-playlist-size); }\n\n@media (max-width: 767px) {\n  .dm-playlist--right-side {\n    --dm-playlist-display: block;\n    --dm-player-size: 100%;\n    --dm-player-ratio: 56.25%;\n    --dm-playlist-size: calc(100% - 80px); } }\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -1265,202 +1265,6 @@ module.exports = __webpack_require__(0);
 
 /***/ }),
 
-/***/ "./node_modules/process/browser.js":
-/*!*****************************************!*\
-  !*** ./node_modules/process/browser.js ***!
-  \*****************************************/
-/*! no static exports found */
-/*! all exports used */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -2077,16 +1881,15 @@ function fetchData(urlParams) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return debugMode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return debugMode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return apiUrl; });
 /* harmony import */ var _Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Utilities/get-query-params */ "./src/Libraries/Utilities/get-query-params.ts");
 // Utilities
 
 // Get debug mode params from url
 var debugMode = (Object(_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])('dmdebug') != null && Object(_Utilities_get_query_params__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])('dmdebug') != 'false');
-var apiUrl = process.env.API_URL ? process.env.API_URL : "https://api.dailymotion.com/";
+var apiUrl =  true ? "https://your-custom-api-endpoint.com/" : undefined;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
 
 /***/ }),
 
@@ -2909,7 +2712,9 @@ var PlayerManager = /** @class */ (function () {
             limit: this.playerParams.showOutsidePlaylist ? 7 : 1,
         };
         var keywords = this.findKeywords(this.playerParams.keywordsSelector);
-        this.keywords = this.keywords ? this.keywords : keywords.slice(0, this.playerParams.maxWordSearch).join(' ');
+        this.keywords = this.keywords ?
+            (this.sanitizeKeywords(this.keywords)).join(' ') :
+            keywords.slice(0, this.playerParams.maxWordSearch).join(' ');
         if (!this.playerParams.searchInPlaylist) {
             // TODO: test using private video
             this.searchParams.private = 0;
