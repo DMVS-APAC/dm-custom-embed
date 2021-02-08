@@ -55,8 +55,12 @@
 }
 
 .dm__text-wrapper {
-  width: calc(100% - 80px);
+  width: calc(100% - var(--dm-ava-width, 80px));
   padding-right: 13px;
+
+  @media (max-width: 576px) { // Mobile breakpoints based on bootstrap
+    --dm-ava-width: 50px;
+  }
 }
 
 .dm__video-title {
@@ -88,10 +92,13 @@
   display: -webkit-box !important;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
-}
 
-.dm__ava-wrapper {
-  width: 80px;
+  &.dm__is-opened {
+    overflow: visible;
+    white-space: unset;
+    -webkit-line-clamp: unset;
+    text-overflow: unset;
+  }
 }
 
 .dm__owner-ava {

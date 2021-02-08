@@ -11,7 +11,7 @@ export default class InfoCard {
         const textWrapper = document.createElement('div');
         textWrapper.className = 'dm__text-wrapper';
 
-        const videoTitle = document.createElement('p');
+        const videoTitle = document.createElement('h5');
         videoTitle.innerHTML = data.title;
         videoTitle.className = 'dm__video-title';
 
@@ -19,8 +19,17 @@ export default class InfoCard {
         videoDesc.innerHTML = data.description;
         videoDesc.className = 'dm__video-desc';
 
+        const collapseButton = document.createElement('button');
+        collapseButton.innerHTML = 'collapse';
+        collapseButton.className = 'dm__desc-collapse';
+
+        collapseButton.addEventListener('click', e => {
+            this.collapseDesc(videoDesc);
+        });
+
         textWrapper.append(videoTitle);
         textWrapper.append(videoDesc);
+        textWrapper.append(collapseButton);
 
         const avaWrapper = document.createElement('picture');
         avaWrapper.className = 'dm__ava-wrapper';
@@ -42,6 +51,14 @@ export default class InfoCard {
         if (this.infoCardEl) {
             this.infoCardEl.remove();
             delete this.infoCardEl;
+        }
+    }
+
+    private collapseDesc(el: HTMLElement): void {
+        if (el.classList.contains('dm__is-opened')) {
+            el.classList.remove('dm__is-opened');
+        } else {
+            el.classList.add('dm__is-opened');
         }
     }
 }
