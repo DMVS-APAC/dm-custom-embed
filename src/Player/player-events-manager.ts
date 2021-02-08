@@ -60,6 +60,7 @@ export default class PlayerEventsManager {
 
                 player.addEventListener('ad_start', (e: Event) => {
                     this.noFill = false;
+                    console.log('ad_start');
                 });
 
                 /**
@@ -85,6 +86,8 @@ export default class PlayerEventsManager {
                             player.setControls(false);
                         }
                     }
+
+                    console.log('ad_play');
                 });
 
                 /**
@@ -105,6 +108,8 @@ export default class PlayerEventsManager {
                             player.setControls(true);
                         }
                     }
+
+                    console.log('ad_end');
                 });
 
                 /**
@@ -115,6 +120,8 @@ export default class PlayerEventsManager {
                  */
                 player.addEventListener('ad_pause', (e: Event) => {
                     this.adPause = true;
+
+                    console.log('ad_pause');
                 });
 
                 /**
@@ -126,6 +133,7 @@ export default class PlayerEventsManager {
                     if (this.multiplayerParams.closePip === true) {
                         this.togglePlay(player.id);
                     }
+                    console.log('player playing');
                 });
 
                 /**
@@ -135,12 +143,15 @@ export default class PlayerEventsManager {
                 player.addEventListener('end', (e: Event) => {
                     const videoEnd = new CustomEvent("dm-video-end", {detail: player.video.videoId});
                     document.dispatchEvent(videoEnd);
+
+                    console.log('video end');
                 });
 
                 /**
                  * Listen to `playback_ready` to show the player
                  */
                 player.addEventListener('playback_ready', async (e: Event) => {
+                    console.log('playback ready');
                     const dmPlayer = player.parentNode.parentNode.parentNode;
 
                     /**
@@ -210,7 +221,7 @@ export default class PlayerEventsManager {
                  * Handle player error as well to avoid bad UX
                  */
                 player.addEventListener('error', (e) => {
-                    // console.log(e);
+                    console.log('Error: ', e);
                 });
             }
         });
