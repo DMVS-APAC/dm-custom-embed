@@ -3,7 +3,7 @@ import infVideo from "../Interfaces/infVideo";
 export default class InfoCard {
     private infoCardEl: HTMLDivElement = null;
 
-    public setInfoCard(data: infVideo): HTMLDivElement {
+    public setInfoCard(data: infVideo, fullLength: boolean): HTMLDivElement {
 
         this.infoCardEl = document.createElement('div');
         this.infoCardEl.className = 'dm__info-card';
@@ -17,19 +17,10 @@ export default class InfoCard {
 
         const videoDesc = document.createElement('p');
         videoDesc.innerHTML = data.description;
-        videoDesc.className = 'dm__video-desc';
-
-        const collapseButton = document.createElement('button');
-        collapseButton.innerHTML = 'collapse';
-        collapseButton.className = 'dm__desc-collapse';
-
-        collapseButton.addEventListener('click', e => {
-            this.collapseDesc(videoDesc);
-        });
+        videoDesc.className = 'dm__video-desc' + (fullLength ? ' dm__full-desc' : '');
 
         textWrapper.append(videoTitle);
         textWrapper.append(videoDesc);
-        textWrapper.append(collapseButton);
 
         const avaWrapper = document.createElement('picture');
         avaWrapper.className = 'dm__ava-wrapper';
@@ -51,14 +42,6 @@ export default class InfoCard {
         if (this.infoCardEl) {
             this.infoCardEl.remove();
             delete this.infoCardEl;
-        }
-    }
-
-    private collapseDesc(el: HTMLElement): void {
-        if (el.classList.contains('dm__is-opened')) {
-            el.classList.remove('dm__is-opened');
-        } else {
-            el.classList.add('dm__is-opened');
         }
     }
 }
