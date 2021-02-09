@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.25] (2021-02-08)
+
+**Implementd enhancements:**
+- Improve keywords algorithm for AMP
+
 ## [1.5.24] (2021-02-02)
 
 **Implemented enhancements:**

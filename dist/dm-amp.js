@@ -3134,7 +3134,9 @@ var PlayerManager = /** @class */ (function () {
             limit: this.playerParams.showOutsidePlaylist ? 7 : 1,
         };
         var keywords = this.findKeywords(this.playerParams.keywordsSelector);
-        this.keywords = this.keywords ? this.keywords : keywords.slice(0, this.playerParams.maxWordSearch).join(' ');
+        this.keywords = this.keywords ?
+            (this.sanitizeKeywords(this.keywords)).join(' ') :
+            keywords.slice(0, this.playerParams.maxWordSearch).join(' ');
         if (!this.playerParams.searchInPlaylist) {
             // TODO: test using private video
             this.searchParams.private = 0;
