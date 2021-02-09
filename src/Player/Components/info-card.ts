@@ -16,7 +16,11 @@ export default class InfoCard {
         videoTitle.className = 'dm__video-title';
 
         const videoDesc = document.createElement('p');
-        videoDesc.innerHTML = data.description;
+        const desc = fullLength ? data.description.replace(
+            /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
+            '<a href="$1">$1</a>'
+        ) : data.description;
+        videoDesc.innerHTML = desc;
         videoDesc.className = 'dm__video-desc' + (fullLength ? ' dm__full-desc' : '');
 
         textWrapper.append(videoTitle);

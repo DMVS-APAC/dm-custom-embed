@@ -2234,7 +2234,8 @@ var InfoCard = /** @class */ (function () {
         videoTitle.innerHTML = data.title;
         videoTitle.className = 'dm__video-title';
         var videoDesc = document.createElement('p');
-        videoDesc.innerHTML = data.description;
+        var desc = fullLength ? data.description.replace(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig, '<a href="$1">$1</a>') : data.description;
+        videoDesc.innerHTML = desc;
         videoDesc.className = 'dm__video-desc' + (fullLength ? ' dm__full-desc' : '');
         textWrapper.append(videoTitle);
         textWrapper.append(videoDesc);
