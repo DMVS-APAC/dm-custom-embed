@@ -17,7 +17,7 @@
 
   .dm__text-wrapper {
     //width: calc(100% - var(--dm-ava-width));
-    width: 1px;
+    width: 1px; // Not sure why this is work on `display: flex` basist
     padding-right: 13px;
     transition: all ease .3s;
     flex-grow: 1;
