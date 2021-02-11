@@ -1,0 +1,83 @@
+.dm__info-card {
+  background: var(--dm-info-card-bg, #eee) !important;
+  padding: var(--dm-info-card-padding, 8px 13px) !important;
+  display: flex;
+  text-align: var(--dm-info-card-align, left) !important;
+
+  // Title
+  --dm-title-align: left;
+  --dm-title-weight: 700;
+  --dm-title-size: 1.1em;
+  --dm-ava-width: 80px;
+
+  @media (max-width: 576px) { // Mobile breakpoints based on bootstrap
+    --dm-ava-width: 50px;
+  }
+}
+
+  .dm__text-wrapper {
+    //width: calc(100% - var(--dm-ava-width));
+    width: 1px;
+    padding-right: 13px;
+    transition: all ease .3s;
+    flex-grow: 1;
+  }
+
+  .dm__video-title {
+    text-align: var(--dm-title-align, center) !important;
+    margin: var(--dm-title-margin, 8px 0) !important;
+    font-style: var(--dm-title-style, normal) !important;
+    color: var(--dm-title-color, inherit) !important;
+    font-size: var(--dm-title-size, 1em) !important;
+    font-weight: var(--dm-title-weight, 400) !important;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  .dm__video-desc {
+    text-align: var(--dm-desc-align, left) !important;
+    margin: var(--dm-desc-margin, 0 0 8px) !important;
+    font-style: var(--dm-desc-style, normal) !important;
+    color: var(--dm-desc-color, inherit) !important;
+    font-size: var(--dm-desc-size, .9em) !important;
+    font-weight: var(--dm-desc-weight, inherit) !important;
+    padding-top: 13px;
+    border-top: solid #666 1px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+
+    &.dm__full-desc {
+      overflow: visible;
+      white-space: unset;
+      -webkit-line-clamp: unset;
+      text-overflow: unset;
+    }
+  }
+
+  .dm__ava-wrapper {
+    width: var(--dm-ava-width);
+  }
+
+  .dm__owner-ava {
+    width: 100%;
+    height: auto;
+  }
+
+  button.dm__collapse-button {
+    padding: 0;
+    margin: 0 7px 0 0;
+    background: none;
+    border: 0;
+    transition: transform .3s ease;
+
+    &.collapsed {
+      transform: rotate(90deg);
+    }
+  }
