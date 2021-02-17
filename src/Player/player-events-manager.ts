@@ -301,7 +301,7 @@ export default class PlayerEventsManager {
             let elapsedTime = 0;
             const timerId = setInterval(() => {
                 const conditionFulfilled = this.noFill === false;
-                const killTimer = (elapsedTime > 5000) || this.noFill === false;
+                const killTimer = (elapsedTime > 8000) || this.noFill === false;
 
                 elapsedTime += interval;
 

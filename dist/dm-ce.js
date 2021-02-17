@@ -2677,7 +2677,7 @@ var PlayerEventsManager = /** @class */ (function () {
             var elapsedTime = 0;
             var timerId = setInterval(function () {
                 var conditionFulfilled = _this.noFill === false;
-                var killTimer = (elapsedTime > 5000) || _this.noFill === false;
+                var killTimer = (elapsedTime > 8000) || _this.noFill === false;
                 elapsedTime += interval;
                 if (conditionFulfilled) {
                     resolve();
