@@ -2444,7 +2444,6 @@ var PlayerEventsManager = /** @class */ (function () {
                         }); });
                         player.addEventListener('ad_start', function (e) {
                             _this.noFill = false;
-                            console.log('ad_start');
                         });
                         /**
                          * Listen to an ad_play
@@ -2466,7 +2465,6 @@ var PlayerEventsManager = /** @class */ (function () {
                                     player.setControls(false);
                                 }
                             }
-                            console.log('ad_play');
                         });
                         /**
                          * Listen to an ad_end event
@@ -2484,7 +2482,6 @@ var PlayerEventsManager = /** @class */ (function () {
                                     player.setControls(true);
                                 }
                             }
-                            console.log('ad_end');
                         });
                         /**
                          * Listen to ad_pause to handle the pause event
@@ -2494,7 +2491,6 @@ var PlayerEventsManager = /** @class */ (function () {
                          */
                         player.addEventListener('ad_pause', function (e) {
                             _this.adPause = true;
-                            console.log('ad_pause');
                         });
                         /**
                          * Listening to playing event
@@ -2506,7 +2502,6 @@ var PlayerEventsManager = /** @class */ (function () {
                                 if (this.multiplayerParams.closePip === true) {
                                     this.togglePlay(player.id);
                                 }
-                                console.log('player playing');
                                 return [2 /*return*/];
                             });
                         }); });
@@ -2517,7 +2512,6 @@ var PlayerEventsManager = /** @class */ (function () {
                         player.addEventListener('end', function (e) {
                             var videoEnd = new CustomEvent("dm-video-end", { detail: player.video.videoId });
                             document.dispatchEvent(videoEnd);
-                            console.log('video end');
                         });
                         /**
                          * Listen to `playback_ready` to show the player
@@ -2527,7 +2521,6 @@ var PlayerEventsManager = /** @class */ (function () {
                             return __generator(this, function (_a) {
                                 switch (_a.label) {
                                     case 0:
-                                        console.log('playback ready');
                                         dmPlayer = player.parentNode.parentNode.parentNode;
                                         if (!(this.playerParams.showAdOnly === true)) return [3 /*break*/, 2];
                                         dmPlayer.classList.add('dm-wait-for-ad');
@@ -2649,23 +2642,52 @@ var PlayerEventsManager = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var destroyPlayer, showPlayer;
             return __generator(this, function (_a) {
-                // Waiting for 1 second to interact with ad
-                // await sleep(2000);
-                /**
-                 * noFill means no ad to serve
-                 * It will send a custom event that let
-                 * the script continue show the player or destroy it
-                 */
-                if (this.noFill === true) {
-                    destroyPlayer = new CustomEvent('dm-destroy-player');
-                    document.dispatchEvent(destroyPlayer);
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.waitingAd()];
+                    case 1:
+                        _a.sent();
+                        /**
+                         * noFill means no ad to serve
+                         * It will send a custom event that let
+                         * the script continue show the player or destroy it
+                         */
+                        if (this.noFill === true) {
+                            destroyPlayer = new CustomEvent('dm-destroy-player');
+                            document.dispatchEvent(destroyPlayer);
+                        }
+                        else {
+                            showPlayer = new CustomEvent('dm-show-player');
+                            document.dispatchEvent(showPlayer);
+                        }
+                        return [2 /*return*/];
                 }
-                else {
-                    showPlayer = new CustomEvent('dm-show-player');
-                    document.dispatchEvent(showPlayer);
-                }
-                return [2 /*return*/];
             });
+        });
+    };
+    /**
+     * A promise for only waiting for the ad filled or not
+     * It waiting for 5s maximum then resolve the promise.
+     *
+     * @private
+     */
+    PlayerEventsManager.prototype.waitingAd = function () {
+        var _this = this;
+        var interval = 100;
+        return new Promise(function (resolve) {
+            var elapsedTime = 0;
+            var timerId = setInterval(function () {
+                var conditionFulfilled = _this.noFill === false;
+                var killTimer = (elapsedTime > 5000) || _this.noFill === false;
+                elapsedTime += interval;
+                if (conditionFulfilled) {
+                    resolve();
+                    clearInterval(timerId);
+                }
+                else if (killTimer) {
+                    resolve();
+                    clearInterval(timerId);
+                }
+            }, interval);
         });
     };
     /**

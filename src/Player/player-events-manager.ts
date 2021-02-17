@@ -60,7 +60,6 @@ export default class PlayerEventsManager {
 
                 player.addEventListener('ad_start', (e: Event) => {
                     this.noFill = false;
-                    console.log('ad_start');
                 });
 
                 /**
@@ -87,7 +86,6 @@ export default class PlayerEventsManager {
                         }
                     }
 
-                    console.log('ad_play');
                 });
 
                 /**
@@ -109,7 +107,6 @@ export default class PlayerEventsManager {
                         }
                     }
 
-                    console.log('ad_end');
                 });
 
                 /**
@@ -121,7 +118,6 @@ export default class PlayerEventsManager {
                 player.addEventListener('ad_pause', (e: Event) => {
                     this.adPause = true;
 
-                    console.log('ad_pause');
                 });
 
                 /**
@@ -133,7 +129,6 @@ export default class PlayerEventsManager {
                     if (this.multiplayerParams.closePip === true) {
                         this.togglePlay(player.id);
                     }
-                    console.log('player playing');
                 });
 
                 /**
@@ -144,14 +139,12 @@ export default class PlayerEventsManager {
                     const videoEnd = new CustomEvent("dm-video-end", {detail: player.video.videoId});
                     document.dispatchEvent(videoEnd);
 
-                    console.log('video end');
                 });
 
                 /**
                  * Listen to `playback_ready` to show the player
                  */
                 player.addEventListener('playback_ready', async (e: Event) => {
-                    console.log('playback ready');
                     const dmPlayer = player.parentNode.parentNode.parentNode;
 
                     /**
@@ -280,8 +273,7 @@ export default class PlayerEventsManager {
      * This function is related to `ad_start` listener as well
      */
     private async waitForAdStart() {
-        // Waiting for 1 second to interact with ad
-        // await sleep(2000);
+        await this.waitingAd();
 
         /**
          * noFill means no ad to serve
@@ -295,6 +287,33 @@ export default class PlayerEventsManager {
             const showPlayer = new CustomEvent('dm-show-player');
             document.dispatchEvent(showPlayer);
         }
+    }
+
+    /**
+     * A promise for only waiting for the ad filled or not
+     * It waiting for 5s maximum then resolve the promise.
+     *
+     * @private
+     */
+    private waitingAd(): Promise<void> {
+        const interval = 100;
+        return new Promise( resolve => {
+            let elapsedTime = 0;
+            const timerId = setInterval(() => {
+                const conditionFulfilled = this.noFill === false;
+                const killTimer = (elapsedTime > 5000) || this.noFill === false;
+
+                elapsedTime += interval;
+
+                if (conditionFulfilled) {
+                    resolve();
+                    clearInterval(timerId);
+                } else if (killTimer) {
+                    resolve();
+                    clearInterval(timerId);
+                }
+            }, interval);
+        });
     }
 
     /**
