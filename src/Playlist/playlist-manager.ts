@@ -5,7 +5,8 @@ import infVideoApi from "../Player/Interfaces/infVideoApi";
 import { lory } from 'lory.js';
 
 // Styles
-import '../Playlist/Scss/playlist.scss';
+import './Scss/video-info.scss';
+import './Scss/playlist.scss';
 
 export default class PlaylistManager {
     private dmPlaylist: HTMLDivElement = null;

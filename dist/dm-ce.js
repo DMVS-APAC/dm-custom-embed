@@ -118,7 +118,26 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".dm-playlist {\n  background: var(--dm-playlist-bg, #232323) !important;\n  padding: 0 40px !important; }\n  .dm-playlist .slider {\n    position: relative !important; }\n  .dm-playlist .frame {\n    width: 100% !important;\n    position: relative !important;\n    overflow: hidden !important;\n    white-space: nowrap !important; }\n  .dm-playlist .slides {\n    display: inline-block !important;\n    width: 100% !important;\n    padding: 0 !important; }\n  .dm-playlist .prev, .dm-playlist .next {\n    position: absolute;\n    top: 50%;\n    margin-top: -25px;\n    display: block;\n    cursor: pointer;\n    background: none;\n    padding: 0;\n    border: 0; }\n\n.dm__video-info {\n  background: var(--dm-video-info-bg, #fff);\n  border-top: 6px solid var(--dm-top-line-color, #232323);\n  margin-bottom: 13px; }\n  .dm__video-info .dm__video-title {\n    --dm-title-align: left;\n    --dm-title-weight: 700;\n    font-family: var(--dm__video-title, \"Noto Sans\", Arial, sans-serif) !important; }\n  .dm__video-info .dm__video-description {\n    font-family: \"Noto Sans\", Arial, sans-serif !important;\n    display: -webkit-box;\n    -webkit-line-clamp: 2;\n    height: 3.1em;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-box-orient: vertical;\n    white-space: normal;\n    font-size: .8em; }\n    .dm__video-info .dm__video-description p {\n      margin: 0 0 13px; }\n\n.dm__playlist-slide {\n  cursor: pointer;\n  position: relative;\n  display: inline-block;\n  width: 133px;\n  vertical-align: top; }\n  .dm__playlist-slide:after {\n    position: absolute;\n    content: '';\n    width: 100%;\n    height: 100%;\n    top: 0;\n    left: 0; }\n\n.dm__slide-wrapper {\n  padding: 5px; }\n\n/**\n * A sign for now playing and next playing on thumbnail\n */\n.dm__playlist-active .dm__playlist-cont-thumbnail:after {\n  content: \"Playing now\";\n  display: block; }\n\n.dm__playlist-active + .dm__playlist-slide .dm__playlist-cont-thumbnail:after {\n  content: \"Playing next\";\n  background: var(--dm-next-playing-bg, rgba(35, 35, 35, 0.95));\n  display: block; }\n\n.dm__playlist-active .dm__playlist-duration, .dm__playlist-active + .dm__playlist-slide .dm__playlist-duration {\n  background: none !important; }\n\n.dm__playlist-cont-thumbnail {\n  width: 100%;\n  position: relative;\n  margin: 0;\n  overflow: hidden; }\n  .dm__playlist-cont-thumbnail:before {\n    content: \"\";\n    padding-top: 56.25%;\n    background: #ddd;\n    display: block;\n    -webkit-animation: slideInDown;\n    animation: slideInDown;\n    -webkit-animation-duration: 1s;\n    animation-duration: 1s;\n    -webkit-animation-iteration-count: 1;\n    animation-iteration-count: 1; }\n  .dm__playlist-cont-thumbnail:after {\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    background: var(--dm-now-playing-bg, #56c7ff);\n    color: var(--dm-now-playing-color, #fff) !important;\n    padding: 4px 10px;\n    font-size: var(--dm-playlist-publisher-size, 0.6em) !important;\n    font-family: \"Noto Sans\", Arial, sans-serif;\n    display: none; }\n\n.dm__playlist-thumbnail {\n  width: 100%;\n  height: auto;\n  display: block;\n  position: absolute;\n  top: 0;\n  left: 0; }\n\n.dm__playlist-duration {\n  position: absolute;\n  bottom: 1px;\n  right: 1px;\n  color: #fff !important;\n  background: rgba(0, 0, 0, 0.6) !important;\n  padding: 4px !important;\n  font-size: .6em !important;\n  font-family: \"Noto Sans\", Arial, sans-serif !important;\n  z-index: 1; }\n\n.dm__playlist-info-container {\n  background: var(--dm-playlist-info-bg, #414141) !important;\n  padding: 6px 10px !important;\n  font-family: var(--dm-playlist-font-family, \"Noto Sans\", Arial, sans-serif) !important;\n  font-weight: var(--dm-playlist-weight, 700) !important;\n  color: var(--dm-playlist-color, #fff) !important; }\n\n.dm__playlist-publisher-name {\n  margin: 12px 0 0 !important;\n  color: inherit !important;\n  font-size: var(--dm-playlist-publisher-size, 0.6em) !important;\n  line-height: 1.3em !important;\n  display: inline-block;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  width: 100%; }\n\nimg.dm__playlist-publisher-ava {\n  all: unset;\n  width: 12px !important;\n  margin-right: 6px;\n  vertical-align: middle; }\n\n.dm__playlist-title {\n  margin: 0 !important;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 3;\n  -webkit-box-orient: vertical;\n  -webkit-font-smoothing: antialiased;\n  white-space: normal !important;\n  font-size: var(--dm-playlist-title-size, 0.7em) !important;\n  font-width: inherit !important;\n  line-height: 1.3em !important;\n  height: 3.87em !important; }\n\n.next {\n  right: -40px; }\n\n.prev {\n  left: -40px; }\n\n.next svg, .prev svg {\n  width: 25px; }\n\n/* SVG style*/\n.arrow {\n  fill: var(--arrow-color, #ddd); }\n\n.dm-playlist--right-side {\n  --dm-playlist-display: flex;\n  --dm-player-size: 50%;\n  --dm-player-ratio: 29%;\n  --dm-playlist-size: 40%;\n  --dm-playlist-bg: #000;\n  display: var(--dm-playlist-display);\n  justify-content: flex-start;\n  align-items: flex-start;\n  background: var(--dm-playlist-bg); }\n  .dm-playlist--right-side .dailymotion-cpe {\n    width: var(--dm-player-size);\n    padding-bottom: var(--dm-player-ratio); }\n  .dm-playlist--right-side .dm-playlist {\n    width: var(--dm-playlist-size); }\n\n@media (max-width: 767px) {\n  .dm-playlist--right-side {\n    --dm-playlist-display: block;\n    --dm-player-size: 100%;\n    --dm-player-ratio: 56.25%;\n    --dm-playlist-size: calc(100% - 80px); } }\n", ""]);
+exports.push([module.i, "/**\n * Playlist style\n */\n.dm-playlist {\n  --dm-playlist-bg: #232323;\n  --dm-playlist-font-fam: Noto Sans, Arial, sans-serif;\n  /**\n   * Slide\n   */\n  /* Thumbnail*/\n  --dm-now-playing-bg-indicator: #56c7ff;\n  --dm-now-playing-color: #fff;\n  --dm-next-playing-bg-indicator: rgba(35,35,35,.95);\n  /* Video info container*/\n  --dm-playlist-publisher-size: .6em;\n  --dm-playlist-title-size: .7em;\n  --dm-playlist-info-bg: #414141;\n  --dm-playlist-font-family: Noto Sans, Arial, sans-serif;\n  --dm-playlist-weight: 700;\n  --dm-playlist-color: #fff;\n  --dm-playlist-info-bg-active: #414141;\n  --dm-playlist-color-active: #fff;\n  /* Playing status*/\n  --dm-playing-status-text-color: #fff;\n  --dm-playing-status-text-size: .8em;\n  --dm-playing-status-bg: var(--dm-playlist-bg);\n  --dm-playing-status-title-color: #fff;\n  --dm-playing-status-title-size: 1em;\n  background: var(--dm-playlist-bg) !important;\n  padding: 0 40px !important;\n  /* SVG style*/ }\n  .dm-playlist .slider {\n    position: relative !important; }\n  .dm-playlist .frame {\n    width: 100% !important;\n    position: relative !important;\n    overflow: hidden !important;\n    white-space: nowrap !important; }\n  .dm-playlist .slides {\n    display: inline-block !important;\n    width: 100% !important;\n    padding: 0 !important; }\n  .dm-playlist .prev, .dm-playlist .next {\n    position: absolute;\n    top: 50%;\n    margin-top: -25px;\n    display: block;\n    cursor: pointer;\n    background: none;\n    padding: 0;\n    border: 0; }\n  .dm-playlist .next {\n    right: -40px; }\n  .dm-playlist .prev {\n    left: -40px; }\n  .dm-playlist .next svg, .dm-playlist .prev svg {\n    width: 25px; }\n  .dm-playlist .arrow {\n    fill: var(--arrow-color, #ddd); }\n\n.dm__playlist-slide {\n  cursor: pointer;\n  position: relative;\n  display: inline-block;\n  width: 133px;\n  vertical-align: top; }\n  .dm__playlist-slide:after {\n    position: absolute;\n    content: '';\n    width: 100%;\n    height: 100%;\n    top: 0;\n    left: 0; }\n\n.dm__slide-wrapper {\n  padding: 5px; }\n\n/**\n * A sign for now playing and next playing on thumbnail\n */\n.dm__playlist-active .dm__playlist-cont-thumbnail:after {\n  content: \"Playing now\";\n  display: block; }\n\n.dm__playlist-active + .dm__playlist-slide .dm__playlist-cont-thumbnail:after {\n  content: \"Playing next\";\n  background: var(--dm-next-playing-bg-indicator);\n  display: block; }\n\n.dm__playlist-active .dm__playlist-duration, .dm__playlist-active + .dm__playlist-slide .dm__playlist-duration {\n  background: none !important; }\n\n.dm__playlist-cont-thumbnail {\n  width: 100%;\n  position: relative;\n  margin: 0;\n  overflow: hidden;\n  /* To size the thumbnail to 16:9, so the thumbnail style will look the same*/\n  /* Add background for video status, it will be used by playing-now and playing-next indicator*/ }\n  .dm__playlist-cont-thumbnail:before {\n    content: \"\";\n    padding-top: 56.25%;\n    background: #ddd;\n    display: block;\n    -webkit-animation: slideInDown;\n    animation: slideInDown;\n    -webkit-animation-duration: 1s;\n    animation-duration: 1s;\n    -webkit-animation-iteration-count: 1;\n    animation-iteration-count: 1; }\n  .dm__playlist-cont-thumbnail:after {\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    background: var(--dm-now-playing-bg-indicator);\n    color: var(--dm-now-playing-color) !important;\n    padding: 4px 10px;\n    font-size: var(--dm-playlist-publisher-size) !important;\n    /* It follows the size of publisher info*/\n    font-family: var(--dm-playlist-font-fam);\n    display: none; }\n\n.dm__playlist-thumbnail {\n  width: 100%;\n  height: auto;\n  display: block;\n  position: absolute;\n  top: 0;\n  left: 0; }\n\n.dm__playlist-duration {\n  position: absolute;\n  bottom: 1px;\n  right: 1px;\n  color: #fff !important;\n  background: rgba(0, 0, 0, 0.6) !important;\n  padding: 4px !important;\n  font-size: .6em !important;\n  font-family: var(--dm-playlist-font-fam) !important;\n  z-index: 1; }\n\n.dm__playlist-info-container {\n  background: var(--dm-playlist-info-bg) !important;\n  padding: 6px 10px !important;\n  font-family: var(--dm-playlist-font-family) !important;\n  font-weight: var(--dm-playlist-weight) !important;\n  color: var(--dm-playlist-color) !important; }\n\n.dm__playlist-active .dm__playlist-info-container {\n  background: var(--dm-playlist-info-bg-active) !important;\n  color: var(--dm-playlist-color-active) !important; }\n\n.dm__playlist-publisher-name {\n  margin: 12px 0 0 !important;\n  color: inherit !important;\n  font-size: var(--dm-playlist-publisher-size) !important;\n  line-height: 1.3em !important;\n  display: inline-block;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  width: 100%; }\n\nimg.dm__playlist-publisher-ava {\n  all: unset;\n  width: 12px !important;\n  margin-right: 6px;\n  vertical-align: middle; }\n\n.dm__playlist-title {\n  margin: 0 !important;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 3;\n  -webkit-box-orient: vertical;\n  -webkit-font-smoothing: antialiased;\n  white-space: normal !important;\n  font-size: var(--dm-playlist-title-size) !important;\n  line-height: 1.3em !important;\n  height: 3.87em !important; }\n\n.dm__now-playing-status {\n  margin: 0 -40px;\n  padding: 10px 40px;\n  background-color: var(--dm-playing-status-bg);\n  font-family: var(--dm-playlist-font-fam); }\n  .dm__now-playing-status .dm__now-playing-text {\n    color: var(--dm-playing-status-text-color);\n    font-size: var(--dm-playing-status-text-size);\n    margin-bottom: 4px; }\n  .dm__now-playing-status .dm__now-playing-title {\n    color: var(--dm-playing-status-title-color);\n    font-size: var(--dm-playing-status-title-size); }\n\n.dm-playlist--right-side {\n  --dm-playlist-display: flex;\n  --dm-player-size: 57%;\n  --dm-player-ratio: 29%;\n  --dm-playlist-size: 43%;\n  --dm-playlist-bg: #232323;\n  display: var(--dm-playlist-display);\n  justify-content: flex-start;\n  align-items: flex-start;\n  background: var(--dm-playlist-bg); }\n  @media (max-width: 767px) {\n    .dm-playlist--right-side {\n      --dm-playlist-display: block;\n      --dm-player-size: 100%;\n      --dm-player-ratio: 56.25%;\n      --dm-playlist-size: 100%; } }\n  .dm-playlist--right-side .dailymotion-cpe {\n    width: var(--dm-player-size);\n    padding-bottom: var(--dm-player-ratio); }\n    @media (max-width: 767px) {\n      .dm-playlist--right-side .dailymotion-cpe {\n        --dm-player-size: 100%; } }\n  .dm-playlist--right-side .dm-playlist {\n    width: var(--dm-playlist-size); }\n    @media (max-width: 767px) {\n      .dm-playlist--right-side .dm-playlist {\n        --dm-playlist-size: auto;\n        margin: 0; } }\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src/index.js!./src/Playlist/Scss/video-info.scss":
+/*!**********************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src!./src/Playlist/Scss/video-info.scss ***!
+  \**********************************************************************************************************************************************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "/**\n * Video info is placed above the player.\n * It contains title and description\n */\n.dm__video-info {\n  --dm-video-info-bg: #fff;\n  --dm-top-line-color: #232323;\n  --dm-video-title-font: Noto Sans, Arial, sans-serif;\n  --dm-title-align: left;\n  --dm-title-weight: 700;\n  --dm-video-desc-font: Noto Sans, Arial, sans-serif;\n  background: var(--dm-video-info-bg);\n  border-top: 6px solid var(--dm-top-line-color);\n  margin-bottom: 13px;\n  /* Overwrite infocard style*/ }\n  .dm__video-info .dm__video-title {\n    font-family: var(--dm-video-title-font) !important; }\n  .dm__video-info .dm__video-description {\n    font-family: var(--dm-video-desc-font) !important;\n    display: -webkit-box;\n    -webkit-line-clamp: 2;\n    height: 3.1em;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-box-orient: vertical;\n    white-space: normal;\n    font-size: .8em; }\n    .dm__video-info .dm__video-description p {\n      margin: 0 0 13px; }\n\n.dm-playlist--right-side .dm__video-info {\n  display: none; }\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -2849,7 +2868,7 @@ var PlayerManager = /** @class */ (function () {
             searchInPlaylist: rootEl.getAttribute("searchInPlaylist") ? rootEl.getAttribute("searchInPlaylist") : false,
             syndication: rootEl.getAttribute("syndication") ? rootEl.getAttribute("syndication") : "",
             controls: (rootEl.getAttribute('controls') != 'false'),
-            adsParams: rootEl.getAttribute('adsParams') ? rootEl.getAttribute('adsParams') : "contextual",
+            adsParams: rootEl.getAttribute('adsParams') ? rootEl.getAttribute('adsParams') : "custom",
             cpeId: rootEl.getAttribute('cpeId') ? rootEl.getAttribute('cpeId').split(',') : [''],
             keywordsSelector: rootEl.getAttribute('keywordsSelector') ? rootEl.getAttribute('keywordsSelector') : null,
             rangeDay: rootEl.getAttribute('rangeDay') ? rootEl.getAttribute('rangeDay').split(",") : [0],
@@ -2935,14 +2954,19 @@ var PlayerManager = /** @class */ (function () {
         var currentStyle = rootEl.getAttribute('style');
         // Set thumbnail
         rootEl.setAttribute('style',  true ? currentStyle : undefined);
+        var referrer = rootEl.getAttribute('referrerpolicy');
+        if (referrer !== null) {
+            cpeEmbed.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+        }
         /**
          * Set attributes part
          */
         var queryString = "";
         if (this.playerParams.adsParams === "") {
-            queryString += "ads_params=contextual";
+            queryString += "ads_params=custom";
         }
         else {
+            // This `htmlEntities` is for extract multiple ads_params
             queryString += "ads_params=" + Object(_Libraries_Utilities_html_entities__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])(this.playerParams.adsParams);
         }
         if (this.playerParams.syndication !== "")
@@ -3260,6 +3284,35 @@ module.exports = content.locals || {};
 
 /***/ }),
 
+/***/ "./src/Playlist/Scss/video-info.scss":
+/*!*******************************************!*\
+  !*** ./src/Playlist/Scss/video-info.scss ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/dist/cjs.js!../../../node_modules/postcss-loader/src!./video-info.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/src/index.js!./src/Playlist/Scss/video-info.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
+
+/***/ }),
+
 /***/ "./src/Playlist/playlist-manager.ts":
 /*!******************************************!*\
   !*** ./src/Playlist/playlist-manager.ts ***!
@@ -3271,11 +3324,14 @@ module.exports = content.locals || {};
 "use strict";
 /* harmony import */ var lory_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lory.js */ "./node_modules/lory.js/dist/lory.js");
 /* harmony import */ var lory_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lory_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Playlist_Scss_playlist_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Playlist/Scss/playlist.scss */ "./src/Playlist/Scss/playlist.scss");
-/* harmony import */ var _Playlist_Scss_playlist_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Playlist_Scss_playlist_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Scss_video_info_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Scss/video-info.scss */ "./src/Playlist/Scss/video-info.scss");
+/* harmony import */ var _Scss_video_info_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Scss_video_info_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Scss_playlist_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Scss/playlist.scss */ "./src/Playlist/Scss/playlist.scss");
+/* harmony import */ var _Scss_playlist_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_Scss_playlist_scss__WEBPACK_IMPORTED_MODULE_2__);
 // Plugins
 
 // Styles
+
 
 var PlaylistManager = /** @class */ (function () {
     function PlaylistManager(rootEl, videos, playnow) {

@@ -112,7 +112,7 @@ export default class PlayerManager {
             searchInPlaylist: rootEl.getAttribute("searchInPlaylist") ? rootEl.getAttribute("searchInPlaylist") : false,
             syndication: rootEl.getAttribute("syndication") ? rootEl.getAttribute("syndication") : "",
             controls: (rootEl.getAttribute('controls') != 'false'),
-            adsParams: rootEl.getAttribute('adsParams') ? rootEl.getAttribute('adsParams') : "contextual",
+            adsParams: rootEl.getAttribute('adsParams') ? rootEl.getAttribute('adsParams') : "custom",
             cpeId: rootEl.getAttribute('cpeId') ? rootEl.getAttribute('cpeId').split(',') : [''],
             keywordsSelector: rootEl.getAttribute('keywordsSelector') ? rootEl.getAttribute('keywordsSelector') : null,
             rangeDay: rootEl.getAttribute('rangeDay') ? rootEl.getAttribute('rangeDay').split(",") : [0],
@@ -212,14 +212,20 @@ export default class PlayerManager {
         // Set thumbnail
         rootEl.setAttribute('style', '--dm-thumbnail:url(' + this.videoParams.thumbnail_480_url + ');' + ( currentStyle !== null) ? currentStyle : '');
 
+        const referrer = rootEl.getAttribute('referrerpolicy');
+        if (referrer !== null) {
+            cpeEmbed.setAttribute('referrerpolicy','no-referrer-when-downgrade');
+        }
+
         /**
          * Set attributes part
          */
         let queryString = "";
 
         if (this.playerParams.adsParams === "") {
-            queryString += "ads_params=contextual";
+            queryString += "ads_params=custom";
         } else {
+            // This `htmlEntities` is for extract multiple ads_params
             queryString += "ads_params=" + htmlEntities(this.playerParams.adsParams);
         }
 
