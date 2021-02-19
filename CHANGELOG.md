@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.26] (2021-02-18)
+
+**Implemented enhancements:**
+- Changed adsParam from contextual to custom
+- Added new parameters on AMP
+- Added referrerpolicy to div as new parameter
+- Refactored playlist CSS, so user can just override the vars
+
 ## [1.5.25] (2021-02-08)
 
 **Implementd enhancements:**
