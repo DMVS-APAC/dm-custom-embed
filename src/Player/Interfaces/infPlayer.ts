@@ -60,7 +60,7 @@ export default interface InfPlayer {
     showVideoTitle?: boolean;
 
     // Info of the video in a card below the video player
-    showInfoCard?: boolean | string;
+    showInfoCard?: boolean;
 
     // Enable outside playlist
     showOutsidePlaylist?: boolean;

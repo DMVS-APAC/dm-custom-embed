@@ -3,7 +3,7 @@ import infVideo from "../Interfaces/infVideo";
 export default class InfoCard {
     private infoCardEl: HTMLDivElement = null;
 
-    public setInfoCard(data: infVideo, fullLength: boolean): HTMLDivElement {
+    public setInfoCard(data: infVideo): HTMLDivElement {
 
         this.infoCardEl = document.createElement('div');
         this.infoCardEl.className = 'dm__info-card';
@@ -16,24 +16,29 @@ export default class InfoCard {
         videoTitle.className = 'dm__video-title';
 
         const videoDesc = document.createElement('p');
-        const desc = fullLength ? data.description.replace(
+        const desc = data.description.replace(
             /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
             '<a href="$1">$1</a>'
-        ) : data.description;
+        );
         videoDesc.innerHTML = desc;
         videoDesc.className = 'dm__video-desc';
 
         const collapseButton = document.createElement('button');
-        collapseButton.innerHTML = `<svg width="9" height="10" viewBox="0 0 9 10" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<rect width="9" height="10" fill="url(#pattern0)"/>
+        collapseButton.innerHTML = `<svg width="30" height="26" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<line x1="7.35355" y1="8.64645" x2="15.3536" y2="16.6464" stroke="#BBBBBB"/>
+<line x1="14.6464" y1="16.6464" x2="22.6464" y2="8.64645" stroke="#BBBBBB"/>
+<g filter="url(#filter0_f)">
+<line y1="-2.5" x2="15.6205" y2="-2.5" transform="matrix(0.640184 0.768221 -0.640184 0.768221 5 9)" stroke="#BBBBBB" stroke-width="5" stroke-linejoin="round"/>
+<line y1="-2.5" x2="15.6205" y2="-2.5" transform="matrix(0.640184 -0.768221 0.640184 0.768221 15 21)" stroke="#BBBBBB" stroke-width="5" stroke-linejoin="round"/>
+</g>
 <defs>
-<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image0" transform="scale(0.111111 0.1)"/>
-</pattern>
-<image id="image0" width="9" height="10" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAKCAYAAABmBXS+AAAAXElEQVQoFYXQwQmAMAyF4Q+vTuAQzuEgDqKDOIhzOIQTeBWlh0IotA2EJLwf8nhwYtapDy8OTDU2QbkfbBhLOANx3lgxZDiK5X5hSWApxLsJNd8l43vNeDeCbpg/LfMs1IxQsGEAAAAASUVORK5CYII="/>
+<filter id="filter0_f" x="0" y="0.158894" width="30" height="25.8411" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="2.5" result="effect1_foregroundBlur"/>
+</filter>
 </defs>
-</svg>
-`;
+</svg>`;
         collapseButton.className = 'dm__collapse-button';
         collapseButton.setAttribute('aria-label', 'Collapse video description');
 
@@ -41,7 +46,7 @@ export default class InfoCard {
             this.collapseDesc(videoDesc, collapseButton);
         });
 
-        videoTitle.insertAdjacentElement('afterbegin', collapseButton);
+        // videoTitle.insertAdjacentElement('afterbegin', collapseButton);
         textWrapper.append(videoTitle);
         textWrapper.append(videoDesc);
 
@@ -56,6 +61,7 @@ export default class InfoCard {
 
         this.infoCardEl.append(textWrapper);
         this.infoCardEl.append(avaWrapper);
+        this.infoCardEl.append(collapseButton);
 
         return this.infoCardEl;
     }

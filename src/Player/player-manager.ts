@@ -120,7 +120,7 @@ export default class PlayerManager {
             getUpdatedVideo: ( rootEl.getAttribute('getUpdatedVideo') != 'false' ) ,
             preVideoTitle: rootEl.getAttribute('preVideoTitle') ? rootEl.getAttribute('preVideoTitle') : null,
             showVideoTitle: ( rootEl.getAttribute('showVideoTitle') != 'false' &&  rootEl.getAttribute('showVideoTitle') != null ),
-            showInfoCard: rootEl.getAttribute('showInfoCard') ? rootEl.getAttribute('showInfoCard') : false,
+            showInfoCard: (rootEl.getAttribute('showInfoCard') === 'true'),
             showOutsidePlaylist: (rootEl.getAttribute('showOutsidePlaylist') === 'true'),
             showPlaynow: (rootEl.getAttribute('showPlaynow') === 'true'),
             showAdOnly: (rootEl.getAttribute('showAdOnly') === 'true'),
@@ -323,8 +323,7 @@ export default class PlayerManager {
                 this.infoCard.remove();
             }
 
-            const descLength = this.playerParams.showInfoCard === 'fulldesc';
-            this.infoCard = infoCard.setInfoCard(this.videoParams, descLength);
+            this.infoCard = infoCard.setInfoCard(this.videoParams);
             this.rootEl.insertAdjacentElement('beforeend', this.infoCard);
         }
 

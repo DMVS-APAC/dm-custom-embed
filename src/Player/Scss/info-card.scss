@@ -1,14 +1,27 @@
 .dm__info-card {
-  background: var(--dm-info-card-bg, #eee) !important;
-  padding: var(--dm-info-card-padding, 8px 13px) !important;
+  background: var(--dm-info-card-bg, #F9F9F9) !important;
+  padding: var(--dm-info-card-padding, 18px 24px 30px) !important;
   display: flex;
+  align-items: flex-start;
   text-align: var(--dm-info-card-align, left) !important;
 
   // Title
   --dm-title-align: left;
-  --dm-title-weight: 700;
+  --dm-title-weight: 400;
   --dm-title-size: 1.1em;
   --dm-ava-width: 80px;
+  --dm-title-color: inherit;
+  --dm-title-padding: 8px 0 12px;
+  --dm-title-style: normal;
+  --dm-ornament-color: #000;
+  --dm-font-family: "Noto Sans", Arial, sans-serif;
+
+  --dm-desc-align: left;
+  --dm-desc-margin: 0 0 8px;
+  --dm-desc-style: normal;
+  --dm-desc-color: #666;
+  --dm-desc-size: .8em;
+  --dm-desc-weight: inherit;
 
   @media (max-width: 576px) { // Mobile breakpoints based on bootstrap
     --dm-ava-width: 50px;
@@ -18,44 +31,56 @@
   .dm__text-wrapper {
     //width: calc(100% - var(--dm-ava-width));
     width: 1px; // Not sure why this is work on `display: flex` basist
-    padding-right: 13px;
+    padding-right: 30px;
     transition: all ease .3s;
     flex-grow: 1;
   }
 
   .dm__video-title {
-    text-align: var(--dm-title-align, center) !important;
-    margin: var(--dm-title-margin, 8px 0) !important;
-    font-style: var(--dm-title-style, normal) !important;
-    color: var(--dm-title-color, inherit) !important;
-    font-size: var(--dm-title-size, 1em) !important;
-    font-weight: var(--dm-title-weight, 400) !important;
+    text-align: var(--dm-title-align) !important;
+    padding: var(--dm-title-padding) !important;
+    font-style: var(--dm-title-style) !important;
+    color: var(--dm-title-color) !important;
+    font-size: var(--dm-title-size) !important;
+    font-weight: var(--dm-title-weight) !important;
+    font-family: var(--dm-font-family) !important;
+    margin: 0 !important;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     max-width: 100%;
+    position: relative;
+
+    &:after {
+      display: block;
+      content: "";
+      width: 20px;
+      height: 1px;
+      background-color: var(--dm-ornament-color);
+      position: absolute;
+      bottom: 0;
+    }
   }
 
   .dm__video-desc {
-    text-align: var(--dm-desc-align, left) !important;
-    margin: var(--dm-desc-margin, 0 0 8px) !important;
-    font-style: var(--dm-desc-style, normal) !important;
-    color: var(--dm-desc-color, inherit) !important;
-    font-size: var(--dm-desc-size, .9em) !important;
-    font-weight: var(--dm-desc-weight, inherit) !important;
+    text-align: var(--dm-desc-align) !important;
+    margin: var(--dm-desc-margin) !important;
+    font-style: var(--dm-desc-style) !important;
+    color: var(--dm-desc-color) !important;
+    font-size: var(--dm-desc-size) !important;
+    font-weight: var(--dm-desc-weight) !important;
+    font-family: var(--dm-font-family) !important;
     padding-top: 13px;
-    border-top: solid #666 1px;
-    white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     max-width: 100%;
     display: -webkit-box !important;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 2;
+    transition: all .5s ease;
 
     &.dm__full-desc {
       overflow: visible;
-      white-space: unset;
       -webkit-line-clamp: unset;
       text-overflow: unset;
     }
@@ -63,21 +88,30 @@
 
   .dm__ava-wrapper {
     width: var(--dm-ava-width);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 4px rgba(0,0,0,.6);
   }
 
   .dm__owner-ava {
     width: 100%;
     height: auto;
+    display: block;
   }
 
   button.dm__collapse-button {
     padding: 0;
-    margin: 0 7px 0 0;
+    margin: 0;
     background: none;
-    border: 0;
     transition: transform .3s ease;
+    overflow: hidden;
+    border: 0;
+    position: absolute;
+    bottom: 8px;
+    left: calc(50% - 10px);
+    cursor: pointer;
 
     &.collapsed {
-      transform: rotate(90deg);
+      transform: rotate(180deg);
     }
   }
