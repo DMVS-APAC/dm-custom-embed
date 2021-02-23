@@ -24,20 +24,9 @@ export default class InfoCard {
         videoDesc.className = 'dm__video-desc';
 
         const collapseButton = document.createElement('button');
-        collapseButton.innerHTML = `<svg width="30" height="26" viewBox="0 0 30 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-<line x1="7.35355" y1="8.64645" x2="15.3536" y2="16.6464" stroke="#BBBBBB"/>
-<line x1="14.6464" y1="16.6464" x2="22.6464" y2="8.64645" stroke="#BBBBBB"/>
-<g filter="url(#filter0_f)">
-<line y1="-2.5" x2="15.6205" y2="-2.5" transform="matrix(0.640184 0.768221 -0.640184 0.768221 5 9)" stroke="#BBBBBB" stroke-width="5" stroke-linejoin="round"/>
-<line y1="-2.5" x2="15.6205" y2="-2.5" transform="matrix(0.640184 -0.768221 0.640184 0.768221 15 21)" stroke="#BBBBBB" stroke-width="5" stroke-linejoin="round"/>
-</g>
-<defs>
-<filter id="filter0_f" x="0" y="0.158894" width="30" height="25.8411" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="2.5" result="effect1_foregroundBlur"/>
-</filter>
-</defs>
+        collapseButton.innerHTML = `<svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<line x1="0.707107" y1="1.29289" x2="10.253" y2="10.8388" stroke="#BBBCBC" stroke-width="2"/>
+<line x1="9.1924" y1="11.1924" x2="19.0919" y2="1.29289" stroke="#BBBCBC" stroke-width="2"/>
 </svg>`;
         collapseButton.className = 'dm__collapse-button';
         collapseButton.setAttribute('aria-label', 'Collapse video description');

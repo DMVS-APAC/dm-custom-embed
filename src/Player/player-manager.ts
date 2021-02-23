@@ -10,7 +10,7 @@ import { apiUrl, debugMode } from '../Libraries/Global/vars';
 // Utilities
 import htmlEntities from "../Libraries/Utilities/html-entities";
 import { fetchData } from "../Libraries/API/apiCall";
-import {sleep, waitFor} from "../Libraries/Utilities/waitFor";
+import {waitFor} from "../Libraries/Utilities/waitFor";
 
 // Components
 import setPreVideoTitle from "../Player/Components/pre-video-title";
