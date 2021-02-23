@@ -3233,12 +3233,13 @@ var PlayerManager = /** @class */ (function () {
     };
     PlayerManager.prototype.loadDmPlayer = function (rootEl) {
         var cpeEmbed = document.createElement("div");
+        // Keep current style in the root element
         var currentStyle = rootEl.getAttribute('style');
         // Set thumbnail
         rootEl.setAttribute('style',  true ? currentStyle : undefined);
         var referrer = rootEl.getAttribute('referrerpolicy');
         if (referrer !== null) {
-            cpeEmbed.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+            cpeEmbed.setAttribute('referrerpolicy', referrer);
         }
         /**
          * Set attributes part

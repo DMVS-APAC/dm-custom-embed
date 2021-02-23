@@ -208,13 +208,14 @@ export default class PlayerManager {
     private loadDmPlayer(rootEl: HTMLDivElement): void {
         const cpeEmbed = document.createElement("div");
 
+        // Keep current style in the root element
         const currentStyle = rootEl.getAttribute('style');
         // Set thumbnail
         rootEl.setAttribute('style', '--dm-thumbnail:url(' + this.videoParams.thumbnail_480_url + ');' + ( currentStyle !== null) ? currentStyle : '');
 
         const referrer = rootEl.getAttribute('referrerpolicy');
         if (referrer !== null) {
-            cpeEmbed.setAttribute('referrerpolicy','no-referrer-when-downgrade');
+            cpeEmbed.setAttribute('referrerpolicy',referrer);
         }
 
         /**
