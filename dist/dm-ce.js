@@ -2780,17 +2780,13 @@ var PlayerEventsManager = /** @class */ (function () {
     PlayerEventsManager.prototype.waitingAd = function () {
         var _this = this;
         var interval = 100;
+        var timeout = 8000;
         return new Promise(function (resolve) {
             var elapsedTime = 0;
             var timerId = setInterval(function () {
-                var conditionFulfilled = _this.noFill === false;
-                var killTimer = (elapsedTime > 8000) || _this.noFill === false;
+                var conditionFulfilled = (elapsedTime > timeout) || _this.noFill === false;
                 elapsedTime += interval;
                 if (conditionFulfilled) {
-                    resolve();
-                    clearInterval(timerId);
-                }
-                else if (killTimer) {
                     resolve();
                     clearInterval(timerId);
                 }

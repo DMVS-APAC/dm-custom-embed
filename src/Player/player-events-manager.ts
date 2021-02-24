@@ -297,18 +297,14 @@ export default class PlayerEventsManager {
      */
     private waitingAd(): Promise<void> {
         const interval = 100;
+        const timeout = 8000;
         return new Promise( resolve => {
             let elapsedTime = 0;
             const timerId = setInterval(() => {
-                const conditionFulfilled = this.noFill === false;
-                const killTimer = (elapsedTime > 8000) || this.noFill === false;
-
+                const conditionFulfilled = (elapsedTime > timeout) || this.noFill === false;
                 elapsedTime += interval;
 
                 if (conditionFulfilled) {
-                    resolve();
-                    clearInterval(timerId);
-                } else if (killTimer) {
                     resolve();
                     clearInterval(timerId);
                 }
