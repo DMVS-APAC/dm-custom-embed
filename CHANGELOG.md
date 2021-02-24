@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.5.27] (2021-02-24)
+
+**Implemented enhancements:**
+- Added collapsible desc button to playlist and info card
+- Improvement on referrerpolicy
+
 ## [1.5.26] (2021-02-18)
 
 **Implemented enhancements:**
