@@ -10,7 +10,7 @@ import { apiUrl, debugMode } from '../Libraries/Global/vars';
 // Utilities
 import htmlEntities from "../Libraries/Utilities/html-entities";
 import { fetchData } from "../Libraries/API/apiCall";
-import {sleep, waitFor} from "../Libraries/Utilities/waitFor";
+import {waitFor} from "../Libraries/Utilities/waitFor";
 
 // Components
 import setPreVideoTitle from "../Player/Components/pre-video-title";
@@ -112,7 +112,7 @@ export default class PlayerManager {
             searchInPlaylist: rootEl.getAttribute("searchInPlaylist") ? rootEl.getAttribute("searchInPlaylist") : false,
             syndication: rootEl.getAttribute("syndication") ? rootEl.getAttribute("syndication") : "",
             controls: (rootEl.getAttribute('controls') != 'false'),
-            adsParams: rootEl.getAttribute('adsParams') ? rootEl.getAttribute('adsParams') : "contextual",
+            adsParams: rootEl.getAttribute('adsParams') ? rootEl.getAttribute('adsParams') : "custom",
             cpeId: rootEl.getAttribute('cpeId') ? rootEl.getAttribute('cpeId').split(',') : [''],
             keywordsSelector: rootEl.getAttribute('keywordsSelector') ? rootEl.getAttribute('keywordsSelector') : null,
             rangeDay: rootEl.getAttribute('rangeDay') ? rootEl.getAttribute('rangeDay').split(",") : [0],
@@ -120,7 +120,7 @@ export default class PlayerManager {
             getUpdatedVideo: ( rootEl.getAttribute('getUpdatedVideo') != 'false' ) ,
             preVideoTitle: rootEl.getAttribute('preVideoTitle') ? rootEl.getAttribute('preVideoTitle') : null,
             showVideoTitle: ( rootEl.getAttribute('showVideoTitle') != 'false' &&  rootEl.getAttribute('showVideoTitle') != null ),
-            showInfoCard: ( rootEl.getAttribute('showInfoCard') != 'false' &&  rootEl.getAttribute('showInfoCard') != null ),
+            showInfoCard: (rootEl.getAttribute('showInfoCard') === 'true'),
             showOutsidePlaylist: (rootEl.getAttribute('showOutsidePlaylist') === 'true'),
             showPlaynow: (rootEl.getAttribute('showPlaynow') === 'true'),
             showAdOnly: (rootEl.getAttribute('showAdOnly') === 'true'),
@@ -135,7 +135,9 @@ export default class PlayerManager {
             scrollToPause: ( rootEl.getAttribute('scrollToPause') != 'false' && rootEl.getAttribute('scrollToPause') != null ),
             stpSound: ( rootEl.getAttribute('stpSound') != 'false' && rootEl.getAttribute('stpSound') != null ),
             playerStyleEnable: ( rootEl.getAttribute('playerStyleEnable') != 'false' && rootEl.getAttribute('playerStyleEnable') != null ),
-            playerStyleColor: rootEl.getAttribute('playerStyleColor') ? rootEl.getAttribute('playerStyleColor') : null
+            playerStyleColor: rootEl.getAttribute('playerStyleColor') ? rootEl.getAttribute('playerStyleColor') : null,
+            blockKeywords: rootEl.getAttribute('blockKeywords') ? rootEl.getAttribute('blockKeywords').split(',') : null,
+            showCloseButtonPip: ( rootEl.getAttribute('showCloseButtonPip') === 'true'),
         };
 
         /**
@@ -177,7 +179,9 @@ export default class PlayerManager {
         };
 
         const keywords = this.findKeywords(this.playerParams.keywordsSelector);
-        this.keywords = this.keywords ? this.keywords : keywords.sort((a, b) => b.length - a.length).slice(0, this.playerParams.maxWordSearch).join(' ');
+        this.keywords = this.keywords ? 
+                        (this.sanitizeKeywords(this.keywords)).join(' ') :
+                        keywords.slice(0, this.playerParams.maxWordSearch).join(' ');
 
         if (!this.playerParams.searchInPlaylist) {
 
@@ -204,9 +208,15 @@ export default class PlayerManager {
     private loadDmPlayer(rootEl: HTMLDivElement): void {
         const cpeEmbed = document.createElement("div");
 
+        // Keep current style in the root element
         const currentStyle = rootEl.getAttribute('style');
         // Set thumbnail
         rootEl.setAttribute('style', '--dm-thumbnail:url(' + this.videoParams.thumbnail_480_url + ');' + ( currentStyle !== null) ? currentStyle : '');
+
+        const referrer = rootEl.getAttribute('referrerpolicy');
+        if (referrer !== null) {
+            cpeEmbed.setAttribute('referrerpolicy',referrer);
+        }
 
         /**
          * Set attributes part
@@ -214,8 +224,9 @@ export default class PlayerManager {
         let queryString = "";
 
         if (this.playerParams.adsParams === "") {
-            queryString += "ads_params=contextual";
+            queryString += "ads_params=custom";
         } else {
+            // This `htmlEntities` is for extract multiple ads_params
             queryString += "ads_params=" + htmlEntities(this.playerParams.adsParams);
         }
 
@@ -307,7 +318,7 @@ export default class PlayerManager {
         /**
          * Set an info card
          */
-        if (this.playerParams.showInfoCard === true) {
+        if (this.playerParams.showInfoCard !== false) {
             const infoCard = new InfoCard();
             if (this.infoCard !== null) {
                 this.infoCard.remove();
@@ -365,7 +376,7 @@ export default class PlayerManager {
             let video = await fetchData(await this.generateQuery(this.playerParams.sort[i], Number(this.playerParams.rangeDay[i])));
 
             if (video) {
-                if (video.total > 0) {
+                if (video.list.length > 0) {
                     this.setVideo(video.list[0], true);
 
                     if (this.playerParams.showOutsidePlaylist === true) {
@@ -382,7 +393,7 @@ export default class PlayerManager {
                         this.keywords = this.keywords.substring(0, this.searchParams.search.lastIndexOf(' '));
                         video = await fetchData(await this.generateQuery(this.playerParams.sort[i], Number(this.playerParams.rangeDay[i])));
 
-                        if (video.total > 0) {
+                        if (video.list.length > 0) {
                             this.setVideo(video.list[0], true);
 
                             if (this.playerParams.showOutsidePlaylist === true) {
@@ -393,13 +404,13 @@ export default class PlayerManager {
                     }
 
                     // Let the looper know that video is found
-                    if (video.total > 0) break;
+                    if (video.list.length > 0) break;
                 }
 
                 /**
                  * This condition is to check if no videos found
                  */
-                if (video.total === 0 && i === this.playerParams.sort.length - 1) {
+                if (video.list.length === 0 && i === this.playerParams.sort.length - 1) {
                     this.getFallbackVideo();
                     break;
                 }
@@ -418,8 +429,6 @@ export default class PlayerManager {
         // Generate url to call
         const url = apiUrl + (this.playerParams.searchInPlaylist ? "playlist/" + this.playerParams.searchInPlaylist + "/videos?" : "videos?owners=" + this.playerParams.owners + "&" ) + ( (this.playerParams.getUpdatedVideo && this.playerParams.searchInPlaylist === false) ? "created_after=" + (currentTime - thirtyDays) + "&" : "") + "sort=random&limit=1&fields=" + this.searchParams.fields;
         const video = await fetchData(url);
-
-        console.log(url);
 
         if (video) {
             if (video.list.length > 0) {
@@ -468,12 +477,21 @@ export default class PlayerManager {
      * Alphabet: a-zA-Z0-9
      * Latin Character: \u00C0-\u00FF
      * Devanagri (India): \u0900-\u097F
-     * Urdu (Arab): \u0621-\u064A \u0660-\u0669
+     * Urdu (India): \u0621-\u064A \u0660-\u0669
+     * Tamil (India): \u0b80-\u0bff \u0B82-\u0BFA
      * Thai: \u0E00-\u0E7F
      */
     // TODO: improve sanitize the keywords to strip duplicate string
     protected sanitizeKeywords(keywords: string): string[] {
-        return keywords.replace(/[^- \u3131-\uD79D a-zA-Z0-9 \u00C0-\u00FF \u0900-\u097F \u0621-\u064A \u0660-\u0669 \u0E00-\u0E7F \u0153]/g, ' ')
+
+        if ( this.playerParams.blockKeywords !== null ) {
+            this.playerParams.blockKeywords.forEach((word: string) => {
+                // const regex = new RegExp(`/${word}/g`);
+                keywords = keywords.replace(word, '');
+            });
+        }
+
+        return keywords.replace(/[^- \u3131-\uD79D a-zA-Z0-9 \u00C0-\u00FF \u0900-\u097F \u0621-\u064A \u0660-\u0669 \u0b80-\u0bff \u0B82-\u0BFA \u0E00-\u0E7F \u0153]/g, ' ')
             .split(' ')
             .filter(word => word.length >= this.playerParams.minWordLength);
     }

@@ -23,14 +23,16 @@
 
 .dm__close-button {
   position: absolute !important;
-  top: -38px !important;
-  right: 0 !important;
-  width: 33px !important;
-  height: 33px !important;
-  background: #000 !important;
-  opacity: .45 !important;
+  top: var( --dm-close-top, -38px) !important;
+  right: var( --dm-close-right, 0) !important;
+  width: var( --dm-close-width, 33px) !important;
+  height: var( --dm-close-height, 33px) !important;
+  background: var( --dm-close-bg, #000) !important;
+  opacity: var( --dm-close-opacity, .45) !important;
   border-radius: 50% !important;
-  padding: 9px !important;
+  padding: var( --dm-close-padding, 9px ) !important;
+  border: var( --dm-close-border, 0) !important;
+  cursor: pointer;
 
   svg {
     width: 100%;
@@ -47,64 +49,6 @@
   font-weight: var(--dm-video-weight, 700) !important;
 }
 
-.dm__info-card {
-  background: var(--dm-info-card-bg, #eee) !important;
-  padding: var(--dm-info-card-padding, 8px 13px) !important;
-  display: flex;
-  text-align: var(--dm-info-card-align, left) !important;
-
-  // Title
-  --dm-title-align: left;
-  --dm-title-weight: 700;
-  --dm-title-size: 1.1em;
-
-}
-
-.dm__text-wrapper {
-  width: calc(100% - 80px);
-  padding-right: 13px;
-}
-
-.dm__video-title {
-  text-align: var(--dm-title-align, center) !important;
-  margin: var(--dm-title-margin, 8px 0) !important;
-  font-style: var(--dm-title-style, normal) !important;
-  color: var(--dm-title-color, inherit) !important;
-  font-size: var(--dm-title-size, 1em) !important;
-  font-weight: var(--dm-title-weight, 400) !important;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  max-width: 100%;
-}
-
-.dm__video-desc {
-  text-align: var(--dm-desc-align, left) !important;
-  margin: var(--dm-desc-margin, 0 0 8px) !important;
-  font-style: var(--dm-desc-style, normal) !important;
-  color: var(--dm-desc-color, inherit) !important;
-  font-size: var(--dm-desc-size, .9em) !important;
-  font-weight: var(--dm-desc-weight, inherit) !important;
-  padding-top: 13px;
-  border-top: solid #666 1px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  max-width: 100%;
-  display: -webkit-box !important;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-}
-
-.dm__ava-wrapper {
-  width: 80px;
-}
-
-.dm__owner-ava {
-  width: 100%;
-  height: auto;
-}
-
 .dm-player {
   position: relative;
   height: 0;
@@ -112,6 +56,14 @@
   width: var(--dm-player-width, 100%) !important;
   clear: left !important; // in some partner website still implement floating grid. this will clear the floating part
 
+  .dailymotion-cpe iframe {
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
 
   &.dm--has-placeholder {
     overflow: visible;
@@ -136,13 +88,31 @@
     }
   }
 
-  &.dm--has-close-button {
-    padding-top: 40px;
-
+  &.dm--has-close-button, &.dm--has-close-pip {
     .dailymotion-cpe {
       overflow: visible;
     }
     .cpeClosePipBtn {
+      display: none;
+    }
+  }
+
+  &.dm--has-close-button {
+    padding-top: 40px;
+  }
+
+  &.dm--has-close-pip {
+    .dm__close-button {
+      display: none;
+    }
+
+    .insider.pip .dm__close-button {
+      display: block;
+    }
+  }
+
+  &.dm--pip-closed.dm-playback-ready {
+    .insider.pip {
       display: none;
     }
   }
@@ -191,5 +161,9 @@
     top: 0;
     left: 0;
     background: rgba(0, 0, 0, .6);
+  }
+  // adding padding to close pip image
+  .insider div.cpeClosePipBtn img.cpeClosePipPicto {
+    padding: 0px;
   }
 }

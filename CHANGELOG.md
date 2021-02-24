@@ -1,12 +1,84 @@
 # Changelog
 
-## [1.5.13] ()
+## [1.5.27] (2021-02-24)
 
 **Implemented enhancements:**
-- Add new parameter to dm-player on AMP
+- Added collapsible desc button to playlist and info card
+- Improvement on referrerpolicy
+
+## [1.5.26] (2021-02-18)
+
+**Implemented enhancements:**
+- Changed adsParam from contextual to custom
+- Added new parameters on AMP
+- Added referrerpolicy to div as new parameter
+- Refactored playlist CSS, so user can just override the vars
+
+## [1.5.25] (2021-02-08)
+
+**Implementd enhancements:**
+- Improve keywords algorithm for AMP
+
+## [1.5.24] (2021-02-02)
+
+**Implemented enhancements:**
+- Improve keywords algorithm
+
+## [1.5.23] (2021-01-22)
 
 **Fixed Bugs:**
-- Add unrewrite style to avoid the style changes on partner website
+- Change param `total` to `length` of result. Seems `total` is deprecated.
+
+## [1.5.22] (2021-01-19)
+
+**Implemented enhancements**
+- Add videoid param to AMP
+
+## [1.5.21] (2021-01-15)
+
+**Fixed Bugs:**
+- Fixed iframe style override by parent web styling
+
+## [1.5.20] (2021-01-05)
+
+**Fixed Bugs:**
+- Fixed `searchInPlaylist` param for AMP
+
+## [1.5.19] (2020-12-11)
+
+**Fixed Bugs:**
+- Fixed the padding overide in close pip button
+
+## [1.5.18] (2020-12-04)
+
+**Fixed Bugs:**
+- Fixed condition for custom close PiP button
+
+## [1.5.17] (2020-12-02)
+
+**Implemented enhancements:**
+- Add delay to show the close button on PiP
+- Add CSS variables to customize close button from outside the script
+
+## [1.5.16] (2020-11-26)
+
+**Implemented enhancements:**
+- Remove waiting for ad fill
+
+## [1.5.15] (2020-11-24)
+
+**Implemented enhancements:**
+- Add new param for playlist in AMP
+
+## [1.5.14] (2020-11-19)
+
+**Implemented enhancements:**
+- Add new param to block some keywords
+
+## [1.5.13] (2020-11-17)
+
+**Implemented enhancements:**
+- Add Tamil alphabet
 
 ## [1.5.12] (2020-10-28)
 

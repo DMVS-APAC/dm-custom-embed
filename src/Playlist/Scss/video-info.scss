@@ -1,0 +1,49 @@
+@import "vars";
+
+/**
+ * Video info is placed above the player.
+ * It contains title and description
+ */
+.dm__video-info {
+  --dm-video-info-bg: #fff;
+  --dm-top-line-color: #{$playlist-bg};
+  --dm-video-title-font: #{$playlist-font-family};
+  --dm-title-align: left;
+  --dm-title-weight: 700;
+  --dm-video-desc-font: #{$playlist-font-family};
+
+  background: var(--dm-video-info-bg);
+  border-top: 6px solid var(--dm-top-line-color);
+  position: relative;
+  padding-bottom: 30px;
+
+  // Overwrite infocard style
+  .dm__video-title {
+    font-family: var(--dm-video-title-font) !important;
+  }
+
+  .dm__video-description {
+    font-family: var(--dm-video-desc-font) !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    height: 3.1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    font-size: .8em;
+
+    p { margin: 0 0 13px;}
+
+    &.dm__full-desc {
+      overflow: visible;
+      -webkit-line-clamp: unset;
+      text-overflow: unset;
+      height: auto;
+    }
+  }
+}
+
+.dm-playlist--right-side .dm__video-info {
+  display: none;
+}

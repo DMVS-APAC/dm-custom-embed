@@ -53,6 +53,62 @@ const setAttributes = async (el: NodeListOf<HTMLDivElement>) => {
     dmPlayer.setAttribute('cpeId', getParam('cpeId'));
     dmPlayer.setAttribute('owners', getParam('owners'));
     dmPlayer.setAttribute('sort', getParam('sort'));
+
+    if (getParam('searchinplaylist') !== null) {
+        dmPlayer.setAttribute('searchInPlaylist', getParam('searchinplaylist'));
+    }
+
+    if (getParam('videoid') !== null) {
+        dmPlayer.setAttribute('videoId', getParam('videoid'));
+    }
+
+    if (getParam('minwordlength') !== null) {
+        dmPlayer.setAttribute('minWordLength', getParam('minwordlength'));
+    }
+
+    if (getParam('minwordsearch') !== null) {
+        dmPlayer.setAttribute('minWordSearch', getParam('minwordsearch'));
+    }
+
+    if (getParam('maxwordsearch') !== null) {
+        dmPlayer.setAttribute('maxWordSearch', getParam('maxwordsearch'));
+    }
+
+    if (getParam('language') !== null) {
+        dmPlayer.setAttribute('language', getParam('language'));
+    }
+
+    if (getParam('category') !== null) {
+        dmPlayer.setAttribute('category', getParam('category'));
+    }
+
+    if (getParam('excludeids') !== null) {
+        dmPlayer.setAttribute('excludeIds', getParam('excludeids'));
+    }
+
+    if (getParam('syndication') !== null) {
+        dmPlayer.setAttribute('syndication', getParam('syndication'));
+    }
+
+    if (getParam('controls') !== null) {
+        dmPlayer.setAttribute('controls', getParam('controls'));
+    }
+
+    if (getParam('adsparams') !== null) {
+        dmPlayer.setAttribute('adsParams', getParam('adsparams'));
+    }
+
+    if (getParam('getupdatedvideo') !== null) {
+        dmPlayer.setAttribute('getUpdatedVideo', getParam('getupdatedvideo'));
+    }
+
+    if (getParam('queueenable') !== null) {
+        dmPlayer.setAttribute('queueEnable', getParam('queueenable'));
+    }
+
+    if (getParam('queueenablenext') !== null) {
+        dmPlayer.setAttribute('queueEnableNext', getParam('queueenablenext'));
+    }
 }
 
 const init = async () => {
