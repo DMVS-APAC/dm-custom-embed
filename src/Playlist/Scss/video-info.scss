@@ -15,6 +15,8 @@
   background: var(--dm-video-info-bg);
   border-top: 6px solid var(--dm-top-line-color);
   margin-bottom: 13px;
+  position: relative;
+  padding-bottom: 30px;
 
   // Overwrite infocard style
   .dm__video-title {
@@ -33,6 +35,13 @@
     font-size: .8em;
 
     p { margin: 0 0 13px;}
+
+    &.dm__full-desc {
+      overflow: visible;
+      -webkit-line-clamp: unset;
+      text-overflow: unset;
+      height: auto;
+    }
   }
 }
 
