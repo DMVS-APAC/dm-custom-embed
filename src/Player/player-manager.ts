@@ -10,7 +10,7 @@ import { apiUrl, debugMode } from '../Libraries/Global/vars';
 // Utilities
 import htmlEntities from "../Libraries/Utilities/html-entities";
 import { fetchData } from "../Libraries/API/apiCall";
-import {sleep, waitFor} from "../Libraries/Utilities/waitFor";
+import {waitFor} from "../Libraries/Utilities/waitFor";
 
 // Components
 import setPreVideoTitle from "../Player/Components/pre-video-title";
@@ -112,7 +112,7 @@ export default class PlayerManager {
             searchInPlaylist: rootEl.getAttribute("searchInPlaylist") ? rootEl.getAttribute("searchInPlaylist") : false,
             syndication: rootEl.getAttribute("syndication") ? rootEl.getAttribute("syndication") : "",
             controls: (rootEl.getAttribute('controls') != 'false'),
-            adsParams: rootEl.getAttribute('adsParams') ? rootEl.getAttribute('adsParams') : "contextual",
+            adsParams: rootEl.getAttribute('adsParams') ? rootEl.getAttribute('adsParams') : "custom",
             cpeId: rootEl.getAttribute('cpeId') ? rootEl.getAttribute('cpeId').split(',') : [''],
             keywordsSelector: rootEl.getAttribute('keywordsSelector') ? rootEl.getAttribute('keywordsSelector') : null,
             rangeDay: rootEl.getAttribute('rangeDay') ? rootEl.getAttribute('rangeDay').split(",") : [0],
@@ -120,7 +120,7 @@ export default class PlayerManager {
             getUpdatedVideo: ( rootEl.getAttribute('getUpdatedVideo') != 'false' ) ,
             preVideoTitle: rootEl.getAttribute('preVideoTitle') ? rootEl.getAttribute('preVideoTitle') : null,
             showVideoTitle: ( rootEl.getAttribute('showVideoTitle') != 'false' &&  rootEl.getAttribute('showVideoTitle') != null ),
-            showInfoCard: ( rootEl.getAttribute('showInfoCard') != 'false' &&  rootEl.getAttribute('showInfoCard') != null ),
+            showInfoCard: (rootEl.getAttribute('showInfoCard') === 'true'),
             showOutsidePlaylist: (rootEl.getAttribute('showOutsidePlaylist') === 'true'),
             showPlaynow: (rootEl.getAttribute('showPlaynow') === 'true'),
             showAdOnly: (rootEl.getAttribute('showAdOnly') === 'true'),
@@ -208,9 +208,15 @@ export default class PlayerManager {
     private loadDmPlayer(rootEl: HTMLDivElement): void {
         const cpeEmbed = document.createElement("div");
 
+        // Keep current style in the root element
         const currentStyle = rootEl.getAttribute('style');
         // Set thumbnail
         rootEl.setAttribute('style', '--dm-thumbnail:url(' + this.videoParams.thumbnail_480_url + ');' + ( currentStyle !== null) ? currentStyle : '');
+
+        const referrer = rootEl.getAttribute('referrerpolicy');
+        if (referrer !== null) {
+            cpeEmbed.setAttribute('referrerpolicy',referrer);
+        }
 
         /**
          * Set attributes part
@@ -218,8 +224,9 @@ export default class PlayerManager {
         let queryString = "";
 
         if (this.playerParams.adsParams === "") {
-            queryString += "ads_params=contextual";
+            queryString += "ads_params=custom";
         } else {
+            // This `htmlEntities` is for extract multiple ads_params
             queryString += "ads_params=" + htmlEntities(this.playerParams.adsParams);
         }
 
@@ -311,7 +318,7 @@ export default class PlayerManager {
         /**
          * Set an info card
          */
-        if (this.playerParams.showInfoCard === true) {
+        if (this.playerParams.showInfoCard !== false) {
             const infoCard = new InfoCard();
             if (this.infoCard !== null) {
                 this.infoCard.remove();

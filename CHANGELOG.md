@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.5.27] (2021-02-24)
+
+**Implemented enhancements:**
+- Added collapsible desc button to playlist and info card
+- Improvement on referrerpolicy
+
+## [1.5.26] (2021-02-18)
+
+**Implemented enhancements:**
+- Changed adsParam from contextual to custom
+- Added new parameters on AMP
+- Added referrerpolicy to div as new parameter
+- Refactored playlist CSS, so user can just override the vars
+
 ## [1.5.25] (2021-02-08)
 
 **Implementd enhancements:**
