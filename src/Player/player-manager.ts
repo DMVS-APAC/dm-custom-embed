@@ -10,7 +10,7 @@ import { apiUrl, debugMode } from '../Libraries/Global/vars';
 // Utilities
 import htmlEntities from "../Libraries/Utilities/html-entities";
 import { fetchData } from "../Libraries/API/apiCall";
-import {sleep, waitFor} from "../Libraries/Utilities/waitFor";
+import {waitFor} from "../Libraries/Utilities/waitFor";
 
 // Components
 import setPreVideoTitle from "../Player/Components/pre-video-title";
@@ -120,7 +120,7 @@ export default class PlayerManager {
             getUpdatedVideo: ( rootEl.getAttribute('getUpdatedVideo') != 'false' ) ,
             preVideoTitle: rootEl.getAttribute('preVideoTitle') ? rootEl.getAttribute('preVideoTitle') : null,
             showVideoTitle: ( rootEl.getAttribute('showVideoTitle') != 'false' &&  rootEl.getAttribute('showVideoTitle') != null ),
-            showInfoCard: ( rootEl.getAttribute('showInfoCard') != 'false' &&  rootEl.getAttribute('showInfoCard') != null ),
+            showInfoCard: (rootEl.getAttribute('showInfoCard') === 'true'),
             showOutsidePlaylist: (rootEl.getAttribute('showOutsidePlaylist') === 'true'),
             showPlaynow: (rootEl.getAttribute('showPlaynow') === 'true'),
             showAdOnly: (rootEl.getAttribute('showAdOnly') === 'true'),
@@ -208,13 +208,14 @@ export default class PlayerManager {
     private loadDmPlayer(rootEl: HTMLDivElement): void {
         const cpeEmbed = document.createElement("div");
 
+        // Keep current style in the root element
         const currentStyle = rootEl.getAttribute('style');
         // Set thumbnail
         rootEl.setAttribute('style', '--dm-thumbnail:url(' + this.videoParams.thumbnail_480_url + ');' + ( currentStyle !== null) ? currentStyle : '');
 
         const referrer = rootEl.getAttribute('referrerpolicy');
         if (referrer !== null) {
-            cpeEmbed.setAttribute('referrerpolicy','no-referrer-when-downgrade');
+            cpeEmbed.setAttribute('referrerpolicy',referrer);
         }
 
         /**
@@ -317,7 +318,7 @@ export default class PlayerManager {
         /**
          * Set an info card
          */
-        if (this.playerParams.showInfoCard === true) {
+        if (this.playerParams.showInfoCard !== false) {
             const infoCard = new InfoCard();
             if (this.infoCard !== null) {
                 this.infoCard.remove();

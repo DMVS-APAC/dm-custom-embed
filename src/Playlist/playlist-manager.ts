@@ -7,6 +7,7 @@ import { lory } from 'lory.js';
 // Styles
 import './Scss/video-info.scss';
 import './Scss/playlist.scss';
+import arrow from "../Assets/arrow";
 
 export default class PlaylistManager {
     private dmPlaylist: HTMLDivElement = null;
@@ -65,12 +66,35 @@ export default class PlaylistManager {
 
         this.videoDesc = document.createElement('div');
         this.videoDesc.className = 'dm__video-description';
-        this.videoDesc.innerHTML = this.videos.list[0].description;
+        this.videoDesc.innerHTML = this.videos.list[0].description.replace(
+            /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
+            '<a href="$1">$1</a>'
+        );
+
+        const collapseButton = document.createElement('button');
+        collapseButton.innerHTML = arrow;
+        collapseButton.className = 'dm__collapse-button';
+        collapseButton.setAttribute('aria-label', 'Collapse video description');
+
+        collapseButton.addEventListener('click', e => {
+            this.collapseDesc(this.videoDesc, collapseButton);
+        });
 
         videoInfo.appendChild(this.videoTitle);
         videoInfo.appendChild(this.videoDesc);
+        videoInfo.appendChild(collapseButton);
 
         this.rootEl.insertAdjacentElement('afterbegin', videoInfo);
+    }
+
+    private collapseDesc(descEl: HTMLElement, buttonEl: HTMLButtonElement): void {
+        if (descEl.classList.contains('dm__full-desc')) {
+            descEl.classList.remove('dm__full-desc');
+            buttonEl.classList.remove('collapsed');
+        } else {
+            descEl.classList.add('dm__full-desc');
+            buttonEl.classList.add('collapsed');
+        }
     }
 
     private generateCarouselTag() {
