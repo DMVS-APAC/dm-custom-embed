@@ -175,7 +175,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "/**\n * Video info is placed above the player.\n * It contains title and description\n */\n.dm__video-info {\n  --dm-video-info-bg: #fff;\n  --dm-top-line-color: #232323;\n  --dm-video-title-font: Noto Sans, Arial, sans-serif;\n  --dm-title-align: left;\n  --dm-title-weight: 700;\n  --dm-video-desc-font: Noto Sans, Arial, sans-serif;\n  background: var(--dm-video-info-bg);\n  border-top: 6px solid var(--dm-top-line-color);\n  margin-bottom: 13px;\n  position: relative;\n  padding-bottom: 30px;\n  /* Overwrite infocard style*/ }\n  .dm__video-info .dm__video-title {\n    font-family: var(--dm-video-title-font) !important; }\n  .dm__video-info .dm__video-description {\n    font-family: var(--dm-video-desc-font) !important;\n    display: -webkit-box;\n    -webkit-line-clamp: 2;\n    height: 3.1em;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-box-orient: vertical;\n    white-space: normal;\n    font-size: .8em; }\n    .dm__video-info .dm__video-description p {\n      margin: 0 0 13px; }\n    .dm__video-info .dm__video-description.dm__full-desc {\n      overflow: visible;\n      -webkit-line-clamp: unset;\n      text-overflow: unset;\n      height: auto; }\n\n.dm-playlist--right-side .dm__video-info {\n  display: none; }\n", ""]);
+exports.push([module.i, "/**\n * Video info is placed above the player.\n * It contains title and description\n */\n.dm__video-info {\n  --dm-video-info-bg: #fff;\n  --dm-top-line-color: #232323;\n  --dm-video-title-font: Noto Sans, Arial, sans-serif;\n  --dm-title-align: left;\n  --dm-title-weight: 700;\n  --dm-video-desc-font: Noto Sans, Arial, sans-serif;\n  background: var(--dm-video-info-bg);\n  border-top: 6px solid var(--dm-top-line-color);\n  position: relative;\n  padding-bottom: 30px;\n  /* Overwrite infocard style*/ }\n  .dm__video-info .dm__video-title {\n    font-family: var(--dm-video-title-font) !important; }\n  .dm__video-info .dm__video-description {\n    font-family: var(--dm-video-desc-font) !important;\n    display: -webkit-box;\n    -webkit-line-clamp: 2;\n    height: 3.1em;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    -webkit-box-orient: vertical;\n    white-space: normal;\n    font-size: .8em; }\n    .dm__video-info .dm__video-description p {\n      margin: 0 0 13px; }\n    .dm__video-info .dm__video-description.dm__full-desc {\n      overflow: visible;\n      -webkit-line-clamp: unset;\n      text-overflow: unset;\n      height: auto; }\n\n.dm-playlist--right-side .dm__video-info {\n  display: none; }\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -3731,7 +3731,7 @@ var PlaylistManager = /** @class */ (function () {
         this.videoTitle.innerText = this.videos.list[0].title;
         this.videoDesc = document.createElement('div');
         this.videoDesc.className = 'dm__video-description';
-        this.videoDesc.innerHTML = this.videos.list[0].description;
+        this.videoDesc.innerHTML = this.videos.list[0].description.replace(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig, '<a href="$1">$1</a>');
         var collapseButton = document.createElement('button');
         collapseButton.innerHTML = _Assets_arrow__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"];
         collapseButton.className = 'dm__collapse-button';

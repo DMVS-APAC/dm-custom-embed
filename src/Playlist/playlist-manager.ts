@@ -66,7 +66,10 @@ export default class PlaylistManager {
 
         this.videoDesc = document.createElement('div');
         this.videoDesc.className = 'dm__video-description';
-        this.videoDesc.innerHTML = this.videos.list[0].description;
+        this.videoDesc.innerHTML = this.videos.list[0].description.replace(
+            /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
+            '<a href="$1">$1</a>'
+        );
 
         const collapseButton = document.createElement('button');
         collapseButton.innerHTML = arrow;
