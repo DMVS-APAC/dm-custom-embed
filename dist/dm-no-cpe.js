@@ -2631,7 +2631,7 @@ var NoCpeManager = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _loop_1 = function (i) {
-                            var player, videoPlaceholder, closeButton, closeImg;
+                            var player, videoPlaceholder, closeButton, closeImg, params;
                             return __generator(this, function (_a) {
                                 switch (_a.label) {
                                     case 0:
@@ -2655,13 +2655,13 @@ var NoCpeManager = /** @class */ (function () {
                                         this_1.videoInside.appendChild(videoPlaceholder);
                                         // Add closeButton and videoPlaceholder
                                         this_1.rootEls[i].querySelector('.dailymotion-cpe').appendChild(this_1.videoInside);
+                                        return [4 /*yield*/, this_1.setParams()];
+                                    case 2:
+                                        params = _a.sent();
                                         // @ts-ignore
                                         this_1.dm = DM.player(videoPlaceholder, {
                                             video: player.videoParams.id,
-                                            params: {
-                                                mute: true,
-                                                'queue-enable': (NoCpeManager.player[i].playerParams.showOutsidePlaylist === true) ? false : true,
-                                            }
+                                            params: params
                                         });
                                         closeButton.addEventListener('click', function () { _this.closePip(); });
                                         return [2 /*return*/];
@@ -2683,6 +2683,23 @@ var NoCpeManager = /** @class */ (function () {
                     case 4: return [2 /*return*/];
                 }
             });
+        });
+    };
+    NoCpeManager.prototype.setParams = function () {
+        return new Promise(function (resolve) {
+            var playerParams = NoCpeManager.player[0].playerParams;
+            var params = {
+                mute: true,
+                'queue-enable': (!(playerParams.showOutsidePlaylist === true || playerParams.queueEnable === false)),
+                'queue-autoplay-next': (playerParams.queueEnableNext === true),
+            };
+            if (playerParams.syndication !== null && playerParams.syndication !== '')
+                params.syndication = playerParams.syndication;
+            if (playerParams.controls !== null)
+                params.controls = playerParams.controls;
+            if (playerParams.adsParams !== null)
+                params.ads_params = playerParams.adsParams;
+            resolve(params);
         });
     };
     NoCpeManager.prototype.closePip = function () {
