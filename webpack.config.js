@@ -4,15 +4,13 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DelWebpackPlugin = require('del-webpack-plugin');
 
-module.exports = (env, options) => {
-    const dotenv = new Dotenv();
-    const isProd = options.mode === 'production';
+const dotenv = new Dotenv();
+const isProd = 'production';
 
-    return {
+module.exports = {
         entry: {
             "dm-ce": "./src/Entries/dm-custom-embed.ts",
             "dm-amp": "./src/Entries/dm-amp.ts",
-            // "dm-fia": "./"
             'dm-no-cpe': "./src/Entries/dm-no-cpe.ts",
         },
         output: {
@@ -58,378 +56,438 @@ module.exports = (env, options) => {
         },
         plugins: [
             /**
-             *  This is a labs part to demo to partner
+             * This is a labs part to demo to partner
              *
              */
-            new HtmlWebpackPlugin({
-                title: 'Dailymotion Custom Embed Video',
-                template: 'src/Labs/index.html',
-                filename: 'index.html',
-                chunks: ['dm-ce'],
-                showErrors: isProd ? false : true,
-                minify: isProd ? {
-                    html5: true,
-                    collapseWhitespace: true,
-                    minifyCSS: true,
-                    minifyJS: true,
-                    minifyURLs: false,
-                    removeAttributeQuotes: true,
-                    removeComments: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true,
-                    removeRedundantAttributes: true,
-                    removeScriptTypeAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    useShortDoctype: true
-                } : false,
-                hash: false
-            }),
-            new HtmlWebpackPlugin({
-                title: 'Dailymotion Custom Embed Video',
-                template: 'src/Labs/ConditionalPlayer/index.html',
-                filename: 'conditional/index.html',
-                chunks: ['dm-ce'],
-                showErrors: isProd ? false : true,
-                minify: isProd ? {
-                    html5: true,
-                    collapseWhitespace: true,
-                    minifyCSS: true,
-                    minifyJS: true,
-                    minifyURLs: false,
-                    removeAttributeQuotes: true,
-                    removeComments: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true,
-                    removeRedundantAttributes: true,
-                    removeScriptTypeAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    useShortDoctype: true
-                } : false,
-                hash: false
-            }),
-            new HtmlWebpackPlugin({
-                title: 'Dailymotion Hide Controls When Ad Playing',
-                template: 'src/Labs/HideControls/index.html',
-                filename: 'hide-controls/index.html',
-                chunks: ['dm-ce'],
-                showErrors: isProd ? false : true,
-                minify: isProd ? {
-                    html5: true,
-                    collapseWhitespace: true,
-                    minifyCSS: true,
-                    minifyJS: true,
-                    minifyURLs: false,
-                    removeAttributeQuotes: true,
-                    removeComments: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true,
-                    removeRedundantAttributes: true,
-                    removeScriptTypeAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    useShortDoctype: true
-                } : false,
-                hash: false
-            }),
-            new HtmlWebpackPlugin({
-                title: 'Dailymotion Multiple Fallback',
-                template: 'src/Labs/MultipleFallback/index.html',
-                filename: 'multiple-fallback/index.html',
-                chunks: ['dm-ce'],
-                showErrors: isProd ? false : true,
-                minify: isProd ? {
-                    html5: true,
-                    collapseWhitespace: true,
-                    minifyCSS: true,
-                    minifyJS: true,
-                    minifyURLs: false,
-                    removeAttributeQuotes: true,
-                    removeComments: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true,
-                    removeRedundantAttributes: true,
-                    removeScriptTypeAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    useShortDoctype: true
-                } : false,
-                hash: false
-            }),
-                // new HtmlWebpackPlugin({
-            //     title: 'Dailymotion Multiple Video Embed',
-            //     template: 'src/entries/multiple/index.html',
-            //     filename: 'multiple/index.html',
-            //     chunks: ['dm-ce'],
-            //     showErrors: isProd ? false : true,
-            //     minify: isProd ? {
-            //         html5: true,
-            //         collapseWhitespace: true,
-            //         minifyCSS: true,
-            //         minifyJS: true,
-            //         minifyURLs: false,
-            //         removeAttributeQuotes: true,
-            //         removeComments: true,
-            //         removeEmptyAttributes: true,
-            //         removeOptionalTags: true,
-            //         removeRedundantAttributes: true,
-            //         removeScriptTypeAttributes: true,
-            //         removeStyleLinkTypeAttributes: true,
-            //         useShortDoctype: true
-            //     } : false,
-            //     hash: false
-            // }),
-            new HtmlWebpackPlugin({
-                title: 'Dailymotion Infinity Scroll Video Embed',
-                template: 'src/Labs/InfiniteScroll/index.html',
-                filename: 'infinity-scroll/index.html',
-                chunks: ['dm-ce'],
-                showErrors: isProd ? false : true,
-                minify: isProd ? {
-                    html5: true,
-                    collapseWhitespace: true,
-                    minifyCSS: true,
-                    minifyJS: true,
-                    minifyURLs: false,
-                    removeAttributeQuotes: true,
-                    removeComments: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true,
-                    removeRedundantAttributes: true,
-                    removeScriptTypeAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    useShortDoctype: true
-                } : false,
-                hash: false
-            }),
-            new HtmlWebpackPlugin({
-                title: 'Dailymotion Player AMP',
-                template: 'src/AMP/dm-player.html',
-                filename: 'dm-player.html',
-                chunks: ['dm-amp'],
-                showErrors: isProd ? false : true,
-                minify: isProd ? {
-                    html5: true,
-                    collapseWhitespace: true,
-                    minifyCSS: true,
-                    minifyJS: true,
-                    minifyURLs: false,
-                    removeAttributeQuotes: true,
-                    removeComments: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true,
-                    removeRedundantAttributes: true,
-                    removeScriptTypeAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    useShortDoctype: true
-                } : false,
-                hash: false
-            }),
-            new HtmlWebpackPlugin({
-                title: 'Dailymotion AMP Video Embed',
-                template: 'src/Labs/AMP/index.html',
-                filename: 'amp/index.html',
-                excludeChunks: ['dm-ce', 'dm-amp', 'dm-no-cpe'],
-                showErrors: isProd ? false : true,
-                minify: isProd ? {
-                    html5: true,
-                    collapseWhitespace: true,
-                    minifyCSS: true,
-                    minifyJS: true,
-                    minifyURLs: false,
-                    removeAttributeQuotes: true,
-                    removeComments: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true,
-                    removeRedundantAttributes: true,
-                    removeScriptTypeAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    useShortDoctype: true
-                } : false,
-                hash: false
-            }),
-            // new HtmlWebpackPlugin({
-            //     title: 'Dailymotion private video',
-            //     template: 'src/entries/private-video/index.html',
-            //     filename: 'private-video/index.html',
-            //     chunks: ['dm-ce'],
-            //     showErrors: isProd ? false : true,
-            //     minify: isProd ? {
-            //         html5: true,
-            //         collapseWhitespace: true,
-            //         minifyCSS: true,
-            //         minifyJS: true,
-            //         minifyURLs: false,
-            //         removeAttributeQuotes: true,
-            //         removeComments: true,
-            //         removeEmptyAttributes: true,
-            //         removeOptionalTags: true,
-            //         removeRedundantAttributes: true,
-            //         removeScriptTypeAttributes: true,
-            //         removeStyleLinkTypeAttributes: true,
-            //         useShortDoctype: true
-            //     } : false,
-            //     hash: false
-            // }),
-            new HtmlWebpackPlugin({
-                title: 'Dailymotion Video with Playlist out the player',
-                template: 'src/Labs/Playlist/index.html',
-                filename: 'playlist/index.html',
-                chunks: ['dm-ce'],
-                showErrors: isProd ? false : true,
-                minify: isProd ? {
-                    html5: true,
-                    collapseWhitespace: true,
-                    minifyCSS: true,
-                    minifyJS: true,
-                    minifyURLs: false,
-                    removeAttributeQuotes: true,
-                    removeComments: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true,
-                    removeRedundantAttributes: true,
-                    removeScriptTypeAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    useShortDoctype: true
-                } : false,
-                hash: false
-            }),
-            new HtmlWebpackPlugin({
-                title: 'Dailymotion Video with Playlist out the player',
-                template: 'src/Labs/Playlist/asiaone.html',
-                filename: 'playlist/asiaone.html',
-                chunks: ['dm-ce'],
-                showErrors: isProd ? false : true,
-                minify: isProd ? {
-                    html5: true,
-                    collapseWhitespace: true,
-                    minifyCSS: true,
-                    minifyJS: true,
-                    minifyURLs: false,
-                    removeAttributeQuotes: true,
-                    removeComments: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true,
-                    removeRedundantAttributes: true,
-                    removeScriptTypeAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    useShortDoctype: true
-                } : false,
-                hash: false
-            }),
-            new HtmlWebpackPlugin({
-                title: 'Dailymotion No CPE Default Embed',
-                template: 'src/Labs/NoCPE/default/index.html',
-                filename: 'no-cpe/index.html',
-                chunks: ['dm-no-cpe'],
-                showErrors: isProd ? false : true,
-                minify: isProd ? {
-                    html5: true,
-                    collapseWhitespace: true,
-                    minifyCSS: true,
-                    minifyJS: true,
-                    minifyURLs: false,
-                    removeAttributeQuotes: true,
-                    removeComments: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true,
-                    removeRedundantAttributes: true,
-                    removeScriptTypeAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    useShortDoctype: true
-                } : false,
-                hash: false
-            }),
-            new HtmlWebpackPlugin({
-                title: 'Dailymotion No CPE Embed No PiP',
-                template: 'src/Labs/NoCPE/no-pip/index.html',
-                filename: 'no-cpe/no-pip.html',
-                chunks: ['dm-no-cpe'],
-                showErrors: isProd ? false : true,
-                minify: isProd ? {
-                    html5: true,
-                    collapseWhitespace: true,
-                    minifyCSS: true,
-                    minifyJS: true,
-                    minifyURLs: false,
-                    removeAttributeQuotes: true,
-                    removeComments: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true,
-                    removeRedundantAttributes: true,
-                    removeScriptTypeAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    useShortDoctype: true
-                } : false,
-                hash: false
-            }),
-            new HtmlWebpackPlugin({
-                title: 'Dailymotion No CPE Embed No Scroll To Play',
-                template: 'src/Labs/NoCPE/no-scroll-to-play/index.html',
-                filename: 'no-cpe/no-scroll-to-play.html',
-                chunks: ['dm-no-cpe'],
-                showErrors: isProd ? false : true,
-                minify: isProd ? {
-                    html5: true,
-                    collapseWhitespace: true,
-                    minifyCSS: true,
-                    minifyJS: true,
-                    minifyURLs: false,
-                    removeAttributeQuotes: true,
-                    removeComments: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true,
-                    removeRedundantAttributes: true,
-                    removeScriptTypeAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    useShortDoctype: true
-                } : false,
-                hash: false
-            }),
-            new HtmlWebpackPlugin({
-                title: 'Dailymotion No CPE Embed Scroll To Play and Scroll To Pause',
-                template: 'src/Labs/NoCPE/scroll-to-pause-play/index.html',
-                filename: 'no-cpe/scroll-to-pause-play.html',
-                chunks: ['dm-no-cpe'],
-                showErrors: isProd ? false : true,
-                minify: isProd ? {
-                    html5: true,
-                    collapseWhitespace: true,
-                    minifyCSS: true,
-                    minifyJS: true,
-                    minifyURLs: false,
-                    removeAttributeQuotes: true,
-                    removeComments: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true,
-                    removeRedundantAttributes: true,
-                    removeScriptTypeAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    useShortDoctype: true
-                } : false,
-                hash: false
-            }),
-            new HtmlWebpackPlugin({
-                title: 'Dailymotion No CPE Embed With Playlist',
-                template: 'src/Labs/NoCPE/playlist/index.html',
-                filename: 'no-cpe/playlist.html',
-                chunks: ['dm-no-cpe'],
-                showErrors: isProd ? false : true,
-                minify: isProd ? {
-                    html5: true,
-                    collapseWhitespace: true,
-                    minifyCSS: true,
-                    minifyJS: true,
-                    minifyURLs: false,
-                    removeAttributeQuotes: true,
-                    removeComments: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true,
-                    removeRedundantAttributes: true,
-                    removeScriptTypeAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    useShortDoctype: true
-                } : false,
-                hash: false
-            }),
+            () => {
+                if (!isProd) {
+                    new HtmlWebpackPlugin({
+                        title: 'Dailymotion Custom Embed Video',
+                        template: 'src/Labs/index.html',
+                        filename: 'lab/index.html',
+                        chunks: ['dm-ce'],
+                        showErrors: isProd ? false : true,
+                        minify: isProd ? {
+                            html5: true,
+                            collapseWhitespace: true,
+                            minifyCSS: true,
+                            minifyJS: true,
+                            minifyURLs: false,
+                            removeAttributeQuotes: true,
+                            removeComments: true,
+                            removeEmptyAttributes: true,
+                            removeOptionalTags: true,
+                            removeRedundantAttributes: true,
+                            removeScriptTypeAttributes: true,
+                            removeStyleLinkTypeAttributes: true,
+                            useShortDoctype: true
+                        } : false,
+                        hash: false
+                    });
+
+                    new HtmlWebpackPlugin({
+                        title: 'Dailymotion Custom Embed Video',
+                        template: 'src/Labs/ConditionalPlayer/index.html',
+                        filename: 'lab/conditional/index.html',
+                        chunks: ['dm-ce'],
+                        showErrors: isProd ? false : true,
+                        minify: isProd ? {
+                            html5: true,
+                            collapseWhitespace: true,
+                            minifyCSS: true,
+                            minifyJS: true,
+                            minifyURLs: false,
+                            removeAttributeQuotes: true,
+                            removeComments: true,
+                            removeEmptyAttributes: true,
+                            removeOptionalTags: true,
+                            removeRedundantAttributes: true,
+                            removeScriptTypeAttributes: true,
+                            removeStyleLinkTypeAttributes: true,
+                            useShortDoctype: true
+                        } : false,
+                        hash: false
+                    });
+
+                    new HtmlWebpackPlugin({
+                        title: 'Dailymotion Hide Controls When Ad Playing',
+                        template: 'src/Labs/HideControls/index.html',
+                        filename: 'lab/hide-controls/index.html',
+                        chunks: ['dm-ce'],
+                        showErrors: isProd ? false : true,
+                        minify: isProd ? {
+                            html5: true,
+                            collapseWhitespace: true,
+                            minifyCSS: true,
+                            minifyJS: true,
+                            minifyURLs: false,
+                            removeAttributeQuotes: true,
+                            removeComments: true,
+                            removeEmptyAttributes: true,
+                            removeOptionalTags: true,
+                            removeRedundantAttributes: true,
+                            removeScriptTypeAttributes: true,
+                            removeStyleLinkTypeAttributes: true,
+                            useShortDoctype: true
+                        } : false,
+                        hash: false
+                    });
+
+                    new HtmlWebpackPlugin({
+                        title: 'Dailymotion Multiple Fallback',
+                        template: 'src/Labs/MultipleFallback/index.html',
+                        filename: 'lab/multiple-fallback/index.html',
+                        chunks: ['dm-ce'],
+                        showErrors: isProd ? false : true,
+                        minify: isProd ? {
+                            html5: true,
+                            collapseWhitespace: true,
+                            minifyCSS: true,
+                            minifyJS: true,
+                            minifyURLs: false,
+                            removeAttributeQuotes: true,
+                            removeComments: true,
+                            removeEmptyAttributes: true,
+                            removeOptionalTags: true,
+                            removeRedundantAttributes: true,
+                            removeScriptTypeAttributes: true,
+                            removeStyleLinkTypeAttributes: true,
+                            useShortDoctype: true
+                        } : false,
+                        hash: false
+                    });
+
+                    // new HtmlWebpackPlugin({
+                    //     title: 'Dailymotion Multiple Video Embed',
+                    //     template: 'src/entries/multiple/index.html',
+                    //     filename: 'multiple/index.html',
+                    //     chunks: ['dm-ce'],
+                    //     showErrors: isProd ? false : true,
+                    //     minify: isProd ? {
+                    //         html5: true,
+                    //         collapseWhitespace: true,
+                    //         minifyCSS: true,
+                    //         minifyJS: true,
+                    //         minifyURLs: false,
+                    //         removeAttributeQuotes: true,
+                    //         removeComments: true,
+                    //         removeEmptyAttributes: true,
+                    //         removeOptionalTags: true,
+                    //         removeRedundantAttributes: true,
+                    //         removeScriptTypeAttributes: true,
+                    //         removeStyleLinkTypeAttributes: true,
+                    //         useShortDoctype: true
+                    //     } : false,
+                    //     hash: false
+                    // });
+
+                    new HtmlWebpackPlugin({
+                        title: 'Dailymotion Infinity Scroll Video Embed',
+                        template: 'src/Labs/InfiniteScroll/index.html',
+                        filename: 'lab/infinity-scroll/index.html',
+                        chunks: ['dm-ce'],
+                        showErrors: isProd ? false : true,
+                        minify: isProd ? {
+                            html5: true,
+                            collapseWhitespace: true,
+                            minifyCSS: true,
+                            minifyJS: true,
+                            minifyURLs: false,
+                            removeAttributeQuotes: true,
+                            removeComments: true,
+                            removeEmptyAttributes: true,
+                            removeOptionalTags: true,
+                            removeRedundantAttributes: true,
+                            removeScriptTypeAttributes: true,
+                            removeStyleLinkTypeAttributes: true,
+                            useShortDoctype: true
+                        } : false,
+                        hash: false
+                    });
+
+                    new HtmlWebpackPlugin({
+                        title: 'Dailymotion Player AMP',
+                        template: 'src/AMP/dm-player.html',
+                        filename: 'lab/dm-player.html',
+                        chunks: ['dm-amp'],
+                        showErrors: isProd ? false : true,
+                        minify: isProd ? {
+                            html5: true,
+                            collapseWhitespace: true,
+                            minifyCSS: true,
+                            minifyJS: true,
+                            minifyURLs: false,
+                            removeAttributeQuotes: true,
+                            removeComments: true,
+                            removeEmptyAttributes: true,
+                            removeOptionalTags: true,
+                            removeRedundantAttributes: true,
+                            removeScriptTypeAttributes: true,
+                            removeStyleLinkTypeAttributes: true,
+                            useShortDoctype: true
+                        } : false,
+                        hash: false
+                    });
+
+                    new HtmlWebpackPlugin({
+                        title: 'Dailymotion AMP Video Embed',
+                        template: 'src/Labs/AMP/index.html',
+                        filename: 'lab/amp/index.html',
+                        excludeChunks: ['dm-ce', 'dm-amp', 'dm-no-cpe'],
+                        showErrors: isProd ? false : true,
+                        minify: isProd ? {
+                            html5: true,
+                            collapseWhitespace: true,
+                            minifyCSS: true,
+                            minifyJS: true,
+                            minifyURLs: false,
+                            removeAttributeQuotes: true,
+                            removeComments: true,
+                            removeEmptyAttributes: true,
+                            removeOptionalTags: true,
+                            removeRedundantAttributes: true,
+                            removeScriptTypeAttributes: true,
+                            removeStyleLinkTypeAttributes: true,
+                            useShortDoctype: true
+                        } : false,
+                        hash: false
+                    });
+
+                    // new HtmlWebpackPlugin({
+                    //     title: 'Dailymotion private video',
+                    //     template: 'src/entries/private-video/index.html',
+                    //     filename: 'private-video/index.html',
+                    //     chunks: ['dm-ce'],
+                    //     showErrors: isProd ? false : true,
+                    //     minify: isProd ? {
+                    //         html5: true,
+                    //         collapseWhitespace: true,
+                    //         minifyCSS: true,
+                    //         minifyJS: true,
+                    //         minifyURLs: false,
+                    //         removeAttributeQuotes: true,
+                    //         removeComments: true,
+                    //         removeEmptyAttributes: true,
+                    //         removeOptionalTags: true,
+                    //         removeRedundantAttributes: true,
+                    //         removeScriptTypeAttributes: true,
+                    //         removeStyleLinkTypeAttributes: true,
+                    //         useShortDoctype: true
+                    //     } : false,
+                    //     hash: false
+                    // });
+
+                    new HtmlWebpackPlugin({
+                        title: 'Dailymotion Video with Playlist out the player',
+                        template: 'src/Labs/Playlist/index.html',
+                        filename: 'lab/playlist/index.html',
+                        chunks: ['dm-ce'],
+                        showErrors: isProd ? false : true,
+                        minify: isProd ? {
+                            html5: true,
+                            collapseWhitespace: true,
+                            minifyCSS: true,
+                            minifyJS: true,
+                            minifyURLs: false,
+                            removeAttributeQuotes: true,
+                            removeComments: true,
+                            removeEmptyAttributes: true,
+                            removeOptionalTags: true,
+                            removeRedundantAttributes: true,
+                            removeScriptTypeAttributes: true,
+                            removeStyleLinkTypeAttributes: true,
+                            useShortDoctype: true
+                        } : false,
+                        hash: false
+                    });
+
+                    new HtmlWebpackPlugin({
+                        title: 'Dailymotion Video with Playlist out the player',
+                        template: 'src/Labs/Playlist/asiaone.html',
+                        filename: 'lab/playlist/asiaone.html',
+                        chunks: ['dm-ce'],
+                        showErrors: isProd ? false : true,
+                        minify: isProd ? {
+                            html5: true,
+                            collapseWhitespace: true,
+                            minifyCSS: true,
+                            minifyJS: true,
+                            minifyURLs: false,
+                            removeAttributeQuotes: true,
+                            removeComments: true,
+                            removeEmptyAttributes: true,
+                            removeOptionalTags: true,
+                            removeRedundantAttributes: true,
+                            removeScriptTypeAttributes: true,
+                            removeStyleLinkTypeAttributes: true,
+                            useShortDoctype: true
+                        } : false,
+                        hash: false
+                    });
+
+                    new HtmlWebpackPlugin({
+                        title: 'Dailymotion No CPE Default Embed',
+                        template: 'src/Labs/NoCPE/default/index.html',
+                        filename: 'lab/no-cpe/index.html',
+                        chunks: ['dm-no-cpe'],
+                        showErrors: isProd ? false : true,
+                        minify: isProd ? {
+                            html5: true,
+                            collapseWhitespace: true,
+                            minifyCSS: true,
+                            minifyJS: true,
+                            minifyURLs: false,
+                            removeAttributeQuotes: true,
+                            removeComments: true,
+                            removeEmptyAttributes: true,
+                            removeOptionalTags: true,
+                            removeRedundantAttributes: true,
+                            removeScriptTypeAttributes: true,
+                            removeStyleLinkTypeAttributes: true,
+                            useShortDoctype: true
+                        } : false,
+                        hash: false
+                    });
+
+                    new HtmlWebpackPlugin({
+                        title: 'Dailymotion No CPE Embed No PiP',
+                        template: 'src/Labs/NoCPE/no-pip/index.html',
+                        filename: 'lab/no-cpe/no-pip.html',
+                        chunks: ['dm-no-cpe'],
+                        showErrors: isProd ? false : true,
+                        minify: isProd ? {
+                            html5: true,
+                            collapseWhitespace: true,
+                            minifyCSS: true,
+                            minifyJS: true,
+                            minifyURLs: false,
+                            removeAttributeQuotes: true,
+                            removeComments: true,
+                            removeEmptyAttributes: true,
+                            removeOptionalTags: true,
+                            removeRedundantAttributes: true,
+                            removeScriptTypeAttributes: true,
+                            removeStyleLinkTypeAttributes: true,
+                            useShortDoctype: true
+                        } : false,
+                        hash: false
+                    });
+
+                    new HtmlWebpackPlugin({
+                        title: 'Dailymotion No CPE Embed No Scroll To Play',
+                        template: 'src/Labs/NoCPE/no-scroll-to-play/index.html',
+                        filename: 'lab/no-cpe/no-scroll-to-play.html',
+                        chunks: ['dm-no-cpe'],
+                        showErrors: isProd ? false : true,
+                        minify: isProd ? {
+                            html5: true,
+                            collapseWhitespace: true,
+                            minifyCSS: true,
+                            minifyJS: true,
+                            minifyURLs: false,
+                            removeAttributeQuotes: true,
+                            removeComments: true,
+                            removeEmptyAttributes: true,
+                            removeOptionalTags: true,
+                            removeRedundantAttributes: true,
+                            removeScriptTypeAttributes: true,
+                            removeStyleLinkTypeAttributes: true,
+                            useShortDoctype: true
+                        } : false,
+                        hash: false
+                    });
+
+                    new HtmlWebpackPlugin({
+                        title: 'Dailymotion No CPE Embed Scroll To Play and Scroll To Pause',
+                        template: 'src/Labs/NoCPE/scroll-to-pause-play/index.html',
+                        filename: 'lab/no-cpe/scroll-to-pause-play.html',
+                        chunks: ['dm-no-cpe'],
+                        showErrors: isProd ? false : true,
+                        minify: isProd ? {
+                            html5: true,
+                            collapseWhitespace: true,
+                            minifyCSS: true,
+                            minifyJS: true,
+                            minifyURLs: false,
+                            removeAttributeQuotes: true,
+                            removeComments: true,
+                            removeEmptyAttributes: true,
+                            removeOptionalTags: true,
+                            removeRedundantAttributes: true,
+                            removeScriptTypeAttributes: true,
+                            removeStyleLinkTypeAttributes: true,
+                            useShortDoctype: true
+                        } : false,
+                        hash: false
+                    });
+
+                    new HtmlWebpackPlugin({
+                        title: 'Dailymotion No CPE Embed With Playlist',
+                        template: 'src/Labs/NoCPE/playlist/index.html',
+                        filename: 'lab/no-cpe/playlist.html',
+                        chunks: ['dm-no-cpe'],
+                        showErrors: isProd ? false : true,
+                        minify: isProd ? {
+                            html5: true,
+                            collapseWhitespace: true,
+                            minifyCSS: true,
+                            minifyJS: true,
+                            minifyURLs: false,
+                            removeAttributeQuotes: true,
+                            removeComments: true,
+                            removeEmptyAttributes: true,
+                            removeOptionalTags: true,
+                            removeRedundantAttributes: true,
+                            removeScriptTypeAttributes: true,
+                            removeStyleLinkTypeAttributes: true,
+                            useShortDoctype: true
+                        } : false,
+                        hash: false
+                    });
+                }
+            },
+            () => {
+                if (isProd) {
+                    new DelWebpackPlugin({
+                        include: ['**'],
+                        exclude: [],
+                        info: true,
+                        keepGeneratedAssets: true,
+                        allowExternal: false
+                    });
+                }
+            },
             dotenv
         ]
     }
+
+
+if (isProd) {
+    module.exports.plugins.push(
+        new HtmlWebpackPlugin({
+            title: 'Dailymotion Custom Embed Video',
+            template: 'src/Labs/index.html',
+            filename: 'lab/index.html',
+            chunks: ['dm-ce'],
+            showErrors: isProd ? false : true,
+            minify: isProd ? {
+                html5: true,
+                collapseWhitespace: true,
+                minifyCSS: true,
+                minifyJS: true,
+                minifyURLs: false,
+                removeAttributeQuotes: true,
+                removeComments: true,
+                removeEmptyAttributes: true,
+                removeOptionalTags: true,
+                removeRedundantAttributes: true,
+                removeScriptTypeAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                useShortDoctype: true
+            } : false,
+            hash: false
+        })
+    );
+
+    // console.log(module.exports.plugins);
 }
