@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.5.28] (2021-03-01)
+
+**Fixed bugs:**
+- Syndication param issue on AMP
+
 ## [1.5.27] (2021-02-24)
 
 **Implemented enhancements:**
