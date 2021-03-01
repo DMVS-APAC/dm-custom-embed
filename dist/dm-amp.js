@@ -2842,6 +2842,7 @@ var NoCpeManager = /** @class */ (function () {
                 mute: true,
                 'queue-enable': (!(playerParams.showOutsidePlaylist === true || playerParams.queueEnable === false)),
                 'queue-autoplay-next': (playerParams.queueEnableNext === true),
+                app: 'amp',
             };
             if (playerParams.syndication !== null && playerParams.syndication !== '')
                 params.syndication = playerParams.syndication;
