@@ -11,9 +11,10 @@
     "url": "git+https://github.com/DMVS-APAC/dm-custom-embed.git"
   },
   "scripts": {
-    "dev": "webpack --mode development --debug",
-    "watch": "webpack --mode development --debug --watch",
-    "prod": "webpack --mode production",
+    "dev": "webpack --mode development --env dev --debug",
+    "watch": "webpack --mode development --env dev --debug --watch",
+    "staging": "webpack --mode production --env staging --debug",
+    "prod": "webpack --mode production --env prod",
     "deploy": "run-p dev prod"
   },
   "author": "Yudhi Satrio <y.satrio@dailymotion.com>",
