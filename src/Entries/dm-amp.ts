@@ -44,7 +44,7 @@ const onAmpIntegrationReady = (ampIntegration: any) => {
 
     init();
     // Tell amp that player is ready, so loader will be removed
-    ampIntegration.postEvent("canplay");
+    // ampIntegration.postEvent("canplay");
 }
 
 const setAttributes = async (el: NodeListOf<HTMLDivElement>) => {
@@ -150,8 +150,13 @@ const addEventListeners = async (player) => {
         AMP.postEvent("ended");
     });
 
-    player.addEventListener('controlschange', (e) => {
-    });
+    player.addEventListener('playback_ready', e => {
+        AMP.postEvent("canplay");
+    })
+
+
+    // player.addEventListener('controlschange', (e) => {
+    // });
 
     player.addEventListener("volumechange", (e) => {
         if (player.muted === true) {

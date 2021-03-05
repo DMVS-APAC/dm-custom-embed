@@ -8,6 +8,7 @@ import ScrollOut from "scroll-out";
 
 // Assets
 import '../NoCPE/Scss/no-cpe.scss';
+import infNoCPEPlayer from './Interfaces/infNoCPEPlayer';
 
 export default class NoCpeManager {
     private rootEls: NodeListOf<HTMLDivElement> = null;
@@ -191,13 +192,7 @@ export default class NoCpeManager {
             // Add closeButton and videoPlaceholder
             this.rootEls[i].querySelector('.dailymotion-cpe').appendChild(this.videoInside);
 
-            const params: infParams = {
-                mute: true,
-                'queue-enable': ( NoCpeManager.player[i].playerParams.showOutsidePlaylist === true ) ? false : true,
-            }
-
-            const appParam = this.rootEls[i].getAttribute('appParam');
-            if (appParam !== null) params.app = appParam;
+            const params = await this.setParams();
 
             // @ts-ignore
             this.dm = DM.player(videoPlaceholder, {
@@ -211,6 +206,25 @@ export default class NoCpeManager {
 
         }
 
+    }
+
+    private setParams(): Promise<infNoCPEPlayer> {
+        return new Promise( resolve => {
+            const playerParams = NoCpeManager.player[0].playerParams;
+
+            const params: infNoCPEPlayer = {
+                mute: true,
+                'queue-enable': (!(playerParams.showOutsidePlaylist === true || playerParams.queueEnable === false)),
+                'queue-autoplay-next': (playerParams.queueEnableNext === true),
+                app: 'amp',
+            }
+
+            if (playerParams.syndication !== null && playerParams.syndication !== '') params.syndication = playerParams.syndication;
+            if (playerParams.controls !== null) params.controls = playerParams.controls;
+            if (playerParams.adsParams !== null) params.ads_params = playerParams.adsParams;
+
+            resolve(params);
+        });
     }
 
     private closePip(): void {
