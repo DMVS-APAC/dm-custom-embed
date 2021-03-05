@@ -4,11 +4,14 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DelWebpackPlugin = require('del-webpack-plugin');
 
+const PACKAGE = require('./package.json');
+const banner = PACKAGE.name + ' v' + PACKAGE.version + ' | ' + PACKAGE.author + ' | Released under the ' + PACKAGE.license + ' license';
+
 const config = {
     entry: {
         "dm-ce": "./src/Entries/dm-custom-embed.ts",
         "dm-amp": "./src/Entries/dm-amp.ts",
-        'dm-no-cpe': "./src/Entries/dm-no-cpe.ts",
+        // 'dm-no-cpe': "./src/Entries/dm-no-cpe.ts",
     },
     optimization: {
         usedExports: true
@@ -45,12 +48,14 @@ const config = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
     },
-    plugins: []
+    plugins: [
+        new webpack.BannerPlugin(banner) // Add version on the top position
+    ]
 }
 
 module.exports = (env, argv) => {
     const dotenv = new Dotenv();
-    const isProd = env === 'prod' || argv.mode === 'staging';
+    const isProd = argv.mode === 'production';
 
     config.plugins.push(dotenv);
     config.output = {
@@ -72,29 +77,6 @@ module.exports = (env, argv) => {
     if (env === 'dev' || env === 'staging') {
 
         config.plugins.push(
-            new HtmlWebpackPlugin({
-                title: 'Dailymotion Custom Embed Video',
-                template: 'src/Labs/index.html',
-                filename: 'lab/index.html',
-                chunks: ['dm-ce'],
-                showErrors: !isProd,
-                minify: isProd ? {
-                    html5: true,
-                    collapseWhitespace: true,
-                    minifyCSS: true,
-                    minifyJS: true,
-                    minifyURLs: false,
-                    removeAttributeQuotes: true,
-                    removeComments: true,
-                    removeEmptyAttributes: true,
-                    removeOptionalTags: true,
-                    removeRedundantAttributes: true,
-                    removeScriptTypeAttributes: true,
-                    removeStyleLinkTypeAttributes: true,
-                    useShortDoctype: true
-                } : false,
-                hash: false
-            }),
             new HtmlWebpackPlugin({
                 title: 'Dailymotion Custom Embed Video',
                 template: 'src/Labs/index.html',

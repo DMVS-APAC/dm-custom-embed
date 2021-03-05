@@ -15,7 +15,7 @@
     "watch": "webpack --mode development --env dev --debug --watch",
     "staging": "webpack --mode production --env staging --debug",
     "prod": "webpack --mode production --env prod",
-    "deploy": "run-p dev prod"
+    "deploy": "npm version patch && npm run prod"
   },
   "author": "Yudhi Satrio <y.satrio@dailymotion.com>",
   "license": "MIT",

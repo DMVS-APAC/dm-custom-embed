@@ -1,9 +1,8 @@
-# This is a basic workflow to help you get started with Actions
 
 name: Stage Runner
 
 # Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the main branch
+# events but only for the stage branch
 on:
   push:
     branches: [ stage ]
