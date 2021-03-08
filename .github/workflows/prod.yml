@@ -5,7 +5,7 @@ name: Production Runner
 # events but only for the prod branch
 on:
   push:
-    branches: [ prod, ys-setup-auto-deploy ]
+    branches: [ prod ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
