@@ -1,18 +1,44 @@
+
 name: Production Runner
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the prod branch
 on:
   push:
-    branches:
-      - prod
-  workflow_dispatch:
+    branches: [ prod ]
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  upload:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v2
-      - uses: bacongobbler/azure-blob-storage-upload@v1.1.1
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout action repo
+        uses: actions/checkout@v2
+
+      # Checks-out NodeJS, get version 10.x
+      - name: Use NodeJS 10.x
+        uses: actions/setup-node@v2
         with:
-          source_dir: prod
+          node-version: '10'
+
+      # Start install the npm
+      - name: NPM Install
+        run: npm install
+
+      # Build the script
+      - name: Build the script
+        run: npm run prod
+
+      - name: Deploy to Blob Storage
+        uses: bacongobbler/azure-blob-storage-upload@v1.1.1
+        with:
+          source_dir: dist
           container_name: main
           connection_string: ${{ secrets.DEPLOYMENTS_BLOB_CONNECTION_STRING }}
           sync: true
