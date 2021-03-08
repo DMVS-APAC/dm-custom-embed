@@ -1,9 +1,8 @@
-# This is a basic workflow to help you get started with Actions
 
 name: Stage Runner
 
 # Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the main branch
+# events but only for the stage branch
 on:
   push:
     branches: [ stage ]
@@ -17,9 +16,28 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-    - uses: jakejarvis/s3-sync-action@master
+    - name: Checkout action repo
+      uses: actions/checkout@v2
+
+    # Checks-out NodeJS, get version 10.x
+    - name: Use NodeJS 10.x
+      uses: actions/setup-node@v2
+      with:
+        node-version: '10'
+
+    # Start install the npm
+    - name: NPM Install
+      run: npm install
+
+    # Build the script
+    - name: Build the script
+      run: npm run staging
+
+    # Deploy the script to DO Spaces, first checks-out s3-sync repo
+    - name: Deploy to DO Spaces
+      uses: jakejarvis/s3-sync-action@master
       with: 
         args: --acl public-read --follow-symlinks --delete
       env:
