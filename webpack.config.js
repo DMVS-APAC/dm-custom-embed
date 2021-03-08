@@ -5,6 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DelWebpackPlugin = require('del-webpack-plugin');
 
 const PACKAGE = require('./package.json');
+
+// To show version to the script when it's built
 const banner = PACKAGE.name + ' v' + PACKAGE.version + ' | ' + PACKAGE.author + ' | Released under the ' + PACKAGE.license + ' license';
 
 const config = {

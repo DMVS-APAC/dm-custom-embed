@@ -1,6 +1,6 @@
 {
   "name": "@dmvs-apac/dm-custom-embed",
-  "version": "2.0.1",
+  "version": "1.5.28",
   "version_short": "1.5",
   "description": "A library to embed video from Dailymotion",
   "main": "dist/dm-ce.min.js",
@@ -15,9 +15,6 @@
     "watch": "webpack --mode development --env dev --debug --watch",
     "staging": "webpack --mode production --env staging --debug",
     "prod": "webpack --mode production --env prod",
-    "deploy-major": "npm version major && npm run prod",
-    "deploy-minor": "npm version minor && npm run prod",
-    "deploy-patch": "npm version patch && npm run prod",
     "release": "standard-version"
   },
   "author": "Yudhi Satrio <y.satrio@dailymotion.com>",
