@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.30](https://github.com/DMVS-APAC/dm-custom-embed/compare/v1.6.2...v1.5.30) (2021-03-17)
+
 ### [1.5.29](https://github.com/DMVS-APAC/dm-custom-embed/compare/v1.6.2...v1.5.29) (2021-03-08)
 
 ## [1.5.28] (2021-03-01)
