@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.31](https://github.com/DMVS-APAC/dm-custom-embed/compare/v1.5.30...v1.5.31) (2021-03-23)
+
+
+### Bug Fixes
+
+* security issue on package elliptic ([cad9798](https://github.com/DMVS-APAC/dm-custom-embed/commit/cad979803d3dd02ff5554b46867f6b9c37b564c0))
+* ssri security issue from dependable bot ([e4b224e](https://github.com/DMVS-APAC/dm-custom-embed/commit/e4b224e81b30860a0f514478e65e8be8f3fa46fe))
+
 ### [1.5.30](https://github.com/DMVS-APAC/dm-custom-embed/compare/v1.6.2...v1.5.30) (2021-03-17)
 
 ### [1.5.29](https://github.com/DMVS-APAC/dm-custom-embed/compare/v1.6.2...v1.5.29) (2021-03-08)
