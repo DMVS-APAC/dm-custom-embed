@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.34](https://github.com/DMVS-APAC/dm-custom-embed/compare/v1.5.33...v1.5.34) (2021-04-08)
+
+
+### Bug Fixes
+
+* Added purge cdn and fixed vulnerable package ([839a07c](https://github.com/DMVS-APAC/dm-custom-embed/commit/839a07cc74c509eb1f711b6f8158b3323609e108))
+
 ### [1.5.33](https://github.com/DMVS-APAC/dm-custom-embed/compare/v1.5.32...v1.5.33) (2021-03-30)
 
 
