@@ -45,7 +45,8 @@
     "typescript": "^3.9.7",
     "typescript-tslint-plugin": "^0.5.5",
     "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "y18n": ">=4.0.1"
   },
   "keywords": [
     "video-embed",
