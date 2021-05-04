@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.35](https://github.com/DMVS-APAC/dm-custom-embed/compare/v1.5.34...v1.5.35) (2021-05-04)
+
+
+### Bug Fixes
+
+* POC showAdOnly ([eac8607](https://github.com/DMVS-APAC/dm-custom-embed/commit/eac8607aed4fbf1db86b6ecea7d78c36c2c2eecb))
+* security fixed ([d680002](https://github.com/DMVS-APAC/dm-custom-embed/commit/d680002845f86c99ad97af528bd28f49683ac411))
+
 ### [1.5.34](https://github.com/DMVS-APAC/dm-custom-embed/compare/v1.5.33...v1.5.34) (2021-04-08)
 
 
