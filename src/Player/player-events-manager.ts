@@ -68,6 +68,9 @@ export default class PlayerEventsManager {
                  * - Cover others player when the ad is played
                  */
                 player.addEventListener('ad_play', (e: Event) => {
+
+                    this.showPlayer();
+
                     if (this.adPlaying === '') {
                         this.adPlaying = player.id;
 
@@ -137,28 +140,25 @@ export default class PlayerEventsManager {
                     document.dispatchEvent(videoEnd);
                 });
 
+                player.addEventListener('video_start', (e: Event) => {
+                    if (this.playerParams.showAdOnly === true && this.noFill === true) {
+                        const destroyPlayer = new CustomEvent('dm-destroy-player');
+                        document.dispatchEvent(destroyPlayer);
+                    } else {
+                        this.showPlayer();
+                    }
+
+                    if (this.noFill === true) {
+                        const noAd = new CustomEvent('dm-no-ad');
+                        document.dispatchEvent(noAd);
+                    }
+                });
+
                 /**
                  * Listen to `playback_ready` to show the player
                  */
                 player.addEventListener('playback_ready', async (e: Event) => {
                     const dmPlayer = player.parentNode.parentNode.parentNode;
-
-                    /**
-                     * It's only to show video when the ad is filled
-                     *
-                     * Because we don't showing the video at first, the video won't play anyway.
-                     * So we play it programmatically via JS and start to listen to `waitForAdStart`
-                     * to listen to ad request
-                     */
-                    if (this.playerParams.showAdOnly === true) {
-                        dmPlayer.classList.add('dm-wait-for-ad');
-                        player.play();
-                        await this.waitForAdStart();
-                    } else {
-                        const showPlayer = new CustomEvent('dm-show-player');
-                        document.dispatchEvent(showPlayer);
-                    }
-
 
                     /**
                      * Force close button PiP to show
@@ -264,26 +264,9 @@ export default class PlayerEventsManager {
         });
     }
 
-    /**
-     * Wait and check if noFill is true or not.
-     * This function is related to `ad_start` listener as well
-     */
-    private async waitForAdStart() {
-        // Waiting for 1 second to interact with ad
-        // await sleep(2000);
-
-        /**
-         * noFill means no ad to serve
-         * It will send a custom event that let
-         * the script continue show the player or destroy it
-         */
-        if ( this.noFill === true ) {
-            const destroyPlayer = new CustomEvent('dm-destroy-player');
-            document.dispatchEvent(destroyPlayer);
-        } else {
-            const showPlayer = new CustomEvent('dm-show-player');
-            document.dispatchEvent(showPlayer);
-        }
+    private showPlayer() {
+        const showPlayer = new CustomEvent('dm-show-player');
+        document.dispatchEvent(showPlayer);
     }
 
     /**
