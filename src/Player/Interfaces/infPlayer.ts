@@ -119,4 +119,6 @@ export default interface InfPlayer {
     width?: number;
     height?: number;
 
+    mute?: boolean;
+
 }

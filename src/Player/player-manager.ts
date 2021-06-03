@@ -138,6 +138,7 @@ export default class PlayerManager {
             playerStyleColor: rootEl.getAttribute('playerStyleColor') ? rootEl.getAttribute('playerStyleColor') : null,
             blockKeywords: rootEl.getAttribute('blockKeywords') ? rootEl.getAttribute('blockKeywords').split(',') : null,
             showCloseButtonPip: ( rootEl.getAttribute('showCloseButtonPip') === 'true'),
+            mute: ( rootEl.getAttribute('mute') === 'true'),
         };
 
         /**
@@ -233,6 +234,8 @@ export default class PlayerManager {
         if (this.playerParams.syndication !== "") queryString += "&syndication=" + this.playerParams.syndication;
 
         if (this.playerParams.controls !== true) queryString += "&controls=" + this.playerParams.controls;
+
+        if (this.playerParams.mute ) queryString += "&mute=" + this.playerParams.mute;
 
         cpeEmbed.setAttribute("class", "dailymotion-cpe");
         cpeEmbed.setAttribute("video-id", this.videoParams.private_id ? this.videoParams.private_id:this.videoParams.id);
