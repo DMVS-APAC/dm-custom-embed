@@ -22,10 +22,10 @@ jobs:
         uses: actions/checkout@v2
 
       # Checks-out NodeJS, get version 10.x
-      - name: Use NodeJS 10.x
+      - name: Use NodeJS 12.x
         uses: actions/setup-node@v2
         with:
-          node-version: '10'
+          node-version: '12'
 
       # Start install the npm
       - name: NPM Install
@@ -36,7 +36,7 @@ jobs:
         run: npm run prod
 
       - name: Deploy to Blob Storage
-        uses: bacongobbler/azure-blob-storage-upload@v1.1.1
+        uses: bacongobbler/azure-blob-storage-upload@v1.2.0
         with:
           source_dir: dist
           container_name: main
