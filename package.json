@@ -11,10 +11,10 @@
     "url": "git+https://github.com/DMVS-APAC/dm-custom-embed.git"
   },
   "scripts": {
-    "dev": "webpack --mode development --env dev --debug",
-    "watch": "webpack --mode development --env dev --debug --watch",
-    "staging": "webpack --mode production --env staging --debug",
-    "prod": "webpack --mode production --env prod",
+    "dev": "webpack --mode development --env env=dev",
+    "watch": "webpack --mode development --env env=dev --watch",
+    "staging": "webpack --mode production --env env=staging",
+    "prod": "webpack --mode production --env env=prod",
     "release": "standard-version"
   },
   "author": "Yudhi Satrio <y.satrio@dailymotion.com>",
@@ -33,6 +33,7 @@
     "node-sass": "^4.14.1",
     "npm-run-all": "^4.1.5",
     "path": "^0.12.7",
+    "path-parse": "^1.0.7",
     "postcss-loader": "^3.0.0",
     "postcss-scss": "^2.1.1",
     "sass-loader": "^8.0.0",
@@ -40,13 +41,14 @@
     "ssri": "^8.0.1",
     "standard-version": "^9.1.1",
     "style-loader": "^1.3.0",
+    "tar": "^4.4.18",
     "trim-newlines": ">=3.0.1",
     "ts-loader": "^6.2.2",
     "tslint": "^5.20.1",
     "typescript": "^3.9.7",
     "typescript-tslint-plugin": "^0.5.5",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12",
+    "webpack": "^5.52.1",
+    "webpack-cli": "^4.3.1",
     "y18n": ">=4.0.1"
   },
   "keywords": [
