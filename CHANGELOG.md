@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.38](https://github.com/DMVS-APAC/dm-custom-embed/compare/v1.5.37...v1.5.38) (2021-09-15)
+
+
+### Bug Fixes
+
+* security warning from dependabot GitHub ([801d9e5](https://github.com/DMVS-APAC/dm-custom-embed/commit/801d9e5b9aa7e6b9372605f62c69481b46c6d9ae))
+
 ### [1.5.37](https://github.com/DMVS-APAC/dm-custom-embed/compare/v1.5.36...v1.5.37) (2021-07-05)
 
 
